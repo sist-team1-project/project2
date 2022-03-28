@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 public class AdminController {
 
     @GetMapping("admin/admin.do")
-    public String mypage_mypage() {
+    public String admin_admin() {
         return "admin/product";
     }
 }
