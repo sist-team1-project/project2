@@ -10,10 +10,13 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
     
+    <!-- AOP 설정 -->
+    <aop:aspectj-autoproxy/> <!-- Annotation으로 작업시에  -->
+    
     <!-- 사용자 정의 클래스 등록  -->
     <context:component-scan base-package="com.sist.*"/>
-<!-- 
-    MVC한글 설정
+
+    <!-- MVC한글 설정 -->
     <mvc:annotation-driven>
       <mvc:message-converters>
         <bean class="org.springframework.http.converter.StringHttpMessageConverter">
@@ -25,7 +28,15 @@
         </bean>
       </mvc:message-converters>
     </mvc:annotation-driven>
-     -->
+    
+    <!-- ViewRsolver설정 JSP(경로명, 확장자 입력) -->
+    <bean id="viewResolver"
+        class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+        p:prefix="/"
+        p:suffix=".jsp"
+        p:order="1"
+    />
+    
     <!--  tiles환경 설정 파일 전송  -->
     <bean id="tilesConfigurer"
         class="org.springframework.web.servlet.view.tiles3.TilesConfigurer"
@@ -39,11 +50,7 @@
         p:order="0"
     />
     
-    <!-- ViewRsolver설정 -->
-    <bean id="viewResolver"
-        class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-        p:prefix="/"
-        p:suffix=".jsp"
-        p:order="1"
-    />
+    <!-- 파일업로드 사용시 등록하는 클래스 -->
+    <bean id="multipartResolver"
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 </beans>
