@@ -14,7 +14,7 @@ public class AdminController2 {
 	@Autowired
 	private GoodsDAO dao;
 
-	@GetMapping("admin/admin.do")
+	@GetMapping("admin/user.do")
 	public String admin_user(String page, Model model) {
 		if (page == null) {
 			page = "1";
