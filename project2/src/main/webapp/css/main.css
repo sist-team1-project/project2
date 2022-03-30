@@ -3222,21 +3222,24 @@ input.num-product::-webkit-inner-spin-button {
   .respon3 {
     padding: 20px;
   }
+}
 
 /*///////////////////////////////////////////////////////////////////////
-[pagination]
-	.pagination {
-	    display: block;
-	    text-align: center;
-	}
-	.pagination > lo > a {
-	    float: none;
-	}
-	.page-link {
-	  color: #111;
-	}
-	.page-link:focus, .page-link:hover {
-	  color: red;
-	}
+[pagination]*/
 
+.pagination {
+    display: block;
+    text-align: center;
+}
+
+.pagination > li > a {
+    float: none;
+}
+
+.page-link {
+  color: #111;
+}
+
+.page-link:focus, .page-link:hover {
+  color: red;
 }
