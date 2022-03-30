@@ -113,7 +113,8 @@
             <!-- 아이템 루프로 돌리기 -->
             <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 women" v-for="vo in goods">
               <div class="block2">
-                <div class="block2-pic hov-img0"><img :src="vo.image"></div>
+                <a href="../goods/detail.do">
+                <div class="block2-pic hov-img0"><img :src="vo.image"></div></a>
     
                 <div class="block2-txt flex-w flex-t p-t-14">
                   <div class="block2-txt-child1 flex-col-l ">
@@ -137,7 +138,8 @@
             <!-- 아이템 루프로 돌리기 -->
             <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 women" v-for="vo in goods">
               <div class="block2">
-                <div class="block2-pic hov-img0"><img :src="vo.image"></div>
+                <a href="../goods/detail.do">
+                <div class="block2-pic hov-img0"><img :src="vo.image"></div></a>
     
                 <div class="block2-txt flex-w flex-t p-t-14">
                   <div class="block2-txt-child1 flex-col-l ">

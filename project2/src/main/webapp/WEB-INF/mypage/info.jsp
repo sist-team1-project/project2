@@ -23,23 +23,19 @@
       <div class="col-sm-3"><b>성별</b></div>
       <div class="col-sm-9">${user.u_gender }</div>
     </div>
-     <div>
-      <div class="col-sm-3"><b>생년월일</b></div>
-      <div class="col-sm-9">${user.u_date }</div>
-    </div>
-    <div class="row roomy-10">
+    <div>
       <div class="col-sm-3"><b>주소</b></div>
       <div class="col-sm-9">
         <div>${user.u_address1 } ${user.u_address2 } (${user.u_post })</div>
       </div>
     </div>
-    <div class="row roomy-10">
+    <div>
       <div class="col-sm-3"><b>비밀번호 찾기 질문</b></div>
       <div class="col-sm-9">
         <div>${user.u_question }</div>
       </div>
     </div>
-    <div class="row roomy-10">
+    <div>
       <div class="col-sm-3"><b>비밀번호 찾기 답변</b></div>
       <div class="col-sm-9">
         <div>${user.u_answer }</div>
