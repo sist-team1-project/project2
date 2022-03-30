@@ -23,13 +23,13 @@ public class GoodsController {
 	private GoodsDAO dao;
     
     @GetMapping("detail.do")
-    public String goods_detail(String gid, Model model) {
+    public String goods_detail(int gid, Model model) {
         Map map = new HashMap();
         map.put("g_id", gid);
-        /*
+        
         GoodsVO vo = service.goodsDetail(map);
         model.addAttribute("vo", vo);
-        */
+        
         return "goods/detail";
     }
 }
