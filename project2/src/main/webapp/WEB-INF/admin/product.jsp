@@ -32,6 +32,9 @@ td {
         <fmt:formatNumber value="${count }" pattern=",000" />
         개
       </div>
+      <div class=" ">
+        <input type="button" class="btn btn-sm btn-success" value="상품 등록" v-on:click="#">
+      </div>
       <div class="col-lg-12 m-lr-auto m-b-50">
         <div class="wrap-table js-pscroll">
 
@@ -75,20 +78,9 @@ td {
     </div>
     <div>
 
-      <!-- <ul class="pagination">
-      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item active"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item"><a class="page-link" href="#">Next</a></li>
-    </ul> -->
-
-
-
-
       <ul class="pagination">
         <c:if test="${startPage > 1 }">
-          <li class="page-item"><a class="page-link" href="user.do?page=${startPage-1 }">&lt;</a></li>
+          <li class="page-item"><a class="page-link" href="adlist.do?page=${startPage-1 }">&lt;</a></li>
         </c:if>
         <c:forEach var="i" begin="${startPage }" end="${endPage }">
           <c:if test="${curpage==i }">
@@ -97,12 +89,13 @@ td {
           <c:if test="${curpage != i }">
             <c:set var="style" value="" />
           </c:if>
-          <li class="page-item ${style }"><a class="page-link" href="user.do?page=${i }">${i }</a></li>
+          <li class="page-item ${style }"><a class="page-link" href="adlist.do?page=${i }">${i }</a></li>
         </c:forEach>
         <c:if test="${endPage < totalpage }">
-          <li class="page-item"><a class="page-link" href="user.do?page=${endPage+1 }">&gt;</a></li>
+          <li class="page-item"><a class="page-link" href="adlist.do?page=${endPage+1 }">&gt;</a></li>
         </c:if>
       </ul>
+
     </div>
   </div>
   <script>

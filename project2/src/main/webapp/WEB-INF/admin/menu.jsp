@@ -13,7 +13,7 @@
 
   <ul>
     <li class="bor18">
-      <a href="../admin/admin.do" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-14 p-lr-4">
+      <a href="../admin/adlist.do" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-14 p-lr-4">
         상품관리
       </a>
     </li>
