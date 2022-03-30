@@ -42,7 +42,7 @@ $(function(){
 				}
 				else
 			    {
-					location.href="main.do";
+					location.href="../main/main.do";
 			    }
 			}
 		})
@@ -68,8 +68,7 @@ $(function(){
                 </div>
               </div>
               <div class="col-sm-5 flex-c-m">
-                <button class="flex-c-m stext-101 cl1 bg3 hov-btn3 p-lr-15 trans-04 pointer"
-                style="width:100px; height:100px" id="logBtn"> 로그인 </button>
+                <button class="flex-c-m stext-101 cl1 bg3 hov-btn3 p-lr-15 trans-04 pointer" style="width:100px; height:100px" id="logBtn"> 로그인 </button>
 			  </div>
 			</div>
 			
