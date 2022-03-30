@@ -24,7 +24,7 @@
     </div>
     <div class="row p-t-10">
       <div class="col-lg-12 m-lr-auto p-tb-10 dis-flex flex-sb flex-m">
-        <div class="fs-11">
+        <div class="fs-13">
           총
           <fmt:formatNumber value="${count }" pattern=",000" />
           개
@@ -35,7 +35,7 @@
         <div class="wrap-table js-pscroll">
 
           <table class="table-checkout">
-            <tr class="table_head">
+            <tr class="table_head font-center">
               <th></th>
               <th>상품번호</th>
               <th>카테고리</th>
@@ -51,7 +51,7 @@
               <th></th>
             </tr>
             <c:forEach var="glist" items="${glist }" varStatus="status">
-              <tr class="table_row fs-11">
+              <tr class="table_row fs-13 font-center">
                 <td><div>
                     <img src="${glist.g_image }" class="size-109">
                   </div></td>

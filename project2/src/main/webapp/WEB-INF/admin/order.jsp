@@ -30,13 +30,13 @@ td {
     </div>
     <div class="row p-t-10">
       <div class="col-lg-12 m-lr-auto p-tb-10 dis-flex flex-sb flex-m">
-        <div class="fs-11">총<fmt:formatNumber value="${count }" pattern=",000" />개</div>
+        <div class="fs-13">총<fmt:formatNumber value="${count }" pattern=",000" />개</div>
       </div>
       <div class="col-lg-12 m-lr-auto m-b-50">
         <div class="wrap-table js-pscroll">
 
           <table class="table-checkout">
-            <tr class="table_head">
+            <tr class="table_head font-center">
               <th></th>
               <th>주문일시</th>
               <th>주문번호</th>
@@ -46,7 +46,7 @@ td {
               <th>주문상태</th>
             </tr>
             <c:forEach var="olist" items="${olist }" varStatus="status">
-              <tr class="table_row fs-11">
+              <tr class="table_row fs-13 font-center">
                 <td>${olist.o_regdate }</td>
                 <td>${olist.od_id }</td>
                 <td>${olist.u_id }</td>
