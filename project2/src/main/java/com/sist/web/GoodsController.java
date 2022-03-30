@@ -25,11 +25,10 @@ public class GoodsController {
     @GetMapping("detail.do")
     public String goods_detail(int gid, Model model) {
         Map map = new HashMap();
-        map.put("g_id", gid);
+        map.put("gid", gid);
         
         GoodsVO vo = service.goodsDetail(map);
         model.addAttribute("vo", vo);
-        
         return "goods/detail";
     }
 }

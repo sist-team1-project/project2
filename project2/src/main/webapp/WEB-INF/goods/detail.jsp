@@ -49,8 +49,8 @@
                   
         <div class="col-md-6 col-lg-5 p-b-30">
           <div class="p-r-50 p-t-5 p-lr-0-lg">
-            <h4 class="mtext-105 cl2 js-name-detail p-b-14">상품이름</h4>
-            <span class="mtext-106 cl2">$58.79</span>
+            <h4 class="mtext-105 cl2 js-name-detail p-b-14">${vo.g_name }</h4>
+            <span class="mtext-106 cl2">${vo.g_price }</span>
             <!--  -->
             <div class="p-t-33">
               <div class="flex-w flex-r-m p-b-10">
