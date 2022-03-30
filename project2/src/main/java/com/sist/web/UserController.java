@@ -22,4 +22,11 @@ public class UserController {
     public String user_login() {
         return "user/login";
     }
+    
+    @GetMapping("user/logout.do")
+    public String user_logout(HttpSession session)
+    {
+    	session.invalidate();
+    	return "redirect:../main/main.do";
+    }
 }

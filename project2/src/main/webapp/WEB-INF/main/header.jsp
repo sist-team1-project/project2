@@ -20,13 +20,15 @@
           <c:if test="${sessionScope.id==null }">
             <div class="right-top-bar flex-w h-full">
               <a href="../user/login.do" class="flex-c-m trans-04 p-lr-25">로그인</a>
-              <a href="../mypage/mypage.do" class="flex-c-m trans-04 p-lr-25">마이페이지</a>
             </div>
           </c:if>
           <c:if test="${sessionScope.id!=null }">
             <div class="right-top-bar flex-w h-full">
               <a href="../user/logout.do" class="flex-c-m trans-04 p-lr-25">로그아웃</a>
               <a href="../mypage/mypage.do" class="flex-c-m trans-04 p-lr-25">마이페이지</a>
+            <c:if test="{sessionScope.grade==0 }">
+              <a href="../mypage/mypage.do" class="flex-c-m trans-04 p-lr-25">관리자페이지</a>
+            </c:if>
             </div>
           </c:if>
         </div>
