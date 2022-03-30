@@ -15,22 +15,22 @@ td {
 </head>
 <body>
   <!-- 테이블이 필요하실땐 cart나 checkout쪽에서 사용한 테이블 사용하시면 편할거에요 -->
-  <div class="container bg0 p-t-70 p-b-30">
+  <div class="container bg0 p-t-70 p-b-10">
     <div class="row">
-      <div class="p-b-20">
-        <h3>상품 목록</h3>
+      <div class="col-lg-12 m-lr-auto">
+        <div class="p-b-20">
+          <h3>상품 목록</h3>
+        </div>
+      </div>
+      <div class="col-lg-12 flex-m">
+        <input type="text" size=20 class="bor4 p-tb-4 dis-inline-block" v-model="ss" :value="ss">
+          &nbsp;&nbsp;
+        <input type="button" class="btn btn-sm btn-warning p-tb-4 dis-inline-block" value="검색" v-on:click="gfind()">
       </div>
     </div>
-    <div class="row">
-      <input type="text" size=20 class="bor4" v-model="ss" :value="ss">
-      &nbsp;&nbsp;
-      <input type="button" class="btn btn-sm btn-warning" value="검색" v-on:click="gfind()">
-    </div>
-    <div class="row p-t-30">
-      <div class="col-lg-12 m-lr-auto dis-flex flex-sb p-tb-10">
-        <div class="fs-11 size-301 h-full flex-c">
-          총<fmt:formatNumber value="${count }" pattern=",000" />개
-        </div>
+    <div class="row p-t-10">
+      <div class="col-lg-12 m-lr-auto p-tb-10 dis-flex flex-sb flex-m">
+        <div class="fs-11">총<fmt:formatNumber value="${count }" pattern=",000" />개</div>
         <input type="button" class="btn btn-sm btn-success" value="상품 등록" v-on:click="#">
       </div>
       <div class="col-lg-12 m-lr-auto m-b-50">
