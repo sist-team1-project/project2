@@ -9,9 +9,11 @@
 	background-color: #eeeee6 ;
 	border-color: #eeeee6 ;
 }
+
 .font-center > th {
 	text-align: center;
 }
+
 .font-center > td {
 	text-align: center;
 }

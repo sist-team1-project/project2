@@ -77,7 +77,6 @@ td {
           <li class="page-item"><a class="page-link" href="salelist.do?page=${endPage+1 }">&gt;</a></li>
         </c:if>
       </ul>
-
     </div>
   </div>
   <script>
