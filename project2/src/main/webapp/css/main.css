@@ -3228,18 +3228,13 @@ input.num-product::-webkit-inner-spin-button {
 [pagination]*/
 
 .pagination {
-    display: block;
-    text-align: center;
-}
-
-.pagination > li > a {
-    float: none;
+    justify-content: center;
 }
 
 .page-link {
-  color: #111;
+  color: #A5A5A5;
 }
 
 .page-link:focus, .page-link:hover {
-  color: red;
+  color: #5A5A5A;
 }

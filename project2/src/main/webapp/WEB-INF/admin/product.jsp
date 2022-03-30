@@ -27,12 +27,10 @@ td {
       <input type="button" class="btn btn-sm btn-warning" value="검색" v-on:click="gfind()">
     </div>
     <div class="row p-t-30">
-      <div class="fs-11 size-301 m-l-10">
-        총
-        <fmt:formatNumber value="${count }" pattern=",000" />
-        개
-      </div>
-      <div class=" ">
+      <div class="col-lg-12 m-lr-auto dis-flex flex-sb p-tb-10">
+        <div class="fs-11 size-301 h-full flex-c">
+          총<fmt:formatNumber value="${count }" pattern=",000" />개
+        </div>
         <input type="button" class="btn btn-sm btn-success" value="상품 등록" v-on:click="#">
       </div>
       <div class="col-lg-12 m-lr-auto m-b-50">
