@@ -9,12 +9,13 @@ import com.sist.vo.*;
 import java.util.*;
 
 @Controller
+@RequestMapping("admin/")
 public class AdminController2 {
 
 	@Autowired
 	private GoodsDAO dao;
 
-	@GetMapping("admin/user.do")
+	@GetMapping("user.do")
 	public String admin_user(String page, Model model) {
 		if (page == null) {
 			page = "1";
@@ -27,15 +28,30 @@ public class AdminController2 {
 		map.put("start", start);
 		map.put("end", end);
 
-		int totalpage = dao.goodsTotalPage();
-		int count = dao.goodsCount();
-		count = count - ((rowSize * curpage) - rowSize);
-
 		List<GoodsVO> list = dao.goodsTotalList(map);
 
+		for (GoodsVO vo : list) {
+			String g_name = vo.getG_name();
+			if (g_name.length() > 18) {
+				g_name = g_name.substring(0, 18) + "...";
+			}
+			vo.setG_name(g_name);
+		}
+
+		int totalpage = dao.goodsTotalPage();
+		int count = dao.goodsCount();
+
+		final int BLOCK = 10;
+		int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
+		int endPage = ((curpage - 1) / BLOCK * BLOCK) + BLOCK;
+		if (endPage > totalpage) {
+			endPage = totalpage;
+		}
+
 		model.addAttribute("glist", list);
-		model.addAttribute("start", start);
-		model.addAttribute("end", end);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("curpage", curpage);
 		model.addAttribute("totalpage", totalpage);
 		model.addAttribute("count", count);
 
