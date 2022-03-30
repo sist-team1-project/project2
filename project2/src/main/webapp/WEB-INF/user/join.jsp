@@ -40,11 +40,6 @@
           </div>
         
           <div>
-            <div>생년월일</div>
-            <input type="date" name="birthday" id="birthday">
-          </div>
-        
-          <div>
             <div>이메일</div>
             <input type="text" name="email" id="email" readonly>
             <input type="button" id="email-check-btn" value="중복 확인">

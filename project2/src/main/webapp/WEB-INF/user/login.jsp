@@ -5,6 +5,51 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#logBtn').click(function(){
+		let id=$('#id').val();
+		if(id.trim()=="")
+		{
+			$('#id').focus();
+			return;
+		}
+		let pwd=$('#pwd').val();
+		if(pwd.trim()=="")
+		{
+			$('#pwd').focus();
+			return;
+		}
+		
+		$.ajax({
+			type:'POST',
+			url:'login_ok.do',
+			data:{"id":id,"pwd":pwd},
+			success:function(res){
+				if(res=='NOID')
+				{
+					alert("아이디가 존재하지 않습니다.")
+					$('#id').val("");
+					$('#pwd').val("");
+					$('#id').focus();
+				}
+				else if(res=='NOPWD')
+				{
+					alert("비밀번호가 틀립니다.")
+					$('#pwd').val("");
+					$('#pwd').focus();
+				}
+				else
+			    {
+					location.href="main.do";
+			    }
+			}
+		})
+	})
+})
+
+</script>
 </head>
 <body>
   <div class="container bg0 p-t-150 p-b-30">
@@ -24,7 +69,7 @@
               </div>
               <div class="col-sm-5 flex-c-m">
                 <button class="flex-c-m stext-101 cl1 bg3 hov-btn3 p-lr-15 trans-04 pointer"
-                style="width:100px; height:100px"> 로그인 </button>
+                style="width:100px; height:100px" id="logBtn"> 로그인 </button>
 			  </div>
 			</div>
 			
