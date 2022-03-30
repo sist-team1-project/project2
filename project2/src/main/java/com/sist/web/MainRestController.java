@@ -19,8 +19,7 @@ public class MainRestController {
     @GetMapping(value = "main/events.do", produces = "text/plain;charset=utf-8")
     public String event_goods() {
         
-        Map map = new HashMap();
-        List<GoodsVO> list = dao.goodsTemp(map);
+        List<GoodsVO> list = dao.goodsList();
         
         JSONArray arr = new JSONArray();
         

@@ -14,11 +14,11 @@ public class GoodsDAO {
 
 	@Autowired
 	private GoodsMapper mapper;
-
-	public List<GoodsVO> goodsTemp(Map map) {
-		return mapper.goodsTemp(map);
-	}
-
+	
+	public List<GoodsVO> goodsList() {
+        return mapper.goodsList();
+    }
+	
 	public List<GoodsVO> goodsTotalList(Map map) {
 		return mapper.goodsTotalList(map);
 	}
