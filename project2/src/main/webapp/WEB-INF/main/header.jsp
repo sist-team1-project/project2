@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,10 +17,18 @@
       <div class="top-bar">
         <div class="content-topbar flex-sb-m h-full container">
           <div class="left-top-bar">3만원 이상 구매시 무료배송</div>
-          <div class="right-top-bar flex-w h-full">
-            <a href="../user/login.do" class="flex-c-m trans-04 p-lr-25">로그인</a>
-            <a href="../mypage/mypage.do" class="flex-c-m trans-04 p-lr-25">마이페이지</a>
-          </div>
+          <c:if test="${sessionScope.id==null }">
+            <div class="right-top-bar flex-w h-full">
+              <a href="../user/login.do" class="flex-c-m trans-04 p-lr-25">로그인</a>
+              <a href="../mypage/mypage.do" class="flex-c-m trans-04 p-lr-25">마이페이지</a>
+            </div>
+          </c:if>
+          <c:if test="${sessionScope.id!=null }">
+            <div class="right-top-bar flex-w h-full">
+              <a href="../user/logout.do" class="flex-c-m trans-04 p-lr-25">로그아웃</a>
+              <a href="../mypage/mypage.do" class="flex-c-m trans-04 p-lr-25">마이페이지</a>
+            </div>
+          </c:if>
         </div>
       </div>
 

@@ -5,7 +5,6 @@
 <head>
   <meta charset="UTF-8">
   <title>Insert title here</title>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
   <script src="http://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
