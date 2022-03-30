@@ -78,9 +78,6 @@
   <script>
       $('.parallax100').parallax100();
   </script>
-  <!-- 그리드 이미지 정렬 플러그인 -->
-  <script src="../vendor/isotope/isotope.pkgd.min.js"></script>
-  
   <script src="../js/main.js"></script>
   
 </body>
