@@ -24,5 +24,10 @@ public interface GoodsMapper {
     
     @Select("SELECT COUNT(*) FROM Goods_1")
     public int goodsCount();
+    @Select("SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status, TO_CHAR(g_regdate,'YYYY-MM-DD HH24:MI:SS')as g_regdate, num "
+    		+ "FROM (SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status, g_regdate, rownum as num "
+    		+ "FROM (SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status, g_regdate FROM Goods_1))"
+    		+ "WHERE num BETWEEN #{start} AND #{end}")
+    public GoodsVO goodsDetail(Map map);
     
 }

@@ -48,7 +48,7 @@
                   
         <div class="col-md-6 col-lg-5 p-b-30">
           <div class="p-r-50 p-t-5 p-lr-0-lg">
-            <h4 class="mtext-105 cl2 js-name-detail p-b-14">Lightweight Jacket</h4>
+            <h4 class="mtext-105 cl2 js-name-detail p-b-14">{{detail.name}}</h4>
             <span class="mtext-106 cl2">$58.79</span>
             
             <!--  -->
@@ -158,6 +158,19 @@
   </div>
   <!-- 사진 크게보여주는 팝업 -->
   <script>
+    new Vue({
+    	el:'.container',
+    	data:{
+    		goods:[]
+    	},
+    	mounted:function(){
+    		 goods_detail:function(gid){
+    		 axios.get("http://localhost:8080/web/goods/detail_vue.do",{
+    		 params:{
+    		 gid:gid
+    	}
+    	
+    })
     $('.gallery-lb').each(function() { // the containers for all your galleries
         $(this).magnificPopup({
             delegate: 'a', // the selector for gallery item

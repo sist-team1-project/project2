@@ -31,4 +31,8 @@ public class GoodsDAO {
 		return mapper.goodsCount();
 	}
 
+	public GoodsVO goodsDetail(Map map) {
+		return mapper.goodsDetail(map);
+	}
+
 }
