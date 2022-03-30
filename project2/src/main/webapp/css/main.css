@@ -2023,9 +2023,9 @@ input.num-product::-webkit-inner-spin-button {
 /*==================================================================
     TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
 ==================================================================*/
-.cl0 {color: black;} /* �긽�뭹 蹂대윭媛�湲� */
+.cl0 {color: black;} /* 占쎄맒占쎈�� 癰귣��쑎揶쏉옙疫뀐옙 */
 .cl1 {color: #fff;}
-.cl2 {color: #333;} /* �뒳�씪�씠�뜑 諛곕꼫, �듬럭 踰꾪듉, �듬럭 �궡 踰꾪듉 */
+.cl2 {color: #333;} /* 占쎈뮩占쎌뵬占쎌뵠占쎈쐭 獄쏄퀡瑗�, 占쎈벉�윮 甕곌쑵�뱣, 占쎈벉�윮 占쎄땀 甕곌쑵�뱣 */
 .cl3 {color: #666;} 
 .cl4 {color: #999;}
 .cl5 {color: #222;}
@@ -2529,7 +2529,7 @@ input.num-product::-webkit-inner-spin-button {
 ==================================================================*/
 .bg-none {background-color: transparent;}
 .bg0 {background-color: #fff;}
-.bg1 {background-color: #A59D90;} /* �긽�뭹蹂대윭媛�湲�, Add to cart */
+.bg1 {background-color: #A59D90;} /* 占쎄맒占쎈�배퉪���쑎揶쏉옙疫뀐옙, Add to cart */
 .bg2 {background-color: #e6e6e6;}
 .bg3 {background-color: #222;}
 .bg5 {background-color: rgba(0,0,0,0.5);}
@@ -3230,7 +3230,10 @@ input.num-product::-webkit-inner-spin-button {
 .pagination {
     justify-content: center;
 }
-
+.page-item.active .page-link {
+  background-color: #dbd0be;
+  border-color: #dbd0be;
+}
 .page-link {
   color: #A5A5A5;
 }

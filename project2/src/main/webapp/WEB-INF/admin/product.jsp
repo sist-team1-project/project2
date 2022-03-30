@@ -60,7 +60,7 @@ td {
                 <td>${glist.c_id }</td>
                 <td>${glist.g_name }</td>
                 <td>${glist.g_brand }</td>
-                <td>${glist.g_price }</td>
+                <td><fmt:formatNumber value="${glist.g_price }" pattern=",000" /></td>
                 <td>${glist.g_sale }</td>
                 <td>${glist.g_stock }</td>
                 <td>${glist.g_sold }</td>
