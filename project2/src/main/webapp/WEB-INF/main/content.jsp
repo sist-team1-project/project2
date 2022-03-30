@@ -110,9 +110,9 @@
         <div class="bg0 p-t-23 p-b-140">
           <div class="p-tb-20"><h3 class="ltext-103 cl5">Product Overview</h3></div>
           <div class="p-t-40 p-b-10"><h4>인기 상품</h4></div>
-          <div class="row isotope-grid">
+          <div class="row">
             <!-- 아이템 루프로 돌리기 -->
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women" v-for="vo in goods">
+            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 women" v-for="vo in goods">
               <div class="block2">
                 <div class="block2-pic hov-img0"><img :src="vo.image"></div>
     
@@ -134,9 +134,9 @@
           </div>
           
           <div class="p-t-40 p-b-10"><h4>추천 상품</h4></div>
-          <div class="row isotope-grid">
+          <div class="row">
             <!-- 아이템 루프로 돌리기 -->
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women" v-for="vo in goods">
+            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 women" v-for="vo in goods">
               <div class="block2">
                 <div class="block2-pic hov-img0"><img :src="vo.image"></div>
     
