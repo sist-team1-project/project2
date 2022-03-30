@@ -40,13 +40,13 @@
   <section class="p-t-110 p-b-60">
     <div class="container">
       <div class="row"> 
-        <div class="col-md-4 col-lg-3 p-b-80">
+        <div class="col-md-4 col-lg-2 p-b-80">
           <div class="side-menu">
             <tiles:insertAttribute name="menu"/>
           </div>
         </div>
         
-        <div class="col-md-8 col-lg-9 p-b-80">
+        <div class="col-md-8 col-lg-10 p-b-80">
           <tiles:insertAttribute name="content"/>
         </div>
       </div>
