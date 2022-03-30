@@ -36,6 +36,14 @@ public class AdminController2 {
 				g_name = g_name.substring(0, 18) + "...";
 			}
 			vo.setG_name(g_name);
+
+			String g_image = vo.getG_image();
+			if (g_image.contains(";")) {
+				StringTokenizer st = new StringTokenizer(g_image, ";");
+				g_image = st.nextToken();
+			}
+			vo.setG_image(g_image);
+
 		}
 
 		int totalpage = dao.goodsTotalPage();

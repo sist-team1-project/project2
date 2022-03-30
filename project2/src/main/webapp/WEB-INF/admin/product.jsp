@@ -6,12 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-td {
-	width: 150px;
-	margin: 0px auto;
-}
-</style>
 </head>
 <body>
   <!-- 테이블이 필요하실땐 cart나 checkout쪽에서 사용한 테이블 사용하시면 편할거에요 -->
@@ -24,14 +18,18 @@ td {
       </div>
       <div class="col-lg-12 flex-m">
         <input type="text" size=20 class="bor4 p-tb-4 dis-inline-block" v-model="ss" :value="ss">
-          &nbsp;&nbsp;
-        <input type="button" class="btn btn-sm btn-warning p-tb-4 dis-inline-block" value="검색" v-on:click="gfind()">
+        &nbsp;&nbsp;
+        <input type="button" class="btn btn-sm btn-pro-color2 p-tb-4 dis-inline-block" value="검색" v-on:click="gfind()">
       </div>
     </div>
     <div class="row p-t-10">
       <div class="col-lg-12 m-lr-auto p-tb-10 dis-flex flex-sb flex-m">
-        <div class="fs-11">총<fmt:formatNumber value="${count }" pattern=",000" />개</div>
-        <input type="button" class="btn btn-sm btn-success" value="상품 등록" v-on:click="#">
+        <div class="fs-11">
+          총
+          <fmt:formatNumber value="${count }" pattern=",000" />
+          개
+        </div>
+        <input type="button" class="btn btn-sm btn-pro-color2" value="상품 등록" v-on:click="goods_add">
       </div>
       <div class="col-lg-12 m-lr-auto m-b-50">
         <div class="wrap-table js-pscroll">
@@ -50,6 +48,7 @@ td {
               <th>판매상태</th>
               <th>제품 등록일</th>
               <th>상세</th>
+              <th></th>
             </tr>
             <c:forEach var="glist" items="${glist }" varStatus="status">
               <tr class="table_row fs-11">
@@ -67,6 +66,7 @@ td {
                 <td>${glist.g_status }</td>
                 <td>${glist.g_regdate }</td>
                 <td><a type="button" href="${glist.g_detail }">상세보기</a></td>
+                <td><input type="button" class="btn btn-sm btn-pro-color2 dis-inline-block" value="수정" v-on:click="goods_update"></td>
               </tr>
             </c:forEach>
           </table>
@@ -100,9 +100,22 @@ td {
 			new Vue({
 				el : '.container',
 				data : {
+					ss : '텐트'
+				},
+				mounted : function() {
 
+				},
+				methods : {
+					gfind : function() {
+
+					},
+					goods_add : function() {
+
+					},
+					goods_update : function() {
+
+					}
 				}
-
 			})
 		</script>
 </body>

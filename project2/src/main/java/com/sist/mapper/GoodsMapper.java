@@ -24,5 +24,5 @@ public interface GoodsMapper {
     
     @Select("SELECT COUNT(*) FROM Goods_1")
     public int goodsCount();
- 
+    
 }
