@@ -9,7 +9,7 @@
 <body>
 
 
-  <h4 class="mtext-112 cl2 p-b-33">어드민 페이지</h4>
+  <h4 class="mtext-112 cl2 p-b-33">관리자 페이지</h4>
 
   <ul>
     <li class="bor18">
@@ -19,7 +19,7 @@
     </li>
 
     <li class="bor18">
-      <a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-14 p-lr-4">
+      <a href="../admin/salelist.do" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-14 p-lr-4">
         판매관리
       </a>
     </li>
