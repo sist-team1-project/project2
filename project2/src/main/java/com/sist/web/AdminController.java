@@ -16,8 +16,8 @@ public class AdminController {
 	@Autowired
 	private OrderDAO odao;
 	
-    @GetMapping("salelist.do")
-    public String admin_sale(String page, Model model) {
+    @GetMapping("orderlist.do")
+    public String admin_order(String page, Model model) {
     	if (page == null) {
 			page = "1";
 		}
@@ -28,7 +28,9 @@ public class AdminController {
 		int end = (rowSize * curpage);
 		map.put("start", start);
 		map.put("end", end);
-
+		
+		List<OrderVO> list = odao.orderTotalList(map);
+		
 		int totalpage = odao.orderTotalPage();
 		int count = odao.orderCount();
 
@@ -46,5 +48,9 @@ public class AdminController {
 		model.addAttribute("count", count);
         return "admin/order";
     }
-    
+    @GetMapping("orderdetail.do")
+    public String admin_order_detail() {
+    	
+    	return "admin/order";
+    }
 }

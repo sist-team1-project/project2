@@ -15,7 +15,7 @@ td {
 </head>
 <body>
   <!-- 테이블이 필요하실땐 cart나 checkout쪽에서 사용한 테이블 사용하시면 편할거에요 -->
-  <div class="container bg0 p-t-70 p-b-10">
+  <div class="container bg0 p-t-70 p-b-10" id="admin-order">
     <div class="row">
       <div class="col-lg-12 m-lr-auto">
         <div class="p-b-20">
@@ -23,7 +23,7 @@ td {
         </div>
       </div>
       <div class="col-lg-12 flex-m">
-        <input type="text" size=20 class="bor4 p-tb-4 dis-inline-block" v-model="ss" :value="ss">
+        <input type="text" size=20 class="bor4 p-tb-4 dis-inline-block" v-model="od" :value="od">
           &nbsp;&nbsp;
         <input type="button" class="btn btn-sm btn-pro-color2 p-tb-4 dis-inline-block" value="검색" v-on:click="ofind()">
       </div>
@@ -45,16 +45,15 @@ td {
               <th>주문금액</th>
               <th>주문상태</th>
             </tr>
-            <c:forEach var="olist" items="${olist }" varStatus="status">
-              <tr class="table_row fs-13 font-center">
-                <td>${olist.o_regdate }</td>
-                <td>${olist.od_id }</td>
-                <td>${olist.u_id }</td>
-                <td>${olist.g_name }</td>
-                <td>${olist.g_price }</td>
-                <td><a type="button" href="${olist.o_state }">상세보기</a></td>
-              </tr>
-            </c:forEach>
+            <tr v-for="order in orderList" class="table_row fs-13 font-center">
+              <!-- <tr class="table_row fs-13 font-center">  -->
+                <td>{{olist.o_regdate }}</td>
+                <td>{{olist.od_id }}</td>
+                <td>{{olist.u_id }}</td>
+                <td>{{olist.g_name }}</td>
+                <td>{{olist.g_price }}</td>
+               <!-- <td><a type="button" :href={{olist.o_state }}>상세보기</a></td>   --> 
+             </tr>
           </table>
         </div>
       </div>
@@ -81,11 +80,39 @@ td {
   </div>
   <script>
 			new Vue({
-				el : '.container',
+				el : '#admin-order',
 				data : {
+					od:'22033022170003',
+					orderList : []
+				},
+				mounted : function(){
+					axios.get("http://localhost:8080/web/admin/salelist_vue.do", {
+						params : {
+							page : "1"
+						}
+					}).then(res => {
+						this.orderList = res.data;
+						console.log(this.orderList);
+						console.log(this.orderList[0].o_id);
 					
-				}
+						this.o_id = result.data[0].o_id;
+					})
+				},
+				methods : {
+					ofind : function() {
 
+					},
+					order_add : function() {
+						console.log("what?");
+					},
+					order_update : function() {
+
+					},
+					order_detail : function(detailId) {
+						console.log("?????");
+						console.log(detailId);
+					}
+				}	
 			})
 		</script>
 </body>
