@@ -36,12 +36,7 @@
     />
     <tx:annotation-driven/>
     
-    <!-- mybatis에 전송 -->
-    <bean id="ssf" class="org.mybatis.spring.SqlSessionFactoryBean"
-        p:dataSource-ref="ds"
-    />
-    <!-- 
-    log파일로 전송 : sql문장 실행과정 확인 
+    <!-- log파일로 전송 : sql문장 실행과정 확인 -->
     <bean id="dataSource" 
           class="net.sf.log4jdbc.Log4jdbcProxyDataSource"> 
       <constructor-arg ref="ds" /> 
@@ -52,7 +47,13 @@
         </bean> 
       </property> 
     </bean>
-     -->
+    
+    <!-- mybatis에 전송 -->
+    <bean id="ssf"
+        class="org.mybatis.spring.SqlSessionFactoryBean"
+        p:dataSource-ref="dataSource"
+    />
+    
     <!-- interface 구현  -->
     <mybatis-spring:scan base-package="com.sist.mapper"/>
 </beans>

@@ -29,6 +29,7 @@
       </mvc:message-converters>
     </mvc:annotation-driven>
     
+    
     <!-- ViewRsolver설정 JSP(경로명, 확장자 입력) -->
     <bean id="viewResolver"
         class="org.springframework.web.servlet.view.InternalResourceViewResolver"
@@ -53,4 +54,6 @@
     <!-- 파일업로드 사용시 등록하는 클래스 -->
     <bean id="multipartResolver"
         class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+    
+    
 </beans>
