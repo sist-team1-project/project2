@@ -28,7 +28,9 @@ public class AdminController {
 		int end = (rowSize * curpage);
 		map.put("start", start);
 		map.put("end", end);
-
+		
+		List<OrderVO> list = odao.orderTotalList(map);
+		
 		int totalpage = odao.orderTotalPage();
 		int count = odao.orderCount();
 

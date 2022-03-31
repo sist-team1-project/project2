@@ -1,5 +1,8 @@
 package com.sist.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -12,4 +15,7 @@ public class OrderDetailDAO {
     @Autowired
     private OrderDetailMapper mapper;
     
+    public List<OrderDetailVO> orderDetailList(Map map) {
+    	return mapper.orderDetailList(map);
+    }
 }

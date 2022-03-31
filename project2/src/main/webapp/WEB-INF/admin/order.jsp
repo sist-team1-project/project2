@@ -15,7 +15,7 @@ td {
 </head>
 <body>
   <!-- 테이블이 필요하실땐 cart나 checkout쪽에서 사용한 테이블 사용하시면 편할거에요 -->
-  <div class="container bg0 p-t-70 p-b-10">
+  <div class="container bg0 p-t-70 p-b-10" id="admin-order">
     <div class="row">
       <div class="col-lg-12 m-lr-auto">
         <div class="p-b-20">
@@ -23,7 +23,7 @@ td {
         </div>
       </div>
       <div class="col-lg-12 flex-m">
-        <input type="text" size=20 class="bor4 p-tb-4 dis-inline-block" v-model="ss" :value="ss">
+        <input type="text" size=20 class="bor4 p-tb-4 dis-inline-block" v-model="od" :value="od">
           &nbsp;&nbsp;
         <input type="button" class="btn btn-sm btn-pro-color2 p-tb-4 dis-inline-block" value="검색" v-on:click="ofind()">
       </div>
@@ -81,8 +81,9 @@ td {
   </div>
   <script>
 			new Vue({
-				el : '.container',
+				el : '#admin-order',
 				data : {
+					od:'',
 					
 				}
 

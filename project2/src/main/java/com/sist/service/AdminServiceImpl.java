@@ -10,6 +10,8 @@ import com.sist.vo.*;
 public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private GoodsDAO gdao;
+	
+	@Autowired OrderDAO odao;
 
 	@Override
 	public List<GoodsVO> goodsTotalList(Map map) {
@@ -21,5 +23,17 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return gdao.goodsTotalPage();
 	}
+
+	@Override
+	public List<OrderVO> orderTotalList(Map map) {
+		return odao.orderTotalList(map);
+	}
+
+	@Override
+	public int orderTotalPage() {
+		return odao.orderTotalPage();
+	}
+	
+	
 
 }

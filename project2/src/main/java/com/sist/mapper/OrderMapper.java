@@ -19,5 +19,5 @@ public interface OrderMapper {
     
     @Select("SELECT COUNT(*) / 10.0 FROM order_1")
     public int orderCount();
-    
+
 }
