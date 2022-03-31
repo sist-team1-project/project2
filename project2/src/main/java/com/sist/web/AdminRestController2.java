@@ -50,6 +50,13 @@ public class AdminRestController2 {
 		JSONArray arr = new JSONArray();
 		int i = 0;
 		int totalpage = gdao.goodsTotalPage();
+		final int BLOCK = 10;
+		int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
+		int endPage = ((curpage - 1) / BLOCK * BLOCK) + BLOCK;
+		if (endPage > totalpage) {
+			endPage = totalpage;
+		}
+
 		for (GoodsVO vo : list) {
 			JSONObject obj = new JSONObject();
 			obj.put("g_id", vo.getG_id());
@@ -64,6 +71,8 @@ public class AdminRestController2 {
 			obj.put("g_sold", vo.getG_sold());
 			obj.put("g_status", vo.getG_status());
 			obj.put("g_regdate", vo.getG_regdate());
+			obj.put("startPage", startPage);
+			obj.put("endPage", endPage);
 
 			if (i == 0) {
 				obj.put("curpage", curpage);
