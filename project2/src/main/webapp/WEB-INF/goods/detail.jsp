@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-  <div class="container">
+  <div class="container" id="goodsDetail">
     <section class="sec-product-detail bg0 p-t-150 p-b-30">
       <div class="row">
         <div class="col-md-6 col-lg-7 p-b-30">
@@ -21,9 +22,12 @@
               <!-- ----------- 갤러리 ------------ -->
               <div class="slick3 gallery-lb">
                 <!-- 사진1 -->
-                <div class="item-slick3" data-thumb="../images/product-detail-01.jpg">
+                <div class="item-slick3" data-thumb="${img }">
                   <div class="wrap-pic-w pos-relative">
-                    <img src="../images/product-detail-01.jpg" alt="IMG-PRODUCT">
+                  <c:forTokens items="${vo.g_image }" delims=";" var="img1">
+                    <img src="${img1 }" alt="IMG-PRODUCT">
+                    </c:forTokens>
+                    
                     <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="../images/product-detail-01.jpg">
                       <i class="fa fa-expand"></i>
                     </a>
@@ -33,7 +37,9 @@
                 <!-- 사진2 -->
                 <div class="item-slick3" data-thumb="../images/product-detail-02.jpg">
                   <div class="wrap-pic-w pos-relative">
-                    <img src="../images/product-detail-02.jpg" alt="IMG-PRODUCT">
+                  <c:forTokens items="${vo.g_image }" delims=";" var="img2">
+                    <img src="${img2 }" alt="IMG-PRODUCT">
+                    </c:forTokens>
                     <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="../images/product-detail-02.jpg">
                       <i class="fa fa-expand"></i>
                     </a>
@@ -49,8 +55,14 @@
                   
         <div class="col-md-6 col-lg-5 p-b-30">
           <div class="p-r-50 p-t-5 p-lr-0-lg">
-            <h4 class="mtext-105 cl2 js-name-detail p-b-14">${vo.g_name }</h4>
-            <span class="mtext-106 cl2">${vo.g_price }</span>
+            <h4 class="mtext-105 cl2 js-name-detail p-b-14">${vo.g_name}</h4>
+            <div style="padding:50px 0px 0px 0px;"> 
+            <span class="mtext-106 cl2"><b>브랜드</b>&emsp;${vo.g_brand }<br></span>
+            <div style="padding:10px 0px 0px 0px;"> 
+            <span class="mtext-106 cl2"><b>배송비</b>&emsp;5,000원<br></span>
+            <div style="padding:10px 0px 0px 0px;"> 
+            <span class="mtext-106 cl2"><b>할인율</b>&emsp;${vo.g_sale }%</span>
+            <div style="padding:10px 0px 0px 0px;"> 
             <!--  -->
             <div class="p-t-33">
               <div class="flex-w flex-r-m p-b-10">
@@ -60,6 +72,7 @@
                     <input class="mtext-104 cl3 text-center num-product" type="number" name="num-product" value="1">
                     <div class="btn-num-product-up cl8 hov-btn1 trans-04 flex-c-m"><i class="fs-16 zmdi zmdi-plus"></i></div>
                   </div>
+                  
                   <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">장바구니</button>
                 </div>
               </div>  
@@ -96,7 +109,9 @@
           <div class="tab-pane fade show active" id="description" role="tabpanel">
             <div class="how-pos2 p-lr-15-md">
               <p class="stext-102 cl6">
-              Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus et elementum sed, sodales vitae eros. Ut ex quam, porta consequat interdum in, faucibus eu velit. Quisque rhoncus ex ac libero varius molestie. Aenean tempor sit amet orci nec iaculis. Cras sit amet nulla libero. Curabitur dignissim, nunc nec laoreet consequat, purus nunc porta lacus, vel efficitur tellus augue in ipsum. Cras in arcu sed metus rutrum iaculis. Nulla non tempor erat. Duis in egestas nunc.
+              <c:forTokens items="${vo.g_detail }" delims=";" var="detail">
+               <img src="${detail }" alt="IMG-PRODUCT">
+               </c:forTokens>
               </p>
             </div>
           </div>
@@ -158,23 +173,22 @@
   </div>
   <!-- 사진 크게보여주는 팝업 -->
   <script>
-/* 
-    new Vue({
-    	el:'.container',
-    	data:{
-    		goods:[]
-    	},
-    	mounted:function(){
-    	    axios.get("http://localhost:8080/web/goods/detail_vue.do",{
-        		params:{
-        		    gid: this.gid
-        		}
-    	    }).then(function(res){
-                this.goods = res.data;
-            })
-    	}
-    })
-     */
+ /* new Vue({
+	   	el:'#goodsDetail',
+	   	data:{
+	   		vo:{},
+	   		gid:${g_id}
+	   	},
+	   	mounted:function(){
+	   		axios.get('http://localhost:8080/web/goods/detail_vue.do',{
+	   			params:{
+	   				gid:this.gid
+	   			}
+	   		}).then(res=>{
+	   			console.log(res.data)
+	   			this.vo=res.data;
+	   		})*/
+
     $('.gallery-lb').each(function() { // the containers for all your galleries
         $(this).magnificPopup({
             delegate: 'a', // the selector for gallery item
