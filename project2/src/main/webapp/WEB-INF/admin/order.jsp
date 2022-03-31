@@ -45,16 +45,15 @@ td {
               <th>주문금액</th>
               <th>주문상태</th>
             </tr>
-            <c:forEach var="olist" items="${olist }" varStatus="status">
-              <tr class="table_row fs-13 font-center">
-                <td>${olist.o_regdate }</td>
-                <td>${olist.od_id }</td>
-                <td>${olist.u_id }</td>
-                <td>${olist.g_name }</td>
-                <td>${olist.g_price }</td>
-                <td><a type="button" href="${olist.o_state }">상세보기</a></td>
-              </tr>
-            </c:forEach>
+            <tr v-for="order in orderList" class="table_row fs-13 font-center">
+              <!-- <tr class="table_row fs-13 font-center">  -->
+                <td>{{olist.o_regdate }}</td>
+                <td>{{olist.od_id }}</td>
+                <td>{{olist.u_id }}</td>
+                <td>{{olist.g_name }}</td>
+                <td>{{olist.g_price }}</td>
+               <!-- <td><a type="button" :href={{olist.o_state }}>상세보기</a></td>   --> 
+             </tr>
           </table>
         </div>
       </div>
@@ -83,10 +82,37 @@ td {
 			new Vue({
 				el : '#admin-order',
 				data : {
-					od:'',
+					od:'22033022170003',
+					orderList : []
+				},
+				mounted : function(){
+					axios.get("http://localhost:8080/web/admin/salelist_vue.do", {
+						params : {
+							page : "1"
+						}
+					}).then(res => {
+						this.orderList = res.data;
+						console.log(this.orderList);
+						console.log(this.orderList[0].o_id);
 					
-				}
+						this.o_id = result.data[0].o_id;
+					})
+				},
+				methods : {
+					ofind : function() {
 
+					},
+					order_add : function() {
+						console.log("what?");
+					},
+					order_update : function() {
+
+					},
+					order_detail : function(detailId) {
+						console.log("?????");
+						console.log(detailId);
+					}
+				}	
 			})
 		</script>
 </body>

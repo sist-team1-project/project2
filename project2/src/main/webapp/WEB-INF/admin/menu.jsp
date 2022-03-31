@@ -19,7 +19,7 @@
     </li>
 
     <li class="bor18">
-      <a href="../admin/salelist.do" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-14 p-lr-4">
+      <a href="../admin/orderlist.do" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-14 p-lr-4">
         판매관리
       </a>
     </li>

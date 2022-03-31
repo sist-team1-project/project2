@@ -11,8 +11,12 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private GoodsDAO gdao;
 	
-	@Autowired OrderDAO odao;
+	@Autowired 
+	private OrderDAO odao;
 
+	@Autowired
+	private OrderDetailDAO oddao;
+	
 	@Override
 	public List<GoodsVO> goodsTotalList(Map map) {
 		return gdao.goodsTotalList(map);
@@ -20,7 +24,6 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public int goodsTotalPage() {
-		// TODO Auto-generated method stub
 		return gdao.goodsTotalPage();
 	}
 
@@ -33,7 +36,15 @@ public class AdminServiceImpl implements AdminService {
 	public int orderTotalPage() {
 		return odao.orderTotalPage();
 	}
-	
-	
 
+	@Override
+	public List<OrderDetailVO> orderDetailList(Map map) {
+		return oddao.orderDetailList(map);
+	}
+
+	@Override
+	public List<OrderDetailVO> orderDetail(OrderDetailVO vo, int o_id) {
+		return oddao.orderDetail(vo, o_id);
+	}
+	
 }
