@@ -28,10 +28,10 @@ public class UserDAO {
     		String data=mapper.memberGetPwdAndName(id);
     		StringTokenizer st=new StringTokenizer(data,",");
     		String db_pwd=st.nextToken();
-    		String name=st.nextToken();
+    		String grade=st.nextToken();
     		if(db_pwd.equals(pwd))
     		{
-    			result=name;
+    			result=grade;
     		}
     		else
     		{

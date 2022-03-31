@@ -21,7 +21,7 @@ public class UserRestController {
         if (!(result.equals("NOID") && result.equals("NOPWD"))) {
             // 로그인이 된 상태 
             session.setAttribute("id", id);
-            session.setAttribute("name", result);
+            session.setAttribute("grade", Integer.parseInt(result));
         }
         return result;
     }

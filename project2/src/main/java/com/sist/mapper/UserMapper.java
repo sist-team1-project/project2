@@ -14,7 +14,7 @@ public interface UserMapper {
 	public int idCount(String id);
 	
 	// 2. password, name
-	@Select("SELECT u_password||','||u_name FROM user_1 "
+	@Select("SELECT u_password||','||u_grade FROM user_1 "
 		   +"WHERE u_id=#{u_id}")
 	public String memberGetPwdAndName(String id);
 	
