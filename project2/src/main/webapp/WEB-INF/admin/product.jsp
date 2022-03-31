@@ -55,10 +55,9 @@
             </thead>
             <tbody>
 
-              <tr v-for class="table_row fs-13 font-center">
+              <tr v-for="goods in goodsList" class="table_row fs-13 font-center">
                 <td></td>
-                <td>{{goodsList}}</td>
-                <!-- <td>{{goods.c_id}}</td>
+                <td>{{goods.c_id}}</td>
                 <td>{{goods.g_name}}</td>
                 <td>{{goods.g_brand}}</td>
                 <td></td>
@@ -66,7 +65,7 @@
                 <td>{{goods.g_stock }}</td>
                 <td>{{goods.g_sold }}</td>
                 <td>{{goods.g_status }}</td>
-                <td>{{goods.g_regdate }}</td> -->
+                <td>{{goods.g_regdate }}</td>
                 <td></td>
                 <td></td>
               </tr>
@@ -148,7 +147,7 @@
 						params : {
 							page : "1"
 						}
-					}).then(function(res) {
+					}).then(res => {
 						console.log(res);
 						this.goodsList = res.data;
 						console.log(this.goodsList);
