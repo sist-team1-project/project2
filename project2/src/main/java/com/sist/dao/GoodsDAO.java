@@ -20,8 +20,8 @@ public class GoodsDAO {
 		return mapper.goodsList(map);
 	}
 	
-	public int goodsListTotalpage(String keyword) {
-        return mapper.goodsListTotalpage(keyword);
+	public int goodsListTotalpage(Map map) {
+        return mapper.goodsListTotalpage(map);
     }
 	
 	public List<GoodsVO> goodsTotalList(Map map) {
