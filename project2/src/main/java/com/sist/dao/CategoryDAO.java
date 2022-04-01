@@ -15,7 +15,11 @@ public class CategoryDAO {
     @Autowired
     private CategoryMapper mapper;
     
-    public List<CategoryVO> categoryList(){
-        return mapper.categoryList();
+    public List<CategoryVO> categoryList_1(){
+        return mapper.categoryList_1();
+    }
+    
+    public List<CategoryVO> categoryList_2(){
+        return mapper.categoryList_2();
     }
 }

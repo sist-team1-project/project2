@@ -39,36 +39,34 @@
       <div class="wrap-menu-desktop">
         <nav class="limiter-menu-desktop container">
 
-          <!-- 로고 데스크탑 -->
+          <!-- 데스크탑 로고 -->
           <a href="../main/main.do" class="logo">
             <img src="../images/logo.png">
           </a>
 
-          <!-- Menu desktop -->
+          <!-- 데스크탑 메뉴 -->
           <div class="menu-desktop">
             <ul class="main-menu">
               <li><a href="../main/main.do">홈</a></li>
-              <li><a href="../goods/list.do">카테고리</a>
+              <li v-for="cate in categories1"><a v-bind:href="'../goods/list.do?cid=' + cate.cid">{{cate.title}}</a>
                 <ul class="sub-menu">
-                  <li><a href="index.html">카테고리명</a></li>
-                </ul>  
+                  <li v-for="cate2 in categories2" v-if="cate2.cid.indexOf(cate.cid) > -1"><a v-bind:href="'../goods/list.do?cid=' + cate2.cid">{{cate2.title}}</a></li>
+                </ul>
               </li>
-              <!-- <li class="label1" data-label1="hot"><a href="#">Features</a></li> -->
-
             </ul>
           </div>
 
           <!-- 아이콘 헤더 -->
           <div class="wrap-icon-header flex-w flex-r-m">
-            <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
+            <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-15 p-r-8 js-show-modal-search">
               <i class="zmdi zmdi-search"></i>
             </div>
 
-            <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
+            <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-15 p-r-8 icon-header-noti js-show-cart" data-notify="2">
               <i class="zmdi zmdi-shopping-cart"></i>
             </div>
 
-            <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
+            <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-15 p-r-8 icon-header-noti" data-notify="0">
               <i class="zmdi zmdi-favorite-outline"></i>
             </a>
           </div>
@@ -135,14 +133,11 @@
 
       <ul class="main-menu-m">
         <li><a href="index.html">홈</a></li>
-        <li>
-          <a href="../main/main.do">카테고리</a><span class="arrow-main-menu-m"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+        <li v-for="cate in categories1"><a v-bind:href="'../goods/list.do?cid=' + cate.cid">{{cate.title}}</a><span class="arrow-main-menu-m"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
           <ul class="sub-menu-m">
-            <li><a href="../goods/list.do">카테고리명</a></li>
+            <li v-for="cate2 in categories2" v-if="cate2.cid.indexOf(cate.cid) > -1"><a v-bind:href="'../goods/list.do?cid=' + cate2.cid">{{cate2.title}}</a></li>
           </ul>
         </li>
-
-        <!-- <li><a href="shoping-cart.html" class="label1 rs1" data-label1="hot">Features</a></li> -->
       </ul>
     </div>
 
@@ -201,17 +196,34 @@
     new Vue({
         el:'header',
         data:{
-            categories: []
+            categories1: [],
+            categories2: [],
         },
         mounted:function(){
-            axios.get("http://localhost:8080/web/goods/category_vue.do",{
-                params:{
-                    
-                }
-            }).then(result=>{
-                this.categories=result.data;
-                console.log(this.categories);
-            })
+            this.cate1();
+            this.cate2();
+        },
+        methods:{
+            cate1:function(){
+                axios.get("http://localhost:8080/web/goods/category_1_vue.do",{
+                    params:{
+                        
+                    }
+                }).then(result=>{
+                    this.categories1=result.data;
+                    console.log(this.categories);
+                })
+            },
+            cate2:function(){
+                axios.get("http://localhost:8080/web/goods/category_2_vue.do",{
+                    params:{
+                        
+                    }
+                }).then(result=>{
+                    this.categories2=result.data;
+                    console.log(this.categories);
+                })
+            }
         }
     })
   </script>

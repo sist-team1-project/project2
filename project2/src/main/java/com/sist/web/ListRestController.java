@@ -20,16 +20,17 @@ public class ListRestController {
         System.out.println("cid: "+cid);
         int curpage = page;
         
-        Map map = new HashMap();
         int rowSize = 20;
         int start = (rowSize * curpage) - (rowSize - 1);
         int end = (rowSize * curpage);
-        int totalpage = service.goodsListTotalpage(keyword);
         
+        Map map = new HashMap();
         map.put("cid", cid);
         map.put("keyword", keyword);
         map.put("start", start);
         map.put("end", end);
+        
+        int totalpage = service.goodsListTotalpage(map);
         
         final int BLOCK = 10;
         int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
@@ -75,17 +76,36 @@ public class ListRestController {
         return arr.toJSONString();
     }
     
-    @GetMapping(value = "goods/category_vue.do", produces = "text/plain;charset=utf-8")
-    public String goods_category_vue() {
+    @GetMapping(value = "goods/category_1_vue.do", produces = "text/plain;charset=utf-8")
+    public String goods_category_1_vue() {
         
-        List<CategoryVO> list = service.categoryList();
+        List<CategoryVO> list = service.categoryList_1();
         JSONArray arr = new JSONArray();
-        JSONObject obj = new JSONObject();
+        
         for(CategoryVO vo : list) {
+            JSONObject obj = new JSONObject();
             obj.put("cid", vo.getC_id());
             obj.put("title", vo.getC_title());
             arr.add(obj);
         }
+        return arr.toJSONString();
+    }
+    
+    @GetMapping(value = "goods/category_2_vue.do", produces = "text/plain;charset=utf-8")
+    public String goods_category_2_vue() {
+        
+        List<CategoryVO> list = service.categoryList_2();
+        JSONArray arr = new JSONArray();
+        
+        int i = 0;
+        for(CategoryVO vo : list) {
+            JSONObject obj = new JSONObject();
+            obj.put("cid", vo.getC_id());
+            obj.put("title", vo.getC_title());
+            arr.add(obj);
+            i++;
+        }
+        
         return arr.toJSONString();
     }
 }

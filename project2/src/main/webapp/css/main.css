@@ -139,7 +139,7 @@
 }
 
 .right-top-bar a:hover {
-  color: #6c7ae0;
+  color: #A59D90;
 }
 
 
@@ -209,8 +209,8 @@
   display: -ms-flexbox;
   display: flex;
   align-items: center;
-  height: 65%;
-  margin-right: 55px;
+  height: 50%;
+  margin-right: 25px;
 }
 
 .logo img {
@@ -253,9 +253,9 @@
 }
 
 .main-menu > li > a {
-  font-size: 14px;
+  font-size: 13px;
   color: #333;
-  padding: 5px 0px;
+  padding: 4px 0px;
   transition: all 0.4s;
   -webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
@@ -307,7 +307,7 @@
 }
 
 .sub-menu a {
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.5;
   color: #555;
 

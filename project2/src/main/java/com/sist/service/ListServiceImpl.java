@@ -24,12 +24,16 @@ public class ListServiceImpl implements ListService {
     }
     
     @Override
-    public int goodsListTotalpage(String keyword) {
-        return gdao.goodsListTotalpage(keyword);
+    public int goodsListTotalpage(Map map) {
+        return gdao.goodsListTotalpage(map);
     }
     
     @Override
-    public List<CategoryVO> categoryList() {
-        return cdao.categoryList();
+    public List<CategoryVO> categoryList_1() {
+        return cdao.categoryList_1();
+    }
+    @Override
+    public List<CategoryVO> categoryList_2() {
+        return cdao.categoryList_2();
     }
 }

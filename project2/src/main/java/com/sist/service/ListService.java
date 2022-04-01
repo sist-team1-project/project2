@@ -8,6 +8,7 @@ import com.sist.dao.*;
 public interface ListService {
     
     public List<GoodsVO> goodsList(Map map);
-    public int goodsListTotalpage(String keyword);
-    public List<CategoryVO> categoryList();
+    public int goodsListTotalpage(Map map);
+    public List<CategoryVO> categoryList_1();
+    public List<CategoryVO> categoryList_2();
 }
