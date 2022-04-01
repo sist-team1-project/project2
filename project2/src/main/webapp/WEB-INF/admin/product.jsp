@@ -88,38 +88,6 @@
 		<div>
 
 
-
-
-			<%-- 			<ul class="pagination">
-				<li class="page-item">
-					<button type="button" class="page-link" v-if="curpage > 1">
-						<i class="fa fa-angle-left" v-on:click="prev()" aria-hidden="true">
-					</button>
-				</li>
-				<li class="page-item">
-					<button type="button" class="page-link" v-for="pageNumber in totalpage.slice(startPage, endPage)" @click="getpage()">{{pageNumber}}</button>
-				</li>
-				<li class="page-item">
-					<button type="button" v-on:click="next()" v-if="endPage < totalpage" class="page-link">
-						<i class="fa fa-angle-right" aria-hidden="true">
-					</button>
-				</li>
-			</ul> --%>
-
-
-
-
-			<!-- <table class="table">
-				<tr>
-					<td class="text-center">
-						<button class="btn btn-sm btn-warning" v-on:click="prev()">이전</button>
-						{{curpage}} page / {{totalpage}} pages
-						<button class="btn btn-sm btn-warning" v-on:click="next()">다음</button>
-					</td>
-				</tr>
-			</table> -->
-
-
 			<div class="text-center">
 				<ul class="pagination">
 					<li class="page-item" v-bind:class="{'disabled':startPage==1}"><button class="page-link" :value="startPage-1" v-on:click="prev($event)">
@@ -139,11 +107,11 @@
 		<!-- 사이드 Detail -->
 
 		<div class="wrap-header-admin js-panel-admin">
-			<div class="s-full js-hide-admin"></div>
+			<div class="s-full" v-on:click="goods_detail_close"></div>
 			<div class="header-admin flex-col-l p-l-65 p-r-25">
 				<div class="header-admin-title flex-w flex-sb-m p-b-8">
 					<span class="mtext-103 cl2"> Detail </span>
-					<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-admin">
+					<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04">
 						<i class="zmdi zmdi-close" v-on:click="goods_detail_close"></i>
 					</div>
 				</div>
@@ -161,17 +129,6 @@
 
 	</div>
 
-	<!-- <script type="text/javascript">
-			/*==================================================================
-			[ admin ]*/
-			$('.js-show-admin').on('click', function() {
-				$('.js-panel-admin').addClass('show-header-admin');
-			});
-
-			$('.js-hide-admin').on('click', function() {
-				$('.js-panel-admin').removeClass('show-header-admin');
-			});
-		</script> -->
 
 	<script>
 			new Vue({
@@ -198,8 +155,6 @@
 							}).then(res => {
 								this.goodsList = res.data;
 								console.log(this.goodsList);
-								console.log(this.goodsList[0].g_id);
-								console.log(this.goodsList[0].g_image);
 								this.curpage = res.data[0].curpage;
 								this.totalpage = res.data[0].totalpage;
 								this.gdetail = res.data[0].g_detail;
@@ -213,18 +168,14 @@
 							})
 					},
 					prev:function(event){
-		    			//this.curpage=this.curpage>1?this.curpage-1:this.curpage;
 		    			this.curpage = event.currentTarget.getAttribute('value');
 		    			this.dataSend();
 		    	},
 	    		next:function(event){
-	    				//this.curpage=this.curpage<this.totalpage?this.curpage+1:this.curpage;
 	    				this.curpage = event.currentTarget.getAttribute('value');
 	    				this.dataSend();
 	    		},
 	    		getpage : function(event){
-	    				//this.curpage = pageNum;
-	    				console.log("가져와")
 	    				this.curpage = event.currentTarget.getAttribute('value');
 	    				this.dataSend();
 	    		},
@@ -238,13 +189,10 @@
 
 					},
 					goods_detail : function(detailId) {
-						console.log("detail 클릭 펑션");
-						console.log(detailId);
 						this.gdetail = detailId;
 						$('.js-panel-admin').addClass('show-header-admin');
 					},
 					goods_detail_close : function(){
-						console.log("닫기닫기");
 						$('.js-panel-admin').removeClass('show-header-admin');
 					}
 				}
