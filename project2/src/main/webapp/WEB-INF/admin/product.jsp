@@ -61,6 +61,7 @@
 										<img :src="goods.g_image" class="size-109">
 									</div>
 								</td>
+								<td>{{goods.g_id}}</td>
 								<td>{{goods.c_id}}</td>
 								<td>{{goods.g_name}}</td>
 								<td>{{goods.g_brand}}</td>
@@ -89,7 +90,7 @@
 
 
 
-<%-- 			<ul class="pagination">
+			<%-- 			<ul class="pagination">
 				<li class="page-item">
 					<button type="button" class="page-link" v-if="curpage > 1">
 						<i class="fa fa-angle-left" v-on:click="prev()" aria-hidden="true">
@@ -108,7 +109,7 @@
 
 
 
-			<table class="table">
+			<!-- <table class="table">
 				<tr>
 					<td class="text-center">
 						<button class="btn btn-sm btn-warning" v-on:click="prev()">이전</button>
@@ -116,27 +117,22 @@
 						<button class="btn btn-sm btn-warning" v-on:click="next()">다음</button>
 					</td>
 				</tr>
-			</table>
+			</table> -->
 
 
+			<div class="text-center">
+				<ul class="pagination">
+					<li class="page-item" v-bind:class="{'disabled':startPage==1}"><button class="page-link" :value="startPage-1" v-on:click="prev($event)">
+							<i class="fa fa-chevron-left" aria-hidden="true"></i>
+						</button></li>
+					<li class="page-item" v-for="i in pages" v-bind:class="{'active':i==curpage}"><button class="page-link" :value="i" v-on:click="getpage($event)">{{i}}</button></li>
+					<li class="page-item" v-bind:class="{'disabled':endPage==totalpage}"><button class="page-link" :value="endPage+1" v-on:click="next($event)">
+							<i class="fa fa-chevron-right" aria-hidden="true"></i>
+						</button></li>
+				</ul>
+			</div>
 
-			<%-- 			<ul class="pagination">
-				<c:if test="${startPage > 1 }">
-					<li class="page-item"><a class="page-link" href="adlist.do?page=${startPage-1 }">&lt;</a></li>
-				</c:if>
-				<c:forEach var="i" begin="${startPage }" end="${endPage }">
-					<c:if test="${curpage==i }">
-						<c:set var="style" value="active" />
-					</c:if>
-					<c:if test="${curpage != i }">
-						<c:set var="style" value="" />
-					</c:if>
-					<li class="page-item ${style }"><a class="page-link" href="adlist.do?page=${i }">${i }</a></li>
-				</c:forEach>
-				<c:if test="${endPage < totalpage }">
-					<li class="page-item"><a class="page-link" href="adlist.do?page=${endPage+1 }">&gt;</a></li>
-				</c:if>
-			</ul> --%>
+
 
 		</div>
 
@@ -187,7 +183,8 @@
 					totalpage : 0,
 					startPage : 0,
 					endPage : 0,
-					gdetail : ''
+					gdetail : '',
+					pages : []
 				},
 				mounted : function() {
 					this.dataSend();
@@ -208,19 +205,28 @@
 								this.gdetail = res.data[0].g_detail;
 								this.startPage = res.data[0].startPage;
 								this.endPage = res.data[0].endPage;
+								
+								this.pages=[];
+                   for(i = this.startPage; i <= this.endPage; i++) {
+                       this.pages.push(i);
+                   }
 							})
 					},
-					prev:function(){
-		    			this.curpage=this.curpage>1?this.curpage-1:this.curpage;
+					prev:function(event){
+		    			//this.curpage=this.curpage>1?this.curpage-1:this.curpage;
+		    			this.curpage = event.currentTarget.getAttribute('value');
 		    			this.dataSend();
 		    	},
-	    		next:function(){
-	    				this.curpage=this.curpage<this.totalpage?this.curpage+1:this.curpage;
+	    		next:function(event){
+	    				//this.curpage=this.curpage<this.totalpage?this.curpage+1:this.curpage;
+	    				this.curpage = event.currentTarget.getAttribute('value');
 	    				this.dataSend();
 	    		},
-	    		getpage : function(pageNum){
-	    				this.curpage = pageNum;
-	    				this.daataSend();
+	    		getpage : function(event){
+	    				//this.curpage = pageNum;
+	    				console.log("가져와")
+	    				this.curpage = event.currentTarget.getAttribute('value');
+	    				this.dataSend();
 	    		},
 					gfind : function() {
 
@@ -235,7 +241,6 @@
 						console.log("detail 클릭 펑션");
 						console.log(detailId);
 						this.gdetail = detailId;
-						//console.log(gdetail);
 						$('.js-panel-admin').addClass('show-header-admin');
 					},
 					goods_detail_close : function(){
