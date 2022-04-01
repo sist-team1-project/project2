@@ -27,4 +27,9 @@ public class ListServiceImpl implements ListService {
     public int goodsListTotalpage(String keyword) {
         return gdao.goodsListTotalpage(keyword);
     }
+    
+    @Override
+    public List<CategoryVO> categoryList() {
+        return cdao.categoryList();
+    }
 }

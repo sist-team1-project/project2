@@ -114,9 +114,22 @@
         <li><div class="left-top-bar">3만원 이상 구매시 무료배송</div></li>
 
         <li>
-          <div class="right-top-bar flex-w h-full">
-            <a href="#" class="flex-c-m p-lr-10 trans-04">로그인</a>
-          </div>
+          <c:if test="${sessionScope.id==null }">
+            <div class="right-top-bar flex-w h-full">
+              <a href="#" class="flex-c-m p-lr-10 trans-04">로그인</a>
+            </div>
+          </c:if>
+          <c:if test="${sessionScope.id!=null }">
+            <div class="right-top-bar flex-w h-full">
+              <a href="../user/logout.do" class="flex-c-m p-lr-10 trans-04">로그아웃</a>
+              <c:if test="${sessionScope.grade==1 }">
+                <a href="../mypage/mypage.do" class="flex-c-m p-lr-10 trans-04">마이페이지</a>
+              </c:if>
+              <c:if test="${sessionScope.grade==0 }">
+                <a href="../admin/adlist.do" class="flex-c-m p-lr-10 trans-04">관리자페이지</a>
+              </c:if>
+            </div>
+          </c:if>
         </li>
       </ul>
 
@@ -184,7 +197,24 @@
     </div>
   </div>
 
-
+  <script>
+    new Vue({
+        el:'header',
+        data:{
+            categories: []
+        },
+        mounted:function(){
+            axios.get("http://localhost:8080/web/goods/category_vue.do",{
+                params:{
+                    
+                }
+            }).then(result=>{
+                this.categories=result.data;
+                console.log(this.categories);
+            })
+        }
+    })
+  </script>
   <script src="../vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
   <!-- 모바일 버전 스크롤바 -->
   <script>

@@ -16,8 +16,8 @@ public class ListRestController {
     private ListService service;
     
     @GetMapping(value = "goods/list_vue.do", produces = "text/plain;charset=utf-8")
-    public String goods_list_vue(int page, String keyword) {
-        
+    public String goods_list_vue(String cid, int page, String keyword) {
+        System.out.println("cid: "+cid);
         int curpage = page;
         
         Map map = new HashMap();
@@ -26,6 +26,7 @@ public class ListRestController {
         int end = (rowSize * curpage);
         int totalpage = service.goodsListTotalpage(keyword);
         
+        map.put("cid", cid);
         map.put("keyword", keyword);
         map.put("start", start);
         map.put("end", end);
@@ -70,6 +71,20 @@ public class ListRestController {
                 arr.add(obj);
                 i++;
             }
+        }
+        return arr.toJSONString();
+    }
+    
+    @GetMapping(value = "goods/category_vue.do", produces = "text/plain;charset=utf-8")
+    public String goods_category_vue() {
+        
+        List<CategoryVO> list = service.categoryList();
+        JSONArray arr = new JSONArray();
+        JSONObject obj = new JSONObject();
+        for(CategoryVO vo : list) {
+            obj.put("cid", vo.getC_id());
+            obj.put("title", vo.getC_title());
+            arr.add(obj);
         }
         return arr.toJSONString();
     }

@@ -9,4 +9,5 @@ public interface ListService {
     
     public List<GoodsVO> goodsList(Map map);
     public int goodsListTotalpage(String keyword);
+    public List<CategoryVO> categoryList();
 }
