@@ -1,5 +1,6 @@
 package com.sist.vo;
 
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,4 +8,6 @@ import lombok.Setter;
 @Getter
 public class OrderDetailVO {
     private int od_id, o_id, g_id, g_price, g_sale, g_quantity;
+    private String g_name;
+    
 }
