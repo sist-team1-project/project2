@@ -42,9 +42,9 @@ public class SupportRestController {
 			   for(NoticeVO vo:list)
 			   {
 				   JSONObject obj=new JSONObject();
-				   obj.put("n_title", vo.getN_title());
-				   obj.put("u_id", vo.getU_id());
-				   obj.put("n_regdate", vo.getN_regdate());
+				   obj.put("ntitle", vo.getN_title());
+				   obj.put("uid", vo.getU_id());
+				   obj.put("nregdate", vo.getN_regdate());
 				   if(i==0)
 				   {
 					   obj.put("curpage", curpage);
@@ -67,11 +67,10 @@ public class SupportRestController {
 		   {
 			   NoticeVO vo=dao.noticeDetailData(no);
 			   JSONObject obj=new JSONObject();
-			   obj.put("n_id", vo.getN_id());
-			   obj.put("u_id", vo.getU_id());
 			   obj.put("n_title", vo.getN_title());
-			   obj.put("n_content", vo.getN_content());
+			   obj.put("u_id", vo.getU_id());
 			   obj.put("n_regdate", vo.getN_regdate());
+			   obj.put("n_content", vo.getN_content());
 			   obj.put("n_visit", vo.getN_visit());
 			   
 			   result=obj.toJSONString();

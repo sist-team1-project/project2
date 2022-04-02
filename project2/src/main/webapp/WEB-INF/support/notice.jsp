@@ -22,9 +22,9 @@
               </tr>
 
               <tr class="table_row" v-for="vo in notice_list">
-                <td width=60% class="text-center">{{vo.n_title}}</td>
-                <td width=20% class="text-center">{{vo.u_id}}</td>
-                <td width=20% class="text-center">{{vo.n_regdate}}</td>
+                <td width=60% class="text-center">{{vo.ntitle}}</td>
+                <td width=20% class="text-center"><a v-bind:href="'notice_detail.do?nid=' + vo.n_id">{{vo.uid}}</a></td>
+                <td width=20% class="text-center">{{vo.nregdate}}</td>
               </tr>
            </table>
           </div>
