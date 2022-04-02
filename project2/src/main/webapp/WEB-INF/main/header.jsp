@@ -17,6 +17,7 @@
       <div class="top-bar">
         <div class="content-topbar flex-sb-m h-full container">
           <div class="left-top-bar">3만원 이상 구매시 무료배송</div>
+          <div class="left-top-bar">${sessionScope.id}님 안녕하세요!</div>
           <c:if test="${sessionScope.id==null }">
             <div class="right-top-bar flex-w h-full">
               <a href="../user/login.do" class="flex-c-m trans-04 p-lr-25">로그인</a>

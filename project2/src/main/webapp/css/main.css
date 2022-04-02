@@ -116,6 +116,12 @@
   background-color: #222;
 }
 
+.center-top-bar {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #b2b2b2;
+}
+
 /*---------------------------------------------*/
 .left-top-bar {
   font-size: 12px;
