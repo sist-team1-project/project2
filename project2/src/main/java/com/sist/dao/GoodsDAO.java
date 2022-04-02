@@ -24,6 +24,10 @@ public class GoodsDAO {
         return mapper.goodsListTotalpage(map);
     }
 	
+	public List<String> brandList(Map map) {
+	    return mapper.brandList(map);
+	}
+	
 	public List<GoodsVO> goodsTotalList(Map map) {
 		return mapper.goodsTotalList(map);
 	}

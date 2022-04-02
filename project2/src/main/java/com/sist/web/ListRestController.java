@@ -17,7 +17,7 @@ public class ListRestController {
     
     @GetMapping(value = "goods/list_vue.do", produces = "text/plain;charset=utf-8")
     public String goods_list_vue(String cid, int page, String keyword) {
-        System.out.println("cid: "+cid);
+        
         int curpage = page;
         
         int rowSize = 20;
@@ -72,6 +72,23 @@ public class ListRestController {
                 arr.add(obj);
                 i++;
             }
+        }
+        return arr.toJSONString();
+    }
+    
+    @GetMapping(value = "goods/list_brand_vue.do", produces = "text/plain;charset=utf-8")
+    public String goods_list_brand_vue(String cid, String keyword) {
+        
+        Map map = new HashMap();
+        map.put("cid", cid);
+        map.put("keyword", keyword);
+        
+        List<String> list = service.brandList(map);
+        JSONArray arr = new JSONArray();
+        for (String i : list) {
+            JSONObject obj = new JSONObject();
+            obj.put("brand", i);
+            arr.add(obj);
         }
         return arr.toJSONString();
     }

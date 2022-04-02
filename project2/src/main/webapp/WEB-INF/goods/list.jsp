@@ -9,92 +9,25 @@
 </head>
 <body>
 
-  <div class="bg0 p-t-150">
+  <div class="bg0 p-t-100">
     <div id="listpage" class="container">
-      <div class="flex-w flex-sb-m">
+      <div id="search" class="w-full p-t-10">
+        <div class="bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
         
-        <!-- Search product -->
-        <div class="panel-search p-t-10 p-b-15">
-          <div class="bor8 dis-flex p-l-15">
-            <button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
-              <i class="zmdi zmdi-search"></i>
-            </button>
-            <input class="mtext-107 cl2 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
+          <!-- Search product -->
+          <div class="p-t-10 p-b-15">
+            <div class="mtext-102 cl2 p-b-15">검색어</div>
+            <input class="mtext-107 cl2 bor8 p-lr-15 p-tb-5" type="text" name="search-product" placeholder="검색어 입력">
           </div>
-        </div>
-
-        <!-- Filter -->
-        <div class="panel-filter w-full p-t-10">
-          <div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
-            <div class="filter-col1 p-r-15 p-b-27">
-              <div class="mtext-102 cl2 p-b-15">Sort By</div>
-              <ul>
-                <li class="p-b-6"><a href="#" class="filter-link stext-106 trans-04"> Default </a></li>
-                <li class="p-b-6"><a href="#" class="filter-link stext-106 trans-04"> Popularity</a></li>
-                <li class="p-b-6"><a href="#" class="filter-link stext-106 trans-04"> Average rating </a></li>
-                <li class="p-b-6"><a href="#" class="filter-link stext-106 trans-04 filter-link-active"> Newness </a></li>
-                <li class="p-b-6"><a href="#" class="filter-link stext-106 trans-04"> Price: Low to High </a></li>
-                <li class="p-b-6"><a href="#" class="filter-link stext-106 trans-04"> Price: High to Low </a></li>
-              </ul>
-            </div>
-
-            <div class="filter-col2 p-r-15 p-b-27">
-              <div class="mtext-102 cl2 p-b-15">Price</div>
-              <ul>
-                <li class="p-b-6"><a href="#" class="filter-link stext-106 trans-04 filter-link-active"> All </a></li>
-                <li class="p-b-6"><a href="#" class="filter-link stext-106 trans-04"> $0.00 - $50.00 </a></li>
-                <li class="p-b-6"><a href="#" class="filter-link stext-106 trans-04"> $50.00 -$100.00 </a></li>
-                <li class="p-b-6"><a href="#" class="filter-link stext-106 trans-04"> $100.00 -$150.00 </a></li>
-                <li class="p-b-6"><a href="#" class="filter-link stext-106 trans-04"> $150.00 - $200.00 </a></li>
-                <li class="p-b-6"><a href="#" class="filter-link stext-106 trans-04"> $200.00+ </a></li>
-              </ul>
-            </div>
-
-            <div class="filter-col3 p-r-15 p-b-27">
-              <div class="mtext-102 cl2 p-b-15">Color</div>
-              <ul>
-                <li class="p-b-6">
-                  <span class="fs-15 lh-12 m-r-6" style="color: #222;"> <i class="zmdi zmdi-circle"></i></span>
-                  <a href="#" class="filter-link stext-106 trans-04">Black </a>
-                </li>
-
-                <li class="p-b-6">
-                  <span class="fs-15 lh-12 m-r-6" style="color: #4272d7;"><i class="zmdi zmdi-circle"></i></span>
-                  <a href="#" class="filter-link stext-106 trans-04 filter-link-active">Blue </a>
-                </li>
-
-                <li class="p-b-6">
-                  <span class="fs-15 lh-12 m-r-6" style="color: #b3b3b3;"><i class="zmdi zmdi-circle"></i></span>
-                  <a href="#" class="filter-link stext-106 trans-04">Grey </a>
-                </li>
-
-                <li class="p-b-6">
-                  <span class="fs-15 lh-12 m-r-6" style="color: #00ad5f;"><i class="zmdi zmdi-circle"></i></span>
-                  <a href="#" class="filter-link stext-106 trans-04">Green </a>
-                </li>
-
-                <li class="p-b-6">
-                  <span class="fs-15 lh-12 m-r-6" style="color: #fa4251;"> <i class="zmdi zmdi-circle"></i></span>
-                  <a href="#" class="filter-link stext-106 trans-04">Red </a>
-                </li>
-
-                <li class="p-b-6">
-                  <span class="fs-15 lh-12 m-r-6" style="color: #aaa;"> <i class="zmdi zmdi-circle-o"></i></span>
-                  <a href="#" class="filter-link stext-106 trans-04">White </a>
-                </li>
-              </ul>
-            </div>
-        
-            <div class="filter-col4 p-b-27">
-              <div class="mtext-102 cl2 p-b-15">Tags</div>
-              <div class="flex-w p-t-4 m-r--5">
-                <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">Fashion </a>
-                <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">Lifestyle </a>
-                <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">Denim </a>
-                <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">Streetstyle </a>
-                <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">Crafts </a>
-              </div>
-            </div>
+          
+          <div class="p-b-27">
+            <div class="mtext-102 cl2 p-b-15">브랜드</div>
+            <span class="p-tb-10 p-r-15 dis-inline-block" v-for="b in brands"><input class="dis-inline-block" type=checkbox name="brand" :value="b.brand"> {{b.brand}}&nbsp;&nbsp;</span>
+          </div>
+          
+          <div class="p-r-15 p-b-27">
+            <div class="mtext-102 cl2 p-b-15">가격</div>
+            <input class="bor8 p-lr-15 p-tb-5 dis-inline-block" type=number name=price1 placeholder="최소 금액 입력"> 원 ~ <input class="bor8 p-lr-15 p-tb-5 dis-inline-block" type=number name=price2 placeholder="최대 금액 입력"> 원
           </div>
         </div>
       </div>
@@ -103,10 +36,10 @@
         <!-- 아이템 루프로 돌리기 -->
         <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 women" v-for="vo in goods">
           <div class="block2">
-            <div class="block2-pic hov-img0"><a v-bind:href="'../goods/detail.do?gid=' + vo.gid"><img :src="vo.image"></a></div>
+            <div class="block2-pic hov-img0"><a :href="'../goods/detail.do?gid=' + vo.gid"><img :src="vo.image"></a></div>
             <div class="block2-txt flex-w flex-t p-t-14">
               <div class="block2-txt-child1 flex-col-l ">
-                <a v-bind:href="'../goods/detail.do?gid=' + vo.gid" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">{{vo.name}}</a>
+                <a :href="'../goods/detail.do?gid=' + vo.gid" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">{{vo.name}}</a>
                 <span class="stext-105 cl3"></span>
               </div>
 
@@ -136,6 +69,7 @@
         data:{
             cid:'${cid }',
             keyword:'',
+            brands:[],
             goods:[],
             totalpage:0,
             empty: 1,
@@ -146,6 +80,7 @@
         },
         mounted:function(){
             this.list();
+            this.brandList();
         },
         methods:{
             list:function(){
@@ -172,6 +107,16 @@
                     for(i = this.start; i <= this.end; i++) {
                         this.pages.push(i);
                     }
+                })
+            },
+            brandList:function(){
+                axios.get("http://localhost:8080/web/goods/list_brand_vue.do",{
+                    params:{
+                        cid: this.cid,
+                        keyword: this.keyword
+                    }
+                }).then(result=>{
+                    this.brands=result.data;
                 })
             },
             curr:function(event) {

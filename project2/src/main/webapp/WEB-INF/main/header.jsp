@@ -211,7 +211,6 @@
                     }
                 }).then(result=>{
                     this.categories1=result.data;
-                    console.log(this.categories);
                 })
             },
             cate2:function(){
@@ -221,7 +220,6 @@
                     }
                 }).then(result=>{
                     this.categories2=result.data;
-                    console.log(this.categories);
                 })
             }
         }
