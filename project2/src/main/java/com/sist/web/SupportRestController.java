@@ -67,11 +67,11 @@ public class SupportRestController {
 		   {
 			   NoticeVO vo=dao.noticeDetailData(no);
 			   JSONObject obj=new JSONObject();
-			   obj.put("n_title", vo.getN_title());
-			   obj.put("u_id", vo.getU_id());
-			   obj.put("n_regdate", vo.getN_regdate());
-			   obj.put("n_content", vo.getN_content());
-			   obj.put("n_visit", vo.getN_visit());
+			   obj.put("ntitle", vo.getN_title());
+			   obj.put("uid", vo.getU_id());
+			   obj.put("nregdate", vo.getN_regdate());
+			   obj.put("ncontent", vo.getN_content());
+			   obj.put("nvisit", vo.getN_visits());
 			   
 			   result=obj.toJSONString();
 			   System.out.println(result);

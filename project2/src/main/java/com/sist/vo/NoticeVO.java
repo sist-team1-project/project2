@@ -7,6 +7,6 @@ import lombok.Setter;
 @Getter
 public class NoticeVO {
     
-    private int n_id, n_visit;
+    private int n_id, n_visits;
     private String u_id, n_title, n_content, n_regdate;
 }
