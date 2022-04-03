@@ -174,72 +174,64 @@
 					gdetail : '',
 					pages : [],
 					 
- 
-
 					selected : '',
-			   	fs : [],
-			   	ss : ''
-
-			
-					  
+    			   	fs : [],
+    			   	ss : ''
 				},
 				mounted : function() {
 					this.dataSend();
 				},
 				methods : {
 					dataSend:function(){
-							axios.get("http://localhost:8080/web/admin/adlist_vue.do", {
-								params : {
-									page : this.curpage
-								}
-							}).then(res => {
-								this.goodsList = res.data;
-								console.log(this.goodsList);
-								this.curpage = res.data[0].curpage;
-								this.totalpage = res.data[0].totalpage;
-								this.gdetail = res.data[0].g_detail;
-								this.startPage = res.data[0].startPage;
-								this.endPage = res.data[0].endPage;
-								
-								this.pages=[];
-                   for(i = this.startPage; i <= this.endPage; i++) {
-                       this.pages.push(i);
-                   }
-							})
+						axios.get("http://localhost:8080/web/admin/adlist_vue.do", {
+							params : {
+								page : this.curpage
+							}
+						}).then(res => {
+							this.goodsList = res.data;
+							console.log(this.goodsList);
+							this.curpage = res.data[0].curpage;
+							this.totalpage = res.data[0].totalpage;
+							this.gdetail = res.data[0].g_detail;
+							this.startPage = res.data[0].startPage;
+							this.endPage = res.data[0].endPage;
+							
+							this.pages=[];
+                              for(i = this.startPage; i <= this.endPage; i++) {
+                                  this.pages.push(i);
+                              }
+						})
 					},
 					prev:function(event){
 		    			this.curpage = event.currentTarget.getAttribute('value');
 		    			this.dataSend();
-		    	},
-	    		next:function(event){
-	    				this.curpage = event.currentTarget.getAttribute('value');
-	    				this.dataSend();
-	    		},
-	    		getpage : function(event){
-	    				this.curpage = event.currentTarget.getAttribute('value');
-	    				this.dataSend();
-	    		},
+    		    	},
+    	    		next:function(event){
+    	    				this.curpage = event.currentTarget.getAttribute('value');
+    	    				this.dataSend();
+    	    		},
+    	    		getpage : function(event){
+    	    				this.curpage = event.currentTarget.getAttribute('value');
+    	    				this.dataSend();
+    	    		},
 					gfind : function() {	
 						console.log("검색버튼이다")
-						console.log(this.fs)
-						console.log(this.ss)
+						/* console.log(this.fs)
+						console.log(this.ss) */
 						if (!this.ss) {
 							console.log("null")
 							this.$refs.goodsfind.focus();
 							return;
 						}
+						
+						/* console.log(JSON.stringify(this.fs)); */
 						axios.get("http://localhost:8080/web/admin/find_vue.do", {
 							params : {
-								//fs : JSON.stringify(this.fs),
-								fs : this.fs,
+								fs : this.fs.join(","),
 								ss : this.ss
-							},
-							/* paramsSerializer: params => {
-								return jQuery.param(params)
-							} */
+							}
 						}).then(res => {
 							this.goodsList = res.data;
-							console.log(this.goodsList);
 						})
 						
 					},

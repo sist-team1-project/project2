@@ -66,6 +66,7 @@ public interface GoodsMapper {
 			  +"</when>"
 			  +"<when test=\"fd=='C'.toString()\">"
 			  +"g_name LIKE '%'||#{ss}||'%'"
+			  +"</when>"
 			  +"<when test=\"fd=='D'.toString()\">"
 			  +"g_brand LIKE '%'||#{ss}||'%'"
 			  +"</when>"
