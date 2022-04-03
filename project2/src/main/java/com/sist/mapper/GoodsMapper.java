@@ -49,5 +49,31 @@ public interface GoodsMapper {
 
 	@Insert("INSERT INTO event_goods_1 VALUES(event_goods_id_seq_1.NEXTVAL, #{e_id}, #{g_id})")
 	public void goodsEventInsert(EventGoodsVO vo);
+	
+	@Select("<script>"
+			  +"SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status, TO_CHAR(g_regdate,'YYYY-MM-DD HH24:MI:SS')as g_regdate "
+			  +"FROM goods_1 "
+			  +"WHERE "
+			  +"<trim prefixOverrides='OR'>"
+			  +"<foreach collection='fsArr' item='fd'>"
+			  +"<trim prefix='OR'>"
+			  +"<choose>"
+			  +"<when test=\"fd=='N'.toString()\">"
+			  +"g_id LIKE '%'||#{ss}||'%'"
+			  +"</when>"
+			  +"<when test=\"fd=='S'.toString()\">"
+			  +"c_id LIKE '%'||#{ss}||'%'"
+			  +"</when>"
+			  +"<when test=\"fd=='C'.toString()\">"
+			  +"g_name LIKE '%'||#{ss}||'%'"
+			  +"<when test=\"fd=='D'.toString()\">"
+			  +"g_brand LIKE '%'||#{ss}||'%'"
+			  +"</when>"
+			  +"</choose>"
+			  +"</trim>"
+			  +"</foreach>"
+			  +"</trim>"
+			  +"</script>")
+		public List<GoodsVO> adminGoodsFind(Map map);
 
 }

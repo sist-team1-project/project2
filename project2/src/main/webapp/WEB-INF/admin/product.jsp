@@ -18,9 +18,38 @@
 				</div>
 			</div>
 			<div class="col-lg-12 flex-m">
-				<input type="text" size=20 class="bor4 p-tb-4 dis-inline-block" v-model="ss" :value="ss">
-				&nbsp;&nbsp;
+
+				<!-- <input type="text" size=20 class="bor4 p-tb-4 dis-inline-block" v-model="ss" :value="ss"> -->
+				&nbsp; &nbsp;
+
+
+
+
+				<input type="checkbox" v-model="fs" value="N">
+				상품번호&nbsp; &nbsp;
+				<input type="checkbox" v-model="fs" value="S">
+				카테고리&nbsp; &nbsp;
+				<input type="checkbox" v-model="fs" value="C">
+				제품명&nbsp; &nbsp;
+				<input type="checkbox" v-model="fs" value="D">
+				브랜드&nbsp; &nbsp;
+				<input type=text size=15 class="input-sm wrap-search-admin" v-model="ss" ref="goodsfind">
+				&nbsp; &nbsp;
 				<button class="flex-c-m stext-101 cl0 btn-sm btn-pro-color2 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail fs-10" v-on:click="gfind()">검색</button>
+
+
+
+
+				<!-- <select v-model="selected">
+					<option disabled value="">Please select one</option>
+					<option name="fs">A</option>
+					<option>B</option>
+					<option>C</option>
+				</select>
+				<span>선택함: {{ selected }}</span> -->
+
+
+
 			</div>
 		</div>
 		<div class="row p-t-10">
@@ -30,7 +59,7 @@
 					<fmt:formatNumber value="${count }" pattern=",000" />
 					개
 				</div>
-				<input type="button" class="btn btn-sm btn-pro-color2" value="상품 등록" v-on:click="goods_add">
+				<button class="flex-c-m stext-101 cl0 btn-sm btn-pro-color2 bor1 hov-btn1 p-lr-15 trans-04  fs-10" v-on:click="goods_add()">상품 등록</button>
 			</div>
 			<div class="col-lg-12 m-lr-auto m-b-50">
 				<div class="wrap-table js-pscroll">
@@ -76,7 +105,9 @@
 										<i class="fa fa-search" v-on:click="goods_detail(goods.g_detail)" aria-hidden="true"></i>
 									</div>
 								</td>
-								<td></td>
+								<td>
+									<button class="flex-c-m stext-101 cl0 btn-sm btn-pro-color2 bor1 hov-btn1 p-lr-15 trans-04  fs-10" v-on:click="goods_update()">수정</button>
+								</td>
 							</tr>
 
 						</tbody>
@@ -134,14 +165,23 @@
 			new Vue({
 				el : '#adminGoods', // 제어하는 영역 
 				data : {
-					ss : ' 텐트',
+					ss : '',
 					goodsList : [],
 					curpage : 1,
 					totalpage : 0,
 					startPage : 0,
 					endPage : 0,
 					gdetail : '',
-					pages : []
+					pages : [],
+					 
+ 
+
+					selected : '',
+			   	fs : [],
+			   	ss : ''
+
+			
+					  
 				},
 				mounted : function() {
 					this.dataSend();
@@ -179,14 +219,35 @@
 	    				this.curpage = event.currentTarget.getAttribute('value');
 	    				this.dataSend();
 	    		},
-					gfind : function() {
-
+					gfind : function() {	
+						console.log("검색버튼이다")
+						console.log(this.fs)
+						console.log(this.ss)
+						if (!this.ss) {
+							console.log("null")
+							this.$refs.goodsfind.focus();
+							return;
+						}
+						axios.get("http://localhost:8080/web/admin/find_vue.do", {
+							params : {
+								//fs : JSON.stringify(this.fs),
+								fs : this.fs,
+								ss : this.ss
+							},
+							/* paramsSerializer: params => {
+								return jQuery.param(params)
+							} */
+						}).then(res => {
+							this.goodsList = res.data;
+							console.log(this.goodsList);
+						})
+						
 					},
 					goods_add : function() {
 						console.log("이건???애드");
 					},
 					goods_update : function() {
-
+						console.log("상품 수정");
 					},
 					goods_detail : function(detailId) {
 						this.gdetail = detailId;

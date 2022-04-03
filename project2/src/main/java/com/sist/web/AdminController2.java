@@ -66,6 +66,4 @@ public class AdminController2 {
 		return "admin/product";
 	}
 	
-	
-	
 }

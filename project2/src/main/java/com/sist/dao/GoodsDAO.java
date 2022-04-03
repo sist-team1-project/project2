@@ -19,15 +19,15 @@ public class GoodsDAO {
 	public List<GoodsVO> goodsList(Map map) {
 		return mapper.goodsList(map);
 	}
-	
+
 	public int goodsListTotalpage(Map map) {
-        return mapper.goodsListTotalpage(map);
-    }
-	
-	public List<String> brandList(Map map) {
-	    return mapper.brandList(map);
+		return mapper.goodsListTotalpage(map);
 	}
-	
+
+	public List<String> brandList(Map map) {
+		return mapper.brandList(map);
+	}
+
 	public List<GoodsVO> goodsTotalList(Map map) {
 		return mapper.goodsTotalList(map);
 	}
@@ -55,6 +55,10 @@ public class GoodsDAO {
 			mapper.goodsEventInsert(evo);
 			mapper.goodsInsert(vo, e_id);
 		}
+	}
+
+	public List<GoodsVO> adminGoodsFind(Map map) {
+		return mapper.adminGoodsFind(map);
 	}
 
 }
