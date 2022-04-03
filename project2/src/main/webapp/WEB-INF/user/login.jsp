@@ -52,7 +52,7 @@ $(function(){
 </script>
 </head>
 <body>
-  <div class="container bg0 p-t-150 p-b-30">
+  <div class="container bg0 p-t-150 p-b-30" id="login">
     
       <div class="col-sm-12 col-lg-4 m-lr-auto m-b-50">
         <div class="bor10 p-lr-40 p-t-30 p-b-25 p-lr-15-sm">
@@ -71,17 +71,16 @@ $(function(){
                 <button class="flex-c-m stext-101 cl1 bg3 hov-btn3 p-lr-15 trans-04 pointer" style="width:100px; height:100px" id="logBtn"> 로그인 </button>
 			  </div>
 			</div>
-			
-			
 			<div class="row flex-c-m p-t-15">
 			  <div class="flex-c-m">
-				<a href="#"> 아이디 찾기 </a>&nbsp;|&nbsp;
-				<a href="#"> 비밀번호 찾기 </a>&nbsp;|&nbsp;
-				<a href="#"> 회원가입 </a>
+				<a id="idfind"> 아이디 찾기 </a>&nbsp;|&nbsp;
+				<a id="pwfind"> 비밀번호 찾기 </a>&nbsp;|&nbsp;
+				<a href="../users/join.do"> 회원가입 </a>
 			  </div>
 			</div>
          </div>  
        </div>
+       
   </div>
 </body>
 </html>

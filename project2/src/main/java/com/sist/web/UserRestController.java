@@ -11,18 +11,18 @@ import com.sist.vo.*;
 
 @RestController
 public class UserRestController {
-    
-    @Autowired
-    private UserDAO dao;
-    
-    @PostMapping("user/login_ok.do")
-    public String user_login_ok(String id, String pwd, HttpSession session) {
-        String result = dao.isLogin(id, pwd);
-        if (!(result.equals("NOID") && result.equals("NOPWD"))) {
-            // 로그인이 된 상태 
-            session.setAttribute("id", id);
-            session.setAttribute("grade", Integer.parseInt(result));
-        }
-        return result;
-    }
+
+	@Autowired
+	private UserDAO dao;
+
+	@PostMapping("user/login_ok.do")
+	public String user_login_ok(String id, String pwd, HttpSession session) {
+		String result = dao.isLogin(id, pwd);
+		if (!(result.equals("NOID") || result.equals("NOPWD"))) {
+			// 로그인이 된 상태
+			session.setAttribute("id", id);
+			session.setAttribute("grade", result);
+		}
+		return result;
+	}
 }

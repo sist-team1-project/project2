@@ -86,7 +86,7 @@
     
         <div>
           <input type="button" id="join-btn" class="btn btn-primary" value="회원가입">
-          <a href="#" id="cancle-btn" class="btn btn-primary">취소</a>
+          <a href="../users/login.do" id="cancle-btn" class="btn btn-primary">취소</a>
         </div>
       
       </form>
