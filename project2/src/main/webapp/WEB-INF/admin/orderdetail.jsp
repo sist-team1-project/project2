@@ -27,30 +27,30 @@ td {
         <div class="wrap-table js-pscroll">
 
           <table class="table-checkout">
-          <tr v-for="order in orderdetail" class="">
             <tr> 
               <th>주문번호</th>
-              <td>{{odd.odid}}</td>
+              <td>{{order.oid}}</td>
               <th>주문일시</th>
-              <td>{{od.o_regdate}}</td>
+              <td>{{order.o_regdate}}</td>
             </tr>
             <tr>
               <th>주문자</th>
-              <td>{{od.u_id}</td>
+              <td>{{order.u_id}}</td>
               <th>연락처</th>
-              <td>{{od.o_phone}}</td>
+              <td>{{order.o_phone}}</td>
               <th>주문상태</th>
-              <td>{{od.o_state}}</td>
+              <td>{{order.o_state}}</td>
             </tr>
+            <template v-for="od in orderDetailList">
             <tr>
            	  <th>상품번호</th>
               <th>상품정보</th>
               <th>상품금액(수량)</th>
             </tr>
             <tr>
-              <td>{{odd.g_id}}</td>
-              <td>{{odd.g_name}}</td>
-              <td>{{odd.g_price}} 원 ({{odd.quantity}} 개)</td>
+              <td>{{od.g_id}}</td>
+              <td>{{od.g_name}}</td>
+              <td>{{od.g_price}} 원 ({{od.quantity}} 개)</td>
             </tr>
             <tr>
               <th style="color: #dbd0be;">주문/결제금액</th>
@@ -61,18 +61,19 @@ td {
             </tr> 	     
             <tr>
               <th>상품금액</th>
-              <td>{{odd.g_price}} 원</td>
+              <td>{{od.g_price}} 원</td>
             <tr>
               <th>배송비</th>
               <td>+ 5,000 원</td>
             </tr>
             <tr>
               <th>할인금액</th>
-              <td>- {{odd.g_sale }}원</td>
+              <td>- {{od.g_sale }}원</td>
 			</tr>
             <tr>
               <th style="color: #dbd0be;">배송정보</th>
             </tr>
+            </template>
             <tr>
               <th>수령자</th>
               <td>김유저</td>              
@@ -81,10 +82,9 @@ td {
             </tr>
             <tr>
               <th>요청사항</th>
-              <td>{{od.request}}</td>            
+              <td>{{order.request}}</td>            
               <th>배송지</th>
-              <td>({{od.post}}) {{od.address1}}{{od.address2}}</td>
-            </tr>
+              <td>({{order.post}}) {{order.address1}}{{order.address2}}</td>
             </tr>
           </table>
         </div>
@@ -101,7 +101,7 @@ td {
           order: {} 			// vo
       },
       mounted:function(){
-          // this.dataList();
+          this.dataList();
           console.log(this.oid);
       },
       methods:{
@@ -112,6 +112,8 @@ td {
                   }
               }).then(res=>{
 				console.log(res.data);
+				this.orderDetailList = res.data;
+				this.order = res.data[0].od;
               })
           }
       }
