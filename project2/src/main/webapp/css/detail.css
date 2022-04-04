@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+#img-area img {
+  width: 100%;
+}
+
+
+.w-30 {
+  width: 20%;
+}
+
+#thumbnails {
+  margin-top: -1px;
+}
+
+#thumbnails img {
+  cursor: pointer;
+}
+
+#thumbnails img:not(:first-of-type) {
+  margin-left: -1px;
+}
