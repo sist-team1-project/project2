@@ -52,7 +52,10 @@ public interface GoodsMapper {
 	public void goodsEventInsert(EventGoodsVO vo);
 	
 	@Select("<script>"
-			  +"SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status, TO_CHAR(g_regdate,'YYYY-MM-DD HH24:MI:SS')as g_regdate "
+			+ "SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status, TO_CHAR(g_regdate,'YYYY-MM-DD HH24:MI:SS')as g_regdate, num "
+			  +"FROM (SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status, g_regdate, rownum as num "
+			  +"FROM ("
+			  +"SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status, g_regdate "
 			  +"FROM goods_1 "
 			  +"WHERE "
 			  +"<trim prefixOverrides='OR'>"
@@ -75,7 +78,9 @@ public interface GoodsMapper {
 			  +"</trim>"
 			  +"</foreach>"
 			  +"</trim>"
-			  +"</script>")
+			  + "))"
+			  +"WHERE num BETWEEN #{start} AND #{end}"
+			  + "</script>")
 		public List<GoodsVO> adminGoodsFind(Map map);
 
 }
