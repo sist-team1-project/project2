@@ -19,36 +19,17 @@
 			</div>
 			<div class="col-lg-12 flex-m">
 
-				<!-- <input type="text" size=20 class="bor4 p-tb-4 dis-inline-block" v-model="ss" :value="ss"> -->
-				&nbsp; &nbsp;
-
-
-
-
 				<input type="checkbox" v-model="fs" value="N">
-				상품번호&nbsp; &nbsp;
+				&nbsp; 상품번호&nbsp; &nbsp;
 				<input type="checkbox" v-model="fs" value="S">
-				카테고리&nbsp; &nbsp;
+				&nbsp; 카테고리&nbsp; &nbsp;
 				<input type="checkbox" v-model="fs" value="C">
-				제품명&nbsp; &nbsp;
+				&nbsp; 제품명&nbsp; &nbsp;
 				<input type="checkbox" v-model="fs" value="D">
-				브랜드&nbsp; &nbsp;
+				&nbsp; 브랜드&nbsp; &nbsp;
 				<input type=text size=15 class="input-sm wrap-search-admin" v-model="ss" ref="goodsfind">
 				&nbsp; &nbsp;
 				<button class="flex-c-m stext-101 cl0 btn-sm btn-pro-color2 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail fs-10" v-on:click="gfind()">검색</button>
-
-
-
-
-				<!-- <select v-model="selected">
-					<option disabled value="">Please select one</option>
-					<option name="fs">A</option>
-					<option>B</option>
-					<option>C</option>
-				</select>
-				<span>선택함: {{ selected }}</span> -->
-
-
 
 			</div>
 		</div>
@@ -94,7 +75,7 @@
 								<td>{{goods.c_id}}</td>
 								<td>{{goods.g_name}}</td>
 								<td>{{goods.g_brand}}</td>
-								<td>{{goods.g_price}}</td>
+								<td>{{goods.g_price | currency}}</td>
 								<td>{{goods.g_sale }}</td>
 								<td>{{goods.g_stock }}</td>
 								<td>{{goods.g_sold }}</td>
@@ -147,7 +128,7 @@
 					</div>
 				</div>
 				<div class="header-admin-content flex-w js-pscroll">
-					<ul class="header-admin-wrapitem w-full">
+					<ul class="header-admin-wrapitem w-2full">
 						<li class="header-admin-item flex-w flex-t m-b-12">
 							<div class="header-admin-item-img">
 								<img :src="gdetail" alt="IMG">
@@ -178,6 +159,12 @@
     			   	fs : [],
     			   	ss : ''
 				},
+				filters:{
+					currency: function(value){
+						var num = new Number(value);
+						return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,")
+					}
+				},
 				mounted : function() {
 					this.dataSend();
 				},
@@ -185,7 +172,7 @@
 					dataSend:function(){
 						axios.get("http://localhost:8080/web/admin/adlist_vue.do", {
 							params : {
-								page : this.curpage
+									page : this.curpage
 							}
 						}).then(res => {
 							this.goodsList = res.data;
@@ -216,15 +203,16 @@
     	    		},
 					gfind : function() {	
 						console.log("검색버튼이다")
-						/* console.log(this.fs)
-						console.log(this.ss) */
 						if (!this.ss) {
-							console.log("null")
+							console.log("ss null")
 							this.$refs.goodsfind.focus();
 							return;
 						}
-						
-						/* console.log(JSON.stringify(this.fs)); */
+						if (this.fs.length == 0) {
+							console.log("fs null")
+							this.fs.push("N", "S", "C", "D");
+							console.log(this.fs)
+						}
 						axios.get("http://localhost:8080/web/admin/find_vue.do", {
 							params : {
 								fs : this.fs.join(","),
