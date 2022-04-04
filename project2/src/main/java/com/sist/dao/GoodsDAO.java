@@ -32,8 +32,8 @@ public class GoodsDAO {
 		return mapper.goodsTotalList(map);
 	}
 
-	public int goodsTotalPage() {
-		return mapper.goodsTotalPage();
+	public int goodsTotalPage(Map map) {
+		return mapper.goodsTotalPage(map);
 	}
 
 	public int goodsCount() {

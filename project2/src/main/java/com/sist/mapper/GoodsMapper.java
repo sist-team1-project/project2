@@ -32,8 +32,34 @@ public interface GoodsMapper {
 			+ "WHERE num BETWEEN #{start} AND #{end}")
 	public List<GoodsVO> goodsTotalList(Map map);
 
-	@Select("SELECT CEIL(COUNT(*) / 10.0) FROM Goods_1")
-	public int goodsTotalPage();
+	@Select("<script>"
+			+"SELECT CEIL(COUNT(*) / 10.0) "
+			+"FROM (SELECT g_id, c_id, g_name, g_brand "
+			+"FROM goods_1 "
+			+"WHERE "
+			+"<trim prefixOverrides='OR'> " 
+			+"<foreach collection='fsArr' item='fd'>" 
+			+"<trim prefix='OR'>" 
+			+"<choose>" 
+			+"<when test=\"fd=='N'.toString()\">"
+			+"g_id LIKE '%'||#{ss}||'%'"
+			+"</when>"
+			+"<when test=\"fd=='S'.toString()\">"
+			+"c_id LIKE '%'||#{ss}||'%'"
+			+"</when>"
+			+"<when test=\"fd=='C'.toString()\">"
+			+"g_name LIKE '%'||#{ss}||'%'"
+			+"</when>"
+			+"<when test=\"fd=='D'.toString()\">"
+			+"g_brand LIKE '%'||#{ss}||'%'"
+			+"</when>"
+			+"</choose>"
+			+"</trim>"
+			+"</foreach>"
+			+"</trim>"
+			+ ")"
+			+ "</script>")
+	public int goodsTotalPage(Map map);
 
 	@Select("SELECT COUNT(*) FROM Goods_1")
 	public int goodsCount();
