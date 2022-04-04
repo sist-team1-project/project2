@@ -39,7 +39,7 @@
 			<div class="col-lg-12 m-lr-auto p-tb-10 dis-flex flex-sb flex-m">
 				<div class="fs-13">
 					총
-					{{count}}
+					{{count | currency}}
 					개
 				</div>
 				<button class="flex-c-m stext-101 cl0 btn-sm btn-pro-color2 bor1 hov-btn1 p-lr-15 trans-04  fs-10" v-on:click="goods_add()">상품 등록</button>
@@ -160,7 +160,7 @@
 					 
 					selected : '',
     			   	fs : ["N","S","C","D"],
-    			   	ss : '%%'
+    			   	ss : ''
 				},
 				filters:{
 					currency: function(value){
