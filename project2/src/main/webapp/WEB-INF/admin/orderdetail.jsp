@@ -31,15 +31,19 @@ td {
               <th>주문번호</th>
               <td>{{order.oid}}</td>
               <th>주문일시</th>
-              <td>{{order.o_regdate}}</td>
+              <td>{{order.regdate}}</td>
             </tr>
             <tr>
               <th>주문자</th>
-              <td>{{order.u_id}}</td>
+                <td>{{order.uid}}</td>
               <th>연락처</th>
-              <td>{{order.o_phone}}</td>
+                <td>{{order.phone}}</td>
               <th>주문상태</th>
-              <td>{{order.o_state}}</td>
+                <td v-if="order.state==-1">주문취소</td>
+                <td v-if="order.state==0">수락</td>
+                <td v-if="order.state==1">상품준비중</td>
+                <td v-if="order.state==2">배송중</td>
+                <td v-if="order.state==3">배송완료</td>
             </tr>
             <template v-for="od in orderDetailList">
             <tr>
@@ -48,9 +52,9 @@ td {
               <th>상품금액(수량)</th>
             </tr>
             <tr>
-              <td>{{od.g_id}}</td>
-              <td>{{od.g_name}}</td>
-              <td>{{od.g_price}} 원 ({{od.quantity}} 개)</td>
+              <td>{{od.gid}}</td>
+              <td>{{od.name}}</td>
+              <td>{{od.price}} 원 ({{od.quantity}} 개)</td>
             </tr>
             <tr>
               <th style="color: #dbd0be;">주문/결제금액</th>
@@ -61,14 +65,14 @@ td {
             </tr> 	     
             <tr>
               <th>상품금액</th>
-              <td>{{od.g_price}} 원</td>
+              <td>{{od.price}} 원</td>
             <tr>
               <th>배송비</th>
               <td>+ 5,000 원</td>
             </tr>
             <tr>
               <th>할인금액</th>
-              <td>- {{od.g_sale }}원</td>
+              <td>- {{od.sale }}원</td>
 			</tr>
             <tr>
               <th style="color: #dbd0be;">배송정보</th>
@@ -84,7 +88,7 @@ td {
               <th>요청사항</th>
               <td>{{order.request}}</td>            
               <th>배송지</th>
-              <td>({{order.post}}) {{order.address1}}{{order.address2}}</td>
+              <td>({{order.post}}) {{order.addr1}}{{order.addr2}}</td>
             </tr>
           </table>
         </div>
@@ -101,11 +105,12 @@ td {
           order: {} 			// vo
       },
       mounted:function(){
-          this.dataList();
+          this.odList();
+          this.oList();
           console.log(this.oid);
       },
       methods:{
-          dataList:function(){
+          odList:function(){
               axios.get("http://localhost:8080/web/admin/orderdetail.do",{
                   params:{
                       oid: this.oid
@@ -113,7 +118,16 @@ td {
               }).then(res=>{
 				console.log(res.data);
 				this.orderDetailList = res.data;
-				this.order = res.data[0].od;
+              })
+          },
+          oList:function(){
+              axios.get("http://localhost:8080/web/admin/order.do",{
+                  params:{
+                      oid: this.oid
+                  }
+              }).then(res=>{
+				console.log(res.data);
+				this.order = res.data;
               })
           }
       }
