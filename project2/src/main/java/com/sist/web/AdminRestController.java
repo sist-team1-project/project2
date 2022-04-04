@@ -25,6 +25,7 @@ public class AdminRestController {
 	
 	@GetMapping(value = "admin/orderdetail.do", produces = "text/plain;charset=utf-8")
 	public String orderdetail_vue(String oid) {
+		System.out.println(oid);
 		JSONArray arr = new JSONArray();
 		int i = 0;
 
@@ -37,8 +38,8 @@ public class AdminRestController {
 				obj.put("od",ovo);
 			}
 			obj.put("odd", odvo);
-			arr.add(obj);
-			i++;
+		    arr.add(obj);
+		    i++;
 		}
 		return arr.toJSONString();
 	}

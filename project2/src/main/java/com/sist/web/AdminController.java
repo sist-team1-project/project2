@@ -59,8 +59,8 @@ public class AdminController {
 
 	
 	@GetMapping("orderdetail.do")
-	public String adorder_detail() {
-
+	public String adorder_detail(String oid, Model model) {
+		model.addAttribute("oid",oid);
 		return "admin/orderdetail";
 	}
 

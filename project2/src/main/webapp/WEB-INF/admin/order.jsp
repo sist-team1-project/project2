@@ -31,7 +31,7 @@ td {
     <div class="row p-t-10">
       <div class="col-lg-12 m-lr-auto p-tb-10 dis-flex flex-sb flex-m">
         <div class="fs-13">총<fmt:formatNumber value="${count }" pattern=",000" />개</div>
-        <input type="button" class="btn btn-sm btn-pro-color2 p-tb-4 dis-inline-block" value="상세">
+        <input type="button" class="btn btn-sm btn-pro-color2 p-tb-4 dis-inline-block" v-on:click="orderdetail()" value="상세">
       </div>
       <div class="col-lg-12 m-lr-auto m-b-50">
         <div class="wrap-table js-pscroll">
@@ -84,6 +84,7 @@ td {
 		data : {
    
 	}
+  })
   </script>
 </body>
 </html>

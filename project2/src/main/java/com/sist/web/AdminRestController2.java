@@ -26,20 +26,21 @@ public class AdminRestController2 {
 			page = "1";
 		}
 		int curpage = Integer.parseInt(page);
-		
+
 		Map map = new HashMap();
 
 		int rowSize = 10;
 		int start = (curpage * rowSize) - (rowSize - 1);
 		int end = (rowSize * curpage);
 		String[] fsArr = fs.split(",");
-		
+
 		map.put("start", start);
 		map.put("end", end);
 		map.put("fsArr", fsArr);
 		map.put("ss", ss);
 
 		List<GoodsVO> list = gdao.adminGoodsFind(map);
+		int totalpage = gdao.goodsTotalPage(map);
 
 		for (GoodsVO vo : list) {
 			String g_name = vo.getG_name();
@@ -58,12 +59,13 @@ public class AdminRestController2 {
 
 		JSONArray arr = new JSONArray();
 		int i = 0;
-		int totalpage = gdao.goodsTotalPage();
 
-		System.out.println(list.size());
+		int count = gdao.goodsCount();
+
 		System.out.println(start);
 		System.out.println(end);
-		System.out.println(totalpage);
+		System.out.println("토탈페이지 : " + totalpage);
+		System.out.println("카운트 : " + count);
 
 		final int BLOCK = 10;
 		int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
@@ -90,10 +92,11 @@ public class AdminRestController2 {
 			obj.put("g_regdate", vo.getG_regdate());
 			obj.put("startPage", startPage);
 			obj.put("endPage", endPage);
-
+			
 			if (i == 0) {
 				obj.put("curpage", curpage);
 				obj.put("totalpage", totalpage);
+				obj.put("count", count);
 			}
 			arr.add(obj);
 			i++;
