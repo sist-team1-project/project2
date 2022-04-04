@@ -24,4 +24,8 @@ public class OrderDAO {
     public int orderCount() {
     	return mapper.orderCount();
     }
+    public OrderVO order(String oid){
+    	return mapper.order(oid);
+    }
+
 }
