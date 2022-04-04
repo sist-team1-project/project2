@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="../css/admin.css">
 </head>
 <body>
   <div class="col-sm-12 col-md-6 m-lr-auto m-b-50">
