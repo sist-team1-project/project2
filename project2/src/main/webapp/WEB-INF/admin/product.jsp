@@ -30,6 +30,8 @@
 				<input type=text size=15 class="input-sm wrap-search-admin" v-model="ss" ref="goodsfind">
 				&nbsp; &nbsp;
 				<button class="flex-c-m stext-101 cl0 btn-sm btn-pro-color2 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail fs-10" v-on:click="gfind()">검색</button>
+				&nbsp; &nbsp;
+				<button class="flex-c-m stext-101 cl0 btn-sm btn-pro-color2 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail fs-10" onclick="location.href='../admin/adlist.do'">초기화</button>
 				
 			</div>
 		</div>
