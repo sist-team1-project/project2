@@ -21,7 +21,7 @@ public class GoodsRestController {
     public String goods_detail(String gid) {
         System.out.println(gid);
         Map map = new HashMap();
-        map.put("g_id", gid);
+        map.put("gid", gid);
         GoodsVO vo = service.goodsDetail(map);
 
         JSONObject obj = new JSONObject();
@@ -33,11 +33,7 @@ public class GoodsRestController {
         obj.put("sale", vo.getG_sale());
         obj.put("image", vo.getG_image());
         obj.put("detail", vo.getG_detail());
-        obj.put("stock", vo.getG_stock());
-        obj.put("sold", vo.getG_sold());
-        obj.put("status", vo.getG_status());
-        obj.put("regdate", vo.getG_regdate());
-        
+        obj.put("status", vo.getG_status());   
         return obj.toJSONString();
     }
 }

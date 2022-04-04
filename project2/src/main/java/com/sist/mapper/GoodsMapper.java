@@ -38,7 +38,7 @@ public interface GoodsMapper {
 	@Select("SELECT COUNT(*) FROM Goods_1")
 	public int goodsCount();
 
-	@Select("SELECT * FROM Goods_1 "
+	@Select("SELECT g_id,g_name,g_brand,g_price,g_sale,g_image,g_detail,g_status FROM Goods_1 "
 			+"WHERE g_id=#{gid}")
 	public GoodsVO goodsDetail(Map map);
 

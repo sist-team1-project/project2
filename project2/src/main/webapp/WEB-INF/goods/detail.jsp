@@ -22,11 +22,11 @@
               <!-- ----------- 갤러리 ------------ -->
               <div class="slick3 gallery-lb">
                 <!-- 사진1 -->
-                <div class="item-slick3" data-thumb="${img }">
+                <div v-for="img in images" class="item-slick3" :data-thumb="img">
                   <div class="wrap-pic-w pos-relative">
-                  <c:forTokens items="${vo.g_image }" delims=";" var="img1">
-                    <img src="${img1 }" alt="IMG-PRODUCT">
-                    </c:forTokens>
+                 
+                    <img :src="img" alt="IMG-PRODUCT">
+                   
                     
                     <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="../images/product-detail-01.jpg">
                       <i class="fa fa-expand"></i>
@@ -34,18 +34,7 @@
                   </div>
                 </div>
                 <!-- -------------- -->
-                <!-- 사진2 -->
-                <div class="item-slick3" data-thumb="../images/product-detail-02.jpg">
-                  <div class="wrap-pic-w pos-relative">
-                  <c:forTokens items="${vo.g_image }" delims=";" var="img2">
-                    <img src="${img2 }" alt="IMG-PRODUCT">
-                    </c:forTokens>
-                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="../images/product-detail-02.jpg">
-                      <i class="fa fa-expand"></i>
-                    </a>
-                  </div>
-                </div>
-                <!-- -------------- -->
+
               </div>
               <!-- -------------- -->
             </div>
@@ -55,13 +44,15 @@
                   
         <div class="col-md-6 col-lg-5 p-b-30">
           <div class="p-r-50 p-t-5 p-lr-0-lg">
-            <h4 class="mtext-105 cl2 js-name-detail p-b-14">${vo.g_name}</h4>
+            <h4 class="mtext-105 cl2 js-name-detail p-b-14">{{goods.name}}</h4>
             <div style="padding:50px 0px 0px 0px;"> 
-            <span class="mtext-106 cl2"><b>브랜드</b>&emsp;${vo.g_brand }<br></span>
+            <span class="mtext-106 cl2"><b>가격</b>&emsp;{{goods.price }}<br></span>
+            <div style="padding:50px 0px 0px 0px;">
+            <span class="mtext-106 cl2"><b>브랜드</b>&emsp;{{goods.brand }}<br></span>
             <div style="padding:10px 0px 0px 0px;"> 
             <span class="mtext-106 cl2"><b>배송비</b>&emsp;5,000원<br></span>
             <div style="padding:10px 0px 0px 0px;"> 
-            <span class="mtext-106 cl2"><b>할인율</b>&emsp;${vo.g_sale }%</span>
+            <span class="mtext-106 cl2"><b>할인율</b>&emsp;{{goods.sale }}</span>
             <div style="padding:10px 0px 0px 0px;"> 
             <!--  -->
             <div class="p-t-33">
@@ -109,9 +100,9 @@
           <div class="tab-pane fade show active" id="description" role="tabpanel">
             <div class="how-pos2 p-lr-15-md">
               <p class="stext-102 cl6">
-              <c:forTokens items="${vo.g_detail }" delims="" var="detail">
-               <img src="${detail }" alt="IMG-PRODUCT">
-               </c:forTokens>
+              <!--<c:forTokens items="{{detail }}" delims="" var="detail">
+               <img src="{detail }" alt="IMG-PRODUCT">
+               </c:forTokens>!-->
               </p>
             </div>
           </div>
@@ -171,13 +162,14 @@
       </div>
     </section>
   </div>
-  <!-- 사진 크게보여주는 팝업 -->
+
   <script>
  new Vue({
 	 el:'#goodsDetail',
 	 data:{
-	     vo:{},
-	     gid:${gid}
+	     gid:${gid},
+		 goods:{},
+	     images:[]
 	 },
 	 mounted:function(){
 	   	axios.get('http://localhost:8080/web/goods/detail_vue.do',{
@@ -185,13 +177,15 @@
 	   		    gid:this.gid
 	   		}
 	    }).then(res=>{
-	   		console.log(res.data)
-	   		this.vo=res.data;
+	   		this.goods=res.data;
+	   		console.log(res.data.image);
+	   		this.images=this.goods.image.split(";");
+	   		console.log(this.images);
 	    })
 	 }
  })
  
-	    
+ <!-- 사진 크게보여주는 팝업 -->
     $('.gallery-lb').each(function() { // the containers for all your galleries
         $(this).magnificPopup({
             delegate: 'a', // the selector for gallery item
