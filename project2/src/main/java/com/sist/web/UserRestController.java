@@ -16,7 +16,7 @@ public class UserRestController {
 	private UserDAO dao;
 
 	@PostMapping("user/login_ok.do")
-	public String user_login_ok(String id, String pwd, HttpSession session) {
+	public String user_login_ok(String id, String pwd, HttpSession session) {// id pwd
 		String result = dao.isLogin(id, pwd);
 		if (!(result.equals("NOID") || result.equals("NOPWD"))) {
 			// 로그인이 된 상태

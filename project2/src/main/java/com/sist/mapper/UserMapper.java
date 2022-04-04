@@ -16,7 +16,5 @@ public interface UserMapper {
 	@Select("SELECT u_password||','||u_grade FROM user_1 " + "WHERE u_id=#{u_id}")
 	public String memberGetPwdAndName(String id);
 
-	@Select("SELECT * FROM user_1 "
-		   +"WHERE u_id=#{uid}")
-	public UserVO userDetail(Map map);
+	
 }

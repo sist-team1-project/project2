@@ -35,7 +35,5 @@ public class UserDAO {
 		return result;
 	}
 	
-	public UserVO userDetail(Map map) {
-		return mapper.userDetail(map);
-	}
+
 }

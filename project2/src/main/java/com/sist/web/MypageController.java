@@ -17,7 +17,7 @@ public class MypageController {
 
 	@GetMapping("mypage/mypage.do")
     public String mypage_mypage() {
-        return "mypage/detail";
+        return "mypage/info";
     }
 
 	@GetMapping("mypage/update.do")

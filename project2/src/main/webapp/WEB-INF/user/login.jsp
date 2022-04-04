@@ -7,47 +7,7 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
-$(function(){
-	$('#logBtn').click(function(){
-		let id=$('#id').val();
-		if(id.trim()=="")
-		{
-			$('#id').focus();
-			return;
-		}
-		let pwd=$('#pwd').val();
-		if(pwd.trim()=="")
-		{
-			$('#pwd').focus();
-			return;
-		}
-		
-		$.ajax({
-			type:'POST',
-			url:'login_ok.do',
-			data:{"id":id,"pwd":pwd},
-			success:function(res){
-				if(res=='NOID')
-				{
-					alert("아이디가 존재하지 않습니다.")
-					$('#id').val("");
-					$('#pwd').val("");
-					$('#id').focus();
-				}
-				else if(res=='NOPWD')
-				{
-					alert("비밀번호가 틀립니다.")
-					$('#pwd').val("");
-					$('#pwd').focus();
-				}
-				else
-			    {
-					location.href="../main/main.do";
-			    }
-			}
-		})
-	})
-})
+
 
 </script>
 </head>
@@ -60,15 +20,15 @@ $(function(){
             <div class="row">
 		      <div class="col-sm-7">
                 <div class="flex-w flex-t p-t-15 p-b-22 m-l-20">
-                  <input type="text" id="id" name="id" placeholder="아이디">
+                  <input type="text" id="id" name="id" placeholder="아이디" v-model="id">
                 </div>
             
 			    <div class="flex-w flex-t p-t-15 p-b-15 m-l-20">
-                  <input type="password" id="pwd" name="pwd" placeholder="비밀번호">
+                  <input type="password" id="pwd" name="pwd" placeholder="비밀번호" v-model="pwd">
                 </div>
               </div>
               <div class="col-sm-5 flex-c-m">
-                <button class="flex-c-m stext-101 cl1 bg3 hov-btn3 p-lr-15 trans-04 pointer" style="width:100px; height:100px" id="logBtn"> 로그인 </button>
+                <button class="flex-c-m stext-101 cl1 bg3 hov-btn3 p-lr-15 trans-04 pointer" style="width:100px; height:100px" id="logBtn" v-on:click="login()"> 로그인 </button>
 			  </div>
 			</div>
 			<div class="row flex-c-m p-t-15">
@@ -80,7 +40,102 @@ $(function(){
 			</div>
          </div>  
        </div>
-       
   </div>
+  <script>
+new Vue({
+ 	el:'#login',
+ 	data:{
+ 		id:'',
+ 		pwd:''
+ 	},
+ 	mounted:function(){
+ 		
+    },
+ 	methods:{
+ 		login:function(){
+ 			let id=$('#id').val();
+ 			if(id.trim()=="")
+ 			{
+ 				$('#id').focus();
+ 				return;
+ 			}
+ 			let pwd=$('#pwd').val();
+ 			if(pwd.trim()=="")
+ 			{
+ 				$('#pwd').focus();
+ 				return;
+ 			}// 서버실행 전 확인
+ 			console.log(this.id);
+ 			console.log(this.pwd);
+ 			axios.post("http://localhost:8080/web/user/login_ok.do",null,{
+ 	            params:{
+ 	                id: this.id, // data에 있는 것
+ 	                pwd: this.pwd
+ 	            }
+ 	        }).then(res=>{
+ 	        	console.log(res);
+ 	        	if(res=='NOID')
+ 				{
+ 					alert("아이디가 존재하지 않습니다.")
+ 					$('#id').val("");
+ 					$('#pwd').val("");
+ 					$('#id').focus();
+ 				}
+ 				else if(res=='NOPWD')
+ 				{
+ 					alert("비밀번호가 틀립니다.")
+ 					$('#pwd').val("");
+ 					$('#pwd').focus();
+ 				}
+ 				else
+ 			    {
+ 					location.href="../main/main.do";
+ 			    }
+ 	        })
+ 		}
+ 	}
+})
+/* $(function(){
+$('#logBtn').click(function(){
+	let id=$('#id').val();
+	if(id.trim()=="")
+	{
+		$('#id').focus();
+		return;
+	}
+	let pwd=$('#pwd').val();
+	if(pwd.trim()=="")
+	{
+		$('#pwd').focus();
+		return;
+	}
+	
+	$.ajax({
+		type:'POST',
+		url:'login_ok.do',
+		data:{"id":id,"pwd":pwd},
+		success:function(res){
+			if(res=='NOID')
+			{
+				alert("아이디가 존재하지 않습니다.")
+				$('#id').val("");
+				$('#pwd').val("");
+				$('#id').focus();
+			}
+			else if(res=='NOPWD')
+			{
+				alert("비밀번호가 틀립니다.")
+				$('#pwd').val("");
+				$('#pwd').focus();
+			}
+			else
+		    {
+				location.href="../main/main.do";
+		    }
+		}
+	})
+})
+}) */
+  </script>
 </body>
 </html>
