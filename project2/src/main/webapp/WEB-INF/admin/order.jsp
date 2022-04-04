@@ -16,7 +16,7 @@ td {
 <body>
   <!-- 테이블이 필요하실땐 cart나 checkout쪽에서 사용한 테이블 사용하시면 편할거에요 -->
   <div class="container bg0 p-t-70 p-b-10" id="admin-order">
-    <div class="row">
+    <div class="row" id="orderpage">
       <div class="col-lg-12 m-lr-auto">
         <div class="p-b-20">
           <h3>판매 목록</h3>
@@ -31,13 +31,13 @@ td {
     <div class="row p-t-10">
       <div class="col-lg-12 m-lr-auto p-tb-10 dis-flex flex-sb flex-m">
         <div class="fs-13">총<fmt:formatNumber value="${count }" pattern=",000" />개</div>
+        <input type="button" class="btn btn-sm btn-pro-color2 p-tb-4 dis-inline-block" value="상세">
       </div>
       <div class="col-lg-12 m-lr-auto m-b-50">
         <div class="wrap-table js-pscroll">
 
           <table class="table-checkout">
             <tr class="table_head font-center">
-              <th></th>
               <th>주문일시</th>
               <th>주문번호</th>
               <th>주문자</th>
@@ -45,14 +45,13 @@ td {
               <th>주문금액</th>
               <th>주문상태</th>
             </tr>
-            <tr v-for="order in orderList" class="table_row fs-13 font-center">
-              <!-- <tr class="table_row fs-13 font-center">  -->
+            <tr class="table_row fs-13 font-center">
                 <td>{{olist.o_regdate }}</td>
                 <td>{{olist.od_id }}</td>
                 <td>{{olist.u_id }}</td>
                 <td>{{olist.g_name }}</td>
                 <td>{{olist.g_price }}</td>
-               <!-- <td><a type="button" :href={{olist.o_state }}>상세보기</a></td>   --> 
+                <td>{{olist.o_state }}</td>
              </tr>
           </table>
         </div>
@@ -78,42 +77,13 @@ td {
       </ul>
     </div>
   </div>
+  
   <script>
-			new Vue({
-				el : '#admin-order',
-				data : {
-					od:'22033022170003',
-					orderList : []
-				},
-				mounted : function(){
-					axios.get("http://localhost:8080/web/admin/salelist_vue.do", {
-						params : {
-							page : "1"
-						}
-					}).then(res => {
-						this.orderList = res.data;
-						console.log(this.orderList);
-						console.log(this.orderList[0].o_id);
-					
-						this.o_id = result.data[0].o_id;
-					})
-				},
-				methods : {
-					ofind : function() {
-
-					},
-					order_add : function() {
-						console.log("what?");
-					},
-					order_update : function() {
-
-					},
-					order_detail : function(detailId) {
-						console.log("?????");
-						console.log(detailId);
-					}
-				}	
-			})
-		</script>
+  new Vue({
+		el : '#admin-order', 
+		data : {
+   
+	}
+  </script>
 </body>
 </html>

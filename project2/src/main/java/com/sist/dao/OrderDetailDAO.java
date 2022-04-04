@@ -11,14 +11,18 @@ import com.sist.mapper.*;
 
 @Repository
 public class OrderDetailDAO {
-    
     @Autowired
     private OrderDetailMapper mapper;
     
     public List<OrderDetailVO> orderDetailList(Map map) {
     	return mapper.orderDetailList(map);
     }
-    public List<OrderDetailVO> orderDetail(OrderDetailVO vo, int o_id) {
-    	return mapper.orderDetail(vo, o_id);
+    public List<String> nameData(String oid) {
+    	return mapper.nameData(oid);
     }
+    public List<OrderDetailVO> orderDetail(String oid){
+    	return mapper.orderDetail(oid);
+    }
+
+    
 }

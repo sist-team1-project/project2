@@ -156,8 +156,8 @@
 					pages : [],
 					 
 					selected : '',
-    			   	fs : [],
-    			   	ss : ''
+    			   	fs : ["N","S","C","D"],
+    			   	ss : '%%'
 				},
 				filters:{
 					currency: function(value){
@@ -170,9 +170,15 @@
 				},
 				methods : {
 					dataSend:function(){
+						if (!this.ss) {
+							console.log("ss null :  " + this.ss)
+						}
+						
 						axios.get("http://localhost:8080/web/admin/adlist_vue.do", {
 							params : {
-									page : this.curpage
+									page : this.curpage,
+									fs : this.fs.join(","),
+									ss : this.ss
 							}
 						}).then(res => {
 							this.goodsList = res.data;
@@ -184,9 +190,9 @@
 							this.endPage = res.data[0].endPage;
 							
 							this.pages=[];
-                              for(i = this.startPage; i <= this.endPage; i++) {
-                                  this.pages.push(i);
-                              }
+              for(i = this.startPage; i <= this.endPage; i++) {
+                  this.pages.push(i);
+              }
 						})
 					},
 					prev:function(event){
@@ -213,14 +219,15 @@
 							this.fs.push("N", "S", "C", "D");
 							console.log(this.fs)
 						}
-						axios.get("http://localhost:8080/web/admin/find_vue.do", {
+						this.dataSend();
+						/* axios.get("http://localhost:8080/web/admin/find_vue.do", {
 							params : {
 								fs : this.fs.join(","),
 								ss : this.ss
 							}
 						}).then(res => {
 							this.goodsList = res.data;
-						})
+						}) */
 						
 					},
 					goods_add : function() {

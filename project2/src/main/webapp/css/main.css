@@ -3184,21 +3184,6 @@ input.num-product::-webkit-inner-spin-button {
   .respon2 {
     font-size: 20px;
   }
-
-  /*---------------------------------------------*/
-  .respon6 {
-    width: 65px;
-  }
-
-  .respon6-next {
-    width: calc(100% - 65px);
-  }
-
-  /*---------------------------------------------*/
-  .respon7 {
-    padding-left: 60px;
-  }
-
   
 }
 

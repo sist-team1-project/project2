@@ -3,10 +3,12 @@ package com.sist.service;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.sist.dao.*;
 import com.sist.vo.*;
 
+@Service
 public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private GoodsDAO gdao;
@@ -26,25 +28,23 @@ public class AdminServiceImpl implements AdminService {
 	public int goodsTotalPage() {
 		return gdao.goodsTotalPage();
 	}
-
-	@Override
-	public List<OrderVO> orderTotalList(Map map) {
-		return odao.orderTotalList(map);
-	}
-
-	@Override
-	public int orderTotalPage() {
-		return odao.orderTotalPage();
-	}
-
+	
+	/*********************************************/
 	@Override
 	public List<OrderDetailVO> orderDetailList(Map map) {
 		return oddao.orderDetailList(map);
 	}
+	
+	@Override
+	public List<OrderDetailVO> orderDetail(String oid) {
+		return oddao.orderDetail(oid);
+	}
 
 	@Override
-	public List<OrderDetailVO> orderDetail(OrderDetailVO vo, int o_id) {
-		return oddao.orderDetail(vo, o_id);
+	public List<String> nameData(String oid) {
+		return oddao.nameData(oid);
 	}
+
+
 	
 }
