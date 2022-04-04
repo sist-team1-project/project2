@@ -35,7 +35,7 @@
 			  <div class="flex-c-m">
 				<a id="idfind"> 아이디 찾기 </a>&nbsp;|&nbsp;
 				<a id="pwfind"> 비밀번호 찾기 </a>&nbsp;|&nbsp;
-				<a href="../users/join.do"> 회원가입 </a>
+				<a href="../user/join.do"> 회원가입 </a>
 			  </div>
 			</div>
          </div>  

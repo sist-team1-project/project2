@@ -34,6 +34,8 @@ public class UserDAO {
 		}
 		return result;
 	}
-	
 
+	public void userJoin(UserVO vo) {
+		mapper.userJoin(vo);
+	}
 }

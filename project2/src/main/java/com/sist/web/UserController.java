@@ -27,5 +27,9 @@ public class UserController {
 		session.invalidate();
 		return "redirect:../main/main.do";
 	}
-
+	
+	@GetMapping("user/join.do")
+	public String user_join() {
+		return "user/join";
+	}
 }

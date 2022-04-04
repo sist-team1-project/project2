@@ -25,4 +25,10 @@ public class UserRestController {
 		}
 		return result;
 	}
+	
+	@PostMapping("user/join_ok.do")
+	public String user_join(UserVO vo) {
+		dao.userJoin(vo);
+		return "";
+	}
 }
