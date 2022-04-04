@@ -109,7 +109,7 @@
           <div class="tab-pane fade show active" id="description" role="tabpanel">
             <div class="how-pos2 p-lr-15-md">
               <p class="stext-102 cl6">
-              <c:forTokens items="${vo.g_detail }" delims=";" var="detail">
+              <c:forTokens items="${vo.g_detail }" delims="" var="detail">
                <img src="${detail }" alt="IMG-PRODUCT">
                </c:forTokens>
               </p>
@@ -173,22 +173,25 @@
   </div>
   <!-- 사진 크게보여주는 팝업 -->
   <script>
- /* new Vue({
-	   	el:'#goodsDetail',
-	   	data:{
-	   		vo:{},
-	   		gid:${g_id}
-	   	},
-	   	mounted:function(){
-	   		axios.get('http://localhost:8080/web/goods/detail_vue.do',{
-	   			params:{
-	   				gid:this.gid
-	   			}
-	   		}).then(res=>{
-	   			console.log(res.data)
-	   			this.vo=res.data;
-	   		})*/
-
+ new Vue({
+	 el:'#goodsDetail',
+	 data:{
+	     vo:{},
+	     gid:${gid}
+	 },
+	 mounted:function(){
+	   	axios.get('http://localhost:8080/web/goods/detail_vue.do',{
+	  		params:{
+	   		    gid:this.gid
+	   		}
+	    }).then(res=>{
+	   		console.log(res.data)
+	   		this.vo=res.data;
+	    })
+	 }
+ })
+ 
+	    
     $('.gallery-lb').each(function() { // the containers for all your galleries
         $(this).magnificPopup({
             delegate: 'a', // the selector for gallery item
