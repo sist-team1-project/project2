@@ -22,7 +22,6 @@
   <link rel="stylesheet" type="text/css" href="../vendor/perfect-scrollbar/perfect-scrollbar.css">
   <link rel="stylesheet" type="text/css" href="../css/util.css">
   <link rel="stylesheet" type="text/css" href="../css/main.css">
-  <link rel="stylesheet" type="text/css" href="../css/admin.css">
   <script src="../vendor/jquery/jquery-3.2.1.min.js"></script>
   <script src="../vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
   <script src="../vendor/select2/select2.min.js"></script>
