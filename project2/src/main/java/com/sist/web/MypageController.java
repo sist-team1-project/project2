@@ -2,6 +2,8 @@ package com.sist.web;
 
 import java.util.*;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +18,12 @@ public class MypageController {
 	private UserDAO dao;
 
 	@GetMapping("mypage/mypage.do")
-    public String mypage_mypage() {
+    public String mypage_mypage(HttpSession session, Model model) {
+		/*
+		 * String uid = (String) session.getAttribute("id"); UserVO vo =
+		 * dao.userInfo(uid); System.out.println(vo.getU_address1());
+		 * model.addAttribute("vo", vo);
+		 */
         return "mypage/info";
     }
 

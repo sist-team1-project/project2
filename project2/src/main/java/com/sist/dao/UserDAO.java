@@ -38,4 +38,8 @@ public class UserDAO {
 	public void userJoin(UserVO vo) {
 		mapper.userJoin(vo);
 	}
+	
+	public UserVO userInfo(String uid) {
+		return mapper.userInfo(uid);
+	}
 }
