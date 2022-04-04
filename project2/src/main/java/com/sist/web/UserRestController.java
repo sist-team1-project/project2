@@ -26,9 +26,10 @@ public class UserRestController {
 		return result;
 	}
 	
-	@PostMapping("user/join_ok.do")
-	public String user_join(UserVO vo) {
-		dao.userJoin(vo);
-		return "";
-	}
+    @PostMapping("user/join_ok.do")
+    public String user_join(UserVO vo) {
+        System.out.println(vo.getU_address1());
+        dao.userJoin(vo);
+        return "ok";
+    }
 }
