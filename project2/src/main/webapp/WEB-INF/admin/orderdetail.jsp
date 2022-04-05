@@ -61,7 +61,7 @@ td {
             </tr>
             <tr>
               <th rowspan="3">총 주문금액</th>
-              <th rowspan="3">212,000 원</th>
+              <th rowspan="3">{{od.price}} 원</th>
             </tr> 	     
             <tr>
               <th>상품금액</th>
@@ -80,9 +80,9 @@ td {
             </template>
             <tr>
               <th>수령자</th>
-              <td>김유저</td>              
+              <td>{{order.receiver}}</td>              
               <th>배송연락처</th>
-              <td>010-1111-1234</td>
+              <td>{{order.phone}}</td>
             </tr>
             <tr>
               <th>요청사항</th>

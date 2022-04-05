@@ -15,11 +15,11 @@ public class OrderDAO {
     @Autowired
     private OrderMapper mapper;
     
-    public List<OrderVO> orderTotalList(Map map){
-    	return mapper.orderTotalList(map);
+    public List<OrderVO> orderList(Map map){
+    	return mapper.orderList(map);
     }
-    public int orderTotalPage() {
-    	return mapper.orderTotalPage();
+    public int orderTotalPage(Map map) {
+    	return mapper.orderTotalPage(map);
     }
     public int orderCount() {
     	return mapper.orderCount();
@@ -27,5 +27,4 @@ public class OrderDAO {
     public OrderVO order(String oid){
     	return mapper.order(oid);
     }
-
 }

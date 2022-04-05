@@ -45,6 +45,14 @@ public class AdminServiceImpl implements AdminService {
 		return oddao.nameData(oid);
 	}
 
+	@Override
+	public int orderTotalPage(Map map) {
+		return odao.orderTotalPage(map);
+	}
 
+	@Override
+	public List<OrderVO> orderList(Map map) {
+		return odao.orderList(map);
+	}
 	
 }

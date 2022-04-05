@@ -15,7 +15,7 @@ td {
 </head>
 <body>
   <!-- 테이블이 필요하실땐 cart나 checkout쪽에서 사용한 테이블 사용하시면 편할거에요 -->
-  <div class="container bg0 p-t-70 p-b-10" id="admin-order">
+  <div class="container bg0 p-t-70 p-b-10" id="adorder">
     <div class="row" id="orderpage">
       <div class="col-lg-12 m-lr-auto">
         <div class="p-b-20">
@@ -45,19 +45,40 @@ td {
               <th>주문금액</th>
               <th>주문상태</th>
             </tr>
-            <tr class="table_row fs-13 font-center">
-                <td>{{olist.o_regdate }}</td>
-                <td>{{olist.od_id }}</td>
-                <td>{{olist.u_id }}</td>
-                <td>{{olist.g_name }}</td>
-                <td>{{olist.g_price }}</td>
-                <td>{{olist.o_state }}</td>
+            <tr v-for="o in order" class="table_row fs-13 font-center">
+              <td>{{order.regdate }}</td>
+              <td>{{order.odid }}</td>
+              <td>{{order.uid }}</td>
+            <template v-for="od in orderDetailList">
+              <td>{{od.name }}</td>
+              <td>{{od.price }}</td>
+            </template>
+              <td>{{order.state }}</td>
              </tr>
           </table>
         </div>
       </div>
     </div>
-    <div>
+    
+<!--      <div class="text-center">
+	  <ul class="pagination">
+		<li class="page-item" v-bind:class="{'disabled':startPage==1}">
+		  <button class="page-link" :value="startPage-1" v-on:click="prev($event)">
+		   <i class="fa fa-chevron-left" aria-hidden="true"></i>
+		  </button>
+		</li>
+		<li class="page-item" v-for="i in pages" v-bind:class="{'active':i==curpage}">
+		  <button class="page-link" :value="i" v-on:click="getpage($event)">{{i}}</button>
+		</li>
+		<li class="page-item" v-bind:class="{'disabled':endPage==totalpage}">
+		  <button class="page-link" :value="endPage+1" v-on:click="next($event)">
+		    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+		  </button>
+		</li>
+	  </ul>
+	</div> -->
+     
+      <div>
       <ul class="pagination">
         <c:if test="${startPage > 1 }">
           <li class="page-item"><a class="page-link" href="adlist.do?page=${startPage-1 }">&lt;</a></li>
@@ -75,15 +96,55 @@ td {
           <li class="page-item"><a class="page-link" href="salelist.do?page=${endPage+1 }">&gt;</a></li>
         </c:if>
       </ul>
-    </div>
+    </div> 
+    
   </div>
-  
   <script>
   new Vue({
-		el : '#admin-order', 
-		data : {
-   
-	}
+      el:'#adorder',
+      data:{
+          oid:'${oid }',
+          orderDetailList:[],	// List
+          order: [], 			// vo
+          curpage : 1,
+		  totalpage : 0,
+		  startPage : 0,
+		  endPage : 0,
+		  pages : [],
+		  count : 0
+      },
+      mounted:function(){
+          this.odList();
+          this.oList();
+          console.log(this.oid);
+      },
+      methods:{
+          odList:function(){
+              axios.get("http://localhost:8080/web/admin/orderlistdetail_vue.do",{
+                  params:{
+                      oid: this.oid
+                  }
+              }).then(res=>{
+				console.log(res.data);
+				this.orderDetailList = res.data;
+              })
+          },
+          oList:function(){
+              axios.get("http://localhost:8080/web/admin/orderlist_vue.do",{
+                  params:{
+                      oid: this.oid,
+                      page: this.curpage,
+                  }
+              }).then(res=>{
+				console.log(res.data);
+				this.order = res.data;
+				this.curpage=result.data[0].curpage;
+                this.totalpage=result.data[0].totalpage;
+                this.start=result.data[0].start;
+                this.end=result.data[0].end;
+              })
+          }
+      }
   })
   </script>
 </body>

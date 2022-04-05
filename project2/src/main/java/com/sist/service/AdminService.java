@@ -11,6 +11,8 @@ public interface AdminService {
 	public List<GoodsVO> goodsTotalList(Map map);
 	public int goodsTotalPage();
 	
+	public List<OrderVO> orderList(Map map);
+	public int orderTotalPage(Map map);
 	public List<OrderDetailVO> orderDetailList(Map map);
 	List<OrderDetailVO> orderDetail(String oid);
 	List<String> nameData(String oid);
