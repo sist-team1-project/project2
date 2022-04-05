@@ -20,14 +20,24 @@ public class NoticeDAO {
  	   return mapper.noticeListData(map);
     }
     
+    public int noticeRowCount()
+    {
+    	return mapper.noticeRowCount();
+    }
+    
     public int noticeTotalPage()
     {
  	   return mapper.noticeTotalPage();
     }
     
-    public void noticeInsert(NoticeVO vo)
+    public void noticeInsertData(NoticeVO vo)
     {
- 	   mapper.noticeInsert(vo);
+ 	   mapper.noticeInsertData(vo);
+    }
+
+    public void noticeUpdateData(NoticeVO vo)
+    {
+    		mapper.noticeUpdateData(vo);
     }
     
     public NoticeVO noticeDetailData(int no)
