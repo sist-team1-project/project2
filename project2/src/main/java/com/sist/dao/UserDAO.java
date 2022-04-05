@@ -1,5 +1,6 @@
 package com.sist.dao;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
@@ -43,16 +44,15 @@ public class UserDAO {
 		return mapper.userInfo(uid);
 	}
 	
-	public String userFind(String id, String email) {
+	public String userFind(Map map) {
 		String result="";
-		int countId=mapper.idCount(id);
-		int countEmail=mapper.emailCount(email);
-		if (countId==1 && countEmail==1) {
-			result = "ADMIT";
+		
+		int idCount = mapper.idEmailCount(map);
+		if (idCount == 0) {
+		    result ="NORESULT";
 		} else {
-			result ="NORESULT";
+		    result=mapper.idFind(map);
 		}
 		return result;
 	}
-	
 }

@@ -54,11 +54,16 @@ public class UserRestController {
 		return obj.toJSONString();
 	}
 
-	@PostMapping("user/idfind_ok.do")
+	@GetMapping(value = "user/idfind_ok.do", produces = "text/plain;charset=utf-8")
 	public String user_idfind_ok(String id, String email) {
-		String result = dao.userFind(id, email);
+	    Map map = new HashMap();
+        map.put("id",id);
+        map.put("email", email);
+        
+		String result = dao.userFind(map);
 		return result;
 	}
+	
 	
 	/*@PostMapping("user/idfind_result.do")
 	public String user_idfind_result(Class user_idfind_ok, String id) {
@@ -71,18 +76,7 @@ public class UserRestController {
 
 	@PostMapping(value = "user/pwdfind_ok.do", produces = "text/plain;charset=utf-8")
 	public String user_pwdfind_ok(String id, String email) {
-		String result = dao.userFind(id, email);
-		UserVO vo = dao.userInfo(id);
-		if (result == "ADMIT") {
-			// id를 통해 해당 유저의 question과 answer를 가져온다
-			JSONObject obj = new JSONObject();
-			obj.put("id", vo.getU_id());
-			obj.put("question", vo.getU_question());
-			obj.put("answer", vo.getU_answer());
-			return obj.toJSONString();
-		} else {
-			return result;
-		}
+		return "";
 	}
 	
 	/*

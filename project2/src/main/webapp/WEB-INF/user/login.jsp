@@ -5,9 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-<script type="text/javascript">
-</script> -->
+<link rel="stylesheet" type="text/css" href="../css/find.css">
 </head>
 <body>
   <div class="container bg0 p-t-150 p-b-30" id="login">
@@ -31,7 +29,7 @@
 			</div>
 			<div class="row flex-c-m p-t-15">
 			  <div class="flex-c-m">
-				<a href="../user/idfind.do"> 아이디 찾기 </a>&nbsp;|&nbsp;
+				<a href="#" class="btn btn-default" data-toggle="modal" data-target="#iframeModal" > 아이디 찾기 </a>&nbsp;|&nbsp;
 				<a id="pwfind"> 비밀번호 찾기 </a>&nbsp;|&nbsp;
 				<a href="../user/join.do"> 회원가입 </a>
 			  </div>
@@ -39,12 +37,25 @@
          </div>  
        </div>
   </div>
+  <div class="modal fade" id="iframeModal" tabindex="-1" role="dialog" aria-labelledby="iframeModalLable" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <div>
+            <iframe width="100%" height="350" src="../user/idfind.do"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <script>
 new Vue({
  	el:'#login',
  	data:{
  		id:'',
- 		pwd:''
+ 		pwd:'',
+ 		iframe:'',
  	},
  	mounted:function(){
  		

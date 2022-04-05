@@ -35,12 +35,12 @@ public class UserController {
 	
 	@GetMapping("user/idfind.do")
 	public String id_find() {
-		return "user/idfind";
+		return "user/idfind/vue";
 	}
 	
-	@GetMapping("user/idfind_result.do")
+	@GetMapping("user/idfind2.do")
 	public String id_find_result() {
-		return "user/idfind2";
+		return "user/idfind2/vue";
 	}
 	
 	@GetMapping("user/pwdfind.do")

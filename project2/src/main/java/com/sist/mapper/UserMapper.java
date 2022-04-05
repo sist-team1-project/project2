@@ -9,11 +9,11 @@ import com.sist.vo.*;
 public interface UserMapper {
 
 	// id존재 여부
-	@Select("SELECT COUNT(*) FROM user_1 " + "WHERE u_id=#{u_id}")
+	@Select("SELECT COUNT(*) FROM user_1 " + "WHERE u_id=#{id}")
 	public int idCount(String id);
 
 	// password, name
-	@Select("SELECT u_password||','||u_grade FROM user_1 " + "WHERE u_id=#{u_id}")
+	@Select("SELECT u_password||','||u_grade FROM user_1 " + "WHERE u_id=#{id}")
 	public String memberGetPwdAndName(String id);
 
 	// 회원가입
@@ -25,6 +25,9 @@ public interface UserMapper {
 	public UserVO userInfo(String uid);
 	
 	// email존재 여부
-	@Select("SELECT COUNT(*) from user_1 WHERE u_email=#{u_email}")
-	public int emailCount(String email);
+	@Select("SELECT COUNT(*) FROM user_1 WHERE u_id=#{id} AND u_email=#{email}")
+	public int idEmailCount(Map map);
+	
+	@Select("SELECT RPAD(SUBSTR(u_id,1,4),LENGTH(u_id),'*') FROM user_1 WHERE u_id=#{id} AND u_email=#{email}")
+	public String idFind(Map map);
 }
