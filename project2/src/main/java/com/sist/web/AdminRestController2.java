@@ -92,7 +92,7 @@ public class AdminRestController2 {
 			obj.put("g_regdate", vo.getG_regdate());
 			obj.put("startPage", startPage);
 			obj.put("endPage", endPage);
-			
+
 			if (i == 0) {
 				obj.put("curpage", curpage);
 				obj.put("totalpage", totalpage);
@@ -103,6 +103,12 @@ public class AdminRestController2 {
 		}
 
 		return arr.toJSONString();
+	}
+
+	@PostMapping(value = "admin/goods_add_ok.do", produces = "text/plain;charset=utf-8")
+	public String goods_add_vue_ok(GoodsVO vo, int e_id) {
+		gdao.goodsInsert(vo, e_id);
+		return "redirect:adlist.do";
 	}
 
 }

@@ -43,7 +43,7 @@
 					{{count | currency}}
 					개
 				</div>
-				<button class="flex-c-m stext-101 cl0 btn-sm btn-pro-color2 bor1 hov-btn1 p-lr-15 trans-04  fs-10" v-on:click="goods_add()">상품 등록</button>
+				<button class="flex-c-m stext-101 cl0 btn-sm btn-pro-color2 bor1 hov-btn1 p-lr-15 trans-04  fs-10" onclick="location.href='../admin/goods_add.do'">상품 등록</button>
 			</div>
 			<div class="col-lg-12 m-lr-auto m-b-50">
 				<div class="wrap-table js-pscroll">
@@ -224,19 +224,7 @@
 							this.fs.push("N", "S", "C", "D");
 							console.log(this.fs)
 						}
-						this.dataSend();
-						/* axios.get("http://localhost:8080/web/admin/find_vue.do", {
-							params : {
-								fs : this.fs.join(","),
-								ss : this.ss
-							}
-						}).then(res => {
-							this.goodsList = res.data;
-						}) */
-						
-					},
-					goods_add : function() {
-						console.log("이건???애드");
+						this.dataSend();				
 					},
 					goods_update : function() {
 						console.log("상품 수정");

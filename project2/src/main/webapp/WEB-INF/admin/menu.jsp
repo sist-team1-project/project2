@@ -26,8 +26,8 @@
     </li>
 
     <li class="bor18">
-      <a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-14 p-lr-4">
-        Street Style
+      <a href="../admin/goods_add.do" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-14 p-lr-4">
+        상품등록
       </a>
     </li>
 

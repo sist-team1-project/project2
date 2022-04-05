@@ -21,4 +21,9 @@ public class AdminController2 {
 		return "admin/product";
 	}
 	
+	@GetMapping("goods_add.do")
+	public String goods_add_vue() {
+
+		return "admin/goods_add";
+	}
 }
