@@ -93,10 +93,10 @@ public class AdminRestController {
 			obj.put("gid", vo.getG_id());
 			
 			String g_name = vo.getG_name(); 
-			if (g_name.length() > 18) { 
-				g_name = g_name.substring(0, 18) + "...";
+			if (g_name.length() > 20) { 
+				g_name = g_name.substring(0, 20) + "...";
 			} 
-			vo.setG_name(g_name);
+			obj.put("name",g_name);
 			obj.put("price", vo.getG_price());
 			obj.put("sale", vo.getG_sale());
 			obj.put("quantity", vo.getG_quantity());

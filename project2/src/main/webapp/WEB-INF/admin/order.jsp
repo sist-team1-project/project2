@@ -47,11 +47,13 @@ td {
             </tr>
             <tr v-for="o in order" class="table_row fs-13 font-center">
               <td>{{o.regdate }}</td>
-              <td>{{o.odid }}</td>
+              <td>{{o.oid }}</td>
               <td>{{o.uid }}</td>
                 <template v-for="od in orderListDetail">
-                  <td>{{od.name }}</td>
-                  <td>{{od.price }}</td>
+                  <template v-if="o.oid == od.oid">
+	                <td>{{od.name }}</td>
+	                <td>{{od.price }}</td>
+                  </template>
                 </template>
               <td>{{o.state }}</td>
              </tr>
@@ -104,7 +106,7 @@ td {
       el:'#adorder',
       data:{
           oid:'${oid }',
-          orderDetailList:[],	// List
+          orderListDetail:[],
           order: [], 			
           curpage : 1,
 		  totalpage : 0,
@@ -121,11 +123,9 @@ td {
       methods:{
           odList:function(){
               axios.get("http://localhost:8080/web/admin/orderlistdetail_vue.do",{
-            	  
               }).then(res=>{
 				console.log(res.data);
-				this.orderDetailList = res.data;
-				console.log(res.data[0].name);
+				this.orderListDetail = res.data;
               })
           },
           oList:function(){

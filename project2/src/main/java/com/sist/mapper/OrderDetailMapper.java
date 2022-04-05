@@ -16,7 +16,7 @@ public interface OrderDetailMapper {
     public List<OrderDetailVO> orderDetailList(Map map);
     
     /* 주문목록 상세 */
-    @Select("SELECT /*+ INDEX_ASC(order_detail_1 od_od_id_pk_1)*/ g_name,g_price,g_quantity "
+    @Select("SELECT /*+ INDEX_ASC(order_detail_1 od_od_id_pk_1)*/ o_id,g_name,g_price,g_quantity "
     		+"FROM order_detail_1 ")
     public List<OrderDetailVO> orderListDetail(); 
     
