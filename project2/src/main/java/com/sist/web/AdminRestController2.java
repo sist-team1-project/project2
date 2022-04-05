@@ -105,10 +105,9 @@ public class AdminRestController2 {
 		return arr.toJSONString();
 	}
 
-	@PostMapping(value = "admin/goods_add_ok.do", produces = "text/plain;charset=utf-8")
-	public String goods_add_vue_ok(GoodsVO vo, int e_id) {
-		gdao.goodsInsert(vo, e_id);
-		return "redirect:adlist.do";
+	@PostMapping("admin/goods_update_ok.do")
+	public String goods_update_ok(GoodsVO vo) {
+		return "";
 	}
 
 }
