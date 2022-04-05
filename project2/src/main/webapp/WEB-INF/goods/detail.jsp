@@ -46,7 +46,9 @@
                   <input v-model="quantity" class="mtext-104 cl3 text-center num-product" type="number" name="num-product">
                   <div v-on:click="qUp()" class="btn-num-product-up cl8 hov-btn1 trans-04 flex-c-m"><i class="fs-16 zmdi zmdi-plus"></i></div>
                 </div>
+                 <c:if test="${sessionScope.grade=='1' }">
                 <button v-on:click="insertCart()" class="stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-10 trans-04 js-addcart-detail">장바구니</button>
+                </c:if>
               </div>  
             </div>
             <!--  -->
