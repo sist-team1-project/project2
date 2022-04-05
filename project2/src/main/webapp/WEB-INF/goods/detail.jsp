@@ -169,10 +169,25 @@
                 this.image=link;
             },
             insertCart:function(){
-            	alert(this.quantity);
+            	axios.post('http://localhost:8080/web/cart/insert_ok.do',null,{
+        	  		params:{
+        	   		    g_id:this.gid,
+        	   		    g_quantity:this.quantity
+        	   		    
+        	   		}
+        	    }).then(res=>{
+        	   		alert("장바구니에 저장 되었습니다.")
+        	    })
+            	
             },
             qUp:function(){
-            	this.quantity=this.quantity+1;
+            	if(this.quantity<this.goods.stock){
+            		this.quantity=this.quantity+1;
+            	}
+            	else{
+            		alert("최대 재고는 " + this.goods.stock + "개 입니다.")
+            	}
+            		
             },
             qDown:function(){
             	if(this.quantity>1){
