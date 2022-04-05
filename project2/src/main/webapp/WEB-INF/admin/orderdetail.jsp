@@ -71,7 +71,7 @@ td {
               <td class="cash">{{od.price | currency}} 원</td>
             <tr>
               <th class="adt-light">배송비</th>
-              <td class="cash">{{order.shippting}} 원</td>
+              <td class="cash">{{order.shipping | currency}} 원</td>
             </tr>
             <tr>
               <th class="adt-light">할인금액</th>
