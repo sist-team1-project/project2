@@ -23,7 +23,7 @@ td {
         </div>
       </div>
       <div class="col-lg-12 flex-m">
-        <input type="text" size=20 class="bor4 p-tb-4 dis-inline-block" v-model="od" :value="od">
+        <input type="text" size=20 class="bor4 p-tb-4 dis-inline-block">
           &nbsp;&nbsp;
         <input type="button" class="btn btn-sm btn-pro-color2 p-tb-4 dis-inline-block" value="검색" v-on:click="ofind()">
       </div>
@@ -46,14 +46,14 @@ td {
               <th>주문상태</th>
             </tr>
             <tr v-for="o in order" class="table_row fs-13 font-center">
-              <td>{{order.regdate }}</td>
-              <td>{{order.odid }}</td>
-              <td>{{order.uid }}</td>
-            <template v-for="od in orderDetailList">
-              <td>{{od.name }}</td>
-              <td>{{od.price }}</td>
-            </template>
-              <td>{{order.state }}</td>
+              <td>{{o.regdate }}</td>
+              <td>{{o.odid }}</td>
+              <td>{{o.uid }}</td>
+                <template v-for="od in orderListDetail">
+                  <td>{{od.name }}</td>
+                  <td>{{od.price }}</td>
+                </template>
+              <td>{{o.state }}</td>
              </tr>
           </table>
         </div>
@@ -121,12 +121,11 @@ td {
       methods:{
           odList:function(){
               axios.get("http://localhost:8080/web/admin/orderlistdetail_vue.do",{
-                  params:{
-                      oid: this.oid
-                  }
+            	  
               }).then(res=>{
 				console.log(res.data);
 				this.orderDetailList = res.data;
+				console.log(res.data[0].name);
               })
           },
           oList:function(){
@@ -135,8 +134,9 @@ td {
                       page: this.curpage
                   }
               }).then(res=>{
-				console.log(res.data);
 				this.order = res.data;
+				console.log(res.data);
+				console.log("DATE : " + res.data[0].regdate)
 				this.curpage=res.data[0].curpage;
                 this.totalpage=res.data[0].totalpage;
                 this.start=res.data[0].start;

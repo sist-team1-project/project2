@@ -82,23 +82,21 @@ public class AdminRestController {
 	}
 	
 	@GetMapping(value = "admin/orderlistdetail_vue.do", produces = "text/plain;charset=utf-8")
-	public String orderlistdetail_vue(String oid) {
-		System.out.println(oid);
+	public String orderlistdetail_vue() {
 		JSONArray arr = new JSONArray();
-
-		List<OrderDetailVO> list = oddao.orderDetail(oid);
+		
+		List<OrderDetailVO> list = oddao.orderListDetail();
 		for (OrderDetailVO vo : list) {
 			JSONObject obj = new JSONObject();
 			obj.put("odid", vo.getOd_id());
 			obj.put("oid", vo.getO_id());
 			obj.put("gid", vo.getG_id());
 			
-			String g_name = vo.getG_name();
-			if (g_name.length() > 18) {
+			String g_name = vo.getG_name(); 
+			if (g_name.length() > 18) { 
 				g_name = g_name.substring(0, 18) + "...";
-			}
+			} 
 			vo.setG_name(g_name);
-			
 			obj.put("price", vo.getG_price());
 			obj.put("sale", vo.getG_sale());
 			obj.put("quantity", vo.getG_quantity());
@@ -107,6 +105,7 @@ public class AdminRestController {
 		}
 		return arr.toJSONString();
 	}
+	
 	
 	/**************** 주문상세페이지 ********************/
 	@GetMapping(value = "admin/orderdetail.do", produces = "text/plain;charset=utf-8")

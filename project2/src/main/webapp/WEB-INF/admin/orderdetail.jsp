@@ -54,7 +54,7 @@ td {
             <tr>
               <td>{{od.gid}}</td>
               <td>{{od.name}}</td>
-              <td>{{od.price}} 원 ({{od.quantity}} 개)</td>
+              <td>{{od.price}} 원 (<fmt:formatNumber value={{od.quantity}} pattern=",000"/> 개)</td>
             </tr>
             <tr>
               <th style="color: #dbd0be;">주문/결제금액</th>
