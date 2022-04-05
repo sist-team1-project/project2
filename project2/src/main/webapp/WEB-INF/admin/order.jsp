@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="../css/order.css">
 <style type="text/css">
 td {
 	width: 150px;
@@ -30,7 +31,9 @@ td {
     </div>
     <div class="row p-t-10">
       <div class="col-lg-12 m-lr-auto p-tb-10 dis-flex flex-sb flex-m">
-        <div class="fs-13">총<fmt:formatNumber value="${count }" pattern=",000" />개</div>
+        <div class="fs-13">
+        	총 {{count | currency}} 개
+        </div>
         <input type="button" class="btn btn-sm btn-pro-color2 p-tb-4 dis-inline-block" v-on:click="orderdetail()" value="상세">
       </div>
       <div class="col-lg-12 m-lr-auto m-b-50">
@@ -51,8 +54,8 @@ td {
               <td>{{o.uid }}</td>
                 <template v-for="od in orderListDetail">
                   <template v-if="o.oid == od.oid">
-	                <td>{{od.name }}</td>
-	                <td>{{od.price }}</td>
+                	  <td>{{od.name}}</td>
+                	  <td>{{od.price | currency }} 원</td>
                   </template>
                 </template>
               <td>{{o.state }}</td>
@@ -62,7 +65,7 @@ td {
       </div>
     </div>
     
-<!--      <div class="text-center">
+    <div class="text-center">
 	  <ul class="pagination">
 		<li class="page-item" v-bind:class="{'disabled':startPage==1}">
 		  <button class="page-link" :value="startPage-1" v-on:click="prev($event)">
@@ -78,9 +81,9 @@ td {
 		  </button>
 		</li>
 	  </ul>
-	</div> -->
+	</div>
      
-      <div>
+<%--       <div>
       <ul class="pagination">
         <c:if test="${startPage > 1 }">
           <li class="page-item"><a class="page-link" href="adlist.do?page=${startPage-1 }">&lt;</a></li>
@@ -98,7 +101,7 @@ td {
           <li class="page-item"><a class="page-link" href="salelist.do?page=${endPage+1 }">&gt;</a></li>
         </c:if>
       </ul>
-    </div> 
+    </div>  --%>
     
   </div>
   <script>
@@ -115,6 +118,12 @@ td {
 		  pages : [],
 		  count : 0
       },
+      filters:{
+			currency: function(value){
+				var num = new Number(value);
+				return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,")
+			}
+		},
       mounted:function(){
           this.odList();
           this.oList();
@@ -141,6 +150,8 @@ td {
                 this.totalpage=res.data[0].totalpage;
                 this.start=res.data[0].start;
                 this.end=res.data[0].end;
+                this.count = res.data[0].count;
+                this.pages=[];
               })
           }
       }

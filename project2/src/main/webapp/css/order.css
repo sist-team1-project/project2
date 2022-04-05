@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+.adtable {
+	background-color: #dbd0be;
+	color: black;
+	text-align: center;
+}
+.adt-light {
+	background-color: #eeeee6;
+	text-align: center;
+}
+.table-checkout tr {
+	height: 35px;
+	text-align: center;
+}
+.cash {
+	text-align: right;
+}
+
+.shortsp {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}

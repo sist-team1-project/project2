@@ -26,5 +26,4 @@ public interface OrderMapper {
     		+"FROM order_1 "
     		+"WHERE o_id=#{oid}")
     public OrderVO order(String oid);
-    
 }
