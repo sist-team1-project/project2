@@ -64,12 +64,12 @@ public interface GoodsMapper {
 	@Select("SELECT COUNT(*) FROM Goods_1")
 	public int goodsCount();
 
-	@Select("SELECT g_id,g_name,g_brand,g_price,g_sale,g_image,g_detail,g_status FROM Goods_1 "
+	@Select("SELECT g_id,g_name,g_brand,g_price,g_sale,g_image,g_detail,g_status,g_stock FROM Goods_1 "
 			+"WHERE g_id=#{gid}")
 	public GoodsVO goodsDetail(Map map);
 
 	@Insert("INSERT INTO goods_1 VALUES(goods_id_seq_1.NEXTVAL, #{c_id}, #{g_name}, #{g_brand}, #{g_price}, #{g_sale}, #{g_image}, #{g_detail}, #{g_stock}, 0, #{g_status}, SYSDATE")
-	public void goodsInsert(GoodsVO vo, int e_id);
+	public void goodsInsert(GoodsVO vo);
 
 	@Select("SELECT eg_id, e_id FROM event_goods_1 WHERE g_id = #{g_id}")
 	public EventGoodsVO eventGoodsData(int g_id);
@@ -108,5 +108,9 @@ public interface GoodsMapper {
 			  +"WHERE num BETWEEN #{start} AND #{end}"
 			  + "</script>")
 		public List<GoodsVO> adminGoodsFind(Map map);
+	
+	
+	//@Update("UPDATE goods_1 SET ")			업데이트 쿼리문 작성
+	//public void goods update(GoodsVO vo);
 
 }

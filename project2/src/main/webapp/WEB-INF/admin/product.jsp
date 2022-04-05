@@ -228,6 +228,7 @@
 					},
 					goods_update : function() {
 						console.log("상품 수정");
+						location.href = '../admin/goods_update.do';
 					},
 					goods_detail : function(detailId) {
 						this.gdetail = detailId;

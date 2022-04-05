@@ -14,7 +14,12 @@ public interface OrderDetailMapper {
     		+"ON order_1.o_id = order_detail_1.o_id " 
     		+"WHERE o_id=#{oid})")
     public List<OrderDetailVO> orderDetailList(Map map);
-       
+    
+    /* 주문목록 상세 */
+    @Select("SELECT /*+ INDEX_ASC(order_detail_1 od_od_id_pk_1)*/ o_id,g_name,g_price,g_quantity "
+    		+"FROM order_detail_1 ")
+    public List<OrderDetailVO> orderListDetail(); 
+    
     /* 상품명 */
     @Select("SELECT g_name "
     		+"FROM order_detail_1 "

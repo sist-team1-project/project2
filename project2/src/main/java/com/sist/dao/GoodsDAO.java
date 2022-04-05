@@ -48,17 +48,20 @@ public class GoodsDAO {
 	public void goodsInsert(GoodsVO vo, int e_id) {
 
 		int g_id = vo.getG_id();
-		if (e_id == 0) {
-			mapper.goodsInsert(vo, e_id);
-		} else {
+		
+		if (e_id != 0) {
 			EventGoodsVO evo = mapper.eventGoodsData(g_id);
 			mapper.goodsEventInsert(evo);
-			mapper.goodsInsert(vo, e_id);
+			mapper.goodsInsert(vo);
 		}
 	}
 
 	public List<GoodsVO> adminGoodsFind(Map map) {
 		return mapper.adminGoodsFind(map);
 	}
+	
+//	public GoodsVO goods_UpdateData(int no) {
+//		return "";
+//	}
 
 }

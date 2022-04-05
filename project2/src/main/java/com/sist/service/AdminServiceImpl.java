@@ -24,10 +24,6 @@ public class AdminServiceImpl implements AdminService {
 		return gdao.goodsTotalList(map);
 	}
 
-	@Override
-	public int goodsTotalPage() {
-		return gdao.goodsTotalPage();
-	}
 	
 	/*********************************************/
 	@Override
@@ -45,6 +41,18 @@ public class AdminServiceImpl implements AdminService {
 		return oddao.nameData(oid);
 	}
 
+	@Override
+	public int orderTotalPage() {
+		return odao.orderTotalPage();
+	}
 
-	
+	@Override
+	public List<OrderVO> orderList(Map map) {
+		return odao.orderList(map);
+	}
+
+	@Override
+	public List<OrderDetailVO> orderListDetail() {
+		return oddao.orderListDetail();
+	}
 }

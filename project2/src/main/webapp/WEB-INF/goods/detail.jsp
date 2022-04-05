@@ -42,11 +42,13 @@
             <div class="p-t-20">
               <div class="flex-w flex-c-m p-b-10">
                 <div class="wrap-num-product flex-w m-r-20 m-tb-10">
-                  <div class="btn-num-product-down cl8 hov-btn1 trans-04 flex-c-m"><i class="fs-16 zmdi zmdi-minus"></i></div>
-                  <input class="mtext-104 cl3 text-center num-product" type="number" name="num-product" value="1">
-                  <div class="btn-num-product-up cl8 hov-btn1 trans-04 flex-c-m"><i class="fs-16 zmdi zmdi-plus"></i></div>
+                  <div v-on:click="qDown()" class="btn-num-product-down cl8 hov-btn1 trans-04 flex-c-m"><i class="fs-16 zmdi zmdi-minus"></i></div>
+                  <input v-model="quantity" class="mtext-104 cl3 text-center num-product" type="number" name="num-product">
+                  <div v-on:click="qUp()" class="btn-num-product-up cl8 hov-btn1 trans-04 flex-c-m"><i class="fs-16 zmdi zmdi-plus"></i></div>
                 </div>
-                <button class="stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-10 trans-04 js-addcart-detail">장바구니</button>
+                 <c:if test="${sessionScope.grade=='1' }">
+                <button v-on:click="insertCart()" class="stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-10 trans-04 js-addcart-detail">장바구니</button>
+                </c:if>
               </div>  
             </div>
             <!--  -->
@@ -150,6 +152,7 @@
             goods:{},
             images:[],
             image:'',
+            quantity:1
         },
         mounted:function(){
     	   	axios.get('http://localhost:8080/web/goods/detail_vue.do',{
@@ -166,9 +169,38 @@
         methods: {
             showImg:function(link){
                 this.image=link;
+            },
+            insertCart:function(){
+            	axios.post('http://localhost:8080/web/cart/insert_ok.do',null,{
+        	  		params:{
+        	   		    g_id:this.gid,
+        	   		    g_quantity:this.quantity
+        	   		    
+        	   		}
+        	    }).then(res=>{
+        	   		alert("장바구니에 저장 되었습니다.")
+        	    })
+            	
+            },
+            qUp:function(){
+            	if(this.quantity<this.goods.stock){
+            		this.quantity=this.quantity+1;
+            	}
+            	else{
+            		alert("최대 재고는 " + this.goods.stock + "개 입니다.")
+            	}
+            		
+            },
+            qDown:function(){
+            	if(this.quantity>1){
+            		this.quantity=this.quantity-1;
+            	}
             }
         }
+        
     })
+    
+    
  
    <!-- 사진 크게보여주는 팝업 -->
     $('.gallery-lb').each(function() { // the containers for all your galleries

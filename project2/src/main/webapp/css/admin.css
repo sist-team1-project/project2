@@ -217,3 +217,15 @@
 }
 
 .w-2full {width: 200%;}
+
+.col-sm-12-add, col-lg-12-add {
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+}
+
+.col-lg-12-add {
+    -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+    max-width: 100%;
+  }
