@@ -7,11 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-  <div class="container bg0 p-t-150 p-b-30" id="pwdfind">
+  <div class="container bg0 p-t-150 p-b-30" id="idfind">
     
       <div class="col-sm-12 col-lg-4 m-lr-auto m-b-50">
         <div class="bor10 p-lr-40 p-t-30 p-b-25 p-lr-15-sm">
-          <h4 class="flex-c-m mtext-109 cl2 p-b-30">비밀번호 찾기</h4>
+          <h4 class="flex-c-m mtext-109 cl2 p-b-30">아이디 찾기</h4>
             <div class="row">
 		      <div class="col-sm-7">
 		      	<div class="col-sm-5 flex-c-m">
@@ -33,7 +33,7 @@
 			</div>
 			<div class="row flex-c-m p-t-15">
 			  <div class="flex-c-m">
-				<a id="pwdfind()"> 비밀번호 찾기 </a>&nbsp;|&nbsp;
+				<a id="idfind()"> 아이디 찾기 </a>&nbsp;|&nbsp;
 				<a id=""> 취소 </a>
 			  </div>
 			</div>
@@ -42,7 +42,7 @@
   </div>
   <script>
 new Vue({
- 	el:'#pwdfind',
+ 	el:'#idfind',
  	data:{
  		id:'',
  		email:''
@@ -51,7 +51,7 @@ new Vue({
  		
     },
  	methods:{
- 		pwdfind:function(){
+ 		idfind:function(){
  			let id=$('#id').val();
  			if(id.trim()=="")
  			{
@@ -65,7 +65,7 @@ new Vue({
  				return;
  			}// 서버실행 전 확인
  			
- 			axios.post("http://localhost:8080/web/user/pwdfind_ok.do",null,{
+ 			axios.post("http://localhost:8080/web/user/idfind_ok.do",null,{
  	            params:{
  	                id: this.id,
  	                email: this.email
@@ -75,9 +75,13 @@ new Vue({
  	        	if(res.data=='ADMIT')
  				{
  	        		
- 	        		location.href = "../pwd/pwd.do"
+ 	        		idfind2.jsp 로 이동하여 뒤에 3개 제외한 거 출력 
  	        		
- 	        		
+ 	        		alert("입력하신 이메일로 비밀번호를 전송하였습니다.")
+ 					
+ 						메일 센더 실행
+ 						
+ 					location.href="../user/login.do";	
  				}
  				else
  			    {

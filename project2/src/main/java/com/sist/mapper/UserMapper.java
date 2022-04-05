@@ -23,4 +23,8 @@ public interface UserMapper {
 	// 고객정보
 	@Select("SELECT u_id, u_name, u_gender, u_email, u_phone, u_address1, u_address2, u_post, u_question, u_answer, to_char(u_regdate,'YYYY-MM-DD') as u_regdate FROM user_1 WHERE u_id=#{uid}")
 	public UserVO userInfo(String uid);
+	
+	// email존재 여부
+	@Select("SELECT COUNT(*) from user_1 WHERE u_email=#{u_email}")
+	public int emailCount(String email);
 }

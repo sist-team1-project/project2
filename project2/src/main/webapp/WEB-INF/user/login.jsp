@@ -5,11 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<!-- <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
-
-
-</script>
+</script> -->
 </head>
 <body>
   <div class="container bg0 p-t-150 p-b-30" id="login">
@@ -33,7 +31,7 @@
 			</div>
 			<div class="row flex-c-m p-t-15">
 			  <div class="flex-c-m">
-				<a id="idfind"> 아이디 찾기 </a>&nbsp;|&nbsp;
+				<a href="../user/idfind.do"> 아이디 찾기 </a>&nbsp;|&nbsp;
 				<a id="pwfind"> 비밀번호 찾기 </a>&nbsp;|&nbsp;
 				<a href="../user/join.do"> 회원가입 </a>
 			  </div>
@@ -65,23 +63,22 @@ new Vue({
  				$('#pwd').focus();
  				return;
  			}// 서버실행 전 확인
- 			console.log(this.id);
- 			console.log(this.pwd);
+
  			axios.post("http://localhost:8080/web/user/login_ok.do",null,{
  	            params:{
  	                id: this.id, // data에 있는 것
  	                pwd: this.pwd
  	            }
  	        }).then(res=>{
- 	        	console.log(res);
- 	        	if(res=='NOID')
+ 	        	console.log(res.data);
+ 	        	if(res.data=='NOID')
  				{
  					alert("아이디가 존재하지 않습니다.")
  					$('#id').val("");
  					$('#pwd').val("");
  					$('#id').focus();
  				}
- 				else if(res=='NOPWD')
+ 				else if(res.data=='NOPWD')
  				{
  					alert("비밀번호가 틀립니다.")
  					$('#pwd').val("");

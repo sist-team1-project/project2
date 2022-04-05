@@ -42,4 +42,17 @@ public class UserDAO {
 	public UserVO userInfo(String uid) {
 		return mapper.userInfo(uid);
 	}
+	
+	public String userFind(String id, String email) {
+		String result="";
+		int countId=mapper.idCount(id);
+		int countEmail=mapper.emailCount(email);
+		if (countId==1 && countEmail==1) {
+			result = "ADMIT";
+		} else {
+			result ="NORESULT";
+		}
+		return result;
+	}
+	
 }
