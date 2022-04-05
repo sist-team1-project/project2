@@ -26,7 +26,7 @@ public class AdminRestController {
 	private OrderDetailDAO oddao;
 	
 	@GetMapping(value = "admin/orderlist_vue.do", produces = "text/plain;charset=utf-8")
-	public String orderlist(String page, String fs, String ss) {
+	public String orderlist(String page) {
 		if (page == null) {
 			page = "1";
 		}
@@ -37,15 +37,12 @@ public class AdminRestController {
 		int rowSize = 10;
 		int start = (curpage * rowSize) - (rowSize - 1);
 		int end = (rowSize * curpage);
-		String[] fsArr = fs.split(",");
 
 		map.put("start", start);
 		map.put("end", end);
-		map.put("fsArr", fsArr);
-		map.put("ss", ss);
 
 		List<OrderVO> list = odao.orderList(map);
-		int totalpage = odao.orderTotalPage(map);
+		int totalpage = odao.orderTotalPage();
 
 		JSONArray arr = new JSONArray();
 		int i = 0;

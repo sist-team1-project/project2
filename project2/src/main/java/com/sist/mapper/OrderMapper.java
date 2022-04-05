@@ -15,9 +15,8 @@ public interface OrderMapper {
 	public List<OrderVO> orderList(Map map);
 	
 	@Select("SELECT CEIL(COUNT(*) / 10.0) "
-			+"FROM order_1 "
-			+"WHERE o_id=#{oid}")
-    public int orderTotalPage(Map map);
+			+"FROM order_1 ")
+    public int orderTotalPage();
     
     @Select("SELECT COUNT(*) FROM order_1")
     public int orderCount();

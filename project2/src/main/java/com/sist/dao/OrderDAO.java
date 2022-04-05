@@ -18,8 +18,8 @@ public class OrderDAO {
     public List<OrderVO> orderList(Map map){
     	return mapper.orderList(map);
     }
-    public int orderTotalPage(Map map) {
-    	return mapper.orderTotalPage(map);
+    public int orderTotalPage() {
+    	return mapper.orderTotalPage();
     }
     public int orderCount() {
     	return mapper.orderCount();

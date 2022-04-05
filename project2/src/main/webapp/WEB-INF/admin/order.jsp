@@ -105,7 +105,7 @@ td {
       data:{
           oid:'${oid }',
           orderDetailList:[],	// List
-          order: [], 			// vo
+          order: [], 			
           curpage : 1,
 		  totalpage : 0,
 		  startPage : 0,
@@ -132,16 +132,15 @@ td {
           oList:function(){
               axios.get("http://localhost:8080/web/admin/orderlist_vue.do",{
                   params:{
-                      oid: this.oid,
-                      page: this.curpage,
+                      page: this.curpage
                   }
               }).then(res=>{
 				console.log(res.data);
 				this.order = res.data;
-				this.curpage=result.data[0].curpage;
-                this.totalpage=result.data[0].totalpage;
-                this.start=result.data[0].start;
-                this.end=result.data[0].end;
+				this.curpage=res.data[0].curpage;
+                this.totalpage=res.data[0].totalpage;
+                this.start=res.data[0].start;
+                this.end=res.data[0].end;
               })
           }
       }

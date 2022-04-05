@@ -12,7 +12,7 @@ public interface AdminService {
 	public int goodsTotalPage();
 	
 	public List<OrderVO> orderList(Map map);
-	public int orderTotalPage(Map map);
+	public int orderTotalPage();
 	public List<OrderDetailVO> orderDetailList(Map map);
 	List<OrderDetailVO> orderDetail(String oid);
 	List<String> nameData(String oid);
