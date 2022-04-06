@@ -5,44 +5,119 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+<script src="http://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
-    <div class="container bg0 p-b-30">
-      <div class="row">
-      <h3 style="padding-bottom: 20px;"><b>공지사항</b></h3>
-	   <table class="table">        
-		<tr>
-         <th class="text-center" width=20%>제목</th>
-         <td colspan="3">${vo.n_title }</td>
+   <div class="container">
+     <h1 class="text-center">내용보기</h1>
+     <div class="row">
+      <table class="table">
+        <tr>
+         <th width=20% class="text-center warning">번호</th>
+         <td width=30% class="text-center">{{vo.no}}</td>
+         <th width=20% class="text-center warning">작성일</th>
+         <td width=30% class="text-center">{{vo.regdate}}</td>
         </tr>
         <tr>
-         <th class="text-center" width=20%>작성자</th>
-         <td class="text-center" width=30%>${vo.u_id }</td>
-         <th class="text-center" width=20%>작성일</th>
-         <td class="text-center" width=30%>${vo.n_regdate }</td>
+         <th width=20% class="text-center warning">이름</th>
+         <td width=30% class="text-center">{{vo.name}}</td>
+         <th width=20% class="text-center warning">조회수</th>
+         <td width=30% class="text-center">{{vo.hit}}</td>
         </tr>
         <tr>
-          <td colspan="4" valign="top" class="text-left" height="200">
-           <pre style="border:none;background-color:white;white-space: pre-wrap;">${vo.n_content }</pre>
+         <th width=20% class="text-center warning">제목</th>
+         <td colspan="3">{{vo.subject}}</td>
+        </tr>
+        <tr>
+          <td colspan="4" class="text-left" valign="top" height="200">
+            <pre style="white-space: pre-wrap;background-color:white;border:none">{{vo.content}}</pre>
           </td>
         </tr>
         <tr>
-         <th class="text-center" width=20%>조회수</th>
-         <td class="text-center" width=30%>${vo.n_visits }</td>
-        </tr>
-        <tr>
-          <td colspan="4" class="text-right">
-            <a href="../support/notice_update.do?no=${vo.n_id }" class="btn btn-xs btn-danger">수정</a>
-            <a href="../support/notice_delete.do?no=${vo.n_id }" class="btn btn-xs btn-success">삭제</a>
-            <a href="notice.do" class="btn btn-xs btn-info">목록</a>
-          </td>
+         <td colspan="4" class="text-right">
+           <button class="btn btn-sm btn-danger" v-on:click="update()">수정</button>
+           <button class="btn btn-sm btn-success" v-on:click="del()">삭제</button>
+           <button class="btn btn-sm btn-primary" v-on:click="list()">목록</button>
+         </td>
         </tr>
       </table>
-    </div>
-    </div>
+     </div>
+     <div class="row">
+       <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+     </div>
+   </div>
+   <script>
+   new Vue({
+	   	el:'.container',
+	   	data:{
+	   		vo:{},
+	   		no:${no}
+	   	},
+	   	mounted:function(){
+	   		axios.get('http://localhost:8080/web/food/board_detail_vue.do',{
+	   			params:{
+	   				no:this.no
+	   			}
+	   		}).then(res=>{
+	   			console.log(res.data)
+	   			this.vo=res.data;
+	   		})
+	   	},
+	   	// 사용자 정의 함수 
+		methods:{
+	   		list:function(){
+	   			location.href="board.do"
+	   		},
+	   		update:function(){
+	   			// ES6 => ';'은선택
+	   			/*
+	   			         자바스크립트
+	   			         데이터형 : 자동지정변수 
+	   			             var = let(지역변수) , const(상수형변수)
+	   			     let a=10 ==== a:int
+	   			     let a=10.5 == a:double
+	   			     ------------------------- Number
+	   			     let a='aaa'    a:String
+	   			     let a="bbb"    a:String 
+	   			     let a={}       a:Object  => {키:값}
+	   			                                 ---멤버변수 
+	   			             예) let a={"no":1,"name":"홍길동"}
+                              a.no
+                              a.name
+                              --------------------------JSON
+                              => 모든언어가 파싱이 가능 (kotlin,javascript라이브러리)
+	   			     let a=[] == a:Array
+	   			     let a=true == a:boolean
+	   			     
+	   			          기능 처리 : 사용자 정의 함수 
+	   			          function func_name(매개변수:변수명)
+                          {
+	   			        	  
+                          }
+                          const func_name=function(){}
+                          const func_name=()=>{} (람다식) : 함수포인터
+	   			          내장 객체
+	   			          window (브라우저)=>외곽 담당 (메뉴바,상태바 , 타이틀바)
+	   			            |                 |           |
+	   			         docuement(출력공간)   history    location
+	   			            |
+	   			           form (입력창)
+	   			          이벤트 처리 
+	   			          onclick , onchange , onmouseover onmouseout
+	   			          onkeyup, onkeydown , onhover(jquery)
+	   			*/
+	   			location.href="board_update.do?no="+this.no
+	   		    // 폴더  => food 
+	   		},
+	   		del:function(){
+	   			location.href="board_delete.do?no="+this.no;
+	   		}
+	   	}
+	   }) 
+  </script>
 </body>
 </html>
-
 
 
 

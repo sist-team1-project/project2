@@ -30,14 +30,22 @@ public interface NoticeMapper {
   		 +"WHERE n_id=#{n_id}")
     public void noticevisitIncrement(int no);
     
-    @Update("UPDATE notice_1 SET "
-  		  +"n_title=#{n_title},n_content=#{n_contnet} "
-  		  +"WHERE n_id=#{n_id}")
-     public void noticeUpdateData(NoticeVO vo);
-    
     @Select("SELECT n_id,u_id,n_title,n_content,n_visits,"
   		 +"TO_CHAR(n_regdate,'YYYY-MM-DD') as n_regdate "
   		 +"FROM notice_1 "
   		 +"WHERE n_id=#{n_id}")
     public NoticeVO noticeDetailData(int no);
+    
+    @Select("SELECT n_pwd FROM notice_1 "
+   		 +"WHERE n_id=#{n_id}")
+     public String noticeGetPassword(int no);
+
+    @Update("UPDATE notice_1 SET "
+  		  +"n_title=#{n_title},n_content=#{n_content} "
+  		  +"WHERE n_id=#{n_id}")
+    public void noticeUpdate(NoticeVO vo);
+
+    @Delete("DELETE FROM notice_1 "
+  		  +"WHERE n_id=#{n_id}")
+    public void noticeDelete(int no);
 }

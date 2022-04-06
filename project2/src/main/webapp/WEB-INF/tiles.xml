@@ -24,10 +24,10 @@
         <put-attribute name="content" value="/WEB-INF/mypage/{1}.jsp"/>
     </definition>
     
-    <definition name="support/*" extends="main2">
-        <put-attribute name="title" value="/WEB-INF/support/title.jsp"/>
-        <put-attribute name="menu" value="/WEB-INF/support/menu.jsp"/>
-        <put-attribute name="content" value="/WEB-INF/support/{1}.jsp"/>
+    <definition name="notice/*" extends="main2">
+        <put-attribute name="title" value="/WEB-INF/notice/title.jsp"/>
+        <put-attribute name="menu" value="/WEB-INF/notice/menu.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/notice/{1}.jsp"/>
     </definition>
     
     <definition name="admin/*" extends="main2">

@@ -14,12 +14,12 @@ import com.sist.dao.*;
 import com.sist.vo.*;
 
 @RestController
-public class SupportRestController {
+public class NoticeRestController {
 
 	@Autowired
 	private NoticeDAO dao;
 	
-	@GetMapping(value="support/notice_vue.do",produces = "text/plain;charset=utf-8")
+	@GetMapping(value="notice/list_vue.do",produces = "text/plain;charset=utf-8")
 	   public String notice_list_vue(String page)
 	   {
 		   String result="";
@@ -42,6 +42,7 @@ public class SupportRestController {
 			   for(NoticeVO vo:list)
 			   {
 				   JSONObject obj=new JSONObject();
+				   obj.put("nid", vo.getN_id());
 				   obj.put("ntitle", vo.getN_title());
 				   obj.put("uid", vo.getU_id());
 				   obj.put("nregdate", vo.getN_regdate());
@@ -59,14 +60,15 @@ public class SupportRestController {
 		   return result;
 	   }
 	
-    @GetMapping(value="support/notice_detail_vue.do",produces = "text/plain;charset=utf-8")
-	   public String food_detail_vue(int no)
+    @GetMapping(value="notice/detail_vue.do",produces = "text/plain;charset=utf-8")
+	   public String notice_detail_vue(int nid)
 	   {
 		   String result="";
 		   try
 		   {
-			   NoticeVO vo=dao.noticeDetailData(no);
+			   NoticeVO vo=dao.noticeDetailData(nid);
 			   JSONObject obj=new JSONObject();
+			   obj.put("nid", vo.getN_id());
 			   obj.put("ntitle", vo.getN_title());
 			   obj.put("uid", vo.getU_id());
 			   obj.put("nregdate", vo.getN_regdate());
