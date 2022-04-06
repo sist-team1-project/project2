@@ -112,9 +112,37 @@ public class AdminRestController2 {
 
 	@PostMapping("admin/goods_add_ok.do")
 	public String goods_add_vue_ok(@RequestBody HashMap<String, Object> map) {
-	    String a = (String)map.get("c_id");
-	    System.out.println(a);
-		//gdao.goodsInsert(vo);
+		GoodsVO vo = new GoodsVO();
+
+		vo.setC_id((String) map.get("c_id"));
+		vo.setG_name((String) map.get("g_name"));
+		vo.setG_brand((String) map.get("g_brand"));
+		vo.setG_price(Integer.parseInt(map.get("g_price").toString()));
+		vo.setG_sale(Integer.parseInt(map.get("g_sale").toString()));
+		vo.setG_image((String) map.get("g_image"));
+		vo.setG_detail((String) map.get("g_detail"));
+		vo.setG_stock(Integer.parseInt(map.get("g_stock").toString()));
+		vo.setG_status(Integer.parseInt(map.get("g_status").toString()));
+
+		int e_id = 0;
+
+		System.out.println("eid : " + map.get("eid"));
+
+		String a = (String) map.get("eid");
+		if (a != null) {
+			System.out.println("a : " + a);
+			if (a.contains(",")) {
+				String[] eid = a.split(",");
+				for (String st : eid) {
+					System.out.print(st + " ");
+					gdao.goodsInsert(vo, Integer.parseInt(st));
+				}
+				return "ok";
+			}
+			e_id = Integer.parseInt(a);
+		}
+		gdao.goodsInsert(vo, e_id);
+
 		return "ok";
 	}
 }

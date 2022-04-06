@@ -68,7 +68,7 @@ public interface GoodsMapper {
 			+"WHERE g_id=#{gid}")
 	public GoodsVO goodsDetail(Map map);
 
-	@Insert("INSERT INTO goods_1 VALUES(goods_id_seq_1.NEXTVAL, #{c_id}, #{g_name}, #{g_brand}, #{g_price}, #{g_sale}, #{g_image}, #{g_detail}, #{g_stock}, 0, #{g_status}, SYSDATE")
+	@Insert("INSERT INTO goods_1 VALUES(goods_id_seq_1.NEXTVAL, #{c_id}, #{g_name}, #{g_brand}, #{g_price}, #{g_sale}, #{g_image}, #{g_detail}, #{g_stock}, 0, #{g_status}, SYSDATE)")
 	public void goodsInsert(GoodsVO vo);
 
 	@Select("SELECT eg_id, e_id FROM event_goods_1 WHERE g_id = #{g_id}")

@@ -15,10 +15,10 @@ public class GoodsDAO {
 
 	@Autowired
 	private GoodsMapper mapper;
-	
+
 	@Autowired
 	private EventGoodsMapper mapper2;
-	
+
 	public List<GoodsVO> goodsList(Map map) {
 		return mapper.goodsList(map);
 	}
@@ -49,22 +49,23 @@ public class GoodsDAO {
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void goodsInsert(GoodsVO vo, int e_id) {
-
-		int g_id = vo.getG_id();
 		mapper.goodsInsert(vo);
-		
+		int g_id = mapper.goodsCount();
+
 		if (e_id != 0) {
-            EventGoodsVO evo = mapper.eventGoodsData(g_id);
-            mapper2.goodsEventInsert(evo);
-        }
+			EventGoodsVO evo = new EventGoodsVO();
+			evo.setE_id(e_id);
+			evo.setG_id(g_id);
+			mapper2.goodsEventInsert(evo);
+		}
 	}
 
 	public List<GoodsVO> adminGoodsFind(Map map) {
 		return mapper.adminGoodsFind(map);
 	}
-	
-//	public GoodsVO goods_UpdateData(int no) {
-//		return "";
-//	}
+
+	//	public GoodsVO goods_UpdateData(int no) {
+	//		return "";
+	//	}
 
 }

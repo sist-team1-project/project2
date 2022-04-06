@@ -5,23 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<style type="text/css">
-.container{
-  margin-top: 50px;
-}
-.row{
-  margin: 0px auto;
-  width:600px;
-}
-</style>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
 <script src="http://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
-   <div class="container">
-     <h1 class="text-center">수정하기</h1>
-     <div class="row">
+	<div class="container bg0" id="notice_update">
+		<h3 class="text-center" style="padding-bottom: 20px">수정하기</h3>
+		<div class="row">
        <table class="table">
         <tr>
          <th width=15% class="text-right warning">이름</th>
@@ -37,33 +27,26 @@
         <tr>
          <th width=15% class="text-right warning">내용</th>
          <td width=85%>
-          <textarea rows="10" cols="55" id="content" v-model="content">{{content}}</textarea>
+          <textarea rows="10" cols="55" id="content" v-model="content">{{vo.ncontent}}</textarea>
          </td>
         </tr>
         <tr>
          <th width=15% class="text-right warning">비밀번호</th>
          <td width=85%><input type=password id="pwd" size=10 v-model="pwd"></td>
         </tr>
-        <tr>
-          <td colspan="2" class="text-center">
-           <button class="btn btn-sm btn-info" v-on:click="write()">수정</button>
-           <button class="btn btn-sm btn-success" v-on:click="cancel()">취소</button>
-          </td>
-        </tr>
        </table>
      </div>
+       <div class="text-right" style="padding-top: 10px;">
+			<button class="btn btn-sm" style="background-color: #eeeee6"
+				v-on:click="write()">수정</button>
+			<button class="btn btn-sm" style="background-color: #dbd0be"
+				v-on:click="cancel()">취소</button>
+		</div>
    </div>
    <script>
     new Vue({
-    	el:'.container',
+    	el:'#notice_update',
     	data:{
-    		/*
-    		    List => []
-    		    VO => {}
-    		    문자열 => ''
-    		    숫자 => 0
-    		    논리 => true/false
-    		*/
     		name:'',
     		subject:'',
     		content:'',
@@ -72,7 +55,7 @@
     		vo:{}
     	},
     	mounted:function(){
-    		axios.get('http://localhost:8080/web/food/board_update_vue.do',{
+    		axios.get('http://localhost:8080/web/notice/update_vue.do',{
     			params:{
     				no:this.no
     			}
@@ -112,7 +95,7 @@
     			} 
     			
     			// 전송 서버 
-    			axios.get('http://localhost:8080/web/food/update_ok_vue.do',{
+    			axios.get('http://localhost:8080/web/notice/update_ok_vue.do',{
     				params:{
     					no:this.no,
     					name:this.name,
@@ -123,7 +106,7 @@
     			}).then(res=>{
     				if(res.data=="YES")
     				{
-    					location.href="board_detail.do?no="+this.no
+    					location.href="detail.do?no="+this.no
         				// return "redirect:board_detail.do?no="+no
     				}
     				else

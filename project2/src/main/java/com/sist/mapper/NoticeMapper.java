@@ -36,14 +36,14 @@ public interface NoticeMapper {
   		 +"WHERE n_id=#{n_id}")
     public NoticeVO noticeDetailData(int no);
     
-    @Select("SELECT n_pwd FROM notice_1 "
-   		 +"WHERE n_id=#{n_id}")
-     public String noticeGetPassword(int no);
-
     @Update("UPDATE notice_1 SET "
   		  +"n_title=#{n_title},n_content=#{n_content} "
   		  +"WHERE n_id=#{n_id}")
     public void noticeUpdate(NoticeVO vo);
+    
+    @Select("SELECT n_pwd FROM notice_1 "
+    		+"WHERE n_id=#{n_id}")
+    public String noticeGetPassword(int no);
 
     @Delete("DELETE FROM notice_1 "
   		  +"WHERE n_id=#{n_id}")

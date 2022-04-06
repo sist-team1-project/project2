@@ -35,10 +35,10 @@ public class NoticeDAO {
  	    mapper.noticeInsertData(vo);
     }
     
-    public NoticeVO noticeDetailData(int nid)
+    public NoticeVO noticeDetailData(int no)
     {
- 	    mapper.noticevisitIncrement(nid);
- 	    return mapper.noticeDetailData(nid);
+ 	    mapper.noticevisitIncrement(no);
+ 	    return mapper.noticeDetailData(no);
     }
     
     public NoticeVO noticeUpdateData(int no)
