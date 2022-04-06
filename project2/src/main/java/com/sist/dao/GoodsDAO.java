@@ -15,7 +15,10 @@ public class GoodsDAO {
 
 	@Autowired
 	private GoodsMapper mapper;
-
+	
+	@Autowired
+	private EventGoodsMapper mapper2;
+	
 	public List<GoodsVO> goodsList(Map map) {
 		return mapper.goodsList(map);
 	}
@@ -51,9 +54,9 @@ public class GoodsDAO {
 		mapper.goodsInsert(vo);
 		
 		if (e_id != 0) {
-			EventGoodsVO evo = mapper.eventGoodsData(g_id);
-			mapper.goodsEventInsert(evo);
-		}
+            EventGoodsVO evo = mapper.eventGoodsData(g_id);
+            mapper2.goodsEventInsert(evo);
+        }
 	}
 
 	public List<GoodsVO> adminGoodsFind(Map map) {
