@@ -48,11 +48,11 @@ public class GoodsDAO {
 	public void goodsInsert(GoodsVO vo, int e_id) {
 
 		int g_id = vo.getG_id();
+		mapper.goodsInsert(vo);
 		
 		if (e_id != 0) {
 			EventGoodsVO evo = mapper.eventGoodsData(g_id);
 			mapper.goodsEventInsert(evo);
-			mapper.goodsInsert(vo);
 		}
 	}
 

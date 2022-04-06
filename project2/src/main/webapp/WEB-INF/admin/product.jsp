@@ -28,7 +28,7 @@
 				&nbsp; 제품명&nbsp; &nbsp;
 				<input type="checkbox" v-model="fs" value="D">
 				&nbsp; 브랜드&nbsp; &nbsp;
-				<input type=text size=15 class="input-sm wrap-search-admin" v-model="ss" ref="goodsfind">
+				<input type=text size=15 @keyup.enter="gfind()" class="input-sm wrap-search-admin" v-model="ss" ref="goodsfind">
 				&nbsp; &nbsp;
 				<button class="flex-c-m stext-101 cl0 btn-sm btn-pro-color2 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail fs-10" v-on:click="gfind()">검색</button>
 				&nbsp; &nbsp;

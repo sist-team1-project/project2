@@ -110,4 +110,13 @@ public class AdminRestController2 {
 		return "";
 	}
 
+	@PostMapping("admin/goods_add_ok.do")
+	public String goods_add_vue_ok(HashMap<String, Object> param) {
+		param.forEach((key, value) -> {
+			System.out.println(key + " : " + value);
+		});
+		//gdao.goodsInsert(param);
+		return "ok";
+	}
+
 }
