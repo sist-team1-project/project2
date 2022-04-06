@@ -73,9 +73,6 @@ public interface GoodsMapper {
 
 	@Select("SELECT eg_id, e_id FROM event_goods_1 WHERE g_id = #{g_id}")
 	public EventGoodsVO eventGoodsData(int g_id);
-
-	@Insert("INSERT INTO event_goods_1 VALUES(event_goods_id_seq_1.NEXTVAL, #{e_id}, #{g_id})")
-	public void goodsEventInsert(EventGoodsVO vo);
 	
 	@Select("<script>"
 			+ "SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status, TO_CHAR(g_regdate,'YYYY-MM-DD HH24:MI:SS')as g_regdate, num "

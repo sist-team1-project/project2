@@ -25,12 +25,6 @@ public class AdminController2 {
 	public String goods_add_vue() {
 		return "admin/goods_add";
 	}
-
-	@PostMapping("goods_add_ok.do")
-	public String goods_add_vue_ok(GoodsVO vo, int e_id) {
-		dao.goodsInsert(vo, e_id);
-		return "redirect:admin/adlist.do";
-	}
 	
 	@GetMapping("goods_update.do")
 	public String goods_update(int no, Model model) {

@@ -26,31 +26,62 @@ public class UserRestController {
 		}
 		return result;
 	}
-	
-    @PostMapping("user/join_ok.do")
-    public String user_join(UserVO vo) {
-        System.out.println(vo.getU_address1());
-        dao.userJoin(vo);
-        return "ok";
-    }
-    
-    @GetMapping(value = "mypage/info_vue.do", produces = "text/plain;charset=utf-8")
-    public String mypage_info_vue(HttpSession session) {
-    	String uid = (String) session.getAttribute("id");
-    	UserVO vo = dao.userInfo(uid);
-    	JSONObject obj = new JSONObject();
+
+	@PostMapping("user/join_ok.do")
+	public String user_join(UserVO vo) {
+		System.out.println(vo.getU_address1());
+		dao.userJoin(vo);
+		return "ok";
+	}
+
+	@GetMapping(value = "mypage/info_vue.do", produces = "text/plain;charset=utf-8")
+	public String mypage_info_vue(HttpSession session) {
+		String uid = (String) session.getAttribute("id");
+		UserVO vo = dao.userInfo(uid);
+		JSONObject obj = new JSONObject();
+
+		obj.put("uid", vo.getU_id());
+		obj.put("name", vo.getU_name());
+		obj.put("gender", vo.getU_gender());
+		obj.put("email", vo.getU_email());
+		obj.put("phone", vo.getU_phone());
+		obj.put("address1", vo.getU_address1());
+		obj.put("address2", vo.getU_address2());
+		obj.put("post", vo.getU_post());
+		obj.put("question", vo.getU_question());
+		obj.put("answer", vo.getU_answer());
+		obj.put("regdate", vo.getU_regdate());
+		return obj.toJSONString();
+	}
+
+	@GetMapping(value = "user/idfind_ok.do", produces = "text/plain;charset=utf-8")
+	public String user_idfind_ok(String id, String email) {
+	    Map map = new HashMap();
+        map.put("id",id);
+        map.put("email", email);
         
-        obj.put("uid", vo.getU_id());
-        obj.put("name", vo.getU_name());
-        obj.put("gender", vo.getU_gender());
-        obj.put("email", vo.getU_email());
-        obj.put("phone", vo.getU_phone());
-        obj.put("address1", vo.getU_address1());
-        obj.put("address2", vo.getU_address2());
-        obj.put("post", vo.getU_post());
-        obj.put("question", vo.getU_question());
-        obj.put("answer", vo.getU_answer());
-        obj.put("regdate", vo.getU_regdate());   
-        return obj.toJSONString();
-    }
+		String result = dao.userFind(map);
+		return result;
+	}
+	
+	
+	/*@PostMapping("user/idfind_result.do")
+	public String user_idfind_result(Class user_idfind_ok, String id) {
+		
+		// 위 클래스에서 가져온 아이디를 출력하기
+		
+		String result = user_idfind_ok();
+		return result;
+	}*/
+
+	@PostMapping(value = "user/pwdfind_ok.do", produces = "text/plain;charset=utf-8")
+	public String user_pwdfind_ok(String id, String email) {
+		return "";
+	}
+	
+	/*
+	 * @PostMapping("user/pwdfind2_ok.do") public String user_pwdfind2_ok(String
+	 * question, String answer) { String result = dao.userAnswer(question, answer);
+	 * return result; }
+	 */
 }
