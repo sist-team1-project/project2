@@ -16,11 +16,11 @@
             <div class="row">
 		      <div class="col-sm-7">
                 <div class="flex-w flex-t p-t-15 p-b-22 m-l-20">
-                  <input type="text" id="id" name="id" placeholder="아이디" v-model="id">
+                  <input @keyup.enter="login()" type="text" id="id" name="id" placeholder="아이디" v-model="id">
                 </div>
             
 			    <div class="flex-w flex-t p-t-15 p-b-15 m-l-20">
-                  <input type="password" id="pwd" name="pwd" placeholder="비밀번호" v-model="pwd">
+                  <input @keyup.enter="login()" type="password" id="pwd" name="pwd" placeholder="비밀번호" v-model="pwd">
                 </div>
               </div>
               <div class="col-sm-5 flex-c-m">
