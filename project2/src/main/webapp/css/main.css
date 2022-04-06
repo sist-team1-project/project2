@@ -1802,7 +1802,8 @@ input.num-product::-webkit-inner-spin-button {
 
 .table-shopping-cart .table_row,
 .table-checkout .table_row {
-  height: 140px;
+  border-collapse: collapse;
+  height: 70px;
 }
 
 .table-shopping-cart .table_row td,

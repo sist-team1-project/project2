@@ -61,23 +61,40 @@ public class NoticeRestController {
 	   }
 	
     @GetMapping(value="notice/detail_vue.do",produces = "text/plain;charset=utf-8")
-	   public String notice_detail_vue(int nid)
+	   public String notice_detail_vue(int no)
 	   {
 		   String result="";
 		   try
 		   {
-			   NoticeVO vo=dao.noticeDetailData(nid);
+			   NoticeVO vo=dao.noticeDetailData(no);
 			   JSONObject obj=new JSONObject();
 			   obj.put("nid", vo.getN_id());
 			   obj.put("ntitle", vo.getN_title());
 			   obj.put("uid", vo.getU_id());
 			   obj.put("nregdate", vo.getN_regdate());
 			   obj.put("ncontent", vo.getN_content());
-			   obj.put("nvisit", vo.getN_visits());
+			   obj.put("nvisits", vo.getN_visits());
 			   
 			   result=obj.toJSONString();
 			   System.out.println(result);
 		   }catch(Exception ex){}
+		   
 		   return result;
 	   }
+    
+    @GetMapping(value = "notice/delete_ok.do",produces = "text/plain;charset=utf-8")
+    public String board_delete(int no,String pwd)
+    {
+ 	   String result="";
+ 	   boolean bCheck=dao.noticeDelete(no, pwd);
+ 	   if(bCheck==true)
+ 	   {
+ 		   result="YES";
+ 	   }
+ 	   else
+ 	   {
+ 		   result="NO";
+ 	   }
+ 	   return result;
+    }
 }

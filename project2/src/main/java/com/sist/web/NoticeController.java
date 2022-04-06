@@ -50,4 +50,11 @@ public class NoticeController {
 		model.addAttribute("no", no);
 		return "notice/update";
 	}
+	
+	@GetMapping("notice/delete.do")
+	public String food_board_delete(int no, Model model)
+	{
+		model.addAttribute("no", no); 
+	    return "notice/delete";
+	}
 }
