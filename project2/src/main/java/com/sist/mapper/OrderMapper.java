@@ -27,7 +27,9 @@ public interface OrderMapper {
 	 public OrderVO order(String oid);
 	 
 	 /* 판매관리목록 */
-	 @Select("SELECT o_id as oid, o_regdate as regdate, o_shipping as shipping, o_state as state, u_id as usid, "
+	 @Select("SELECT oid, regdate, shipping, state, usid, name, price, quantity "
+	         +"FROM (SELECT oid, regdate, shipping, state, usid, name, price, quantity, rownum as num "
+	         +"FROM (SELECT o_id as oid, o_regdate as regdate, o_shipping as shipping, o_state as state, u_id as usid, "
 			 +"g_name || decode(sum(g_quantity),1,'',' 외 ' || (sum(g_quantity)-1) || '개')as name, "
 			 +"sum(g_price) as price, sum(g_quantity) as quantity "
 			 +"FROM (SELECT a.o_id, a.o_regdate, a.o_shipping, a.o_state, a.u_id, "
@@ -35,6 +37,7 @@ public interface OrderMapper {
 			 +"FROM order_1 a, order_detail_1 b "
 			 +"WHERE a.o_id = b.o_id) "
 			 +"GROUP BY o_id, o_regdate, o_shipping, o_state, u_id, g_name "
-			 +"order by o_id desc")
+			 +"order by o_id desc)) "
+			 +"WHERE num BETWEEN #{start} AND #{end}")
 	 public List<Map<String,Object>> orderFullList(Map map);
 }

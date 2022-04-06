@@ -2988,9 +2988,9 @@ input.num-product::-webkit-inner-spin-button {
 
 /*---------------------------------------------*/
 .hov-btn2:hover {
-  border-color: #fff;
+  border-color: #222;
   background-color: #fff;
-  color: #717fe0;
+  color: #222;
 }
 
 /*---------------------------------------------*/

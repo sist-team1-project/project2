@@ -48,7 +48,7 @@ td {
             </tr>
             <tr v-for="o in orderFullList" class="table_row fs-13 font-center">
               <td>{{o.regdate}}</td>
-              <td>{{o.oid}}</td>
+              <td><a href="#" class="btn btn-default" data-toggle="modal" data-target="#iframeModal" @click="iframe='../admin/orderdetail.do?oid='+o.oid">{{o.oid}}</a></td>
               <td>{{o.usid}}</td>
               <td>{{o.name}}</td>
               <td>{{o.price | currency }} 원</td>
@@ -62,79 +62,83 @@ td {
 	<!------------- 페이징 ------------->
     <div class="text-center">
 	  <ul class="pagination">
-		<li class="page-item" v-bind:class="{'disabled':startPage==1}">
-		  <button class="page-link" :value="startPage-1" v-on:click="prev($event)"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
+		<li class="page-item" :class="{'disabled':startPage==1}">
+		  <button class="page-link" :value="startPage-1" @click="getpage($event)"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
 		</li>
-		<li class="page-item" v-for="i in pages" v-bind:class="{'active':i==curpage}">
-		  <button class="page-link" :value="i" v-on:click="getpage($event)">{{i}}</button>
+		<li class="page-item" v-for="i in pages" :class="{'active':i==curpage}">
+		  <button class="page-link" :value="i" @click="getpage($event)">{{i}}</button>
 		</li>
-		<li class="page-item" v-bind:class="{'disabled':endPage==totalpage}">
-		  <button class="page-link" :value="endPage+1" v-on:click="next($event)"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+		<li class="page-item" :class="{'disabled':endPage==totalpage}">
+		  <button class="page-link" :value="endPage+1" @click="getpage($event)"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
 		</li>
 	  </ul>
 	</div>
-     
+    <!-- ----- 팝업 ----- -->
+    <div class="modal fade" id="iframeModal" tabindex="-1" role="dialog" aria-labelledby="iframeModalLable" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <div>
+              <iframe height="600px" width="100%" :src="iframe"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+  
   <script>
-  new Vue({
-      el:'#adorder',
-      data:{
-          oid:'${oid }',
-          orderFullList: [],
-          //order: [], 			
-          curpage : 1,
-		  totalpage : 0,
-		  startPage : 0,
-		  endPage : 0,
-		  pages : [],
-		  count : 0
-      },
-      filters:{
-			currency: function(value){
-				var num = new Number(value);
-				return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,")
-			}
-		},
-      mounted:function(){
-          this.oList();
-          //console.log(this.oid);
-      },
-      methods:{
-          oList:function(){
-              axios.get("http://localhost:8080/web/admin/orderlist_vue.do",{
-                  params:{
-                	  page: this.curpage
-                  }
-              }).then(res=>{
-				this.orderFullList = res.data;
-				console.log(res.data);
-				//console.log("DATE : " + res.data[0].regdate)
-				this.curpage=res.data[0].curpage;
-                this.totalpage=res.data[0].totalpage;
-                this.startPage = res.data[0].startPage;
-				this.endPage = res.data[0].endPage;
-				this.count = res.data[0].count;
-                this.pages=[];
-                
-                for(i = this.startPage; i <= this.endPage; i++) {
-                    this.pages.push(i);
-                }
-              })
-          },
-          prev:function(event){
-  			  this.curpage = event.currentTarget.getAttribute('value');
-  			  this.oList();
-	      },
-  		  next:function(event){
-  			  this.curpage = event.currentTarget.getAttribute('value');
-  			  this.oList();
-  		  },
-  		  getpage : function(event){
-  			  this.curpage = event.currentTarget.getAttribute('value');
-  			  this.oList();
-  		  }
-      }
-  })
+    new Vue({
+        el:'#adorder',
+        data:{
+            oid:'${oid }',
+            orderFullList: [],
+            //order: [], 			
+            curpage : 1,
+  		    totalpage : 0,
+  		    startPage : 0,
+  		    endPage : 0,
+  		    pages : [],
+  		    count : 0,
+  		    iframe:''
+        },
+        filters:{
+  			currency: function(value){
+  				var num = new Number(value);
+  				return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,")
+  			}
+  		},
+        mounted:function(){
+            this.oList();
+            //console.log(this.oid);
+        },
+        methods:{
+            oList:function(){
+                axios.get("http://localhost:8080/web/admin/orderlist_vue.do",{
+                    params:{
+                  	  page: this.curpage
+                    }
+                }).then(res=>{
+                    this.orderFullList = res.data;
+                    this.curpage = res.data[0].curpage;
+                    this.totalpage = res.data[0].totalpage;
+                    this.startPage = res.data[0].startPage;
+                    this.endPage = res.data[0].endPage;
+                    this.count = res.data[0].count;
+                  
+                    this.pages=[];
+                    for(i = this.startPage; i <= this.endPage; i++) {
+                        this.pages.push(i);
+                    }
+                })
+            },
+    		getpage : function(event){
+    			this.curpage = event.currentTarget.value;
+    			this.oList();
+    		}
+        }
+    })
   </script>
 </body>
 </html>

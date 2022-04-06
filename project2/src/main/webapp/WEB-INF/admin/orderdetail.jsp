@@ -15,7 +15,7 @@ td {
 </style>
 </head>
 <body>
-  <div class="container bg0 p-t-70 p-b-10" id="adorderdetail">
+  <div class="container bg0" id="adorderdetail">
     <div class="row" id="orderpage">
       <div class="col-lg-12 m-lr-auto">
         <div class="p-b-20">
