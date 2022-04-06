@@ -28,13 +28,13 @@
 									<span class="stext-110 cl2"> 카테고리 </span>
 								</div>
 								<div class="size-209">
-                                    <select  v-model="cid1" id="select1" v-model="selectedCate">
-                                      <option v-for="cate in categories1" :value="cate.cid">{{cate.title}}</option>
-                                    </select>
-                                    &nbsp;&nbsp;
-                                    <select id="good" v-model="cid2">
-                                      <option v-for="cate2 in categories2" v-if="cate2.cid.indexOf(cid1) > -1" :value="cate2.cid">{{cate2.title}}</option>
-                                    </select>
+									<select v-model="cid1" id="select1" v-model="selectedCate">
+										<option v-for="cate in categories1" :value="cate.cid">{{cate.title}}</option>
+									</select>
+									&nbsp;&nbsp;
+									<select id="good" v-model="cid2">
+										<option v-for="cate2 in categories2" v-if="cate2.cid.indexOf(cid1) > -1" :value="cate2.cid">{{cate2.title}}</option>
+									</select>
 								</div>
 							</div>
 
@@ -43,7 +43,7 @@
 									<span class="stext-110 cl2"> 상품명 </span>
 								</div>
 								<div class="size-209">
-									<input id="gname" type=text size=65 class="input-sm bor15"  v-model="gname">
+									<input id="gname" type=text size=65 class="input-sm bor15" v-model="gname">
 									<!-- <span class="mtext-110 cl2"> $10 </span> -->
 								</div>
 							</div>
@@ -53,7 +53,7 @@
 									<span class="stext-110 cl2"> 브랜드 </span>
 								</div>
 								<div class="size-209">
-									<input id="gbrand" type=text size=65 class="input-sm bor15"  v-model="gbrand">
+									<input id="gbrand" type=text size=65 class="input-sm bor15" v-model="gbrand">
 									<!-- <span class="mtext-110 cl2"> $10 </span> -->
 								</div>
 							</div>
@@ -63,7 +63,7 @@
 									<span class="stext-110 cl2"> 가격 </span>
 								</div>
 								<div class="size-209">
-									<input id="gprice" type=text size=65 class="input-sm bor15"  v-model="gprice">
+									<input id="gprice" type=text size=65 class="input-sm bor15" v-model="gprice">
 									<!-- <span class="mtext-110 cl2"> $10 </span> -->
 								</div>
 							</div>
@@ -107,7 +107,7 @@
 									<span class="stext-110 cl2"> 대표이미지 첨부 </span>
 								</div>
 								<div class="size-209">
-									<input id="gimage" type=text size=65 class="input-sm bor15"  v-model="gimage">
+									<input id="gimage" type=text size=65 class="input-sm bor15" v-model="gimage">
 									<!-- <span class="mtext-110 cl2"> $89.65 </span> -->
 								</div>
 							</div>
@@ -156,96 +156,94 @@
 
 	<script>
 	new Vue({
-		el: '#GoodsAdd',
-		data:{
-		    cid1: '',
-            cid2: '',
-			gname:'',
-			gbrand:'',
-			gprice:'',
-			gsale:'',
-			gdetail:'',
-			gstock:'',
-			gstatus:'',
-			gimage:'',
-			eid:[],
-			categories1: [],
-            categories2: [],
-            
-		},
-		mounted:function(){
-		    this.cate1();
-            this.cate2();
-		},
-		methods:{
-            cate1:function(){
-                axios.get("http://localhost:8080/web/goods/category_1_vue.do",{
-                }).then(result=>{
-                    this.categories1=result.data;
-                    this.cid1=result.data[0].cid
-                })
-            },
-            cate2:function(){
-                axios.get("http://localhost:8080/web/goods/category_2_vue.do",{
-                }).then(result=>{
-                    this.categories2=result.data;
-                    this.cid2=result.data[0].cid
-                })
-            },
-			submit : function() {
+	    el: '#GoodsAdd',
+	    data: {
+	        cid1: '',
+	        cid2: '',
+	        gname: '',
+	        gbrand: '',
+	        gprice: '',
+	        gsale: '',
+	        gdetail: '',
+	        gstock: '',
+	        gstatus: '',
+	        gimage: '',
+	        eid: [],
+	        categories1: [],
+	        categories2: [],
+
+	    },
+	    mounted: function() {
+	        this.cate1();
+	        this.cate2();
+	    },
+	    methods: {
+	        cate1: function() {
+	            axios.get("http://localhost:8080/web/goods/category_1_vue.do", {}).then(result => {
+	                this.categories1 = result.data;
+	                this.cid1 = result.data[0].cid
+	            })
+	        },
+	        cate2: function() {
+	            axios.get("http://localhost:8080/web/goods/category_2_vue.do", {}).then(result => {
+	                this.categories2 = result.data;
+	                this.cid2 = result.data[0].cid
+	            })
+	        },
+	        submit: function() {
 	            if (this.gname == "") {
 	                $('#gname').focus();
 	                return;
-	            }else if (this.gbrand == "") {
+	            } else if (this.gbrand == "") {
 	                $('#gbrand').focus();
 	                return;
-	            }else if (this.gprice == "") {
+	            } else if (this.gprice == "") {
 	                $('#gprice').focus();
 	                return;
-	            }else if (this.gsale == "") {
+	            } else if (this.gsale == "") {
 	                $('#gsale').focus();
 	                return;
-	            }else if (this.gstock == "") {
+	            } else if (this.gstock == "") {
 	                $('#gstock').focus();
 	                return;
-	            }else if (this.gimage == "") {
+	            } else if (this.gimage == "") {
 	                $('#giamge').focus();
 	                return;
-	            }else if (!$('#gstatus>option:selected').val()) {
+	            } else if (!$('#gstatus>option:selected').val()) {
 	                alert("상태 확인 필요");
 	                return;
 	            }
-				
-				console.log("======= vue ========")
-				console.log("cid1 : " + this.cid1);
-				console.log("cid2 : " + this.cid2);
-				console.log("name : " + this.gname)
-				console.log("brand : " + this.brand);
-				console.log("price : " + this.price);
-				console.log("gsale : " + this.gsale);
-				console.log("gdetail : " + this.gdetail);
-				console.log("gstock: " + this.gstock);
-				console.log("gstatus : " +  this.gstatus);
-				console.log("gimage : " + this.gimage);
-				console.log("eid : " + this.eid);
-				
-				let map = {
-                    c_id : this.cid2,
-                    g_name : this.gname,
-                    g_brand : this.gbrand,
-                    g_price : this.gprice,
-                    g_sale : this.gsale,
-                    g_detail : this.gdetail,
-                    g_stock : this.gstock,
-                    g_status : this.gstatus,
-                    g_image : this.gimage,
-                    eid : this.eid.join(",")
-                };
-				axios.post("http://localhost:8080/web/admin/goods_add_ok.do",map);
 
-                //location.href='../admin/adlist.do';*/
-			} 
-		}
+	            console.log("======= vue ========")
+	            console.log("cid1 : " + this.cid1);
+	            console.log("cid2 : " + this.cid2);
+	            console.log("name : " + this.gname)
+	            console.log("brand : " + this.gbrand);
+	            console.log("price : " + this.gprice);
+	            console.log("gsale : " + this.gsale);
+	            console.log("gdetail : " + this.gdetail);
+	            console.log("gstock: " + this.gstock);
+	            console.log("gstatus : " + this.gstatus);
+	            console.log("gimage : " + this.gimage);
+	            console.log("eid : " + this.eid);
+
+	            let map = {
+	                c_id: this.cid2,
+	                g_name: this.gname,
+	                g_brand: this.gbrand,
+	                g_price: this.gprice,
+	                g_sale: this.gsale,
+	                g_detail: this.gdetail,
+	                g_stock: this.gstock,
+	                g_status: this.gstatus,
+	                g_image: this.gimage,
+	                eid: this.eid.join(",")
+	            };
+	            axios.post("http://localhost:8080/web/admin/goods_add_ok.do", map).then(res => {
+	                location.href = '../admin/adlist.do';
+	            })
+	        }
+	    }
 	})
 	
 	</script>
