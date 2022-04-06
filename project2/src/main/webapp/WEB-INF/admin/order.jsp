@@ -15,7 +15,6 @@ td {
 </style>
 </head>
 <body>
-  <!-- 테이블이 필요하실땐 cart나 checkout쪽에서 사용한 테이블 사용하시면 편할거에요 -->
   <div class="container bg0 p-t-70 p-b-10" id="adorder">
     <div class="row" id="orderpage">
       <div class="col-lg-12 m-lr-auto">
@@ -38,7 +37,6 @@ td {
       </div>
       <div class="col-lg-12 m-lr-auto m-b-50">
         <div class="wrap-table js-pscroll">
-
           <table class="table-checkout">
             <tr class="table_head font-center">
               <th>주문일시</th>
@@ -48,69 +46,42 @@ td {
               <th>주문금액</th>
               <th>주문상태</th>
             </tr>
-            <tr v-for="o in order" class="table_row fs-13 font-center">
-              <td>{{o.regdate }}</td>
-              <td>{{o.oid }}</td>
-              <td>{{o.uid }}</td>
-                <template v-for="od in orderListDetail">
-                  <template v-if="o.oid == od.oid">
-                	  <td>{{od.name}}</td>
-                	  <td>{{od.price | currency }} 원</td>
-                  </template>
-                </template>
-              <td>{{o.state }}</td>
+            <tr v-for="o in orderFullList" class="table_row fs-13 font-center">
+              <td>{{o.regdate}}</td>
+              <td>{{o.oid}}</td>
+              <td>{{o.usid}}</td>
+              <td>{{o.name}}</td>
+              <td>{{o.price | currency }} 원</td>
+              <td>{{o.state}}</td>
              </tr>
           </table>
         </div>
       </div>
     </div>
     
+	<!------------- 페이징 ------------->
     <div class="text-center">
 	  <ul class="pagination">
 		<li class="page-item" v-bind:class="{'disabled':startPage==1}">
-		  <button class="page-link" :value="startPage-1" v-on:click="prev($event)">
-		   <i class="fa fa-chevron-left" aria-hidden="true"></i>
-		  </button>
+		  <button class="page-link" :value="startPage-1" v-on:click="prev($event)"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
 		</li>
 		<li class="page-item" v-for="i in pages" v-bind:class="{'active':i==curpage}">
 		  <button class="page-link" :value="i" v-on:click="getpage($event)">{{i}}</button>
 		</li>
 		<li class="page-item" v-bind:class="{'disabled':endPage==totalpage}">
-		  <button class="page-link" :value="endPage+1" v-on:click="next($event)">
-		    <i class="fa fa-chevron-right" aria-hidden="true"></i>
-		  </button>
+		  <button class="page-link" :value="endPage+1" v-on:click="next($event)"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
 		</li>
 	  </ul>
 	</div>
      
-<%--       <div>
-      <ul class="pagination">
-        <c:if test="${startPage > 1 }">
-          <li class="page-item"><a class="page-link" href="adlist.do?page=${startPage-1 }">&lt;</a></li>
-        </c:if>
-        <c:forEach var="i" begin="${startPage }" end="${endPage }">
-          <c:if test="${curpage==i }">
-            <c:set var="style" value="active" />
-          </c:if>
-          <c:if test="${curpage != i }">
-            <c:set var="style" value="" />
-          </c:if>
-          <li class="page-item ${style }"><a class="page-link" href="salelist.do?page=${i }">${i }</a></li>
-        </c:forEach>
-        <c:if test="${endPage < totalpage }">
-          <li class="page-item"><a class="page-link" href="salelist.do?page=${endPage+1 }">&gt;</a></li>
-        </c:if>
-      </ul>
-    </div>  --%>
-    
   </div>
   <script>
   new Vue({
       el:'#adorder',
       data:{
           oid:'${oid }',
-          orderListDetail:[],
-          order: [], 			
+          orderFullList: [],
+          //order: [], 			
           curpage : 1,
 		  totalpage : 0,
 		  startPage : 0,
@@ -125,35 +96,43 @@ td {
 			}
 		},
       mounted:function(){
-          this.odList();
           this.oList();
-          console.log(this.oid);
+          //console.log(this.oid);
       },
       methods:{
-          odList:function(){
-              axios.get("http://localhost:8080/web/admin/orderlistdetail_vue.do",{
-              }).then(res=>{
-				console.log(res.data);
-				this.orderListDetail = res.data;
-              })
-          },
           oList:function(){
               axios.get("http://localhost:8080/web/admin/orderlist_vue.do",{
                   params:{
-                      page: this.curpage
+                	  page: this.curpage
                   }
               }).then(res=>{
-				this.order = res.data;
+				this.orderFullList = res.data;
 				console.log(res.data);
-				console.log("DATE : " + res.data[0].regdate)
+				//console.log("DATE : " + res.data[0].regdate)
 				this.curpage=res.data[0].curpage;
                 this.totalpage=res.data[0].totalpage;
-                this.start=res.data[0].start;
-                this.end=res.data[0].end;
-                this.count = res.data[0].count;
+                this.startPage = res.data[0].startPage;
+				this.endPage = res.data[0].endPage;
+				this.count = res.data[0].count;
                 this.pages=[];
+                
+                for(i = this.startPage; i <= this.endPage; i++) {
+                    this.pages.push(i);
+                }
               })
-          }
+          },
+          prev:function(event){
+  			  this.curpage = event.currentTarget.getAttribute('value');
+  			  this.oList();
+	      },
+  		  next:function(event){
+  			  this.curpage = event.currentTarget.getAttribute('value');
+  			  this.oList();
+  		  },
+  		  getpage : function(event){
+  			  this.curpage = event.currentTarget.getAttribute('value');
+  			  this.oList();
+  		  }
       }
   })
   </script>

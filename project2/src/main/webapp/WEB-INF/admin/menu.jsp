@@ -18,7 +18,13 @@
         상품관리
       </a>
     </li>
-
+    
+    <li class="bor18">
+      <a href="../admin/goods_add.do" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-14 p-lr-4">
+        상품등록
+      </a>
+    </li>
+    
     <li class="bor18">
       <a href="../admin/orderlist.do" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-14 p-lr-4">
         판매관리
@@ -26,20 +32,14 @@
     </li>
 
     <li class="bor18">
-      <a href="../admin/goods_add.do" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-14 p-lr-4">
-        상품등록
-      </a>
-    </li>
-
-    <li class="bor18">
       <a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-14 p-lr-4">
-        Life Style
+        문의관리
       </a>
     </li>
 
     <li class="bor18">
       <a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-        DIY & Crafts
+        유저관리
       </a>
     </li>
   </ul>

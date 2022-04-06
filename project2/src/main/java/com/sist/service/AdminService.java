@@ -16,4 +16,5 @@ public interface AdminService {
 	public List<OrderDetailVO> orderListDetail();
 	List<OrderDetailVO> orderDetail(String oid);
 	List<String> nameData(String oid);
+	public List<Map<String,Object>> orderFullList(Map map);
 }

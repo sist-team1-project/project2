@@ -55,4 +55,10 @@ public class AdminServiceImpl implements AdminService {
 	public List<OrderDetailVO> orderListDetail() {
 		return oddao.orderListDetail();
 	}
+
+
+	@Override
+	public List<Map<String, Object>> orderFullList(Map map) {
+		return odao.orderFullList(map);
+	}
 }

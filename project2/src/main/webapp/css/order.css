@@ -1,5 +1,10 @@
 @charset "UTF-8";
-
+.shortsp {
+	display:block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
 .adtable {
 	background-color: #dbd0be;
 	color: black;
@@ -17,8 +22,4 @@
 	text-align: right;
 }
 
-.shortsp {
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-}
+

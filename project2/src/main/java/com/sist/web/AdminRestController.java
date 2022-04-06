@@ -2,6 +2,7 @@ package com.sist.web;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.ui.Model;
@@ -26,33 +27,25 @@ public class AdminRestController {
 	private OrderDetailDAO oddao;
 	
 	@GetMapping(value = "admin/orderlist_vue.do", produces = "text/plain;charset=utf-8")
-	public String orderlist(String page) {
+	public String orderFull(String page) {
 		if (page == null) {
 			page = "1";
 		}
 		int curpage = Integer.parseInt(page);
-
 		Map map = new HashMap();
-
+		
+        List<OrderVO> olist = service.orderList(map);
+		JSONArray arr = new JSONArray();
+		
 		int rowSize = 10;
 		int start = (curpage * rowSize) - (rowSize - 1);
 		int end = (rowSize * curpage);
-
+		
 		map.put("start", start);
 		map.put("end", end);
-
-		List<OrderVO> list = odao.orderList(map);
+		
 		int totalpage = odao.orderTotalPage();
-
-		JSONArray arr = new JSONArray();
-		int i = 0;
-
 		int count = odao.orderCount();
-
-		System.out.println(start);
-		System.out.println(end);
-		System.out.println("토탈페이지 : " + totalpage);
-		System.out.println("카운트 : " + count);
 
 		final int BLOCK = 10;
 		int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
@@ -60,48 +53,27 @@ public class AdminRestController {
 		if (endPage > totalpage) {
 			endPage = totalpage;
 		}
-
-		for (OrderVO vo : list) {
+		
+		List<Map<String, Object>> list = odao.orderFullList(map);
+		
+		for (int i = 0; i < list.size(); i++) {
 			JSONObject obj = new JSONObject();
-			obj.put("oid", vo.getO_id());
-			obj.put("uid", vo.getU_id());
-			obj.put("regdate", vo.getO_regdate());
-			obj.put("state", vo.getO_state());
+			obj.put("oid", list.get(i).get("OID").toString());
+			obj.put("regdate", list.get(i).get("REGDATE").toString());
+			obj.put("shipping", list.get(i).get("SHIPPING").toString());
+			obj.put("state", list.get(i).get("STATE").toString());
+			obj.put("usid", list.get(i).get("USID").toString());
+			obj.put("name", list.get(i).get("NAME").toString());
+			obj.put("price", list.get(i).get("PRICE").toString());
+			obj.put("quantity", list.get(i).get("QUANTITY").toString());
 			obj.put("startPage", startPage);
 			obj.put("endPage", endPage);
 
-			if (i == 0) {
-				obj.put("curpage", curpage);
-				obj.put("totalpage", totalpage);
-				obj.put("count", count);
-			}
-			arr.add(obj);
-			i++;
-		}
-		return arr.toJSONString();
-	}
-	
-	@GetMapping(value = "admin/orderlistdetail_vue.do", produces = "text/plain;charset=utf-8")
-	public String orderlistdetail_vue() {
-		JSONArray arr = new JSONArray();
-		
-		List<OrderDetailVO> list = oddao.orderListDetail();
-		for (OrderDetailVO vo : list) {
-			JSONObject obj = new JSONObject();
-			obj.put("odid", vo.getOd_id());
-			obj.put("oid", vo.getO_id());
-			obj.put("gid", vo.getG_id());
-			obj.put("name",vo.getG_name());
-			obj.put("price", vo.getG_price());
-			obj.put("sale", vo.getG_sale());
-			obj.put("quantity", vo.getG_quantity());
-			
 			arr.add(obj);
 		}
 		return arr.toJSONString();
 	}
-	
-	
+
 	/**************** 주문상세페이지 ********************/
 	@GetMapping(value = "admin/orderdetail.do", produces = "text/plain;charset=utf-8")
 	public String orderdetail_vue(String oid) {
