@@ -39,7 +39,7 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-body">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="location.href='../user/login.do'">&times;</button>
           <div>
             <iframe width="100%" height="200" src="../user/idfind.do"></iframe>
           </div>
