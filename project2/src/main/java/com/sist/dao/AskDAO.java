@@ -51,33 +51,15 @@ public class AskDAO {
 		return mapper.askDetailData(no);
 	}
 
-	public boolean askUpdate(AskVO vo) {
-		boolean bCheck = false;
-		String db_pwd = mapper.askGetPassword(vo.getA_id());
-		if (db_pwd.equals(vo.getA_pwd())) {
-			bCheck = true;
+	public void askUpdate(AskVO vo) {
 			mapper.askUpdate(vo);
-		}
-		return bCheck;
 	}
 
-	public boolean askDelete1(int no, int group_id, String pwd) {
-		boolean bCheck = false;
-		String db_pwd = mapper.askGetPassword(no);
-		if (db_pwd.equals(pwd)) {
-			bCheck = true;
+	public void askDelete1(int no, int group_id) {
 			mapper.askDelete1(group_id);
-		}
-		return bCheck;
 	}
 
-	public boolean askDelete2(int no, String pwd) {
-		boolean bCheck = false;
-		String db_pwd = mapper.askGetPassword(no);
-		if (db_pwd.equals(pwd)) {
-			bCheck = true;
+	public void askDelete2(int no) {
 			mapper.askDelete2(no);
-		}
-		return bCheck;
 	}
 }

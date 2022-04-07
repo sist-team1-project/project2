@@ -41,7 +41,7 @@
     				p.focus();
     				return;
     			}
-    			axios.get('http://localhost:8080/web/notice/delete_ok.do',{
+    			axios.get('http://localhost:8080/web/support/notice_delete_ok.do',{
     				params:{
     					no:this.no,
     					pwd:this.pwd

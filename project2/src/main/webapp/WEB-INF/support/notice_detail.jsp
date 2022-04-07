@@ -11,7 +11,7 @@
 <script src="http://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
-	<div class="container bg0" id="notice_list">
+	<div class="container bg0" id="notice_detail">
 		<h3 class="text-center" style="padding-bottom: 20px">공지사항</h3>
 		<div class="row">
 			<div class="col-lg-12 m-lr-auto m-b-50">
@@ -55,13 +55,13 @@
 	</div>
 	<script>
    new Vue({
-	   	el:'#notice_list',
+	   	el:'#notice_detail',
 	   	data:{
 	   		vo:{},
 	   		no:${no}
 	   	},
 	   	mounted:function(){
-	   		axios.get('http://localhost:8080/web/notice/detail_vue.do',{
+	   		axios.get('http://localhost:8080/web/support/notice_detail_vue.do',{
 	   			params:{
 	   				no:this.no
 	   			}
@@ -73,13 +73,13 @@
 	   	
 		methods:{
 	   		list:function(){
-	   			location.href="list.do"
+	   			location.href="notice.do"
 	   		},
 	   		update:function(){
-	   			location.href="update.do?no="+this.no
+	   			location.href="notice_update.do?no="+this.no
 	   		},
 	   		del:function(){
-	   			location.href="delete.do?no="+this.no;
+	   			location.href="notice_delete.do?no="+this.no;
 	   		}
 	   	}
 	   }) 

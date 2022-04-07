@@ -13,16 +13,10 @@
 		<div class="row">
       <table class="table">
         <tr>
-         <th class="text-center" width=20%>번호</th>
-         <td class="text-center" width=30%>${vo.a_id }</td>
+         <th class="text-center" width=20%>문의유형</th>
+         <td class="text-center" width=30%>${vo.a_type }</td>
          <th class="text-center" width=20%>작성일</th>
          <td class="text-center" width=30%>${vo.a_regdate }</td>
-        </tr>
-        <tr>
-         <th class="text-center" width=20%>이름</th>
-         <td class="text-center" width=30%>${vo.u_id }</td>
-         <th class="text-center" width=20%>조회수</th>
-         <td class="text-center" width=30%>${vo.a_visits }</td>
         </tr>
         <tr>
          <th class="text-center" width=20%>제목</th>
@@ -42,7 +36,7 @@
             <a href="../ask/update.do?no=${vo.a_id }" class="btn btn-xs" style="background-color: #eeeee6">수정</a>
             <a href="../ask/delete.do?no=${vo.a_id }" class="btn btn-xs" style="background-color: #eeeee6">삭제</a>
             </c:if>
-            <a href="list.do" class="btn btn-xs" style="background-color: #dbd0be">목록</a>
+            <a href="ask.do" class="btn btn-xs" style="background-color: #dbd0be">목록</a>
           </td>
         </tr>
       </table>

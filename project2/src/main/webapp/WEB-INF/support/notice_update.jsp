@@ -54,7 +54,7 @@
     		vo:{}
     	},
     	mounted:function(){
-    		axios.get('http://localhost:8080/web/notice/update_vue.do',{
+    		axios.get('http://localhost:8080/web/support/notice_update_vue.do',{
     			params:{
     				no:this.no
     			}
@@ -94,7 +94,7 @@
     			} 
     			
     			// 전송 서버 
-    			axios.get('http://localhost:8080/web/notice/update_ok_vue.do',{
+    			axios.get('http://localhost:8080/web/support/notice_update_ok_vue.do',{
     				params:{
     					no:this.no,
     					name:this.name,
@@ -105,7 +105,7 @@
     			}).then(res=>{
     				if(res.data=="YES")
     				{
-    					location.href="detail.do?no="+this.no
+    					location.href="notice_detail.do?no="+this.no
         				// return "redirect:board_detail.do?no="+no
     				}
     				else

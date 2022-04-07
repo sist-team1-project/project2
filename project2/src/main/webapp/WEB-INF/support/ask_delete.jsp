@@ -10,7 +10,7 @@
 	<div class="container bg0">
 		<h3 class="text-left" style="padding-bottom: 20px">삭제하기</h3>
 		<div class="row">
-			<form method=post action="../ask/delete_ok.do">
+			<form method=post action="../support/ask_delete_ok.do">
 				<table class="table">
 					<tr>
 						<td class="text-center">비밀번호:<input type=password name=pwd

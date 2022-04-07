@@ -10,7 +10,7 @@
 	<div class="container bg0">
 		<h3 class="text-left" style="padding-bottom: 20px">수정하기</h3>
 		<div class="row">
-      <form method=post action="../ask/update_ok.do">
+      <form method=post action="../support/ask_update_ok.do">
       <table class="table">
         <tr>
           <th width=15% class="text-right">이름</th>

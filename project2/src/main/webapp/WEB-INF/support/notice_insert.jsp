@@ -65,14 +65,14 @@
     				return;
     			} 
     			
-    			axios.get('http://localhost:8080/web/notice/insert_ok.do',{
+    			axios.get('http://localhost:8080/web/support/notice_insert_ok.do',{
     				params:{
     					subject:this.subject,
     					content:this.content,
     					pwd:this.pwd
     				}
     			}).then(res=>{
-    				location.href="list.do"
+    				location.href="notice.do"
     				
     			})
     		},

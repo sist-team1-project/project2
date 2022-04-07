@@ -11,7 +11,7 @@
 <script src="http://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
-	<div class="container bg0" id="notice_list">
+	<div class="container bg0" id="notice">
 		<h3 class="text-left" style="padding-bottom: 20px">공지사항</h3>
 		<div class="row">
 			<div class="col-lg-12 m-lr-auto m-b-50">
@@ -27,7 +27,7 @@
 
 					<tr class="table_row"  v-for="vo in notice_list">
 						<th width=10% class="text-center">{{vo.nid}}</th>
-						<td width=50%><a :href="'detail.do?no=' + vo.nid">{{vo.ntitle}}</a></td>
+						<td width=50%><a :href="'notice_detail.do?no=' + vo.nid">{{vo.ntitle}}</a></td>
 						<td width=10% class="text-center">{{vo.uid}}</td>
 						<td width=20% class="text-center">{{vo.nregdate}}</td>
 						<td width=10% class="text-center">{{vo.nvisits}}</td>
@@ -48,7 +48,7 @@
 	</div>
 	<script>
     new Vue({
-    	el:'#notice_list',
+    	el:'#notice',
     	data:{
     		notice_list:[],
     		curpage:1,
@@ -60,7 +60,7 @@
     	},
     	methods:{
     		dataSend:function(){
-    			axios.get("http://localhost:8080/web/notice/list_vue.do",{
+    			axios.get("http://localhost:8080/web/support/notice_vue.do",{
         			params:{
         				page:this.curpage
         			}
@@ -80,7 +80,7 @@
     			this.dataSend();
     		},
     		insert:function(){
-    			location.href="insert.do";
+    			location.href="notice_insert.do";
     		}
     	}
     })
