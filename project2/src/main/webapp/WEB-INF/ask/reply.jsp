@@ -37,15 +37,12 @@
             <input type=password name=a_pwd size=10 class="input-sm">
           </td>
         </tr>
-        <tr>
-          <td colspan="2" class="text-center">
-            <input type=submit value="답변" class="btn btn-sm">
-            <input type=button value="취소" class="btn btn-sm"
-             onclick="javasecript:history.back()"
-            >
-          </td>
-        </tr>
       </table>
+          <div colspan="2" class="text-right">
+            <input type=submit value="답변" class="btn btn-sm" style="background-color: #eeeee6">
+            <input type=button value="취소" class="btn btn-sm" style="background-color: #dbd0be"
+             onclick="javasecript:history.back()">
+          </div>
       </form>
     </div>
  </div>

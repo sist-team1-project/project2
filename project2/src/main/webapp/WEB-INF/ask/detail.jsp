@@ -36,11 +36,11 @@
         <tr>
           <td colspan="4" class="text-right">
             <c:if test="${count!=1 }">
-              <a href="../ask/reply.do?no=${vo.a_id }" class="btn btn-xs">답변</a>
+              <a href="../ask/reply.do?no=${vo.a_id }" class="btn btn-xs" style="background-color: #eeeee6">답변</a>
             </c:if>
-            <a href="../ask/update.do?no=${vo.a_id }" class="btn btn-xs">수정</a>
-            <a href="../ask/delete.do?no=${vo.a_id }" class="btn btn-xs">삭제</a>
-            <a href="list.do" class="btn btn-xs">목록</a>
+            <a href="../ask/update.do?no=${vo.a_id }" class="btn btn-xs" style="background-color: #eeeee6">수정</a>
+            <a href="../ask/delete.do?no=${vo.a_id }" class="btn btn-xs" style="background-color: #eeeee6">삭제</a>
+            <a href="list.do" class="btn btn-xs" style="background-color: #dbd0be">목록</a>
           </td>
         </tr>
       </table>

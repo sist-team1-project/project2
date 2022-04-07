@@ -17,7 +17,6 @@
          <th width=15% class="text-right warning">이름</th>
          <td width=85%><input type=text id="name" size=15 
          v-model="name" :value="name"></td>
-         <%-- value="${name}" --%>
         </tr>
         <tr>
          <th width=15% class="text-right warning">제목</th>
