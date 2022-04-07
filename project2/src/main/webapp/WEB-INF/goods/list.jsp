@@ -56,13 +56,13 @@
               
               <div class="block2-txt-child1 flex-col-l short">
                 <a :href="'../goods/detail.do?gid=' + vo.gid" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">{{vo.name}}</a>
-                <div class="cl4">₩{{vo.price | makeComma}}</div>
+                <div class="cl4">₩{{vo.price | currency}}</div>
               </div>
 
-              <div class="block2-txt-child2 flex-r p-t-3">
-                <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                  <img class="icon-heart1 dis-block trans-04" src="../images/icons/icon-heart-01.png">
-                  <img class="icon-heart2 dis-block trans-04 ab-t-l" src="../images/icons/icon-heart-02.png">
+              <div class="block2-txt-child2 flex-r">
+                <a href="#" class="btn-addwish-b2 dis-block pos-relative">
+                  <img class="icon-heart1 trans-04" src="../images/icons/icon-heart-01.png" @click="likeInsert(vo.gid)">
+                  <img class="icon-heart2 trans-04 dis-none" src="../images/icons/icon-heart-02.png">
                 </a>
               </div>
             </div>
@@ -82,9 +82,6 @@
   </div>
   <script>
     /* 제품 출력용 Vue 필터 */
-    Vue.filter("makeComma", val =>{
-        return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    })
     new Vue({
         el:'#listpage',
         data:{
@@ -102,6 +99,12 @@
             start:1,
             end:1,
             pages:[]
+        },
+        filters:{
+            currency: function(value){
+                var num = new Number(value);
+                return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,")
+            }
         },
         mounted:function(){
             
@@ -197,6 +200,15 @@
             /* 브랜드 전체 체크 해제 버튼 */
             brandCheck:function() {
                 this.checkAll = false;
+            },
+            likeInsert:function(gid) {
+                axios.post("http://localhost:8080/web/goods/like_insert_ok.do",null,{
+                    params:{
+                        gid: gid
+                    }
+                }).then(result=>{
+                    
+                })
             }
         }
     })
