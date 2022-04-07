@@ -24,26 +24,19 @@
                 <th class="column-7">할인가격</th>
               </tr>
 
-              <tr class="table_row">
+              <tr class v-for="cart in cartList" class="table_row">
                 <td class="column-1"><input type="checkbox"></td>
-                <td class="column-2"><div class="how-itemcart1"><img src="../images/item-cart-04.jpg" ></div></td>
-                <td class="column-3">Fresh Strawberries</td>
-                <td class="column-4">
-                  <div class="wrap-num-product flex-w m-l-auto m-r-0">
-                    <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m"><i class="fs-16 zmdi zmdi-minus"></i></div>
-                    <input class="mtext-104 cl3 text-center num-product" type="number" name="num-product1" value="1">
-                    <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m"><i class="fs-16 zmdi zmdi-plus"></i></div>
-                  </div>
-                </td>
-                <td class="column-5">{{goods.price }}</td>
-                <td class="column-6">10 %</td>
-                <td class="column-7">$ 36.00</td>
+                <td class="column-2"><div class="how-itemcart1"><img :src="cart.Gimage" ></div></td>
+                <td class="column-3">{{cart.Gname }}</td>
+                <td class="column-4">{{cart.Gquantity }}</td>
+                <td class="column-5">{{cart.Gprice }}</td>
+                <td class="column-6">{{cart.Gsale }}%</td>
+                <td class="column-7">{{cart.Gprice * cart.Gsale }}</td>
               </tr>
               
             </table>
           </div>
         </div>
-
         <div class="col-sm-12 col-lg-6 m-lr-auto m-b-50">
           <div class="bor10 p-lr-40 p-t-30 p-b-40 p-lr-15-sm">
             <h4 class="mtext-109 cl2 p-b-30">Cart Totals</h4>
@@ -71,7 +64,38 @@
   </form>
  </div>
   <script>
-
+  new Vue({
+	  el:'#cart',
+	  data:{
+		  cart:0,
+		  cartList: [],
+		  total: 0
+	  },
+	  mounted:function(){
+		  this.cList();
+		  this.countCart();
+	  },
+	  methods:{
+          countCart:function(){
+              axios.get("http://localhost:8080/web/cart/Count_cart_vue.do",{
+                  params:{
+                  }
+              }).then(result=>{
+                  this.cart = result.data.Count;
+              })
+          },
+          cList:function(){
+              axios.get("http://localhost:8080/web/cart/Cart_list_vue.do",{
+                  params:{
+                  }
+              }).then(result=>{
+                  this.cartList = result.data;
+                  colsole.log(result.data);
+                  this.total = result.data[0].Sum;
+              })
+          }
+      }
+  })
   </script>
 </body>
 </html>
