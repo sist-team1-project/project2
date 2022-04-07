@@ -55,31 +55,19 @@ public class UserDAO {
 	}
 
 	// 유저정보 수정
-	public boolean userUpdate(UserVO vo)
-	{
-		boolean bCheck=false;
-		String db_pwd=mapper.userGetPassword(vo.getU_id());
-		if(db_pwd.equals(vo.getU_password()))
-		{
-			bCheck=true;
+	public boolean userUpdate(UserVO vo) {
+		boolean bCheck = false;
+		String db_pwd = mapper.userGetPassword(vo.getU_id());
+		if (db_pwd.equals(vo.getU_password())) {
+			bCheck = true;
 			mapper.userUpdate(vo);
 		}
 		return bCheck;
 	}
-	
+
 	public int idCheck(String id) {
 		int result = mapper.idCount(id);
 		return result;
 	}
 
 }
-
-
-
-
-
-
-
-
-
-

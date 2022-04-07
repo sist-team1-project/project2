@@ -25,7 +25,7 @@
     </li>
 
     <li class="bor18">
-      <a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-14 p-lr-4">
+      <a href="../mypage/update_pwd.do" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-14 p-lr-4">
         비밀번호 변경
       </a>
     </li>

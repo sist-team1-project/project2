@@ -65,13 +65,13 @@ public class UserRestController {
 
 	@GetMapping(value = "user/idcheck_ok.do", produces = "text/plain;charset=utf-8")
 	public String user_idcheck_ok(String id) {
-		String result="";
+		String result = "";
 		JSONObject obj = new JSONObject();
 		int idcheck = dao.idCheck(id);
 		if (idcheck == 0) {
-			result = id;	// 저장한 id를 jsp까지 가져가기
+			result = id; // 저장한 id를 jsp까지 가져가기
 		} else {
-			result = "no";					// 현재 얘는 출력됨
+			result = "no"; // 현재 얘는 출력됨
 		}
 		return result;
 	}
