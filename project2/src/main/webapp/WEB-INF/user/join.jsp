@@ -5,66 +5,68 @@
 <head>
   <meta charset="UTF-8">
   <title>Insert title here</title>
-  <link rel="stylesheet" type="text/css" href="../css/find.css">
+  <link rel="stylesheet" type="text/css" href="../css/join.css">
   <script type="text/javascript" src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
-  <div class="container p-t-150 p-b-80" id="user_join">
+  <div class="container p-t-100 p-b-60 flex-c-m" id="user_join">
     <div class="col-sm-5 bor10 p-lr-40 p-t-30 p-b-25 p-lr-15-sm">
+      <h4>회원가입</h4>
       <form @submit.prevent="submitForm">
         <div class="text-left"> 
-          <div class="p-b-10">
+          <div class="p-t-20 p-b-10">
             <div>아이디</div>
-            <input class="bor10 p-lr-5 p-tb-3" type="text" ref="id" v-model="id" @blur="idCheck">
-            {{idOk}}
+            <input class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" type="text" ref="id" v-model="id" @blur="idCheck">
+            <p class="fs-12 cl3">{{idOk}}</p>
           </div>
           
           <div class="p-tb-10">
             <div>이름</div>
-            <input class="bor10 p-lr-5 p-tb-3" type="text" ref="name" v-model="name">
+            <input class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" type="text" ref="name" v-model="name">
           </div>
           
           <div class="p-tb-10">
             <div>비밀번호 입력</div>
-            <input class="bor10 p-lr-5 p-tb-3" type="password" ref="password1" v-model="password1" @blur="pwdValidate" @click="password1=''; password2=''">
-            {{pwdOk}}
+            <input class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" type="password" ref="password1" v-model="password1" @blur="pwdValidate" @click="password1=''; password2=''">
+            <p class="fs-12 cl3">{{pwdOk}}</p>
           </div>
           
           <div class="p-tb-10">
             <div>비밀번호 확인</div>
-            <input class="bor10 p-lr-5 p-tb-3" type="password" ref="password2" v-model="password2" @blur="pwd2Validate" @click="password2=''">
-            {{pwdOk2}}
+            <input class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" type="password" ref="password2" v-model="password2" @blur="pwd2Validate" @click="password2=''">
+            <p class="fs-12 cl3">{{pwdOk2}}</p>
           </div>
         
           <div class="p-tb-10">
             <div>성별</div>
-            <input class="dis-inline-block" type="radio" value="남자" v-model="gender"> 남자
-            <input class="dis-inline-block"  type="radio" value="여자" v-model="gender"> 여자
+            <input class="dis-inline-block cl3 fs-13" type="radio" value="남자" v-model="gender"> 남자
+            <input class="dis-inline-block cl3 fs-13"  type="radio" value="여자" v-model="gender"> 여자
           </div>
         
           <div class="p-tb-10">
             <div>이메일</div>
-            <input class="bor10 p-lr-5 p-tb-3" type="text" ref="email" v-model="email" @blur="emailCheck">{{emailOk}}
+            <input class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" type="text" ref="email" v-model="email" @blur="emailCheck">
+            <p class="fs-12 cl3">{{emailOk}}</p>
           </div>
         
           <div class="p-tb-10">
             <div>전화번호</div>
-            <input class="bor10 p-lr-5 p-tb-3" type="text" ref="phone" v-model="phone">
+            <input class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" type="text" ref="phone" v-model="phone">
           </div>
         
           <div class="p-tb-10">
             <div>우편번호</div>
-            <input type="text" class="bor10 p-lr-5 p-tb-3 bg06" ref="post" v-model="post" readonly>
-            <input type="button" value="우편번호 찾기" @click="postFind">
+            <input type="text" class="bor10 p-lr-5 p-tb-3 cl3 fs-13 dis-inline-block" ref="post" v-model="post" readonly>
+            <input type="button" class="cl0 bg2 fs-13 bor4 p-lr-5 p-tb-4 trans-04 pointer dis-inline-block" value="우편번호 찾기" @click="postFind">
             <div>주소</div>
-            <input type="text" class="bor10 p-lr-5 p-tb-3 bg06" ref="address1" v-model="address1" readonly>
+            <input type="text" class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" ref="address1" v-model="address1" readonly>
             <div>상세주소</div>
-            <input class="bor10 p-lr-5 p-tb-3" type="text" v-model="address2">
+            <input class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" type="text" v-model="address2">
           </div class="p-tb-10">
         
           <div class="p-tb-10">
             <div>비밀번호 찾기 질문</div>
-            <select class="bor10 p-lr-5 p-tb-3" ref="question" v-model="question">
+            <select class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" ref="question" v-model="question">
               <option value="기억에 남는 추억의 장소는?" selected>기억에 남는 추억의 장소는?</option>
               <option value="자신의 인생 좌우명은?" >자신의 인생 좌우명은?</option>
               <option value="자신의 보물 제1호는?" >자신의 보물 제1호는?</option>
@@ -82,7 +84,7 @@
               <option value="내가 좋아하는 캐릭터는?" >내가 좋아하는 캐릭터는? </option>
             </select>
             <div>비밀번호 찾기 답변</div>
-            <input class="bor10 p-lr-5 p-tb-3" type="text" ref="answer" v-model="answer">
+            <input class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" type="text" ref="answer" v-model="answer">
           </div>
         </div>
     

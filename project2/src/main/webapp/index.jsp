@@ -4,7 +4,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Insert title here</title>
+  <title>Healing Camp</title>
   <script type="text/javascript">
   location.href="main/main.do";
   </script>

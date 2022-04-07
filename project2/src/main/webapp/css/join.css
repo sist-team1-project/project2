@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+select:focus {
+  outline: none;
+}
+
+.w-20 {
+  width: 20%
+}
+.w-80 {
+  width: 80%
+}
