@@ -43,7 +43,7 @@
 
             <div class="flex-w flex-t bor12 p-b-13">
               <div class="size-208"><span class="stext-110 cl2"> 금액: </span></div>
-              <div clas="size-209"><span class="mtext-110 cl2">{{cart.Gprice - (cart.Gprice * cart.Gsale / 100) }}</span></div>
+              <div clas="size-209"><span class="mtext-110 cl2"></span></div>
             </div>
 
             <div class="flex-w flex-t bor12 p-t-15 p-b-30">
