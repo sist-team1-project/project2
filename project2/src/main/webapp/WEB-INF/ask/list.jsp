@@ -42,8 +42,15 @@
 		</div>
 		
 		<div class="text-right" style="padding-top: 10px;">
-			<a href="insert.do" class="btn btn-sm"
-				style="background-color: #dbd0be">새글</a>
+		<c:choose>
+		  <c:when test="${sessionScope.id == null}" >
+		    <a href="../user/login.do" class="btn btn-sm" onclick="return confirm('먼저 로그인을 진행해주세요')"
+			   style="background-color: #dbd0be">새글</a>
+		  </c:when>
+		  <c:otherwise>
+		    <a href="insert.do" class="btn btn-sm" style="background-color: #dbd0be">새글</a>
+		  </c:otherwise>
+		</c:choose>
 		</div>
 		<nav class="pagination">
 			<ul>
@@ -62,8 +69,8 @@
 				</c:forEach>
 
 				<c:if test="${endPage<totalpage }">
-					<li><a href="../ask/list.do?page=${endPage+1 }">Next
-							&raquo;</a></li>
+					<li><a href="../ask/list.do?page=${endPage+1 }">
+							<i class="fa fa-caret-right" aria-hidden="true"></i></a></li>
 				</c:if>
 			</ul>
 		</nav>

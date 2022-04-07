@@ -19,7 +19,7 @@ public interface AskMapper {
 	public int askRowCount();
 
 	@Insert("INSERT INTO ask_1(a_id,u_id,a_type,a_content,a_pwd,a_group_id) "
-			+"VALUES(ask_id_seq_1.nextval,#{u_id},#{a_title},#{a_content},#{a_pwd},"
+			+"VALUES(ask_id_seq_1.nextval,#{u_id},#{a_type},#{a_title},#{a_content},#{a_pwd},"
 			+"(SELECT NVL(MAX(a_group_id)+1,1) FROM ask_1))")
 	public void askInsert(AskVO vo);
 

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,9 +33,11 @@
 						<td width=10% class="text-center">{{vo.nvisits}}</td>
 					</tr>
 				</table>
+				<c:if test="${sessionScope.grade=='0'}">
 				<div class="text-right" style="padding-top: 10px;">
 					<button class="btn btn-sm" style="background-color: #dbd0be" v-on:click="insert()">새글</button>
 				</div>
+				</c:if>
 				<div class="text-center">
 					<button class="btn btn-sm" style="background-color: #eeeee6" v-on:click="prev()">이전</button>
 					{{curpage}} page / {{totalpage}} pages

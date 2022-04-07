@@ -62,7 +62,7 @@ public class AskController {
    public String askInsertOk(AskVO vo)
    {
 	   dao.askInsert(vo);
-	   return "redirect:list.do";
+	   return "redirect:../ask/list.do";
    }
    
    @GetMapping("detail.do")
