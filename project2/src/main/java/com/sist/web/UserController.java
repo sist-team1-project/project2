@@ -52,4 +52,6 @@ public class UserController {
 	public String id_check() {
 		return "user/idcheck/vue";
 	}
+	
+	
 }
