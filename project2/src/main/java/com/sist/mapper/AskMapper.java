@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.*;
 import com.sist.vo.*;
 
 public interface AskMapper {
-	@Select("SELECT a_id,u_id,a_type,a_title,TO_CHAR(a_regdate,'YYYY-MM-DD') as a_regdate,"
+	@Select("SELECT a_id,u_id,a_type,a_title,a_regdate as a_regdate,"
 			 +"a_visits,a_group_tab,num "
 			 +"FROM (SELECT a_id,u_id,a_type,a_title,a_regdate,a_visits,a_group_tab,rownum as num "
 			 +"FROM (SELECT a_id,u_id,a_type,a_title,a_regdate,a_visits,a_group_tab "

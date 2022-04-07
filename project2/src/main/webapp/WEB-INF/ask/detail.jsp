@@ -20,17 +20,17 @@
         </tr>
         <tr>
          <th class="text-center" width=20%>이름</th>
-         <td class="text-center" width=30%>${vo.u_name }</td>
+         <td class="text-center" width=30%>${vo.u_id }</td>
          <th class="text-center" width=20%>조회수</th>
-         <td class="text-center" width=30%>${vo.n_visits }</td>
+         <td class="text-center" width=30%>${vo.a_visits }</td>
         </tr>
         <tr>
          <th class="text-center" width=20%>제목</th>
-         <td colspan="3">${vo.a.title }</td>
+         <td colspan="3">${vo.a_title }</td>
         </tr>
         <tr>
           <td colspan="4" valign="top" class="text-left" height="200">
-           <pre style="border:none;background-color:white;white-space: pre-wrap;">${vo.a.content }</pre>
+           <pre style="border:none;background-color:white;white-space: pre-wrap;">${vo.a_content }</pre>
           </td>
         </tr>
         <tr>

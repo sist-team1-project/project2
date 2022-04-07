@@ -33,7 +33,7 @@
         <tr>
           <th width=20% class="text-right">비밀번호</th>
           <td width=80%>
-            <input type=password name=pwd size=10 class="input-sm">
+            <input type=password name=a_pwd size=10 class="input-sm">
           </td>
         </tr>
         <tr>

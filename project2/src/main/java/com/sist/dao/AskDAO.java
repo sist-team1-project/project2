@@ -44,7 +44,7 @@ public class AskDAO {
 		return mapper.askParentInfoData(no);
 	}
 
-	public void askaskInsert(AskVO vo) {
+	public void askReplyInsert(AskVO vo) {
 		mapper.askReplyInsert(vo);
 	}
 
