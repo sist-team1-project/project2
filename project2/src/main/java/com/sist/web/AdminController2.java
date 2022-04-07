@@ -32,4 +32,9 @@ public class AdminController2 {
 		// 모델 이용해서 전달
 		return "admin/goods_update";
 	}
+	
+	@GetMapping("inquiry_admin.do")
+	public String inquiry_admin() {
+		return "admin/inquiry_admin";
+	}
 }

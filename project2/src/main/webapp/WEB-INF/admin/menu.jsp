@@ -32,7 +32,7 @@
     </li>
 
     <li class="bor18">
-      <a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-14 p-lr-4">
+      <a href="../admin/inquiry_admin.do" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-14 p-lr-4">
         문의관리
       </a>
     </li>
