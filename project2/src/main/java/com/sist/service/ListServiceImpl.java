@@ -18,6 +18,11 @@ public class ListServiceImpl implements ListService {
     private CategoryDAO cdao;
     
     @Override
+    public int goodsMaxPrice(String cid) {
+        return gdao.goodsMaxPrice(cid);
+    }
+    
+    @Override
     public List<GoodsVO> goodsList(Map map) {
         // TODO Auto-generated method stub
         return gdao.goodsList(map);

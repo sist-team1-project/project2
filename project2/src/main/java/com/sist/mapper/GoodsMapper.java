@@ -9,6 +9,9 @@ import com.sist.vo.*;
 public interface GoodsMapper {
     
     /*  ------- 리스트 페이지 -------  */
+    @Select("SELECT MAX(g_price) FROM goods_1 WHERE c_id LIKE #{cid}||'%'")
+    public int goodsMaxPrice(String cid);
+    
 	@Select("<script>"
 	        + "SELECT g_id,g_name,g_price,g_image "
 	        + "FROM (SELECT g_id,g_name,g_price,g_image,rownum as num "

@@ -18,7 +18,11 @@ public class GoodsDAO {
 
 	@Autowired
 	private EventGoodsMapper mapper2;
-
+	
+	public int goodsMaxPrice(String cid) {
+	    return mapper.goodsMaxPrice(cid);
+	}
+	
 	public List<GoodsVO> goodsList(Map map) {
 		return mapper.goodsList(map);
 	}
