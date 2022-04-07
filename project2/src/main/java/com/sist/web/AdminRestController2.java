@@ -106,7 +106,9 @@ public class AdminRestController2 {
 	}
 
 	@PostMapping("admin/goods_update_ok.do")
-	public String goods_update_ok(GoodsVO vo) {
+	public String goods_update_ok(@RequestBody HashMap<String, Object> map) {
+		
+		
 		return "";
 	}
 

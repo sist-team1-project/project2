@@ -27,9 +27,23 @@ public class AdminController2 {
 	}
 
 	@GetMapping("goods_update.do")
-	public String goods_update(int g_id) {
-		// mapper , dao 필요
-		// 모델 이용해서 전달
+	public String goods_update(int g_id, Model model) {
+		/*
+		 * @GetMapping("update.do")
+		   public String replyUpdate(int no,Model model)
+		   {
+			   ReplyVO vo=dao.replyUpdateData(no);
+			   model.addAttribute("vo", vo);
+			   return "reply/update";
+		   } 
+		 * 
+		 */
+		Map map = new HashMap();
+		map.put("g_id", g_id);
+
+		GoodsVO vo = dao.goodsDetail(map);
+
+		model.addAttribute("vo", vo);
 		return "admin/goods_update";
 	}
 

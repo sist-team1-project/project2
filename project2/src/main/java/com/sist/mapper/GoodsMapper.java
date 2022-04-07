@@ -132,13 +132,16 @@ public interface GoodsMapper {
 			  +"</trim>"
 			  +"</foreach>"
 			  +"</trim>"
-			  + "))"
+			  + "ORDER BY g_id))"
 			  +"WHERE num BETWEEN #{start} AND #{end}"
 			  + "</script>")
 		public List<GoodsVO> adminGoodsFind(Map map);
 	
+
+	@Update("UPDATE goods_1 SET "
+			+ "c_id=#{c_id}, g_name=#{g_name}, g_brand = #{g_brand}, g_price = #{g_price}, g_sale = #{g_sale}, g_image = #{g_image}, g_detail = #{g_detail}, g_stock = #{g_stock}, g_status = #{g_status} "
+			+ "WHERE g_id = #{g_id}")
+	public void goodsupdate(GoodsVO vo);
 	
-//			@Update("UPDATE goods_1 SET ")			업데이트 쿼리문 작성
-//			public void goods update(GoodsVO vo);
-		
+	
 }
