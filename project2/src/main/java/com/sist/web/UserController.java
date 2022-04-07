@@ -47,5 +47,9 @@ public class UserController {
 	public String pwd_find() {
 		return "user/pwdfind";
 	}
-
+	
+	@GetMapping("user/idcheck.do")
+	public String id_check() {
+		return "user/idcheck/vue";
+	}
 }

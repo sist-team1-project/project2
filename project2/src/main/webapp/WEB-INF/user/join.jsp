@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="../css/find.css">
 </head>
 <body>
   <div class="container p-t-150 p-b-80" id="user_join">
@@ -15,7 +16,7 @@
           <div>
             <div>아이디</div>
             <input class=bor10 type="text" name="u_id" id="id" v-model="id">
-            <input type="button" id="id-check-btn" v-on:click="id-check-btn" value="중복 확인">
+            <input type="button" id="id-check-btn" data-toggle="modal" data-target="#iframeModal" value="중복 확인">
           </div>
         
           <div>
@@ -91,6 +92,18 @@
       
       </form>
       
+    </div>
+  </div>
+  <div class="modal fade" id="iframeModal" tabindex="-1" role="dialog" aria-labelledby="iframeModalLable" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <div>
+            <iframe width="100%" height="200" src="../user/idcheck.do"></iframe>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <script>
@@ -191,6 +204,7 @@
                     location.href="../user/login.do";
                 })
             }
+        	
         }
     })
   </script>

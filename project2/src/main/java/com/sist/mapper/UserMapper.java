@@ -27,10 +27,10 @@ public interface UserMapper {
 	public UserVO userInfo(String uid);
 
 	// email존재 여부
-	@Select("SELECT COUNT(*) FROM user_1 WHERE u_id=#{id} AND u_email=#{email}")
+	@Select("SELECT COUNT(*) FROM user_1 WHERE u_name=#{name} AND u_email=#{email}")
 	public int idEmailCount(Map map);
 
-	@Select("SELECT RPAD(SUBSTR(u_id,1,4),LENGTH(u_id),'*') FROM user_1 WHERE u_id=#{id} AND u_email=#{email}")
+	@Select("SELECT RPAD(SUBSTR(u_id,1,4),LENGTH(u_id),'*') FROM user_1 WHERE u_name=#{name} AND u_email=#{email}")
 	public String idFind(Map map);
 
 	@Update("UPDATE user_1 SET "

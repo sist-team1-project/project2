@@ -16,60 +16,50 @@
   <script src="http://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
-  <div class="container bg0" id="idfind">
+  <div class="container bg0" id="idcheck">
     <div class="flex-c-m">
-        <h4 class="mtext-109 cl2 p-b-20">아이디 찾기</h4>
+        <h4 class="mtext-109 cl2 p-b-20">아이디 중복 체크</h4>
     </div>
     <div class="flex-c-m p-tb-10">
-      이름&nbsp;&nbsp;<input class="dis-inline-block bor10" type="text" id="name" name="name" placeholder="이름 입력" v-model="name">
+      아이디&nbsp;&nbsp;<input class="dis-inline-block bor10" type="text" id="id" name="id" placeholder="아이디 입력" v-model="id">
     </div>
-    <div class="flex-c-m p-tb-10">
-       이메일&nbsp;&nbsp;<input class="dis-inline-block bor10" type="text" id="email" name="email" placeholder="이메일 입력" v-model="email">
-    </div>
+    
     
     <div class="row flex-c-m p-t-15">
       <div class="flex-c-m">
-        <a href="#" v-on:click="idfind()" style="color:#666666"> 아이디 찾기 </a>&nbsp;|&nbsp;
+        <a href="#" v-on:click="idcheck()" style="color:#666666"> 아이디 확인 </a>&nbsp;|&nbsp;
         <a id=""> 취소 </a>
       </div>
     </div>
   </div>
   <script>
 new Vue({
- 	el:'#idfind',
+ 	el:'#idcheck',
  	data:{
- 		name:'',
- 		email:''
+ 		id:''
  	},
  	mounted:function(){
  		
     },
  	methods:{
- 		idfind:function(){
- 			let name=$('#name').val();
- 			if(name.trim()=="")
+ 		idcheck:function(){
+ 			let id=$('#id').val();
+ 			if(id.trim()=="")
  			{
- 				$('#name').focus();
+ 				$('#id').focus();
  				return;
  			}
- 			let email=$('#email').val();
- 			if(email.trim()=="")
- 			{
- 				$('#email').focus();
- 				return;
- 			}// 서버실행 전 확인
- 			axios.get("http://localhost:8080/web/user/idfind_ok.do",{
+ 			// 서버실행 전 확인
+ 			axios.get("http://localhost:8080/web/user/idcheck_ok.do",{
  	            params:{
- 	            	name: this.name,
- 	                email: this.email
+ 	                id: this.id
  	            }
  	        }).then(res=>{
- 	        	console.log(res.data);
- 	        	if(res.data=='NORESULT'){
- 	        	    alert("아이디가 존재하지 않습니다");
+ 	        	if(res.data=='no'){
+ 	        	    alert("아이디 사용 불가");
  				}
  				else {
- 				    $('#idfind').html('<div>'+ '고객님의 아이디는 ' + res.data + '입니다.' + '</div>')
+ 				    $('#idcheck').html('<div>'+ res.data +'</div>')
  			    }
  	        })
  		}

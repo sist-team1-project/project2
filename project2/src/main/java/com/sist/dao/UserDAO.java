@@ -66,5 +66,20 @@ public class UserDAO {
 		}
 		return bCheck;
 	}
+	
+	public int idCheck(String id) {
+		int result = mapper.idCount(id);
+		return result;
+	}
 
 }
+
+
+
+
+
+
+
+
+
+

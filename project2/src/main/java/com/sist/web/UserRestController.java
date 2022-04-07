@@ -54,12 +54,25 @@ public class UserRestController {
 	}
 
 	@GetMapping(value = "user/idfind_ok.do", produces = "text/plain;charset=utf-8")
-	public String user_idfind_ok(String id, String email) {
+	public String user_idfind_ok(String name, String email) {
 		Map map = new HashMap();
-		map.put("id", id);
+		map.put("name", name);
 		map.put("email", email);
 
 		String result = dao.userFind(map);
+		return result;
+	}
+
+	@GetMapping(value = "user/idcheck_ok.do", produces = "text/plain;charset=utf-8")
+	public String user_idcheck_ok(String id) {
+		String result="";
+		JSONObject obj = new JSONObject();
+		int idcheck = dao.idCheck(id);
+		if (idcheck == 0) {
+			result = id;	// 저장한 id를 jsp까지 가져가기
+		} else {
+			result = "no";					// 현재 얘는 출력됨
+		}
 		return result;
 	}
 
