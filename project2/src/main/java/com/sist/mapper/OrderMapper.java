@@ -7,21 +7,23 @@ import org.apache.ibatis.annotations.*;
 import com.sist.vo.*;
 
 public interface OrderMapper {
-	/* 판매관리 목록 리스트 */
+	/* 판매관리 목록 리스트 - 삭제예정 */
 	@Select("SELECT o_id,u_id,o_request,TO_CHAR(o_regdate,'YYYY-MM-DD HH24:MI:SS')as o_regdate,o_shipping,o_state,num "
 			+ "FROM (SELECT o_id,u_id,o_request,o_regdate,o_shipping,o_state, rownum as num "
 			+ "FROM (SELECT o_id,u_id,o_request,o_regdate,o_shipping,o_state from order_1)) "
 			+ "WHERE num BETWEEN #{start} AND #{end}")
 	public List<OrderVO> orderList(Map map);
 
+	/* 페이징 사용 */
 	@Select("SELECT CEIL(COUNT(*) / 10.0) " + "FROM order_1 ")
 	public int orderTotalPage();
-
+	
+	/* 페이징 사용 */
 	@Select("SELECT COUNT(*) FROM order_1")
     public int orderCount();
 
-	 /* 주문 */ 
-	 @Select("SELECT /*+ INDEX_ASC(order_1 order_o_id_pk_1)* " 
+	 /* 주문상세에서 사용 */ 
+	 @Select("SELECT /*+ INDEX_ASC(order_1 order_o_id_pk_1)*/* " 
 			 +"FROM order_1 "
 			 +"WHERE o_id=#{oid}")
 	 public OrderVO order(String oid);
@@ -37,7 +39,13 @@ public interface OrderMapper {
 			 +"FROM order_1 a, order_detail_1 b "
 			 +"WHERE a.o_id = b.o_id) "
 			 +"GROUP BY o_id, o_regdate, o_shipping, o_state, u_id, g_name "
-			 +"order by o_id desc)) "
+			 +"ORDER BY o_id desc)) "
 			 +"WHERE num BETWEEN #{start} AND #{end}")
 	 public List<Map<String,Object>> orderFullList(Map map);
+	 
+	 /* 주문상태 변경 */
+	 @Update("UPDATE order_1 FROM o_state=#{ostate} WHERE oid=#{oid}")
+	 public int stateupdate(Map map);
+	 
+	 
 }

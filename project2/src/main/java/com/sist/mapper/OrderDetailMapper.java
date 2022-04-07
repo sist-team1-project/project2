@@ -21,12 +21,13 @@ public interface OrderDetailMapper {
     public List<OrderDetailVO> orderListDetail(); 
     
     /* 상품명 */
+    
     @Select("SELECT g_name "
     		+"FROM order_detail_1 "
     		+"WHERE o_id=#{oid}")    
     public List<String> nameData(String oid);
     
-    /* 주문 상세 */
+    /* 주문 상세 - 사용 */
     @Select("SELECT /*+ INDEX_ASC(order_detail_1 od_od_id_pk_1)*/* "
     		+"FROM order_detail_1 "
     		+"WHERE o_id=#{oid}")

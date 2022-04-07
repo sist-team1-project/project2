@@ -25,7 +25,6 @@ public class AdminController {
 	@Autowired
 	private OrderDetailDAO oddao;
 
-	
 	@GetMapping("orderlist.do")
 	public String adorder(String oid, Model model) {
 		if(oid==null) oid="";

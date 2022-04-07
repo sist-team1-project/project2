@@ -9,7 +9,11 @@
 <link rel="stylesheet" type="text/css" href="../css/order.css">
 <style type="text/css">
 td {
-	width: 150px;
+	width: 65px;
+	margin: 0px auto;
+}
+th {
+	width: 70px;
 	margin: 0px auto;
 }
 </style>
@@ -43,7 +47,7 @@ td {
                 <td>{{order.phone}}</td>
               <th class="adt-light">주문상태</th>
                 <td v-if="order.state==-1">주문취소</td>
-                <td v-if="order.state==0">수락</td>
+                <td v-if="order.state==0">수락대기</td>
                 <td v-if="order.state==1">상품준비중</td>
                 <td v-if="order.state==2">배송중</td>
                 <td v-if="order.state==3">배송완료</td>
@@ -115,12 +119,12 @@ td {
   		},
         mounted:function(){
             this.odList();
-            this.oList();
+            this.orList();
             console.log(this.oid);
         },
         methods:{
             odList:function(){
-                axios.get("http://localhost:8080/web/admin/orderdetail_vye.do",{
+                axios.get("http://localhost:8080/web/admin/orderdetail_vue.do",{
                     params:{
                         oid: this.oid
                     }
@@ -129,7 +133,7 @@ td {
   				this.orderDetailList = res.data;
                 })
             },
-            oList:function(){
+            orList:function(){
                 axios.get("http://localhost:8080/web/admin/order.do",{
                     params:{
                         oid: this.oid

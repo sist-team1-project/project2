@@ -33,7 +33,6 @@ td {
         <div class="fs-13">
         	총 {{count | currency}} 개
         </div>
-        <input type="button" class="btn btn-sm btn-pro-color2 p-tb-4 dis-inline-block" v-on:click="orderdetail()" value="상세">
       </div>
       <div class="col-lg-12 m-lr-auto m-b-50">
         <div class="wrap-table js-pscroll">
@@ -52,7 +51,14 @@ td {
               <td>{{o.usid}}</td>
               <td>{{o.name}}</td>
               <td>{{o.price | currency }} 원</td>
-              <td>{{o.state}}</td>
+              <td id="select" class="state">
+              <select>
+                <option :selected="o.state==1" @click="selecteOrder($event)">상품준비중</option>
+                <option :selected="o.state==2" @click="selecteOrder($event)">배송중</option>
+                <option :selected="o.state==3" @click="selecteOrder($event)">배송완료</option>
+                 <!-- <td>{{o.state}}</td>  --> 
+              </select>
+              </td>
              </tr>
           </table>
         </div>
@@ -73,14 +79,15 @@ td {
 		</li>
 	  </ul>
 	</div>
-    <!-- ----- 팝업 ----- -->
+	
+    <!------------- 팝업 ------------->
     <div class="modal fade" id="iframeModal" tabindex="-1" role="dialog" aria-labelledby="iframeModalLable" aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-body">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             <div>
-              <iframe height="600px" width="100%" :src="iframe"></iframe>
+              <iframe height="800px" width="100%" :src="iframe"></iframe>
             </div>
           </div>
         </div>
@@ -101,7 +108,9 @@ td {
   		    endPage : 0,
   		    pages : [],
   		    count : 0,
-  		    iframe:''
+  		    iframe:'',
+  		    selected:[],
+  		    state : 0
         },
         filters:{
   			currency: function(value){
@@ -136,6 +145,12 @@ td {
     		getpage : function(event){
     			this.curpage = event.currentTarget.value;
     			this.oList();
+    		},
+    		selecteOrder:function(event) {
+    			// this.select;
+    			this.curpage = 1; // 페이지 초기화
+    			this.o.state = event.currentTarget.value; // o.state값을 반환..?
+    			this.oList();	// 목록출력
     		}
         }
     })

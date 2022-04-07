@@ -29,8 +29,11 @@ public class OrderDAO {
 		return mapper.order(oid);
 	}
 	 
-    
     public List<Map<String,Object>> orderFullList(Map map) {
     	return mapper.orderFullList(map);
+    }
+    
+    public int stateupdate(Map map) {
+    	return mapper.stateupdate(map);
     }
 }
