@@ -10,12 +10,13 @@ import com.sist.service.*;
 import com.sist.vo.*;
 
 @RestController
+@RequestMapping("goods/")
 public class ListRestController {
     
     @Autowired
     private ListService service;
     
-    @GetMapping(value = "goods/list_vue.do", produces = "text/plain;charset=utf-8")
+    @GetMapping(value = "list_vue.do", produces = "text/plain;charset=utf-8")
     public String goods_list_vue(String cid, int page, String keyword, String brands, int price1, int price2, String order) {
         
         int curpage = page;
@@ -82,11 +83,12 @@ public class ListRestController {
         return arr.toJSONString();
     }
     
-    @GetMapping(value = "goods/brandlist_cname_vue.do", produces = "text/plain;charset=utf-8")
+    @GetMapping(value = "brandlist_cname_vue.do", produces = "text/plain;charset=utf-8")
     public String goods_brandlist_cname_vue(String cid) {
         
         List<String> list = service.brandList(cid);
         String cname = service.categoryName(cid);
+        if (cname == null) cname = "전체";
         
         JSONArray arr = new JSONArray();
         int i = 0;
@@ -99,39 +101,6 @@ public class ListRestController {
             arr.add(obj);
             i++;
         }
-        return arr.toJSONString();
-    }
-    
-    @GetMapping(value = "goods/category_1_vue.do", produces = "text/plain;charset=utf-8")
-    public String goods_category_1_vue() {
-        
-        List<CategoryVO> list = service.categoryList_1();
-        JSONArray arr = new JSONArray();
-        
-        for(CategoryVO vo : list) {
-            JSONObject obj = new JSONObject();
-            obj.put("cid", vo.getC_id());
-            obj.put("title", vo.getC_title());
-            arr.add(obj);
-        }
-        return arr.toJSONString();
-    }
-    
-    @GetMapping(value = "goods/category_2_vue.do", produces = "text/plain;charset=utf-8")
-    public String goods_category_2_vue() {
-        
-        List<CategoryVO> list = service.categoryList_2();
-        JSONArray arr = new JSONArray();
-        
-        int i = 0;
-        for(CategoryVO vo : list) {
-            JSONObject obj = new JSONObject();
-            obj.put("cid", vo.getC_id());
-            obj.put("title", vo.getC_title());
-            arr.add(obj);
-            i++;
-        }
-        
         return arr.toJSONString();
     }
 }

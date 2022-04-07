@@ -16,7 +16,7 @@
       <div id="search" class="w-full bor8">
         <div class="bg6 w-full p-t-27 p-lr-40 p-lr-15-sm">
           <div class="p-t-10 p-b-27">
-            <div class="mtext-102 cl2 p-b-15">제품 이름으로 검색</div>
+            <div class="mtext-102 cl2 p-b-15">검색어</div>
             <input class="mtext-107 cl2 bor8 p-lr-15 p-tb-5" type="text" v-model="keyword" placeholder="검색어 입력">
           </div>
           
@@ -90,10 +90,10 @@
         data:{
             cid:'${cid }',
             cname: '',
-            cname: '',
-            keyword:'',
+            keyword:'${keyword }',
             brands:[],
             selectedBrands:[],
+            checkAll:true,
             order:'A',
             goods:[],
             totalpage:0,
@@ -101,13 +101,11 @@
             curpage:1,
             start:1,
             end:1,
-            pages:[],
-            checkAll:true
+            pages:[]
         },
         mounted:function(){
             
             this.brandListAndCname();
-            
             /* 가격 슬라이더 */
             $("#slider-range").slider({
                 range: true,
@@ -166,8 +164,8 @@
                         cid: this.cid
                     }
                 }).then(result=>{
-                    this.brands=result.data;
                     this.cname=result.data[0].cname;
+                    this.brands=result.data;
                 })
             },
             /* 페이지 전환 */

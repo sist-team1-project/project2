@@ -39,16 +39,6 @@ public class ListServiceImpl implements ListService {
     }
     
     @Override
-    public List<CategoryVO> categoryList_1() {
-        return cdao.categoryList_1();
-    }
-    
-    @Override
-    public List<CategoryVO> categoryList_2() {
-        return cdao.categoryList_2();
-    }
-    
-    @Override
     public String categoryName(String cid) {
         return cdao.categoryName(cid);
     }
