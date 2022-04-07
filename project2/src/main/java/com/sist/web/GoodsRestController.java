@@ -19,7 +19,6 @@ public class GoodsRestController {
 
     @GetMapping(value = "goods/detail_vue.do", produces = "text/plain;charset=utf-8")
     public String goods_detail(String gid) {
-        System.out.println(gid);
         Map map = new HashMap();
         map.put("gid", gid);
         GoodsVO vo = service.goodsDetail(map);

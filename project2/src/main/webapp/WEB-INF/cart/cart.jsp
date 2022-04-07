@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+ <div class="container" id="cart">
   <form method="post" action="../cart/checkout.do" id="frm">
     <div class="container bg0 p-t-150 p-b-30">
       <div class="row">
@@ -34,7 +35,7 @@
                     <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m"><i class="fs-16 zmdi zmdi-plus"></i></div>
                   </div>
                 </td>
-                <td class="column-5">$ 36.00</td>
+                <td class="column-5">{{goods.price }}</td>
                 <td class="column-6">10 %</td>
                 <td class="column-7">$ 36.00</td>
               </tr>
@@ -68,20 +69,29 @@
       </div>
     </div>
   </form>
+ </div>
   <script>
-    $('.js-pscroll').each(function(){
-        $(this).css('position','relative');
-        $(this).css('overflow','hidden');
-        var ps = new PerfectScrollbar(this, {
-            wheelSpeed: 1,
-            scrollingThreshold: 1000,
-            wheelPropagation: false,
-        });
-  
-        $(window).on('resize', function(){
-            ps.update();
-        })
-    });
+  new Vue({
+      el:'#cart',
+      data:{
+          gid:${gid},
+          goods:{},
+          images:[],
+          image:'',
+          quantity:0
+      },
+      mounted:function(){
+  	   	axios.get('http://localhost:8080/web/goods/detail_vue.do',{
+  	  		params:{
+  	   		    gid:this.gid
+  	   		}
+  	    }).then(res=>{
+  	   		this.goods=res.data;
+  	   		console.log(res.data.image);
+  	   		this.images=this.goods.image.split(";");
+  	   		this.image=this.images[0];
+  	    })
+      }
   </script>
 </body>
 </html>

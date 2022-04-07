@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.sist.dao.*;
+import com.sist.service.GoodsService;
 import com.sist.vo.*;
 
 @RestController
@@ -23,6 +24,7 @@ public class CartRestController {
         dao.cartInsert(vo);
 		return "";
 	}
+
 	
 	
 }
