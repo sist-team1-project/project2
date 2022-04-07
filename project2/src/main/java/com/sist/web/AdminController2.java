@@ -27,9 +27,9 @@ public class AdminController2 {
 	}
 	
 	@GetMapping("goods_update.do")
-	public String goods_update(int no, Model model) {
+	public String goods_update(int g_id) {
 		// mapper , dao 필요
 		// 모델 이용해서 전달
-		return "goods_update";
+		return "admin/goods_update";
 	}
 }

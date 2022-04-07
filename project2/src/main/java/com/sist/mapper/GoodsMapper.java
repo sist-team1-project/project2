@@ -124,7 +124,7 @@ public interface GoodsMapper {
 		public List<GoodsVO> adminGoodsFind(Map map);
 	
 	
-	//@Update("UPDATE goods_1 SET ")			업데이트 쿼리문 작성
-	//public void goods update(GoodsVO vo);
-
+//			@Update("UPDATE goods_1 SET ")			업데이트 쿼리문 작성
+//			public void goods update(GoodsVO vo);
+		
 }

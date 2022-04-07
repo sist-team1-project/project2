@@ -68,7 +68,7 @@
 						</thead>
 						<tbody>
 
-							<tr v-for="goods in goodsList" class="table_row fs-13 font-center">
+							<tr v-for="(goods, index) in goodsList" class="table_row fs-13 font-center p-t-20-admin-td">
 								<td>
 									<div>
 										<img :src="goods.g_image" class="size-109">
@@ -90,7 +90,7 @@
 									</div>
 								</td>
 								<td>
-									<button class="flex-c-m stext-101 cl0 btn-sm btn-pro-color2 bor1 hov-btn1 p-lr-15 trans-04  fs-10" v-on:click="goods_update()">수정</button>
+									<button class="flex-c-m stext-101 cl0 btn-sm btn-pro-color2 bor1 hov-btn1 p-lr-15 trans-04  fs-10" :index="index" v-on:click="goods_update($event)">수정</button>
 								</td>
 							</tr>
 
@@ -158,6 +158,7 @@
 					gdetail : '',
 					pages : [],
 					count : 0,
+					g_id : 0,
 					 
 					selected : '',
     			   	fs : ["N","S","C","D"],
@@ -228,7 +229,11 @@
 					},
 					goods_update : function() {
 						console.log("상품 수정");
-						location.href = '../admin/goods_update.do';
+						var index = event.currentTarget.getAttribute('index');
+						this.g_id = this.goodsList[index].g_id;
+						console.log(this.g_id);
+						
+						location.href = '../admin/goods_update.do?g_id=' + this.g_id;
 					},
 					goods_detail : function(detailId) {
 						this.gdetail = detailId;
