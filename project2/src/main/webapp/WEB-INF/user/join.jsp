@@ -53,7 +53,7 @@
           <div>
             <div>우편번호</div>
             <input type="text" name="u_post" id="post" v-model="post">
-            <input type="button" id="post-btn" v-on:click="post-btn" vlaue="우편번호 찾기">
+            <input type="button" id="post-btn" v-on:click="post-btn" value="우편번호 찾기">
             <div>주소</div>
             <input type="text" name="u_address1" id="address1" v-model="address1">
             <div>상세주소</div>

@@ -18,7 +18,6 @@ public class UserDAO {
 
 	public String isLogin(String id, String pwd) {
 		String result = "";
-		// id체크
 		int count = mapper.idCount(id);
 		if (count == 0) {
 			result = "NOID";
@@ -39,20 +38,33 @@ public class UserDAO {
 	public void userJoin(UserVO vo) {
 		mapper.userJoin(vo);
 	}
-	
+
 	public UserVO userInfo(String uid) {
 		return mapper.userInfo(uid);
 	}
-	
+
 	public String userFind(Map map) {
-		String result="";
-		
+		String result = "";
 		int idCount = mapper.idEmailCount(map);
 		if (idCount == 0) {
-		    result ="NORESULT";
+			result = "NORESULT";
 		} else {
-		    result=mapper.idFind(map);
+			result = mapper.idFind(map);
 		}
 		return result;
 	}
+
+	// 유저정보 수정
+	public boolean userUpdate(UserVO vo)
+	{
+		boolean bCheck=false;
+		String db_pwd=mapper.userGetPassword(vo.getU_id());
+		if(db_pwd.equals(vo.getU_password()))
+		{
+			bCheck=true;
+			mapper.userUpdate(vo);
+		}
+		return bCheck;
+	}
+
 }

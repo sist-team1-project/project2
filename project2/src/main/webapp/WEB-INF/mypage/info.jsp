@@ -7,11 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-  <div id="userDetail" class="container">
-  <div class="row border">
-    <div class="col-md-12"><h3><b>회원정보</b></h3></div>
+  <div id="userDetail" class="container bg0 p-t-50 p-b-30">
+  <div class="row">
+    <div class="col-md-12 p-b-20"><h3>회원정보</h3></div>
   </div>
-  <div class="info">
+  <div class="info border">
     <div>
       <div class="col-sm-3"><b>아이디</b></div>
       <div class="col-sm-9">{{info.uid }}</div>

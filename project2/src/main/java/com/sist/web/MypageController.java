@@ -20,8 +20,9 @@ public class MypageController {
 	@GetMapping("mypage/mypage.do")
     public String mypage_mypage(HttpSession session, Model model) {
 		/*
-		 * String uid = (String) session.getAttribute("id"); UserVO vo =
-		 * dao.userInfo(uid); System.out.println(vo.getU_address1());
+		 * String uid = (String) session.getAttribute("id"); 
+		 * UserVO vo = dao.userInfo(uid); 
+		 * System.out.println(vo.getU_address1());
 		 * model.addAttribute("vo", vo);
 		 */
         return "mypage/info";

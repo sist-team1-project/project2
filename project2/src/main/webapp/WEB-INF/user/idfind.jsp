@@ -29,7 +29,7 @@
     
     <div class="row flex-c-m p-t-15">
       <div class="flex-c-m">
-        <a href="#" v-on:click="idfind()"> 아이디 찾기 </a>&nbsp;|&nbsp;
+        <a href="#" v-on:click="idfind()" style="color:#666666"> 아이디 찾기 </a>&nbsp;|&nbsp;
         <a id=""> 취소 </a>
       </div>
     </div>

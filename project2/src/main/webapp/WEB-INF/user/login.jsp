@@ -9,29 +9,27 @@
 </head>
 <body>
   <div class="container bg0 p-t-150 p-b-30" id="login">
-    
-      <div class="col-sm-12 col-lg-4 m-lr-auto m-b-50">
+      <div class="col-lg-4 col-sm-6 m-lr-auto m-b-50">
         <div class="bor10 p-lr-40 p-t-30 p-b-25 p-lr-15-sm">
           <h4 class="flex-c-m mtext-109 cl2 p-b-30">회원 로그인</h4>
-            <div class="row">
-		      <div class="col-sm-7">
-                <div class="flex-w flex-t p-t-15 p-b-22 m-l-20">
-                  <input @keyup.enter="login()" type="text" id="id" name="id" placeholder="아이디" v-model="id">
+            <div class="row p-b-15">
+		      <div class="col-sm-8">
+                <div class="p-b-20 flex-c">
+                  <input @keyup.enter="login()" style="height:33px" class="bor10" type="text" id="id" name="id" placeholder="아이디" v-model="id">
                 </div>
-            
-			    <div class="flex-w flex-t p-t-15 p-b-15 m-l-20">
-                  <input @keyup.enter="login()" type="password" id="pwd" name="pwd" placeholder="비밀번호" v-model="pwd">
+			    <div class="flex-c">
+                  <input @keyup.enter="login()" style="height:33px" class="bor10" type="password" size=20 id="pwd" name="pwd" placeholder="비밀번호" v-model="pwd">
                 </div>
               </div>
-              <div class="col-sm-5 flex-c-m">
-                <button class="flex-c-m stext-101 cl1 bg3 hov-btn3 p-lr-15 trans-04 pointer" style="width:100px; height:100px" id="logBtn" v-on:click="login()"> 로그인 </button>
+              <div class="col-sm-4 flex-c">
+                <button class="flex-c-m stext-101 cl1 bg3 hov-btn3 p-lr-15 trans-04 pointer" style="width:100px; height:auto" id="logBtn" v-on:click="login()"> 로그인 </button>
 			  </div>
 			</div>
 			<div class="row flex-c-m p-t-15">
 			  <div class="flex-c-m">
-				<a href="#" class="btn btn-default" data-toggle="modal" data-target="#iframeModal" > 아이디 찾기 </a>&nbsp;|&nbsp;
-				<a id="pwfind"> 비밀번호 찾기 </a>&nbsp;|&nbsp;
-				<a href="../user/join.do"> 회원가입 </a>
+				<a href="#" style="color:#666666" data-toggle="modal" data-target="#iframeModal"> 아이디 찾기 </a>&nbsp;|&nbsp;
+				<a id="pwfind" style="color:#666666"> 비밀번호 찾기 </a>&nbsp;|&nbsp;
+				<a href="../user/join.do" style="color:#666666"> 회원가입 </a>
 			  </div>
 			</div>
          </div>  
@@ -43,12 +41,13 @@
         <div class="modal-body">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <div>
-            <iframe width="100%" height="350" src="../user/idfind.do"></iframe>
+            <iframe width="100%" height="200" src="../user/idfind.do"></iframe>
           </div>
         </div>
       </div>
     </div>
   </div>
+
   <script>
 new Vue({
  	el:'#login',
@@ -58,7 +57,6 @@ new Vue({
  		iframe:'',
  	},
  	mounted:function(){
- 		
     },
  	methods:{
  		login:function(){
@@ -117,7 +115,6 @@ $('#logBtn').click(function(){
 		$('#pwd').focus();
 		return;
 	}
-	
 	$.ajax({
 		type:'POST',
 		url:'login_ok.do',
@@ -143,7 +140,7 @@ $('#logBtn').click(function(){
 		}
 	})
 })
-}) */
+})*/
   </script>
 </body>
 </html>

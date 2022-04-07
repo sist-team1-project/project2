@@ -29,7 +29,6 @@ public class UserRestController {
 
 	@PostMapping("user/join_ok.do")
 	public String user_join(UserVO vo) {
-		System.out.println(vo.getU_address1());
 		dao.userJoin(vo);
 		return "ok";
 	}
@@ -56,29 +55,19 @@ public class UserRestController {
 
 	@GetMapping(value = "user/idfind_ok.do", produces = "text/plain;charset=utf-8")
 	public String user_idfind_ok(String id, String email) {
-	    Map map = new HashMap();
-        map.put("id",id);
-        map.put("email", email);
-        
+		Map map = new HashMap();
+		map.put("id", id);
+		map.put("email", email);
+
 		String result = dao.userFind(map);
 		return result;
 	}
-	
-	
-	/*@PostMapping("user/idfind_result.do")
-	public String user_idfind_result(Class user_idfind_ok, String id) {
-		
-		// 위 클래스에서 가져온 아이디를 출력하기
-		
-		String result = user_idfind_ok();
-		return result;
-	}*/
 
 	@PostMapping(value = "user/pwdfind_ok.do", produces = "text/plain;charset=utf-8")
 	public String user_pwdfind_ok(String id, String email) {
 		return "";
 	}
-	
+
 	/*
 	 * @PostMapping("user/pwdfind2_ok.do") public String user_pwdfind2_ok(String
 	 * question, String answer) { String result = dao.userAnswer(question, answer);

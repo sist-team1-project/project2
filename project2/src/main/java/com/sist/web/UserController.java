@@ -27,24 +27,25 @@ public class UserController {
 		session.invalidate();
 		return "redirect:../main/main.do";
 	}
-	
+
 	@GetMapping("user/join.do")
 	public String user_join() {
 		return "user/join";
 	}
-	
+
 	@GetMapping("user/idfind.do")
 	public String id_find() {
 		return "user/idfind/vue";
 	}
-	
+
 	@GetMapping("user/idfind2.do")
 	public String id_find_result() {
 		return "user/idfind2/vue";
 	}
-	
+
 	@GetMapping("user/pwdfind.do")
 	public String pwd_find() {
 		return "user/pwdfind";
 	}
+
 }
