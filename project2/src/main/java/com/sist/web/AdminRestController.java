@@ -6,15 +6,14 @@ import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import java.util.*;
 import com.sist.dao.*;
 import com.sist.vo.*;
 import com.sist.service.*;
 
 @RestController
+@RequestMapping("admin/")
 public class AdminRestController {
 
     @Autowired
@@ -26,7 +25,7 @@ public class AdminRestController {
     @Autowired
     private OrderDetailDAO oddao;
     
-    @GetMapping(value = "admin/orderlist_vue.do", produces = "text/plain;charset=utf-8")
+    @GetMapping(value = "orderlist_vue.do", produces = "text/plain;charset=utf-8")
     public String orderFull(int page) {
         
         int curpage = page;
@@ -68,6 +67,7 @@ public class AdminRestController {
                 obj.put("endPage", endPage);
                 obj.put("totalpage", totalpage);
                 obj.put("curpage", curpage);
+                obj.put("count", count);
             }
             
             arr.add(obj);
@@ -76,7 +76,7 @@ public class AdminRestController {
     }
 
     /**************** 주문상세페이지 ********************/
-    @GetMapping(value = "admin/orderdetail_vue.do", produces = "text/plain;charset=utf-8")
+    @GetMapping(value = "orderdetail_vue.do", produces = "text/plain;charset=utf-8")
     public String orderdetail_vue(String oid) {
         System.out.println(oid);
         JSONArray arr = new JSONArray();
@@ -98,8 +98,8 @@ public class AdminRestController {
         return arr.toJSONString();
     }
     
-    @GetMapping(value = "admin/order.do", produces = "text/plain;charset=utf-8")
-    public String order_vue(String oid) {
+    @GetMapping(value = "order.do", produces = "text/plain;charset=utf-8")
+    public String order(String oid) {
 
         OrderVO ovo = odao.order(oid);
             JSONObject obj = new JSONObject();
@@ -116,5 +116,14 @@ public class AdminRestController {
             obj.put("state", ovo.getO_state());
             
         return obj.toJSONString();
+    }
+    
+    @PostMapping(value = "order_state_update_ok.do", produces = "text/plain;charset=utf-8")
+    public void order_state_update_ok(int state, String oid) {
+        
+        Map map = new HashMap();
+        map.put("state",state);
+        map.put("oid",oid);
+        odao.stateupdate(map);
     }
 }

@@ -9,8 +9,8 @@
 <link rel="stylesheet" type="text/css" href="../css/order.css">
 <style type="text/css">
 td {
-	width: 150px;
-	margin: 0px auto;
+    width: 150px;
+    margin: 0px auto;
 }
 </style>
 </head>
@@ -31,13 +31,13 @@ td {
     <div class="row p-t-10">
       <div class="col-lg-12 m-lr-auto p-tb-10 dis-flex flex-sb flex-m">
         <div class="fs-13">
-        	총 {{count | currency}} 개
+            총 {{count | currency}} 개
         </div>
       </div>
       <div class="col-lg-12 m-lr-auto m-b-50">
         <div class="wrap-table js-pscroll">
           <table class="table-checkout">
-            <tr class="table_head font-center">
+            <tr class="table_head text-center">
               <th>주문일시</th>
               <th>주문번호</th>
               <th>주문자</th>
@@ -47,16 +47,17 @@ td {
             </tr>
             <tr v-for="o in orderFullList" class="table_row fs-13 font-center">
               <td>{{o.regdate}}</td>
-              <td><a href="#" class="btn btn-default" data-toggle="modal" data-target="#iframeModal" @click="iframe='../admin/orderdetail.do?oid='+o.oid">{{o.oid}}</a></td>
+              <td><a class="cl8" href="#" data-toggle="modal" @click="odetail(o.oid)">{{o.oid}}</a></td>
               <td>{{o.usid}}</td>
               <td>{{o.name}}</td>
               <td>{{o.price | currency }} 원</td>
               <td id="select" class="state">
-              <select>
-                <option :selected="o.state==1" @click="selecteOrder($event)">상품준비중</option>
-                <option :selected="o.state==2" @click="selecteOrder($event)">배송중</option>
-                <option :selected="o.state==3" @click="selecteOrder($event)">배송완료</option>
-                 <!-- <td>{{o.state}}</td>  --> 
+              <select @change="selecteOrder($event, o.oid)">
+                <option :selected="o.state==-1" value="-1">취소</option>
+                <option :selected="o.state==0" value="0">대기중</option>
+                <option :selected="o.state==1" value="1">상품준비중</option>
+                <option :selected="o.state==2" value="2">배송중</option>
+                <option :selected="o.state==3" value="3">배송완료</option>
               </select>
               </td>
              </tr>
@@ -65,59 +66,61 @@ td {
       </div>
     </div>
     
-	<!------------- 페이징 ------------->
+    <!------------- 페이징 ------------->
     <div class="text-center">
-	  <ul class="pagination">
-		<li class="page-item" :class="{'disabled':startPage==1}">
-		  <button class="page-link" :value="startPage-1" @click="getpage($event)"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
-		</li>
-		<li class="page-item" v-for="i in pages" :class="{'active':i==curpage}">
-		  <button class="page-link" :value="i" @click="getpage($event)">{{i}}</button>
-		</li>
-		<li class="page-item" :class="{'disabled':endPage==totalpage}">
-		  <button class="page-link" :value="endPage+1" @click="getpage($event)"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
-		</li>
-	  </ul>
-	</div>
-	
-    <!------------- 팝업 ------------->
-    <div class="modal fade" id="iframeModal" tabindex="-1" role="dialog" aria-labelledby="iframeModalLable" aria-hidden="true">
-      <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-body">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <div>
-              <iframe height="800px" width="100%" :src="iframe"></iframe>
-            </div>
+      <ul class="pagination">
+        <li class="page-item" :class="{'disabled':startPage==1}">
+          <button class="page-link" :value="startPage-1" @click="getpage($event)"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
+        </li>
+        <li class="page-item" v-for="i in pages" :class="{'active':i==curpage}">
+          <button class="page-link" :value="i" @click="getpage($event)">{{i}}</button>
+        </li>
+        <li class="page-item" :class="{'disabled':endPage==totalpage}">
+          <button class="page-link" :value="endPage+1" @click="getpage($event)"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+        </li>
+      </ul>
+    </div>
+      
+    
+    <!-- 사이드 Detail -->
+    <div class="wrap-header-admin js-panel-admin">
+      <div class="s-full" v-on:click="odetail_close"></div>
+      <div class="header-admin flex-col-l p-l-65 p-r-25">
+        <div class="header-admin-title flex-w flex-sb-m p-b-8">
+          <span class="mtext-103 cl2"> Detail </span>
+          <div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04">
+            <i class="zmdi zmdi-close" v-on:click="odetail_close"></i>
           </div>
+        </div>
+        <div class="header-admin-content flex-w js-pscroll">
+          <iframe height="800px" width="600px" :src="iframe"></iframe>
         </div>
       </div>
     </div>
   </div>
-  
   <script>
     new Vue({
         el:'#adorder',
         data:{
             oid:'${oid }',
             orderFullList: [],
-            //order: [], 			
+            //order: [],             
             curpage : 1,
-  		    totalpage : 0,
-  		    startPage : 0,
-  		    endPage : 0,
-  		    pages : [],
-  		    count : 0,
-  		    iframe:'',
-  		    selected:[],
-  		    state : 0
+              totalpage : 0,
+              startPage : 0,
+              endPage : 0,
+              pages : [],
+              count : 0,
+              iframe:'',
+              selected:[],
+              state : 0
         },
         filters:{
-  			currency: function(value){
-  				var num = new Number(value);
-  				return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,")
-  			}
-  		},
+              currency: function(value){
+                  var num = new Number(value);
+                  return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,")
+              }
+          },
         mounted:function(){
             this.oList();
             //console.log(this.oid);
@@ -126,7 +129,7 @@ td {
             oList:function(){
                 axios.get("http://localhost:8080/web/admin/orderlist_vue.do",{
                     params:{
-                  	  page: this.curpage
+                        page: this.curpage
                     }
                 }).then(res=>{
                     this.orderFullList = res.data;
@@ -135,23 +138,37 @@ td {
                     this.startPage = res.data[0].startPage;
                     this.endPage = res.data[0].endPage;
                     this.count = res.data[0].count;
-                  
+                    console.log(this.count);
                     this.pages=[];
                     for(i = this.startPage; i <= this.endPage; i++) {
                         this.pages.push(i);
                     }
                 })
             },
-    		getpage : function(event){
-    			this.curpage = event.currentTarget.value;
-    			this.oList();
-    		},
-    		selecteOrder:function(event) {
-    			// this.select;
-    			this.curpage = 1; // 페이지 초기화
-    			this.o.state = event.currentTarget.value; // o.state값을 반환..?
-    			this.oList();	// 목록출력
-    		}
+            getpage : function(event){
+                this.curpage = event.currentTarget.value;
+                this.oList();
+            },
+            selecteOrder:function(event, oid) {
+                let state = event.currentTarget.value;
+                axios.post("http://localhost:8080/web/admin/order_state_update_ok.do",null,{
+                    params:{
+                        state: state,
+                        oid: oid
+                    }
+                }).then(res=>{
+                    
+                })
+            },
+            /* 디테일 열기 */
+            odetail : function(oid) {
+                this.iframe = '../admin/orderdetail.do?oid=' + oid;
+                $('.js-panel-admin').addClass('show-header-admin');
+            },
+            /* 디테일 닫기 */
+            odetail_close : function(){
+                $('.js-panel-admin').removeClass('show-header-admin');
+            }
         }
     })
   </script>

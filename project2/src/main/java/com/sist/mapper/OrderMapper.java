@@ -44,7 +44,7 @@ public interface OrderMapper {
 	 public List<Map<String,Object>> orderFullList(Map map);
 	 
 	 /* 주문상태 변경 */
-	 @Update("UPDATE order_1 FROM o_state=#{ostate} WHERE oid=#{oid}")
+	 @Update("UPDATE order_1 SET o_state=#{state} WHERE o_id=#{oid}")
 	 public int stateupdate(Map map);
 	 
 	 

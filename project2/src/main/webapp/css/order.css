@@ -23,22 +23,81 @@
 }
 
 
-.modal {
-  text-align: center;
+
+
+
+
+
+
+/*=============================================
+[ Header admin ]*/
+.wrap-header-admin {
+    position: fixed;
+    z-index: 1100;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.0);
+    visibility: hidden;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
 }
 
-@media screen and (min-width: 768px) { 
-  .modal:before {
-    display: inline-block;
-    vertical-align: middle;
-    content: " ";
-    height: 100%;
-  }
+.header-admin {
+    position: fixed;
+    z-index: 1100;
+    width: 700px;
+    max-width: calc(100% - 30px);
+    height: 100vh;
+    top: 0;
+    right: -400px;
+    background-color: #fff;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.34;
+    transition: all 0.4s;
+    box-shadow: 0 3px 6px 0px rgba(0, 0, 0, 0.18);
+    -moz-box-shadow: 0 3px 6px 0px rgba(0, 0, 0, 0.18);
+    -webkit-box-shadow: 0 3px 6px 0px rgba(0, 0, 0, 0.18);
+    -o-box-shadow: 0 3px 6px 0px rgba(0, 0, 0, 0.18);
+    -ms-box-shadow: 0 3px 6px 0px rgba(0, 0, 0, 0.18);
 }
 
-.modal-dialog {
-  display: inline-block;
-  text-align: left;
-  vertical-align: middle;
-  width:100%;
+.header-admin::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 9%;
+    min-height: 30px;
+}
+
+.show-header-admin {
+    visibility: visible;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.show-header-admin .header-admin {
+    right: 0;
+}
+
+/*---------------------------------------------*/
+.header-admin-title {
+    width: 100%;
+    max-width: 100%;
+    height: 16.5%;
+    min-height: 85px;
+}
+
+.header-admin-content {
+    flex-grow: 1;
+    overflow: auto;
+    align-content: space-between;
+}
+/*---------------------------------------------*/
+
+.w-2full {
+    width: 200%;
 }
