@@ -32,7 +32,6 @@ public class AskDAO {
 	}
 
 	public AskVO askDetailData(int no) {
-		mapper.askVisitsIncrement(no);
 		return mapper.askDetailData(no);
 	}
 
