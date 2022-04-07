@@ -170,8 +170,7 @@
 	        gimage: '',
 	        eid: [],
 	        categories1: [],
-	        categories2: [],
-
+	        categories2: []
 	    },
 	    mounted: function() {
 	        this.cate1();
@@ -226,7 +225,12 @@
 	            console.log("gstatus : " + this.gstatus);
 	            console.log("gimage : " + this.gimage);
 	            console.log("eid : " + this.eid);
-
+							
+	            if (this.eid == null) {
+							this.eid.push(0);
+							console.log("eid : " + this.eid);
+				}
+	            
 	            let map = {
 	                c_id: this.cid2,
 	                g_name: this.gname,

@@ -96,7 +96,7 @@ public interface GoodsMapper {
 	public int goodsCount();
 
 	@Select("SELECT g_id,g_name,g_brand,g_price,g_sale,g_image,g_detail,g_status,g_stock FROM Goods_1 "
-			+"WHERE g_id=#{gid}")
+			+"WHERE g_id=#{g_id}")
 	public GoodsVO goodsDetail(Map map);
 
 	@Insert("INSERT INTO goods_1 VALUES(goods_id_seq_1.NEXTVAL, #{c_id}, #{g_name}, #{g_brand}, #{g_price}, #{g_sale}, #{g_image}, #{g_detail}, #{g_stock}, 0, #{g_status}, SYSDATE)")

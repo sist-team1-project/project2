@@ -107,8 +107,7 @@ public class AdminRestController2 {
 
 	@PostMapping("admin/goods_update_ok.do")
 	public String goods_update_ok(@RequestBody HashMap<String, Object> map) {
-		
-		
+
 		return "";
 	}
 
@@ -126,24 +125,37 @@ public class AdminRestController2 {
 		vo.setG_stock(Integer.parseInt(map.get("g_stock").toString()));
 		vo.setG_status(Integer.parseInt(map.get("g_status").toString()));
 
+		gdao.goodsInsert(vo);
+
 		int e_id = 0;
+		int g_id = gdao.goodsCount();
 
 		System.out.println("eid : " + map.get("eid"));
+		System.out.println("gid : " + g_id);
 
 		String a = (String) map.get("eid");
-		if (a != null) {
+		EventGoodsVO evo = new EventGoodsVO();
+		if (a != "") {
 			System.out.println("a : " + a);
 			if (a.contains(",")) {
 				String[] eid = a.split(",");
 				for (String st : eid) {
 					System.out.print(st + " ");
-					gdao.goodsInsert(vo, Integer.parseInt(st));
+					evo.setE_id(Integer.parseInt(st));
+					evo.setG_id(g_id);
+					gdao.goodsEventInsert(evo);
 				}
 				return "ok";
 			}
-			e_id = Integer.parseInt(a);
+			evo.setE_id(Integer.parseInt(a));
+			evo.setG_id(g_id);
+			try {
+				e_id = Integer.parseInt(a);
+				gdao.goodsEventInsert(evo);
+			} catch (Exception e) {
+			}
+
 		}
-		gdao.goodsInsert(vo, e_id);
 
 		return "ok";
 	}

@@ -28,21 +28,26 @@ public class AdminController2 {
 
 	@GetMapping("goods_update.do")
 	public String goods_update(int g_id, Model model) {
-		/*
-		 * @GetMapping("update.do")
-		   public String replyUpdate(int no,Model model)
-		   {
-			   ReplyVO vo=dao.replyUpdateData(no);
-			   model.addAttribute("vo", vo);
-			   return "reply/update";
-		   } 
-		 * 
-		 */
+
 		Map map = new HashMap();
 		map.put("g_id", g_id);
 
 		GoodsVO vo = dao.goodsDetail(map);
+		
+		int e_id = 0;
+		
+		try {
+			int eidtest = dao.goodsEidData(g_id);
+			System.out.println("eid : " + eidtest);
+			e_id = eidtest;
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 
+
+		model.addAttribute("e_id", e_id);
 		model.addAttribute("vo", vo);
 		return "admin/goods_update";
 	}

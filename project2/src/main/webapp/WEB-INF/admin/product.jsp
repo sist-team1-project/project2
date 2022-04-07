@@ -33,16 +33,12 @@
 				<button class="flex-c-m stext-101 cl0 btn-sm btn-pro-color2 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail fs-10" v-on:click="gfind()">검색</button>
 				&nbsp; &nbsp;
 				<button class="flex-c-m stext-101 cl0 btn-sm btn-pro-color2 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail fs-10" onclick="location.href='../admin/adlist.do'">초기화</button>
-				
+
 			</div>
 		</div>
 		<div class="row p-t-10">
 			<div class="col-lg-12 m-lr-auto p-tb-10 dis-flex flex-sb flex-m">
-				<div class="fs-13">
-					총
-					{{count | currency}}
-					개
-				</div>
+				<div class="fs-13">총 {{count | currency}} 개</div>
 				<button class="flex-c-m stext-101 cl0 btn-sm btn-pro-color2 bor1 hov-btn1 p-lr-15 trans-04  fs-10" onclick="location.href='../admin/goods_add.do'">상품 등록</button>
 			</div>
 			<div class="col-lg-12 m-lr-auto m-b-50">
@@ -146,104 +142,110 @@
 
 
 	<script>
-			new Vue({
-				el : '#adminGoods', // 제어하는 영역 
-				data : {
-					ss : '',
-					goodsList : [],
-					curpage : 1,
-					totalpage : 0,
-					startPage : 0,
-					endPage : 0,
-					gdetail : '',
-					pages : [],
-					count : 0,
-					g_id : 0,
-					 
-					selected : '',
-    			   	fs : ["N","S","C","D"],
-    			   	ss : ''
-				},
-				filters:{
-					currency: function(value){
-						var num = new Number(value);
-						return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,")
-					}
-				},
-				mounted : function() {
-					this.dataSend();
-				},
-				methods : {
-					dataSend:function(){
-						if (!this.ss) {
-							console.log("ss null :  " + this.ss)
-						}
-						
-						axios.get("http://localhost:8080/web/admin/adlist_vue.do", {
-							params : {
-									page : this.curpage,
-									fs : this.fs.join(","),
-									ss : this.ss
-							}
-						}).then(res => {
-							this.goodsList = res.data;
-							console.log(this.goodsList);
-							this.curpage = res.data[0].curpage;
-							this.totalpage = res.data[0].totalpage;
-							this.gdetail = res.data[0].g_detail;
-							this.startPage = res.data[0].startPage;
-							this.endPage = res.data[0].endPage;
-							this.count = res.data[0].count;
-							
-							this.pages=[];
-              for(i = this.startPage; i <= this.endPage; i++) {
-                  this.pages.push(i);
-              }
-						})
-					},
-					prev:function(event){
-		    			this.curpage = event.currentTarget.getAttribute('value');
-		    			this.dataSend();
-    		    	},
-    	    		next:function(event){
-    	    				this.curpage = event.currentTarget.getAttribute('value');
-    	    				this.dataSend();
-    	    		},
-    	    		getpage : function(event){
-    	    				this.curpage = event.currentTarget.getAttribute('value');
-    	    				this.dataSend();
-    	    		},
-					gfind : function() {	
-						console.log("검색버튼이다")
-						if (!this.ss) {
-							console.log("ss null")
-							this.$refs.goodsfind.focus();
-							return;
-						}
-						if (this.fs.length == 0) {
-							console.log("fs null")
-							this.fs.push("N", "S", "C", "D");
-							console.log(this.fs)
-						}
-						this.dataSend();				
-					},
-					goods_update : function() {
-						console.log("상품 수정");
-						var index = event.currentTarget.getAttribute('index');
-						this.g_id = this.goodsList[index].g_id;
-						console.log(this.g_id);
-						
-						location.href = '../admin/goods_update.do?g_id=' + this.g_id;
-					},
-					goods_detail : function(detailId) {
-						this.gdetail = detailId;
-						$('.js-panel-admin').addClass('show-header-admin');
-					},
-					goods_detail_close : function(){
-						$('.js-panel-admin').removeClass('show-header-admin');
-					}
-				}
-			})
+	new Vue({
+	    el: '#adminGoods', // 제어하는 영역 
+	    data: {
+	        ss: '',
+	        goodsList: [],
+	        curpage: 1,
+	        totalpage: 0,
+	        startPage: 0,
+	        endPage: 0,
+	        gdetail: '',
+	        pages: [],
+	        count: 0,
+	        g_id: 0,
+
+	        selected: '',
+	        fs: ["N", "S", "C", "D"],
+	        ss: ''
+	    },
+	    filters: {
+	        currency: function(value) {
+	            var num = new Number(value);
+	            return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,")
+	        }
+	    },
+	    mounted: function() {
+	        this.dataSend();
+	    },
+	    methods: {
+	        dataSend: function() {
+	            if (!this.ss) {
+	                console.log("ss null :  " + this.ss)
+	            }
+
+	            axios.get("http://localhost:8080/web/admin/adlist_vue.do", {
+	                params: {
+	                    page: this.curpage,
+	                    fs: this.fs.join(","),
+	                    ss: this.ss
+	                }
+	            }).then(res => {
+	                this.goodsList = res.data;
+	                console.log(this.goodsList);
+	                this.curpage = res.data[0].curpage;
+	                this.totalpage = res.data[0].totalpage;
+	                this.gdetail = res.data[0].g_detail;
+	                this.startPage = res.data[0].startPage;
+	                this.endPage = res.data[0].endPage;
+	                this.count = res.data[0].count;
+
+	                this.pages = [];
+	                for (i = this.startPage; i <= this.endPage; i++) {
+	                    this.pages.push(i);
+	                }
+	            })
+	        },
+	        prev: function(event) {
+	            this.curpage = event.currentTarget.getAttribute('value');
+	            this.dataSend();
+	        },
+	        next: function(event) {
+	            this.curpage = event.currentTarget.getAttribute('value');
+	            this.dataSend();
+	        },
+	        getpage: function(event) {
+	            this.curpage = event.currentTarget.getAttribute('value');
+	            this.dataSend();
+	        },
+	        gfind: function() {
+	            console.log("검색버튼이다")
+	            if (!this.ss) {
+	                console.log("ss null")
+	                this.$refs.goodsfind.focus();
+	                return;
+	            }
+	            if (this.fs.length == 0) {
+	                console.log("fs null")
+	                this.fs.push("N", "S", "C", "D");
+	                console.log(this.fs)
+	            }
+	            this.dataSend();
+	        },
+	        goods_update: function() {
+	            console.log("상품 수정");
+	            var index = event.currentTarget.getAttribute('index');
+	            this.g_id = this.goodsList[index].g_id;
+	            console.log(this.g_id);
+
+	            /* axios.post("http://localhost:8080/web/admin/goods_update_ok.do", {
+	                params: {
+	                    g_id: this.g_id
+	                }
+	            }).then(res => {}) */
+	            
+	            location.href = '../admin/goods_update.do?g_id=' + this.g_id;
+	        },
+	        goods_detail: function(detailId) {
+	            this.gdetail = detailId;
+	            $('.js-panel-admin').addClass('show-header-admin');
+	        },
+	        goods_detail_close: function() {
+	            $('.js-panel-admin').removeClass('show-header-admin');
+	        }
+	    }
+	})
 		</script>
 </body>
 </html>
