@@ -13,4 +13,5 @@ public interface ListService {
     public List<String> brandList(String cid);
     public List<CategoryVO> categoryList_1();
     public List<CategoryVO> categoryList_2();
+    public String categoryName(String cid);
 }

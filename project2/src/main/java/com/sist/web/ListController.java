@@ -18,7 +18,6 @@ public class ListController {
     public String goods_list(String cid, Model model) {
         if (cid==null) cid="";
         int maxPrice = service.goodsMaxPrice(cid);
-        System.out.println("max:"+maxPrice);
         model.addAttribute("cid", cid);
         model.addAttribute("maxPrice", maxPrice);
         return "goods/list";

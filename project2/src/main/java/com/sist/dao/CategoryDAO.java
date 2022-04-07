@@ -22,4 +22,8 @@ public class CategoryDAO {
     public List<CategoryVO> categoryList_2(){
         return mapper.categoryList_2();
     }
+    
+    public String categoryName(String cid) {
+        return mapper.categoryName(cid);
+    }
 }

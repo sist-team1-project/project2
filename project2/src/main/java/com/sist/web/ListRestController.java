@@ -63,9 +63,7 @@ public class ListRestController {
             for (GoodsVO vo : list) {
                 JSONObject obj = new JSONObject();
                 obj.put("gid", vo.getG_id());
-                String name = vo.getG_name();
-                
-                obj.put("name", name);
+                obj.put("name", vo.getG_name());
                 obj.put("price", vo.getG_price());
                 String images = vo.getG_image();
                 String[] image = images.split(";");
@@ -84,19 +82,22 @@ public class ListRestController {
         return arr.toJSONString();
     }
     
-    @GetMapping(value = "goods/list_brand_vue.do", produces = "text/plain;charset=utf-8")
-    public String goods_list_brand_vue(String cid, String keyword) {
-        
-        Map map = new HashMap();
-        map.put("cid", cid);
-        map.put("keyword", keyword);
+    @GetMapping(value = "goods/brandlist_cname_vue.do", produces = "text/plain;charset=utf-8")
+    public String goods_brandlist_cname_vue(String cid) {
         
         List<String> list = service.brandList(cid);
+        String cname = service.categoryName(cid);
+        
         JSONArray arr = new JSONArray();
-        for (String i : list) {
+        int i = 0;
+        for (String j : list) {
             JSONObject obj = new JSONObject();
-            obj.put("brand", i);
+            if(i == 0) {
+                obj.put("cname", cname);
+            }
+            obj.put("brand", j);
             arr.add(obj);
+            i++;
         }
         return arr.toJSONString();
     }

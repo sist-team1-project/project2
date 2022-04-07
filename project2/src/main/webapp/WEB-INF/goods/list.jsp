@@ -37,7 +37,7 @@
           </div>
         </div>
       </div>
-      <div id="items" class="row p-t-40 p-b-10"><div class="col-lg-12"><h4>제품</h4></div></div>
+      <div id="items" class="row p-t-40 p-b-10"><div class="col-lg-12"><h4>{{cname}}</h4></div></div>
       <!-- --------------------- -->
       <!-- ------ 검색 순서 ------ -->
       <div id="order" class="bor8 m-tb-10 cl2 p-tb-10 p-lr-40 p-lr-15-sm">
@@ -47,7 +47,7 @@
         <button class="cl2" :class="{'activeFilter':order=='D'}" value="D" @click="searchByOrder($event)">높은가격 순</button>
       </div>
       <!-- --------------------- -->
-      <div class="row" v-if="empty==1">
+      <div class="row" v-if="empty==1"> <!-- 상품이 하나도 없으면 아예 출력을하지 않는다 -->
         <!-- 아이템 -->
         <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 women" v-for="vo in goods">
           <div class="block2">
@@ -81,6 +81,7 @@
     
   </div>
   <script>
+    /* 제품 출력용 Vue 필터 */
     Vue.filter("makeComma", val =>{
         return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     })
@@ -88,6 +89,8 @@
         el:'#listpage',
         data:{
             cid:'${cid }',
+            cname: '',
+            cname: '',
             keyword:'',
             brands:[],
             selectedBrands:[],
@@ -102,6 +105,10 @@
             checkAll:true
         },
         mounted:function(){
+            
+            this.brandListAndCname();
+            
+            /* 가격 슬라이더 */
             $("#slider-range").slider({
                 range: true,
                 min: 0,
@@ -110,17 +117,18 @@
                 slide: function( event, ui ) {
                     let price1 = ui.values[0].toLocaleString('ko-KR');
                     let price2 = ui.values[1].toLocaleString('ko-KR');
-                    $("#amount").text("₩" + price1 + " - ₩" + price2);
+                    $("#amount").text("₩" + price1 + " - ₩" + price2); // 변경되는 가격 뿌려주기
                 }
             });
+            /* 가격 슬라이더 초기 설정 */
             let price1 = $('#slider-range').slider("values")[0].toLocaleString('ko-KR');
             let price2 = $('#slider-range').slider("values")[1].toLocaleString('ko-KR');
-            $("#amount").text("₩" + price1 + " - ₩" + price2);
+            $("#amount").text("₩" + price1 + " - ₩" + price2); // 초기 가격 뿌려주기
             this.list();
         },
         methods:{
+            /* 상품 출력 */
             list:function(){
-                this.brandList();
                 $("#items")[0].scrollIntoView();
                 axios.get("http://localhost:8080/web/goods/list_vue.do",{
                     params:{
@@ -149,41 +157,46 @@
                     for(i = this.start; i <= this.end; i++) {
                         this.pages.push(i);
                     }
-                    
                 })
             },
-            brandList:function(){
-                axios.get("http://localhost:8080/web/goods/list_brand_vue.do",{
+            /* 브랜드 목록 & 카테고리 이름 출력 (초기 1번만) */
+            brandListAndCname:function(){
+                axios.get("http://localhost:8080/web/goods/brandlist_cname_vue.do",{
                     params:{
-                        cid: this.cid,
-                        keyword: this.keyword
+                        cid: this.cid
                     }
                 }).then(result=>{
                     this.brands=result.data;
+                    this.cname=result.data[0].cname;
                 })
             },
+            /* 페이지 전환 */
             paging:function(event) {
                 this.curpage = event.currentTarget.value;
                 this.list();
             },
+            /* 검색 버튼 */
             search:function() {
-                this.order = 'A';
-                this.curpage = 1;
-                this.list();
+                this.order = 'A'; // 검색 순서 초기화
+                this.curpage = 1; // 페이지 초기화
+                this.list();      // 목록 출력
             },
+            /* 검색 순서 버튼 */
             searchByOrder:function(event) {
-                this.curpage = 1;
-                this.order = event.currentTarget.value;
-                this.list();
+                this.curpage = 1; // 페이지 초기화
+                this.order = event.currentTarget.value; // 누른 버튼의 값(원하는 순서)을 가지고옴
+                this.list();      // 목록 출력
             },
+            /* 브랜드 전체 체크 버튼 */
             brandCheckAll:function() {
-                if(this.checkAll == false) {
+                if(this.checkAll == false) {  // 전체 체크 버튼을 선택
                     this.checkAll = true;
-                    this.selectedBrands = [];
-                } else {
+                    this.selectedBrands = []; // 브랜드 목록 초기화 (빈 배열일시 쿼리문에서 브랜드를 조건에 넣지 않음)
+                } else {                      // 전체 체크 버튼을 해제
                     this.checkAll = false;
                 }
             },
+            /* 브랜드 전체 체크 해제 버튼 */
             brandCheck:function() {
                 this.checkAll = false;
             }

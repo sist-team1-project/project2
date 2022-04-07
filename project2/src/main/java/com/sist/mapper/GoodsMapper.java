@@ -26,7 +26,7 @@ public interface GoodsMapper {
 	        + "</if>"
             + "<choose>"
 	        + "<when test=\"order=='B'.toString()\">"
-	        + "ORDER BY g_sold"
+	        + "ORDER BY g_sold DESC"
 	        + "</when>"
 	        + "<when test=\"order=='C'.toString()\">"
             + "ORDER BY g_price ASC"
