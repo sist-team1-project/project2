@@ -175,12 +175,10 @@
         	  		params:{
         	   		    g_id:this.gid,
         	   		    g_quantity:this.quantity
-        	   		    
         	   		}
         	    }).then(res=>{
         	   		alert("장바구니에 저장 되었습니다.")
         	    })
-            	
             },
             qUp:function(){
             	if(this.quantity<this.goods.stock){

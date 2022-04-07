@@ -1,7 +1,8 @@
 package com.sist.service;
-import java.util.*;
 
-import com.sist.vo.GoodsVO;
+import com.sist.vo.*;
+
 public interface GoodsService {
-	public GoodsVO goodsDetail(Map map);
+    
+	public GoodsVO goodsDetail(String gid);
 }

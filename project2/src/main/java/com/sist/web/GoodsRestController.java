@@ -6,23 +6,24 @@ import java.util.Map;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sist.service.GoodsService;
 import com.sist.vo.GoodsVO;
 
 @RestController
-
+@RequestMapping("goods/")
 public class GoodsRestController {
+    
     @Autowired
     private GoodsService service;
 
-    @GetMapping(value = "goods/detail_vue.do", produces = "text/plain;charset=utf-8")
+    @GetMapping(value = "detail_vue.do", produces = "text/plain;charset=utf-8")
     public String goods_detail(String gid) {
-        Map map = new HashMap();
-        map.put("gid", gid);
-        GoodsVO vo = service.goodsDetail(map);
-
+        
+        GoodsVO vo = service.goodsDetail(gid);
+        
         JSONObject obj = new JSONObject();
         
         obj.put("gid", vo.getG_id());

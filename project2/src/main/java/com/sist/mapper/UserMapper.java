@@ -8,10 +8,14 @@ import com.sist.vo.*;
 
 public interface UserMapper {
 
-	// id존재 여부
+	// 회원가입: id 존재 여부
 	@Select("SELECT COUNT(*) FROM user_1 " + "WHERE u_id=#{id}")
 	public int idCount(String id);
-
+	
+	// 회원가입: email 존재 여부
+    @Select("SELECT COUNT(*) FROM user_1 " + "WHERE u_email=#{email}")
+    public int emailCount(String email);
+    
 	// password, name
 	@Select("SELECT u_password||','||u_grade FROM user_1 " + "WHERE u_id=#{id}")
 	public String memberGetPwdAndName(String id);
@@ -26,7 +30,7 @@ public interface UserMapper {
 			+ "FROM user_1 WHERE u_id=#{uid}")
 	public UserVO userInfo(String uid);
 
-	// email존재 여부
+	// 아이디 찾기: email 존재 여부
 	@Select("SELECT COUNT(*) FROM user_1 WHERE u_name=#{name} AND u_email=#{email}")
 	public int idEmailCount(Map map);
 

@@ -1,23 +1,21 @@
 package com.sist.service;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sist.dao.GoodsDAO;
-import com.sist.vo.GoodsVO;
+import com.sist.dao.*;
+import com.sist.vo.*;
+
 @Service
 public class GoodsServiceImpl implements GoodsService{
+    
 	@Autowired
 	private GoodsDAO gdao;
-
 	
 	@Override
-	public GoodsVO goodsDetail(Map map) {
-		return gdao.goodsDetail(map);
+	public GoodsVO goodsDetail(String gid) {
+		return gdao.goodsDetail(gid);
 	}
-
-
-
 }

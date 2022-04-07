@@ -16,6 +16,7 @@ import com.sist.vo.GoodsVO;
 @Controller
 @RequestMapping("goods/")
 public class GoodsController {
+    
 	@Autowired
 	private GoodsService service;
 	

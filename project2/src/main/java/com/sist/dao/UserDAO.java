@@ -34,7 +34,17 @@ public class UserDAO {
 		}
 		return result;
 	}
-
+	
+	public int idCheck(String id) {
+        int result = mapper.idCount(id);
+        return result;
+    }
+	
+	public int emailCheck(String email) {
+        int result = mapper.emailCount(email);
+        return result;
+    }
+	
 	public void userJoin(UserVO vo) {
 		mapper.userJoin(vo);
 	}
@@ -64,10 +74,4 @@ public class UserDAO {
 		}
 		return bCheck;
 	}
-
-	public int idCheck(String id) {
-		int result = mapper.idCount(id);
-		return result;
-	}
-
 }

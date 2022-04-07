@@ -18,7 +18,8 @@ public class GoodsDAO {
 
 	@Autowired
 	private EventGoodsMapper mapper2;
-
+	
+	/*  ------- 리스트 페이지 -------  */
 	public int goodsMaxPrice(String cid) {
 		return mapper.goodsMaxPrice(cid);
 	}
@@ -30,11 +31,12 @@ public class GoodsDAO {
 	public int goodsListTotalpage(Map map) {
 		return mapper.goodsListTotalpage(map);
 	}
-
+	
 	public List<String> brandList(String cid) {
 		return mapper.brandList(cid);
 	}
-
+	/*  --------------------------  */
+	
 	public List<GoodsVO> goodsTotalList(Map map) {
 		return mapper.goodsTotalList(map);
 	}
@@ -47,10 +49,9 @@ public class GoodsDAO {
 		return mapper.goodsCount();
 	}
 
-	public GoodsVO goodsDetail(Map map) {
-		return mapper.goodsDetail(map);
+	public GoodsVO goodsDetail(String gid) {
+		return mapper.goodsDetail(gid);
 	}
-
 	
 	public void goodsEventInsert(EventGoodsVO vo) {
 		mapper2.goodsEventInsert(vo);
@@ -81,5 +82,4 @@ public class GoodsDAO {
 	public int goodsEidData(int g_id) {
 		return mapper2.goodsEidData(g_id);
 	}
-
 }
