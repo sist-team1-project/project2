@@ -71,27 +71,7 @@
   </form>
  </div>
   <script>
-  new Vue({
-      el:'#cart',
-      data:{
-          gid:${gid},
-          goods:{},
-          images:[],
-          image:'',
-          quantity:0
-      },
-      mounted:function(){
-  	   	axios.get('http://localhost:8080/web/goods/detail_vue.do',{
-  	  		params:{
-  	   		    gid:this.gid
-  	   		}
-  	    }).then(res=>{
-  	   		this.goods=res.data;
-  	   		console.log(res.data.image);
-  	   		this.images=this.goods.image.split(";");
-  	   		this.image=this.images[0];
-  	    })
-      }
+
   </script>
 </body>
 </html>
