@@ -29,8 +29,8 @@ public class ListServiceImpl implements ListService {
     }
     
     @Override
-    public List<String> brandList(Map map) {
-        return gdao.brandList(map);
+    public List<String> brandList(String cid) {
+        return gdao.brandList(cid);
     }
     
     @Override

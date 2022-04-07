@@ -9,21 +9,38 @@ import com.sist.vo.*;
 public interface GoodsMapper {
     
     /*  ------- 리스트 페이지 -------  */
-	@Select("SELECT g_id,g_name,g_price,g_image "
+	@Select("<script>"
+	        + "SELECT g_id,g_name,g_price,g_image "
 	        + "FROM (SELECT g_id,g_name,g_price,g_image,rownum as num "
 	        + "FROM (SELECT /*+ INDEX_DESC(goods_1 goods_g_id_pk_1)*/g_id,g_name,g_price,g_image "
 	        + "FROM goods_1 "
-	        + "WHERE c_id LIKE #{cid}||'%' AND g_name LIKE '%'||#{keyword}||'%')) "
-	        + "WHERE num BETWEEN #{start} AND #{end}")
+	        + "WHERE c_id LIKE #{cid}||'%' AND g_name LIKE '%'||#{keyword}||'%' "
+	        + "<if test=\"brands.size!=0\">"
+	        + "AND g_brand IN "
+	        + "<foreach collection='brands' item='b' index='index' open='(' close=')' separator=','>"
+	        + "#{b}"
+	        + "</foreach>"
+	        + "</if>"
+	        + "))"
+	        + "WHERE num BETWEEN #{start} AND #{end}"
+	        + "</script>")
 	public List<GoodsVO> goodsList(Map map);
 	
-	@Select("SELECT CEIL(COUNT(*)/20.0) "
+	@Select("<script>"
+	        + "SELECT CEIL(COUNT(*)/20.0) "
             + "FROM goods_1 "
-            + "WHERE c_id LIKE #{cid}||'%' AND g_name LIKE '%'||#{keyword}||'%'")
+            + "WHERE c_id LIKE #{cid}||'%' AND g_name LIKE '%'||#{keyword}||'%'"
+            + "<if test=\"brands.size!=0\">"
+            + "AND g_brand IN "
+            + "<foreach collection='brands' item='b' index='index' open='(' close=')' separator=','>"
+            + "#{b}"
+            + "</foreach>"
+            + "</if>"
+            + "</script>")
     public int goodsListTotalpage(Map map);
 	
-	@Select("SELECT DISTINCT g_brand FROM goods_1 WHERE c_id LIKE #{cid}||'%' AND g_name LIKE '%'||#{keyword}||'%'")
-	public List<String> brandList(Map map);
+	@Select("SELECT DISTINCT g_brand FROM goods_1 WHERE c_id LIKE #{cid}||'%'")
+	public List<String> brandList(String cid);
     /*  --------------------------  */
 	
 	@Select("SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status, TO_CHAR(g_regdate,'YYYY-MM-DD HH24:MI:SS')as g_regdate, num "

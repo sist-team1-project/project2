@@ -16,7 +16,7 @@ public class ListRestController {
     private ListService service;
     
     @GetMapping(value = "goods/list_vue.do", produces = "text/plain;charset=utf-8")
-    public String goods_list_vue(String cid, int page, String keyword) {
+    public String goods_list_vue(String cid, int page, String keyword, String brands) {
         
         int curpage = page;
         
@@ -29,8 +29,15 @@ public class ListRestController {
         map.put("keyword", keyword);
         map.put("start", start);
         map.put("end", end);
+        List<String> brandList = new ArrayList<String>();
+        StringTokenizer st = new StringTokenizer(brands,",");
+        while(st.hasMoreTokens()){
+            brandList.add(st.nextToken());
+        }
+        map.put("brands", brandList);
         
         int totalpage = service.goodsListTotalpage(map);
+        List<GoodsVO> list = service.goodsList(map);
         
         final int BLOCK = 10;
         int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
@@ -39,7 +46,6 @@ public class ListRestController {
             endPage = totalpage;
         }
         
-        List<GoodsVO> list = service.goodsList(map);
         JSONArray arr = new JSONArray();
         
         if(list.size() == 0) {
@@ -83,7 +89,7 @@ public class ListRestController {
         map.put("cid", cid);
         map.put("keyword", keyword);
         
-        List<String> list = service.brandList(map);
+        List<String> list = service.brandList(cid);
         JSONArray arr = new JSONArray();
         for (String i : list) {
             JSONObject obj = new JSONObject();
