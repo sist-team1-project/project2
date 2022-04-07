@@ -25,16 +25,21 @@ public class AdminController2 {
 	public String goods_add_vue() {
 		return "admin/goods_add";
 	}
-	
+
 	@GetMapping("goods_update.do")
 	public String goods_update(int g_id) {
 		// mapper , dao 필요
 		// 모델 이용해서 전달
 		return "admin/goods_update";
 	}
-	
+
 	@GetMapping("inquiry_admin.do")
 	public String inquiry_admin() {
 		return "admin/inquiry_admin";
+	}
+
+	@GetMapping("user_management.do")
+	public String user_management() {
+		return "admin/user_management";
 	}
 }
