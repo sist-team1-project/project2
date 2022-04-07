@@ -16,7 +16,7 @@ public class ListRestController {
     private ListService service;
     
     @GetMapping(value = "goods/list_vue.do", produces = "text/plain;charset=utf-8")
-    public String goods_list_vue(String cid, int page, String keyword, String brands) {
+    public String goods_list_vue(String cid, int page, String keyword, String brands, int price1, int price2, String order) {
         
         int curpage = page;
         
@@ -35,8 +35,11 @@ public class ListRestController {
             brandList.add(st.nextToken());
         }
         map.put("brands", brandList);
+        map.put("price1", price1);
+        map.put("price2", price2);
         
         int totalpage = service.goodsListTotalpage(map);
+        map.put("order", order);
         List<GoodsVO> list = service.goodsList(map);
         
         final int BLOCK = 10;
@@ -61,8 +64,7 @@ public class ListRestController {
                 JSONObject obj = new JSONObject();
                 obj.put("gid", vo.getG_id());
                 String name = vo.getG_name();
-                if (name.length() >= 22)
-                    name = name.substring(0, 20) + "...";
+                
                 obj.put("name", name);
                 obj.put("price", vo.getG_price());
                 String images = vo.getG_image();

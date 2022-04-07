@@ -3233,3 +3233,10 @@ input.num-product::-webkit-inner-spin-button {
 .page-link:focus, .page-link:hover {
   color: #5A5A5A;
 }
+
+.short {
+  display:block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}

@@ -20,6 +20,7 @@
   <link rel="stylesheet" type="text/css" href="../vendor/slick/slick.css">
   <link rel="stylesheet" type="text/css" href="../vendor/MagnificPopup/magnific-popup.css">
   <link rel="stylesheet" type="text/css" href="../vendor/perfect-scrollbar/perfect-scrollbar.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" type="text/css" href="../css/util.css">
   <link rel="stylesheet" type="text/css" href="../css/main.css">
   <script src="../vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -27,7 +28,7 @@
   <script src="../vendor/select2/select2.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
   <script src="http://unpkg.com/axios/dist/axios.min.js"></script>
-  
+  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 </head>
 <body>
     
