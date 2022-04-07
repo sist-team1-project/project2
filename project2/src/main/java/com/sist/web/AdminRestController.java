@@ -76,7 +76,7 @@ public class AdminRestController {
     }
 
     /**************** 주문상세페이지 ********************/
-    @GetMapping(value = "admin/orderdetail.do", produces = "text/plain;charset=utf-8")
+    @GetMapping(value = "admin/orderdetail_vue.do", produces = "text/plain;charset=utf-8")
     public String orderdetail_vue(String oid) {
         System.out.println(oid);
         JSONArray arr = new JSONArray();
