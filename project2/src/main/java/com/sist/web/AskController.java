@@ -1,9 +1,5 @@
 package com.sist.web;
 
-import org.snu.ids.ha.index.Keyword;
-
-import org.snu.ids.ha.index.KeywordExtractor;
-import org.snu.ids.ha.index.KeywordList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,21 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-/*
- *   JSP => 요청 => Model => 전송받은 데이터 출력 => JSP
- *        ------  ------    -----------------------
- *        DispatcherServlet       ViewResolver(InternalResourceViewResolver,TilesView)
- *                HandlerMapping  ---------------------------------
- *                --------------      => 경로명 , 확장자 
- *                1. 클래스 찾기                  => 등록된 리턴형  ==> 
- *                   @Controller
- *                   @RestController 
- *                2. 메소드 찾기
- *                   @RequestMapping
- *                   @Getmapping
- *                   @PostMapping
- *                => 1) 에러 (Autowired,404)
- */
 import java.util.*;
 import com.sist.vo.*;
 import com.sist.dao.*;
