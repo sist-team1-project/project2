@@ -28,7 +28,7 @@ public interface NoticeMapper {
     @Update("UPDATE notice_1 SET "
   		 +"n_visits=n_visits+1 "
   		 +"WHERE n_id=#{n_id}")
-    public void noticevisitIncrement(int no);
+    public void noticeVisitIncrement(int no);
     
     @Select("SELECT n_id,u_id,n_title,n_content,n_visits,"
   		 +"TO_CHAR(n_regdate,'YYYY-MM-DD') as n_regdate "

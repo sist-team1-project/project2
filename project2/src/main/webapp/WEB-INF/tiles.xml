@@ -34,6 +34,12 @@
         <put-attribute name="content" value="/WEB-INF/notice/{1}.jsp"/>
     </definition>
     
+    <definition name="ask/*" extends="main2">
+        <put-attribute name="title" value="/WEB-INF/ask/title.jsp"/>
+        <put-attribute name="menu" value="/WEB-INF/ask/menu.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/ask/{1}.jsp"/>
+    </definition>
+    
     <definition name="admin/*" extends="main2">
         <put-attribute name="menu" value="/WEB-INF/admin/menu.jsp"/>
         <put-attribute name="content" value="/WEB-INF/admin/{1}.jsp"/>

@@ -37,7 +37,7 @@ public class NoticeDAO {
     
     public NoticeVO noticeDetailData(int no)
     {
- 	    mapper.noticevisitIncrement(no);
+ 	    mapper.noticeVisitIncrement(no);
  	    return mapper.noticeDetailData(no);
     }
     
