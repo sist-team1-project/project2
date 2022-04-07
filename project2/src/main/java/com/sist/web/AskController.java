@@ -75,14 +75,14 @@ public class AskController {
 	   return "ask/detail";
    }
    
-   @GetMapping("ask.do")
+   @GetMapping("reply.do")
    public String askReply(int no, Model model)
    {
 	   model.addAttribute("no", no);
 	   return "ask/reply";
    }
    
-   @PostMapping("ask_ok.do")
+   @PostMapping("reply_ok.do")
    public String askReplyInsert(int pno, AskVO vo)
    {
 	   AskVO pvo=dao.askParentInfoData(pno);
@@ -90,7 +90,7 @@ public class AskController {
 	   vo.setA_group_step(pvo.getA_group_step()+1);
 	   vo.setA_group_tab(pvo.getA_group_tab()+1);
 	   
-	   dao.askaskInsert(vo);
+	   dao.askReplyInsert(vo);
 	   
 	   return "redirect:list.do";
    }

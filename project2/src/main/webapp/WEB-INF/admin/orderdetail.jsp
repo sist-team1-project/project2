@@ -100,47 +100,47 @@ td {
   </div>
 
   <script>
-  new Vue({
-      el:'#adorderdetail',
-      data:{
-          oid:'${oid }',
-          orderDetailList:[],	// List
-          order: {} 			// vo
-      },
-      filters:{
-			currency: function(value){
-				var num = new Number(value);
-				return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,")
-			}
-		},
-      mounted:function(){
-          this.odList();
-          this.oList();
-          console.log(this.oid);
-      },
-      methods:{
-          odList:function(){
-              axios.get("http://localhost:8080/web/admin/orderdetail.do",{
-                  params:{
-                      oid: this.oid
-                  }
-              }).then(res=>{
-				console.log(res.data);
-				this.orderDetailList = res.data;
-              })
-          },
-          oList:function(){
-              axios.get("http://localhost:8080/web/admin/order.do",{
-                  params:{
-                      oid: this.oid
-                  }
-              }).then(res=>{
-				console.log(res.data);
-				this.order = res.data;
-              })
-          }
-      }
-  })
+    new Vue({
+        el:'#adorderdetail',
+        data:{
+            oid:'${oid }',
+            orderDetailList:[],	// List
+            order: {} 			// vo
+        },
+        filters:{
+  			currency: function(value){
+  				var num = new Number(value);
+  				return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,")
+  			}
+  		},
+        mounted:function(){
+            this.odList();
+            this.oList();
+            console.log(this.oid);
+        },
+        methods:{
+            odList:function(){
+                axios.get("http://localhost:8080/web/admin/orderdetail_vye.do",{
+                    params:{
+                        oid: this.oid
+                    }
+                }).then(res=>{
+  				console.log(res.data);
+  				this.orderDetailList = res.data;
+                })
+            },
+            oList:function(){
+                axios.get("http://localhost:8080/web/admin/order.do",{
+                    params:{
+                        oid: this.oid
+                    }
+                }).then(res=>{
+  				console.log(res.data);
+  				this.order = res.data;
+                })
+            }
+        }
+    })
   </script>
 </body>
 </html>

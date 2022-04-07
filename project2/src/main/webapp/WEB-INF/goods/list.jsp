@@ -16,7 +16,7 @@
       <div id="search" class="w-full bor8">
         <div class="bg6 w-full p-t-27 p-lr-40 p-lr-15-sm">
           <div class="p-t-10 p-b-27">
-            <div class="mtext-102 cl2 p-b-15">제품 이름으로 검색</div>
+            <div class="mtext-102 cl2 p-b-15">검색어</div>
             <input class="mtext-107 cl2 bor8 p-lr-15 p-tb-5" type="text" v-model="keyword" placeholder="검색어 입력">
           </div>
           
@@ -56,13 +56,13 @@
               
               <div class="block2-txt-child1 flex-col-l short">
                 <a :href="'../goods/detail.do?gid=' + vo.gid" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">{{vo.name}}</a>
-                <div class="cl4">₩{{vo.price | makeComma}}</div>
+                <div class="cl4">₩{{vo.price | currency}}</div>
               </div>
 
-              <div class="block2-txt-child2 flex-r p-t-3">
-                <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                  <img class="icon-heart1 dis-block trans-04" src="../images/icons/icon-heart-01.png">
-                  <img class="icon-heart2 dis-block trans-04 ab-t-l" src="../images/icons/icon-heart-02.png">
+              <div class="block2-txt-child2 flex-r">
+                <a href="#" class="btn-addwish-b2 dis-block pos-relative">
+                  <img class="icon-heart1 trans-04" src="../images/icons/icon-heart-01.png" @click="likeInsert(vo.gid)">
+                  <img class="icon-heart2 trans-04 dis-none" src="../images/icons/icon-heart-02.png">
                 </a>
               </div>
             </div>
@@ -82,18 +82,15 @@
   </div>
   <script>
     /* 제품 출력용 Vue 필터 */
-    Vue.filter("makeComma", val =>{
-        return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    })
     new Vue({
         el:'#listpage',
         data:{
             cid:'${cid }',
             cname: '',
-            cname: '',
-            keyword:'',
+            keyword:'${keyword }',
             brands:[],
             selectedBrands:[],
+            checkAll:true,
             order:'A',
             goods:[],
             totalpage:0,
@@ -101,13 +98,17 @@
             curpage:1,
             start:1,
             end:1,
-            pages:[],
-            checkAll:true
+            pages:[]
+        },
+        filters:{
+            currency: function(value){
+                var num = new Number(value);
+                return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,")
+            }
         },
         mounted:function(){
             
             this.brandListAndCname();
-            
             /* 가격 슬라이더 */
             $("#slider-range").slider({
                 range: true,
@@ -166,8 +167,8 @@
                         cid: this.cid
                     }
                 }).then(result=>{
-                    this.brands=result.data;
                     this.cname=result.data[0].cname;
+                    this.brands=result.data;
                 })
             },
             /* 페이지 전환 */
@@ -199,6 +200,15 @@
             /* 브랜드 전체 체크 해제 버튼 */
             brandCheck:function() {
                 this.checkAll = false;
+            },
+            likeInsert:function(gid) {
+                axios.post("http://localhost:8080/web/goods/like_insert_ok.do",null,{
+                    params:{
+                        gid: gid
+                    }
+                }).then(result=>{
+                    
+                })
             }
         }
     })

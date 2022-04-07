@@ -17,16 +17,18 @@
 				<table class="table">
 					<tr class="table_head">
 						<th width=10% class="text-center">번호</th>
-						<th width=60% class="text-center">제목</th>
+						<th width=50% class="text-center">제목</th>
 						<th width=10% class="text-center">작성자</th>
 						<th width=20% class="text-center">작성일</th>
+						<th width=10% class="text-center">조회수</th>
 					</tr>
 
 					<tr class="table_row"  v-for="vo in notice_list">
 						<th width=10% class="text-center">{{vo.nid}}</th>
-						<td width=60%><a :href="'detail.do?no=' + vo.nid">{{vo.ntitle}}</a></td>
+						<td width=50%><a :href="'detail.do?no=' + vo.nid">{{vo.ntitle}}</a></td>
 						<td width=10% class="text-center">{{vo.uid}}</td>
 						<td width=20% class="text-center">{{vo.nregdate}}</td>
+						<td width=10% class="text-center">{{vo.nvisits}}</td>
 					</tr>
 				</table>
 				<div class="text-right" style="padding-top: 10px;">

@@ -46,6 +46,7 @@ public class NoticeRestController {
 				   obj.put("ntitle", vo.getN_title());
 				   obj.put("uid", vo.getU_id());
 				   obj.put("nregdate", vo.getN_regdate());
+				   obj.put("nvisits", vo.getN_visits());
 				   if(i==0)
 				   {
 					   obj.put("curpage", curpage);

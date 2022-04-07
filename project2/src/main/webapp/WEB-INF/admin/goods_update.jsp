@@ -179,13 +179,13 @@
 	    },
 	    methods: {
 	        cate1: function() {
-	            axios.get("http://localhost:8080/web/goods/category_1_vue.do", {}).then(result => {
+	            axios.get("http://localhost:8080/web/main/category_1_vue.do", {}).then(result => {
 	                this.categories1 = result.data;
 	                this.cid1 = result.data[0].cid
 	            })
 	        },
 	        cate2: function() {
-	            axios.get("http://localhost:8080/web/goods/category_2_vue.do", {}).then(result => {
+	            axios.get("http://localhost:8080/web/main/category_2_vue.do", {}).then(result => {
 	                this.categories2 = result.data;
 	                this.cid2 = result.data[0].cid
 	            })

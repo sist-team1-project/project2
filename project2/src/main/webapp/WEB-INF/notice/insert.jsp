@@ -27,14 +27,14 @@
          <th width=15% class="text-right warning">비밀번호</th>
          <td width=85%><input type=password id="pwd" size=10 v-model="pwd"></td>
         </tr>
-        <tr>
-          <td colspan="2" class="text-center">
-           <button class="btn btn-sm btn-info" v-on:click="write()">글쓰기</button>
-           <button class="btn btn-sm btn-success" v-on:click="cancel()">취소</button>
-          </td>
-        </tr>
        </table>
      </div>
+       <div colspan="2" class="text-right">
+         <button class="btn btn-sm" v-on:click="write()" 
+           style="background-color: #eeeee6">글쓰기</button>
+         <button class="btn btn-sm" v-on:click="cancel()" 
+           style="background-color: #dbd0be">취소</button>
+       </div>
    </div>
    <script>
     new Vue({

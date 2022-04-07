@@ -17,7 +17,7 @@ public interface GoodsMapper {
 	        + "FROM (SELECT g_id,g_name,g_price,g_image,rownum as num "
 	        + "FROM (SELECT /*+ INDEX_DESC(goods_1 goods_g_id_pk_1)*/g_id,g_name,g_price,g_image "
 	        + "FROM goods_1 "
-	        + "WHERE c_id LIKE #{cid}||'%' AND (g_price BETWEEN #{price1} AND #{price2}) AND g_name LIKE '%'||#{keyword}||'%' "
+	        + "WHERE c_id LIKE #{cid}||'%' AND (g_price BETWEEN #{price1} AND #{price2}) AND (g_name LIKE '%'||#{keyword}||'%' OR g_brand LIKE '%'||#{keyword}||'%')"
 	        + "<if test=\"brands.size!=0\">"
 	        + "AND g_brand IN "
 	        + "<foreach collection='brands' item='b' index='index' open='(' close=')' separator=','>"
@@ -43,7 +43,7 @@ public interface GoodsMapper {
 	@Select("<script>"
 	        + "SELECT CEIL(COUNT(*)/20.0) "
             + "FROM goods_1 "
-            + "WHERE c_id LIKE #{cid}||'%' AND (g_price BETWEEN #{price1} AND #{price2}) AND g_name LIKE '%'||#{keyword}||'%'"
+            + "WHERE c_id LIKE #{cid}||'%' AND (g_price BETWEEN #{price1} AND #{price2}) AND (g_name LIKE '%'||#{keyword}||'%' OR g_brand LIKE '%'||#{keyword}||'%')"
             + "<if test=\"brands.size!=0\">"
             + "AND g_brand IN "
             + "<foreach collection='brands' item='b' index='index' open='(' close=')' separator=','>"
@@ -132,13 +132,16 @@ public interface GoodsMapper {
 			  +"</trim>"
 			  +"</foreach>"
 			  +"</trim>"
-			  + "))"
+			  + "ORDER BY g_id))"
 			  +"WHERE num BETWEEN #{start} AND #{end}"
 			  + "</script>")
 		public List<GoodsVO> adminGoodsFind(Map map);
 	
+
+	@Update("UPDATE goods_1 SET "
+			+ "c_id=#{c_id}, g_name=#{g_name}, g_brand = #{g_brand}, g_price = #{g_price}, g_sale = #{g_sale}, g_image = #{g_image}, g_detail = #{g_detail}, g_stock = #{g_stock}, g_status = #{g_status} "
+			+ "WHERE g_id = #{g_id}")
+	public void goodsupdate(GoodsVO vo);
 	
-//			@Update("UPDATE goods_1 SET ")			업데이트 쿼리문 작성
-//			public void goods update(GoodsVO vo);
-		
+	
 }

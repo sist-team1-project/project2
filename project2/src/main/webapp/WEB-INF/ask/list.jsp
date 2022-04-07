@@ -27,14 +27,14 @@
 					    <td width=10% class="text-center">${count }</td>
 						<td width=10% class="text-center">${vo.a_type }</td>
 						<td width=40%>
-					<c:if test="${vo.group_tab==1 }">
+					<c:if test="${vo.a_group_tab==1 }">
                         &nbsp;&nbsp;
                         <img src="../images/demo/re_icon.png">
 					</c:if> 
 					    <a href="../ask/detail.do?no=${vo.a_id }">${vo.a_title }</a></td>
 						<td width=10% class="text-center">${vo.u_id }</td>
-						<td width=20% class="text-center">${vo.n_regdate }</td>
-						<td width=10% class="text-center">${vo.n_visits }</td>
+						<td width=20% class="text-center">${vo.a_regdate }</td>
+						<td width=10% class="text-center">${vo.a_visits }</td>
 					</tr>
 					<c:set var="count" value="${count-1 }" />
 				</c:forEach>

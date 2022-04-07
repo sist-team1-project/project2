@@ -11,7 +11,6 @@ public interface ListService {
     public List<GoodsVO> goodsList(Map map);
     public int goodsListTotalpage(Map map);
     public List<String> brandList(String cid);
-    public List<CategoryVO> categoryList_1();
-    public List<CategoryVO> categoryList_2();
     public String categoryName(String cid);
+    public void likeInsert(LikeVO vo);
 }

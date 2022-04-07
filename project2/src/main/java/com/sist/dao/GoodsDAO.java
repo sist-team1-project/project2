@@ -18,11 +18,11 @@ public class GoodsDAO {
 
 	@Autowired
 	private EventGoodsMapper mapper2;
-	
+
 	public int goodsMaxPrice(String cid) {
-	    return mapper.goodsMaxPrice(cid);
+		return mapper.goodsMaxPrice(cid);
 	}
-	
+
 	public List<GoodsVO> goodsList(Map map) {
 		return mapper.goodsList(map);
 	}
@@ -68,8 +68,18 @@ public class GoodsDAO {
 		return mapper.adminGoodsFind(map);
 	}
 
-	//	public GoodsVO goods_UpdateData(int no) {
-	//		return "";
-	//	}
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public void goodsUpdate(GoodsVO vo, int e_id) {
+		mapper.goodsupdate(vo);
+		int g_id = vo.getG_id();
+
+		if (e_id != 0) {
+			EventGoodsVO evo = new EventGoodsVO();
+			evo.setE_id(e_id);
+			evo.setG_id(g_id);
+			int eg_id = mapper2.goodsEGidData(evo);
+			mapper2.goodsEventUpdate(evo, eg_id);
+		}
+	}
 
 }

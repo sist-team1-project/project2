@@ -6,89 +6,45 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<style type="text/css">
-.row{
-  margin: 0px auto;
-  width:650px;
-}
-</style>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <script type="text/javascript">
-      google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['KeyWord', 'KeyWordCount'],
-          <c:forEach var="kvo" items="${list}">
-           ['<c:out value="${kvo.word}"/>',     <c:out value="${kvo.count}"/>],
-          </c:forEach>
-        ]);
-
-        var options = {
-          title: '리뷰',
-          is3D: true,
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-        chart.draw(data, options);
-      }
-    </script>
 </head>
 <body>
-<div class="wrapper row2">
-  <div id="breadcrumb" class="clear"> 
-    <!-- ################################################################################################ -->
-    <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">커뮤니티</a></li>
-      <li><a href="#">묻고 답하기</a></li>
-    </ul>
-    <!-- ################################################################################################ -->
-  </div>
- </div>
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<div class="wrapper row3">
-  <main class="container clear">
-    <div class="row">
-      <h3 class="text-center">내용보기</h3>
+	<div class="container bg0">
+		<h3 class="text-left" style="padding-bottom: 20px">1:1 문의</h3>
+		<div class="row">
       <table class="table">
         <tr>
          <th class="text-center" width=20%>번호</th>
-         <td class="text-center" width=30%>${vo.no }</td>
+         <td class="text-center" width=30%>${vo.a_id }</td>
          <th class="text-center" width=20%>작성일</th>
-         <td class="text-center" width=30%>${vo.dbday }</td>
+         <td class="text-center" width=30%>${vo.a_regdate }</td>
         </tr>
         <tr>
          <th class="text-center" width=20%>이름</th>
-         <td class="text-center" width=30%>${vo.name }</td>
+         <td class="text-center" width=30%>${vo.u_id }</td>
          <th class="text-center" width=20%>조회수</th>
-         <td class="text-center" width=30%>${vo.hit }</td>
+         <td class="text-center" width=30%>${vo.a_visits }</td>
         </tr>
         <tr>
          <th class="text-center" width=20%>제목</th>
-         <td colspan="3">${vo.subject }</td>
+         <td colspan="3">${vo.a_title }</td>
         </tr>
         <tr>
           <td colspan="4" valign="top" class="text-left" height="200">
-           <pre style="border:none;background-color:white;white-space: pre-wrap;">${vo.content }</pre>
+           <pre style="border:none;background-color:white;white-space: pre-wrap;">${vo.a_content }</pre>
           </td>
         </tr>
         <tr>
           <td colspan="4" class="text-right">
             <c:if test="${count!=1 }">
-              <a href="../reply/reply.do?no=${vo.no }" class="btn btn-xs btn-info">답변</a>
+              <a href="../ask/reply.do?no=${vo.a_id }" class="btn btn-xs" style="background-color: #eeeee6">답변</a>
             </c:if>
-            <a href="../reply/update.do?no=${vo.no }" class="btn btn-xs btn-danger">수정</a>
-            <a href="../reply/delete.do?no=${vo.no }" class="btn btn-xs btn-success">삭제</a>
-            <a href="list.do" class="btn btn-xs btn-info">목록</a>
+            <a href="../ask/update.do?no=${vo.a_id }" class="btn btn-xs" style="background-color: #eeeee6">수정</a>
+            <a href="../ask/delete.do?no=${vo.a_id }" class="btn btn-xs" style="background-color: #eeeee6">삭제</a>
+            <a href="list.do" class="btn btn-xs" style="background-color: #dbd0be">목록</a>
           </td>
         </tr>
       </table>
     </div>
-    <div id="piechart_3d" style="width: 700px; height: 500px;"></div>
-  </main>
+  </div>
 </body>
 </html>
