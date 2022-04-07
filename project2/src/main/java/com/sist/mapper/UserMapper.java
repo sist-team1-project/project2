@@ -37,7 +37,7 @@ public interface UserMapper {
 			+ "#{u_phone}, #{u_email}, #{u_post}, #{u_address1}, #{u_address2}, #{u_question}, #{u_answer} "
 			+ "WHERE u_id=#{uid}")
 	public void userUpdate(UserVO vo);
-	
+
 	@Select("SELECT u_password FROM user_1 WHERE u_id=#{uid}")
 	public String userGetPassword(String uid);
 
