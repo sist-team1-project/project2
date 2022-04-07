@@ -17,6 +17,9 @@ public class ListServiceImpl implements ListService {
     @Autowired
     private CategoryDAO cdao;
     
+    @Autowired
+    private LikeDAO ldao;
+    
     @Override
     public int goodsMaxPrice(String cid) {
         return gdao.goodsMaxPrice(cid);
@@ -41,5 +44,10 @@ public class ListServiceImpl implements ListService {
     @Override
     public String categoryName(String cid) {
         return cdao.categoryName(cid);
+    }
+    
+    @Override
+    public void likeInsert(LikeVO vo) {
+        ldao.likeInsert(vo);
     }
 }

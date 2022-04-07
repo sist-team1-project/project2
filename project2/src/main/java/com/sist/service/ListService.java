@@ -12,4 +12,5 @@ public interface ListService {
     public int goodsListTotalpage(Map map);
     public List<String> brandList(String cid);
     public String categoryName(String cid);
+    public void likeInsert(LikeVO vo);
 }

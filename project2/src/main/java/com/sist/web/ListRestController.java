@@ -2,6 +2,8 @@ package com.sist.web;
 
 import java.util.*;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.simple.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -102,5 +104,15 @@ public class ListRestController {
             i++;
         }
         return arr.toJSONString();
+    }
+    
+    @PostMapping("like_insert_ok.do")
+    public String like_insert_ok(int gid, HttpSession session) {
+        String uid = (String) session.getAttribute("id");
+        LikeVO vo = new LikeVO();
+        vo.setG_id(gid);
+        vo.setU_id(uid);
+        service.likeInsert(vo);
+        return "";
     }
 }
