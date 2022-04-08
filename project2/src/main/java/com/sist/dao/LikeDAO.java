@@ -19,4 +19,7 @@ public class LikeDAO {
 		mapper.likeInsert(vo);
 	}
 	
+	public void likeDelete(LikeVO vo) {
+	    mapper.likeDelete(vo);
+	}
 }

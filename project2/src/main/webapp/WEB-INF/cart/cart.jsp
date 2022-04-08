@@ -30,8 +30,8 @@
                 <td class="column-3">{{cart.Gname }}</td>
                 <td class="column-4">{{cart.Gquantity }}</td>
                 <td class="column-5">{{cart.Gprice }}</td>
-                <td class="column-6">{{cart.Gsale }}%</td>
-                <td class="column-7">{{cart.Gprice * cart.Gsale }}</td>
+                <td class="column-6">{{cart.Gsale }}</td>
+                <td class="column-7">{{cart.Gprice - (cart.Gprice * cart.Gsale / 100) }}</td>
               </tr>
               
             </table>

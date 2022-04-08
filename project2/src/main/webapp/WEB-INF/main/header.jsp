@@ -64,9 +64,16 @@
             <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-15 p-r-8 js-show-modal-search">
               <i class="zmdi zmdi-search"></i>
             </div>
-            <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-15 p-r-8 icon-header-noti js-show-cart" :data-notify="cart" @click="cList()">
+            <c:if test="${sessionScope.id!=null }">
+              <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-15 p-r-8 icon-header-noti js-show-cart" :data-notify="cart" @click="cList()">
+                <i class="zmdi zmdi-shopping-cart"></i>
+              </div>
+            </c:if>
+            <c:if test="${sessionScope.id==null }">
+              <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-15 p-r-8" @click="if(confirm('로그인창으로 이동하시겠습니까?')) return location.href='../user/login.do'">
               <i class="zmdi zmdi-shopping-cart"></i>
             </div>
+            </c:if>
             <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-15 p-r-8 icon-header-noti" data-notify="0">
               <i class="zmdi zmdi-favorite-outline"></i>
             </a>
@@ -87,11 +94,16 @@
         <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
           <i class="zmdi zmdi-search"></i>
         </div>
-
-        <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" :data-notify="cart" @click="cList()">
-          <i class="zmdi zmdi-shopping-cart"></i>
-        </div>
-
+        <c:if test="${sessionScope.id!=null }">
+          <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" :data-notify="cart" @click="cList()">
+            <i class="zmdi zmdi-shopping-cart"></i>
+          </div>
+        </c:if>
+        <c:if test="${sessionScope.id==null }">
+          <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10" @click="if(confirm('로그인창으로 이동하시겠습니까?')) return location.href='../user/login.do'">
+            <i class="zmdi zmdi-shopping-cart"></i>
+          </div>
+        </c:if>
         <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
           <i class="zmdi zmdi-favorite-outline"></i>
         </a>

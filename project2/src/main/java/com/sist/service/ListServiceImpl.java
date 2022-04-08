@@ -26,7 +26,7 @@ public class ListServiceImpl implements ListService {
     }
     
     @Override
-    public List<GoodsVO> goodsList(Map map) {
+    public List<Map<String,Object>> goodsList(Map map) {
         // TODO Auto-generated method stub
         return gdao.goodsList(map);
     }
@@ -49,5 +49,10 @@ public class ListServiceImpl implements ListService {
     @Override
     public void likeInsert(LikeVO vo) {
         ldao.likeInsert(vo);
+    }
+    
+    @Override
+    public void likeDelete(LikeVO vo) {
+        ldao.likeDelete(vo);
     }
 }

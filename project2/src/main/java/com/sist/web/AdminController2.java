@@ -27,12 +27,11 @@ public class AdminController2 {
 	}
 
 	@GetMapping("goods_update.do")
-	public String goods_update(int g_id, Model model) {
+	public String goods_update(String g_id, Model model) {
 
-		Map map = new HashMap();
-		map.put("g_id", g_id);
-
-		GoodsVO vo = dao.goodsDetail(map);
+		GoodsVO vo = dao.goodsDetail(g_id);
+		String cid1 = vo.getC_id().substring(0,3);
+		String cid2 = vo.getC_id();
 		
 		int e_id = 0;
 		
@@ -45,10 +44,12 @@ public class AdminController2 {
 			// TODO: handle exception
 		}
 		
-
-
+		System.out.println("c_id : " + vo.getC_id());
+		
 		model.addAttribute("e_id", e_id);
 		model.addAttribute("vo", vo);
+		model.addAttribute("cid1", cid1);
+		model.addAttribute("cid2", cid2);
 		return "admin/goods_update";
 	}
 

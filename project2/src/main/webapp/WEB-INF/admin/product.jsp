@@ -229,11 +229,11 @@
 	            this.g_id = this.goodsList[index].g_id;
 	            console.log(this.g_id);
 
-	            /* axios.post("http://localhost:8080/web/admin/goods_update_ok.do", {
+	            axios.post("http://localhost:8080/web/admin/goods_update_ok.do", {
 	                params: {
 	                    g_id: this.g_id
 	                }
-	            }).then(res => {}) */
+	            }).then(res => {})
 	            
 	            location.href = '../admin/goods_update.do?g_id=' + this.g_id;
 	        },

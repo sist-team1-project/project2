@@ -12,33 +12,35 @@ public interface GoodsMapper {
     @Select("SELECT MAX(g_price) FROM goods_1 WHERE c_id LIKE #{cid}||'%'")
     public int goodsMaxPrice(String cid);
     
-	@Select("<script>"
-	        + "SELECT g_id,g_name,g_price,g_image "
-	        + "FROM (SELECT g_id,g_name,g_price,g_image,rownum as num "
-	        + "FROM (SELECT /*+ INDEX_DESC(goods_1 goods_g_id_pk_1)*/g_id,g_name,g_price,g_image "
-	        + "FROM goods_1 "
-	        + "WHERE c_id LIKE #{cid}||'%' AND (g_price BETWEEN #{price1} AND #{price2}) AND (g_name LIKE '%'||#{keyword}||'%' OR g_brand LIKE '%'||#{keyword}||'%')"
-	        + "<if test=\"brands.size!=0\">"
-	        + "AND g_brand IN "
-	        + "<foreach collection='brands' item='b' index='index' open='(' close=')' separator=','>"
-	        + "#{b}"
-	        + "</foreach>"
-	        + "</if>"
+    @Select("<script>"
+            + "SELECT NVL(l.l_id,0) AS l_id,g.g_id,g.g_name,g.g_price,g.g_image "
+            + "FROM (SELECT l_id,g_id FROM like_1 WHERE u_id=#{uid}) l, (SELECT g_id,g_name,g_price,g_image "
+            + "FROM (SELECT g_id,g_name,g_price,g_image,rownum as num "
+            + "FROM (SELECT /*+ INDEX_DESC(goods_1 goods_g_id_pk_1)*/g_id,g_name,g_price,g_image "
+            + "FROM goods_1 "
+            + "WHERE c_id LIKE #{cid}||'%' AND (g_price BETWEEN #{price1} AND #{price2}) AND (g_name LIKE '%'||#{keyword}||'%' OR g_brand LIKE '%'||#{keyword}||'%')"
+            + "<if test=\"brands.size!=0\">"
+            + "AND g_brand IN "
+            + "<foreach collection='brands' item='b' index='index' open='(' close=')' separator=','>"
+            + "#{b}"
+            + "</foreach>"
+            + "</if>"
             + "<choose>"
-	        + "<when test=\"order=='B'.toString()\">"
-	        + "ORDER BY g_sold DESC"
-	        + "</when>"
-	        + "<when test=\"order=='C'.toString()\">"
+            + "<when test=\"order=='B'.toString()\">"
+            + "ORDER BY g_sold DESC"
+            + "</when>"
+            + "<when test=\"order=='C'.toString()\">"
             + "ORDER BY g_price ASC"
             + "</when>"
             + "<when test=\"order=='D'.toString()\">"
             + "ORDER BY g_price DESC"
             + "</when>"
             + "</choose>"
-	        + ")) "
-	        + "WHERE num BETWEEN #{start} AND #{end}"
-	        + "</script>")
-	public List<GoodsVO> goodsList(Map map);
+            + ")) "
+            + "WHERE num BETWEEN #{start} AND #{end}) g "
+            + "WHERE l.g_id(+)=g.g_id"
+            + "</script>")
+    public List<Map<String,Object>> goodsList(Map map);
 	
 	@Select("<script>"
 	        + "SELECT CEIL(COUNT(*)/20.0) "
@@ -95,15 +97,15 @@ public interface GoodsMapper {
 	@Select("SELECT COUNT(*) FROM Goods_1")
 	public int goodsCount();
 
-	@Select("SELECT g_id,g_name,g_brand,g_price,g_sale,g_image,g_detail,g_status,g_stock FROM Goods_1 "
-			+"WHERE g_id=#{g_id}")
-	public GoodsVO goodsDetail(Map map);
+	@Select("SELECT g_id, c_id, g_name,g_brand,g_price,g_sale,g_image,g_detail,g_status,g_stock FROM Goods_1 "
+			+"WHERE g_id=#{gid}")
+	public GoodsVO goodsDetail(String gid);
 
 	@Insert("INSERT INTO goods_1 VALUES(goods_id_seq_1.NEXTVAL, #{c_id}, #{g_name}, #{g_brand}, #{g_price}, #{g_sale}, #{g_image}, #{g_detail}, #{g_stock}, 0, #{g_status}, SYSDATE)")
 	public void goodsInsert(GoodsVO vo);
 
 	@Select("SELECT eg_id, e_id FROM event_goods_1 WHERE g_id = #{g_id}")
-	public EventGoodsVO eventGoodsData(int g_id);
+	public EventGoodsVO eventGoodsData(String g_id);
 	
 	@Select("<script>"
 			+ "SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status, TO_CHAR(g_regdate,'YYYY-MM-DD HH24:MI:SS')as g_regdate, num "

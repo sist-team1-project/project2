@@ -19,7 +19,11 @@ public class ListRestController {
     private ListService service;
     
     @GetMapping(value = "list_vue.do", produces = "text/plain;charset=utf-8")
-    public String goods_list_vue(String cid, int page, String keyword, String brands, int price1, int price2, String order) {
+    public String goods_list_vue(String cid, int page, String keyword, String brands, int price1, int price2, String order, HttpSession session) {
+        String uid = (String) session.getAttribute("id");
+        if (uid == null) {
+            uid = "";
+        }
         
         int curpage = page;
         
@@ -40,10 +44,10 @@ public class ListRestController {
         map.put("brands", brandList);
         map.put("price1", price1);
         map.put("price2", price2);
-        
+        map.put("uid", uid);
         int totalpage = service.goodsListTotalpage(map);
         map.put("order", order);
-        List<GoodsVO> list = service.goodsList(map);
+        List<Map<String,Object>> list = service.goodsList(map);
         
         final int BLOCK = 10;
         int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
@@ -62,13 +66,14 @@ public class ListRestController {
             obj.put("end", endPage);
             arr.add(obj);
         } else {
-            int i = 0;
-            for (GoodsVO vo : list) {
+            
+            for (int i = 0; i < list.size(); i++) {
                 JSONObject obj = new JSONObject();
-                obj.put("gid", vo.getG_id());
-                obj.put("name", vo.getG_name());
-                obj.put("price", vo.getG_price());
-                String images = vo.getG_image();
+                obj.put("lid", list.get(i).get("L_ID").toString());
+                obj.put("gid", list.get(i).get("G_ID").toString());
+                obj.put("name", list.get(i).get("G_NAME").toString());
+                obj.put("price", list.get(i).get("G_PRICE").toString());
+                String images = list.get(i).get("G_IMAGE").toString();
                 String[] image = images.split(";");
                 obj.put("image", image[0]);
                 
@@ -79,7 +84,6 @@ public class ListRestController {
                     obj.put("end", endPage);
                 }
                 arr.add(obj);
-                i++;
             }
         }
         return arr.toJSONString();
@@ -107,12 +111,22 @@ public class ListRestController {
     }
     
     @PostMapping("like_insert_ok.do")
-    public String like_insert_ok(int gid, HttpSession session) {
+    public void like_insert_ok(int gid, HttpSession session) {
         String uid = (String) session.getAttribute("id");
+        
         LikeVO vo = new LikeVO();
         vo.setG_id(gid);
         vo.setU_id(uid);
         service.likeInsert(vo);
-        return "";
+    }
+    
+    @PostMapping("like_delete_ok.do")
+    public void like_delete_ok(int lid, HttpSession session) {
+        String uid = (String) session.getAttribute("id");
+        
+        LikeVO vo = new LikeVO();
+        vo.setL_id(lid);
+        vo.setU_id(uid);
+        service.likeDelete(vo);
     }
 }

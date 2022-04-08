@@ -69,7 +69,7 @@ new Vue({
  	        	    alert("아이디가 존재하지 않습니다");
  				}
  				else {
- 				    $('#idfind').html('<div>'+ '고객님의 아이디는 ' + res.data + '입니다.' + '</div>')
+ 				    $('#idfind').html('<div class="text-center p-t-50">'+ '고객님의 아이디는 ' + res.data + '입니다.' + '</div>')
  			    }
  	        })
  		}

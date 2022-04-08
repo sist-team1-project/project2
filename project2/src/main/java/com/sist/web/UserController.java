@@ -12,44 +12,40 @@ import com.sist.dao.*;
 import com.sist.vo.*;
 
 @Controller
+@RequestMapping("user/")
 public class UserController {
 
 	@Autowired
 	private UserDAO dao;
 
-	@GetMapping("user/login.do")
+	@GetMapping("login.do")
 	public String user_login() {
 		return "user/login";
 	}
 
-	@GetMapping("user/logout.do")
+	@GetMapping("logout.do")
 	public String user_logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:../main/main.do";
 	}
 
-	@GetMapping("user/join.do")
+	@GetMapping("join.do")
 	public String user_join() {
 		return "user/join";
 	}
-
-	@GetMapping("user/idfind.do")
+	
+	@GetMapping("idfind.do")
 	public String id_find() {
 		return "user/idfind/vue";
 	}
 
-	@GetMapping("user/idfind2.do")
+	@GetMapping("idfind2.do")
 	public String id_find_result() {
 		return "user/idfind2/vue";
 	}
 
-	@GetMapping("user/pwdfind.do")
+	@GetMapping("pwdfind.do")
 	public String pwd_find() {
 		return "user/pwdfind";
-	}
-	
-	@GetMapping("user/idcheck.do")
-	public String id_check() {
-		return "user/idcheck/vue";
 	}
 }

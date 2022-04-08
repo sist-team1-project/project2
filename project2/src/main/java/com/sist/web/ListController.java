@@ -24,5 +24,4 @@ public class ListController {
         model.addAttribute("maxPrice", maxPrice);
         return "goods/list";
     }
-
 }

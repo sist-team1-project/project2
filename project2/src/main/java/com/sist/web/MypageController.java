@@ -18,19 +18,22 @@ public class MypageController {
 	private UserDAO dao;
 
 	@GetMapping("mypage/mypage.do")
-    public String mypage_mypage(HttpSession session, Model model) {
+	public String mypage_mypage(HttpSession session, Model model) {
 		/*
-		 * String uid = (String) session.getAttribute("id"); 
-		 * UserVO vo = dao.userInfo(uid); 
-		 * System.out.println(vo.getU_address1());
+		 * String uid = (String) session.getAttribute("id"); UserVO vo =
+		 * dao.userInfo(uid); System.out.println(vo.getU_address1());
 		 * model.addAttribute("vo", vo);
 		 */
-        return "mypage/info";
-    }
+		return "mypage/info";
+	}
 
 	@GetMapping("mypage/update.do")
 	public String mypage_update() {
 		return "mypage/update";
 	}
 
+	@GetMapping("mypage/update_pwd.do")
+	public String user_update_pwd(HttpSession session, Model model) {
+		return "mypage/update_pwd";
+	}
 }

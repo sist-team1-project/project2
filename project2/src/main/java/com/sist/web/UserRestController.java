@@ -11,12 +11,13 @@ import com.sist.dao.*;
 import com.sist.vo.*;
 
 @RestController
+@RequestMapping("user/")
 public class UserRestController {
 
 	@Autowired
 	private UserDAO dao;
 
-	@PostMapping("user/login_ok.do")
+	@PostMapping("login_ok.do")
 	public String user_login_ok(String id, String pwd, HttpSession session) {// id pwd
 		String result = dao.isLogin(id, pwd);
 		if (!(result.equals("NOID") || result.equals("NOPWD"))) {
@@ -26,14 +27,13 @@ public class UserRestController {
 		}
 		return result;
 	}
+	
+    @PostMapping("join_ok.do")
+    public void user_join(UserVO vo) {
+        dao.userJoin(vo);
+    }
 
-	@PostMapping("user/join_ok.do")
-	public String user_join(UserVO vo) {
-		dao.userJoin(vo);
-		return "ok";
-	}
-
-	@GetMapping(value = "mypage/info_vue.do", produces = "text/plain;charset=utf-8")
+	/*@GetMapping(value = "mypage/info_vue.do", produces = "text/plain;charset=utf-8")
 	public String mypage_info_vue(HttpSession session) {
 		String uid = (String) session.getAttribute("id");
 		UserVO vo = dao.userInfo(uid);
@@ -51,9 +51,35 @@ public class UserRestController {
 		obj.put("answer", vo.getU_answer());
 		obj.put("regdate", vo.getU_regdate());
 		return obj.toJSONString();
-	}
-
-	@GetMapping(value = "user/idfind_ok.do", produces = "text/plain;charset=utf-8")
+	}*/
+	
+	@GetMapping(value = "idcheck_ok.do", produces = "text/plain;charset=utf-8")
+    public String user_idcheck_ok(String id) {
+        String result = "";
+        JSONObject obj = new JSONObject();
+        int idcheck = dao.idCheck(id);
+        if (idcheck == 0) {
+            result = id; // 저장한 id를 jsp까지 가져가기
+        } else {
+            result = "no"; // 현재 얘는 출력됨
+        }
+        return result;
+    }
+	
+	@GetMapping(value = "emailcheck_ok.do", produces = "text/plain;charset=utf-8")
+    public String user_emailcheck_ok(String email) {
+        String result = "";
+        JSONObject obj = new JSONObject();
+        int emailcheck = dao.emailCheck(email);
+        if (emailcheck == 0) {
+            result = email; // 저장한 email을 jsp까지 가져가기
+        } else {
+            result = "no"; // 현재 얘는 출력됨
+        }
+        return result;
+    }
+	
+	@GetMapping(value = "idfind_ok.do", produces = "text/plain;charset=utf-8")
 	public String user_idfind_ok(String name, String email) {
 		Map map = new HashMap();
 		map.put("name", name);
@@ -63,20 +89,9 @@ public class UserRestController {
 		return result;
 	}
 
-	@GetMapping(value = "user/idcheck_ok.do", produces = "text/plain;charset=utf-8")
-	public String user_idcheck_ok(String id) {
-		String result="";
-		JSONObject obj = new JSONObject();
-		int idcheck = dao.idCheck(id);
-		if (idcheck == 0) {
-			result = id;	// 저장한 id를 jsp까지 가져가기
-		} else {
-			result = "no";					// 현재 얘는 출력됨
-		}
-		return result;
-	}
+	
 
-	@PostMapping(value = "user/pwdfind_ok.do", produces = "text/plain;charset=utf-8")
+	@PostMapping(value = "pwdfind_ok.do", produces = "text/plain;charset=utf-8")
 	public String user_pwdfind_ok(String id, String email) {
 		return "";
 	}
