@@ -22,16 +22,19 @@
                 <th class="column-5">가격</th>
                 <th class="column-6">할인율</th>
                 <th class="column-7">할인가격</th>
+                <th class="column-8">삭제</th>
               </tr>
 
               <tr class v-for="cart in cartList" class="table_row">
                 <td class="column-1"><input type="checkbox"></td>
                 <td class="column-2"><div class="how-itemcart1"><img :src="cart.Gimage" ></div></td>
-                <td class="column-3">{{cart.Gname }}</td>
+                <td class="column-3 " style="width:800px;">{{cart.Gname }}</td>
                 <td class="column-4">{{cart.Gquantity }}</td>
-                <td class="column-5">{{cart.Gprice }}</td>
+                <td class="column-5">{{cart.Gprice | makeComma }}</td>
                 <td class="column-6">{{cart.Gsale }}</td>
-                <td class="column-7">{{cart.Gprice - (cart.Gprice * cart.Gsale / 100) }}</td>
+                <td class="column-7" style="width:100px;">{{cart.Gprice - (cart.Gprice * cart.Gsale / 100) | makeComma }}</td>
+				<td class="column-8" style="width:150px;">
+				<button class="delete_btn">삭제</button></td>
               </tr>
               
             </table>
@@ -43,7 +46,7 @@
 
             <div class="flex-w flex-t bor12 p-b-13">
               <div class="size-208"><span class="stext-110 cl2"> 금액: </span></div>
-              <div class="size-209"><span class="mtext-110 cl2"> $79.65 </span></div>
+              <div class="size-209"><span class="mtext-110 cl2"> {{total | makeComma}} </span></div>
             </div>
 
             <div class="flex-w flex-t bor12 p-t-15 p-b-30">
@@ -53,7 +56,7 @@
 
             <div class="flex-w flex-t p-t-27 p-b-33">
               <div class="size-208"><span class="mtext-101 cl2"> 총 금액: </span></div>
-              <div class="size-209 p-t-1"><span class="mtext-110 cl2"> $89.65 </span></div>
+              <div class="size-209 p-t-1"><span class="mtext-110 cl2"> {{total }} </span></div>
             </div>
 
             <button class="flex-c-m stext-101 cl1 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer"> 결제하기</button>
@@ -64,6 +67,9 @@
   </form>
  </div>
   <script>
+  Vue.filter("makeComma", val =>{
+      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  })
   new Vue({
 	  el:'#cart',
 	  data:{
@@ -90,7 +96,6 @@
                   }
               }).then(result=>{
                   this.cartList = result.data;
-                  colsole.log(result.data);
                   this.total = result.data[0].Sum;
               })
           }
