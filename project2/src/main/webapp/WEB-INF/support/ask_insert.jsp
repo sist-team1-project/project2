@@ -19,14 +19,14 @@
 						<td width=80%>
 						<select class="form-select" name=a_type>
 							<option selected>문의유형 선택</option>
-							<option value="1">교환</option>
-							<option value="2">환불</option>
-							<option value="3">취소(출하 전 취소)</option>
-							<option value="4">배송</option>
-							<option value="4">A/S</option>
-							<option value="4">주문/결제</option>
-							<option value="4">회원 관련</option>
-							<option value="4">기타 문의</option>
+							<option value="교환">교환</option>
+							<option value="환불">환불</option>
+							<option value="취소">취소(출하 전 취소)</option>
+							<option value="배송">배송</option>
+							<option value="A/S">A/S</option>
+							<option value="주문/결제">주문/결제</option>
+							<option value="회원 관련">회원 관련</option>
+							<option value="기타 문의">기타 문의</option>
 						</select>
 						</td>
 					</tr>
