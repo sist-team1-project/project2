@@ -36,7 +36,7 @@ td {
       </div>
       <div class="col-lg-12 m-lr-auto m-b-50">
         <div class="wrap-table js-pscroll">
-          <table class="table-checkout">
+          <table class="table-checkout text-center">
             <tr class="table_head text-center">
               <th>주문일시</th>
               <th>주문번호</th>
@@ -45,7 +45,7 @@ td {
               <th>주문금액</th>
               <th>주문상태</th>
             </tr>
-            <tr v-for="o in orderFullList" class="table_row fs-13 font-center">
+            <tr v-for="o in orderFullList" class="table_row fs-13 text-center">
               <td>{{o.regdate}}</td>
               <td><a class="cl8" href="#" data-toggle="modal" @click="odetail(o.oid)">{{o.oid}}</a></td>
               <td>{{o.usid}}</td>
@@ -53,7 +53,7 @@ td {
               <td>{{o.price | currency }} 원</td>
               <td id="select" class="state">
               <select @change="selecteOrder($event, o.oid)">
-                <option :selected="o.state==-1" value="-1">취소</option>
+                <option :selected="o.state==-1" value="-1">주문취소</option>
                 <option :selected="o.state==0" value="0">대기중</option>
                 <option :selected="o.state==1" value="1">상품준비중</option>
                 <option :selected="o.state==2" value="2">배송중</option>
@@ -98,6 +98,7 @@ td {
       </div>
     </div>
   </div>
+  
   <script>
     new Vue({
         el:'#adorder',

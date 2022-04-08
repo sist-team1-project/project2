@@ -1,4 +1,42 @@
 @charset "UTF-8";
+.table-order {
+	border-collapse: collapse;
+	width: 100%;
+	border-color: #dbd0be;
+	height: 550px;
+}
+td {
+	width: 65px;
+	height: 
+	margin: 0px auto;
+}
+th {
+	width: 70px;
+	margin: 0px auto;
+	text-align: center;
+}
+.ft{
+	font-size: 12pt;
+}
+
+.ft>td {
+	font-size: 11pt;
+}
+.tcenter {
+	text-align: center;
+}
+.tright {
+	text-align: right;
+}
+.tleft {
+	text-align:left; 
+	padding-left: 10px;
+}
+.adt-light {
+	background-color: #eeeee6;
+	text-align: center;
+}
+
 .shortsp {
 	display:block;
     text-overflow: ellipsis;
@@ -10,17 +48,12 @@
 	color: black;
 	text-align: center;
 }
-.adt-light {
-	background-color: #eeeee6;
-	text-align: center;
-}
-.table-checkout tr {
+
+.table-order tr {
 	height: 35px;
 	text-align: center;
 }
-.cash {
-	text-align: right;
-}
+
 
 
 
