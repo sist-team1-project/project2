@@ -44,7 +44,7 @@
 									<td>${count }</td>
 									<td>${vo.a_type }</td>
 									<td>
-										<a href="../ask/detail.do?no=${vo.a_id }" >${vo.a_title }</a>
+										<a href="../support/ask_detail.do?no=${vo.a_id }" >${vo.a_title }</a>
 									</td>
 									<td>${vo.u_id }</td>
 									<td>${vo.a_regdate }</td>
