@@ -58,12 +58,17 @@
                 <a :href="'../goods/detail.do?gid=' + vo.gid" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">{{vo.name}}</a>
                 <div class="cl4">₩{{vo.price | currency}}</div>
               </div>
-
+            
               <div class="block2-txt-child2 flex-r">
-                <a href="#" class="btn-addwish-b2 dis-block pos-relative">
-                  <img class="icon-heart1 trans-04" src="../images/icons/icon-heart-01.png" @click="likeInsert(vo.gid)">
-                  <img class="icon-heart2 trans-04 dis-none" src="../images/icons/icon-heart-02.png">
-                </a>
+                <span class="btn-addwish-b2 dis-block pos-relative">
+                  <c:if test="${sessionScope.id!=null }">
+                    <img v-if="vo.lid==0" class="icon-heart1 trans-04 pointer" src="../images/icons/icon-heart-01.png" @click="like(vo.gid); vo.lid=1; alert('즐겨찾기에 등록되었습니다')">
+                    <img v-if="vo.lid>0" class="icon-heart2 trans-04 pointer" src="../images/icons/icon-heart-02.png" @click="unlike(vo.lid); vo.lid=0; alert('즐겨찾기가 해제되었습니다')">
+                  </c:if>
+                  <c:if test="${sessionScope.id==null }">
+                    <img class="icon-heart1 trans-04 pointer" src="../images/icons/icon-heart-01.png" @click="if(confirm('로그인창으로 이동하시겠습니까?')) return location.href='../user/login.do'">
+                  </c:if>
+                </span>
               </div>
             </div>
           </div>
@@ -102,7 +107,7 @@
         },
         filters:{
             currency: function(value){
-                var num = new Number(value);
+                let num = new Number(value);
                 return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,")
             }
         },
@@ -142,11 +147,11 @@
                         order: this.order
                     }
                 }).then(result=>{
-                    this.goods=result.data;
-                    this.curpage=result.data[0].curpage;
-                    this.totalpage=result.data[0].totalpage;
-                    this.start=result.data[0].start;
-                    this.end=result.data[0].end;
+                    this.goods = result.data;
+                    this.curpage = result.data[0].curpage;
+                    this.totalpage = result.data[0].totalpage;
+                    this.start = result.data[0].start;
+                    this.end = result.data[0].end;
                     
                     // 검색 결과가 없을 경우
                     if(result.data[0].name == null) {
@@ -167,8 +172,8 @@
                         cid: this.cid
                     }
                 }).then(result=>{
-                    this.cname=result.data[0].cname;
-                    this.brands=result.data;
+                    this.cname = result.data[0].cname;
+                    this.brands = result.data;
                 })
             },
             /* 페이지 전환 */
@@ -201,10 +206,19 @@
             brandCheck:function() {
                 this.checkAll = false;
             },
-            likeInsert:function(gid) {
+            like:function(gid) {
                 axios.post("http://localhost:8080/web/goods/like_insert_ok.do",null,{
                     params:{
                         gid: gid
+                    }
+                }).then(result=>{
+                    
+                })
+            },
+            unlike:function(lid) {
+                axios.post("http://localhost:8080/web/goods/like_delete_ok.do",null,{
+                    params:{
+                        lid: lid
                     }
                 }).then(result=>{
                     
