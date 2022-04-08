@@ -8,4 +8,6 @@ import com.sist.vo.*;
 
 public interface EventMapper {
 
+    @Select("select * from event_1")
+    public List<EventVO> eventList();
 }

@@ -1,26 +1,27 @@
 package com.sist.web;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import java.util.*;
+
+import org.json.simple.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import java.util.*;
+import org.springframework.web.bind.annotation.*;
+
 import com.sist.dao.*;
 import com.sist.vo.*;
 
 @RestController
+@RequestMapping("admin/")
 public class AdminRestController2 {
 
 	@Autowired
 	private GoodsDAO gdao;
+	
+	@Autowired
+	private EventDAO edao;
 
-	@GetMapping(value = "admin/adlist_vue.do", produces = "text/plain;charset=utf-8")
+	@GetMapping(value = "adlist_vue.do", produces = "text/plain;charset=utf-8")
 	public String adlist_vue(String page, String fs, String ss) {
 		if (page == null) {
 			page = "1";
@@ -56,24 +57,18 @@ public class AdminRestController2 {
 			}
 			vo.setG_image(g_image);
 		}
-
-		JSONArray arr = new JSONArray();
-		int i = 0;
-
+		
 		int count = gdao.goodsCount();
-
-		System.out.println(start);
-		System.out.println(end);
-		System.out.println("토탈페이지 : " + totalpage);
-		System.out.println("카운트 : " + count);
-
+		
 		final int BLOCK = 10;
 		int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
 		int endPage = ((curpage - 1) / BLOCK * BLOCK) + BLOCK;
 		if (endPage > totalpage) {
 			endPage = totalpage;
 		}
-
+		
+		int i = 0;
+		JSONArray arr = new JSONArray();
 		for (GoodsVO vo : list) {
 			JSONObject obj = new JSONObject();
 			obj.put("g_id", vo.getG_id());
@@ -92,7 +87,7 @@ public class AdminRestController2 {
 			obj.put("g_regdate", vo.getG_regdate());
 			obj.put("startPage", startPage);
 			obj.put("endPage", endPage);
-
+			
 			if (i == 0) {
 				obj.put("curpage", curpage);
 				obj.put("totalpage", totalpage);
@@ -101,62 +96,53 @@ public class AdminRestController2 {
 			arr.add(obj);
 			i++;
 		}
-
 		return arr.toJSONString();
 	}
 
-	@PostMapping("admin/goods_update_ok.do")
+	@PostMapping("goods_update_ok.do")
 	public String goods_update_ok(@RequestBody HashMap<String, Object> map) {
 
 		return "";
 	}
-
-	@PostMapping("admin/goods_add_ok.do")
+	
+	@GetMapping(value = "event_list.do", produces = "text/plain;charset=utf-8")
+    public String admin_event_list() {
+	    List<EventVO> list = new ArrayList<EventVO>();
+	    list = edao.eventList();
+	    
+	    JSONArray arr = new JSONArray();
+	    for (EventVO vo : list) {
+            JSONObject obj = new JSONObject();
+            obj.put("eid", vo.getE_id());
+            obj.put("etitle", vo.getE_title());
+            
+            arr.add(obj);
+        }
+        return arr.toJSONString();
+    }
+	
+	@PostMapping("goods_add_ok.do")
 	public String goods_add_vue_ok(@RequestBody HashMap<String, Object> map) {
+	    	    
 		GoodsVO vo = new GoodsVO();
-
-		vo.setC_id((String) map.get("c_id"));
-		vo.setG_name((String) map.get("g_name"));
-		vo.setG_brand((String) map.get("g_brand"));
-		vo.setG_price(Integer.parseInt(map.get("g_price").toString()));
-		vo.setG_sale(Integer.parseInt(map.get("g_sale").toString()));
-		vo.setG_image((String) map.get("g_image"));
-		vo.setG_detail((String) map.get("g_detail"));
-		vo.setG_stock(Integer.parseInt(map.get("g_stock").toString()));
-		vo.setG_status(Integer.parseInt(map.get("g_status").toString()));
-
-		gdao.goodsInsert(vo);
-
-		int e_id = 0;
-		int g_id = gdao.goodsCount();
-
-		System.out.println("eid : " + map.get("eid"));
-		System.out.println("gid : " + g_id);
-
-		String a = (String) map.get("eid");
-		EventGoodsVO evo = new EventGoodsVO();
-		if (a != "") {
-			System.out.println("a : " + a);
-			if (a.contains(",")) {
-				String[] eid = a.split(",");
-				for (String st : eid) {
-					System.out.print(st + " ");
-					evo.setE_id(Integer.parseInt(st));
-					evo.setG_id(g_id);
-					gdao.goodsEventInsert(evo);
-				}
-				return "ok";
-			}
-			evo.setE_id(Integer.parseInt(a));
-			evo.setG_id(g_id);
-			try {
-				e_id = Integer.parseInt(a);
-				gdao.goodsEventInsert(evo);
-			} catch (Exception e) {
-			}
-
-		}
-
+    	vo.setC_id((String) map.get("cid"));
+    	vo.setG_name((String) map.get("gname"));
+    	vo.setG_brand((String) map.get("gbrand"));
+    	vo.setG_price(Integer.parseInt(map.get("gprice").toString()));
+    	vo.setG_sale(Integer.parseInt(map.get("gsale").toString()));
+    	vo.setG_detail((String) map.get("gdetail"));
+    	vo.setG_stock(Integer.parseInt(map.get("gstock").toString()));
+    	vo.setG_status(Integer.parseInt(map.get("gstatus").toString()));
+    	vo.setG_image((String) map.get("gimage"));
+    	
+    	Map map2 = new HashMap();
+    	map2.put("vo", vo);
+    	String eid = (String) map.get("eid");
+    	if(eid == null) eid = "";
+    	map2.put("eid", eid);
+    	
+    	gdao.goodsInsert(map2);
+        
 		return "ok";
 	}
 }
