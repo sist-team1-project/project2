@@ -33,7 +33,7 @@ public class MypageController {
 	}
 
 	@GetMapping("mypage/update_pwd.do")
-	public String pwd_change() {
+	public String user_update_pwd(HttpSession session, Model model) {
 		return "mypage/update_pwd";
 	}
 }

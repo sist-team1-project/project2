@@ -33,7 +33,7 @@ public class UserRestController {
         dao.userJoin(vo);
     }
 
-	@GetMapping(value = "mypage/info_vue.do", produces = "text/plain;charset=utf-8")
+	/*@GetMapping(value = "mypage/info_vue.do", produces = "text/plain;charset=utf-8")
 	public String mypage_info_vue(HttpSession session) {
 		String uid = (String) session.getAttribute("id");
 		UserVO vo = dao.userInfo(uid);
@@ -51,7 +51,7 @@ public class UserRestController {
 		obj.put("answer", vo.getU_answer());
 		obj.put("regdate", vo.getU_regdate());
 		return obj.toJSONString();
-	}
+	}*/
 	
 	@GetMapping(value = "idcheck_ok.do", produces = "text/plain;charset=utf-8")
     public String user_idcheck_ok(String id) {

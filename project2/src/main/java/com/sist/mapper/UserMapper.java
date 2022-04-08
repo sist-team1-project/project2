@@ -45,4 +45,6 @@ public interface UserMapper {
 	@Select("SELECT u_password FROM user_1 WHERE u_id=#{uid}")
 	public String userGetPassword(String uid);
 
+	@Update("UPDATE user_1 SET #{u_password} WHERE u_id=#{uid}")
+	public void userPwdUpdate(UserVO vo);
 }

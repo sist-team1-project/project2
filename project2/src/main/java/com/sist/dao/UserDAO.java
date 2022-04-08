@@ -34,17 +34,17 @@ public class UserDAO {
 		}
 		return result;
 	}
-	
+
 	public int idCheck(String id) {
-        int result = mapper.idCount(id);
-        return result;
-    }
-	
+		int result = mapper.idCount(id);
+		return result;
+	}
+
 	public int emailCheck(String email) {
-        int result = mapper.emailCount(email);
-        return result;
-    }
-	
+		int result = mapper.emailCount(email);
+		return result;
+	}
+
 	public void userJoin(UserVO vo) {
 		mapper.userJoin(vo);
 	}
@@ -73,5 +73,21 @@ public class UserDAO {
 			mapper.userUpdate(vo);
 		}
 		return bCheck;
+	}
+
+	public boolean userPwdUpdate(UserVO vo) {
+		boolean bCheck=false;
+		   String db_pwd=mapper.userGetPassword(vo.getU_id());
+		   if(db_pwd.equals(vo.getU_password()))
+		   { 
+			   bCheck=true;
+			   mapper.userPwdUpdate(vo);
+		   }
+		   else
+		   {
+			   // 비밀번호가 틀린 상태 
+			   bCheck=false;
+		   }
+		   return bCheck;
 	}
 }
