@@ -50,4 +50,4 @@
     <definition name="user/idfind/vue" template="/WEB-INF/user/idfind.jsp"></definition>
     <definition name="user/idcheck/vue" template="/WEB-INF/user/idcheck.jsp"></definition>
     <definition name="admin/orderdetail/vue" template="/WEB-INF/admin/orderdetail.jsp"></definition>
-</tiles-definitions>
+</tiles-definitions> 
