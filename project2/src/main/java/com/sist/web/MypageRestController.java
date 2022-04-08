@@ -34,7 +34,7 @@ public class MypageRestController {
 		return obj.toJSONString();
 	}
 	
-	@PostMapping(value = "mypage/update_ok.do", produces = "text/plain;charset=utf-8")
+/*	@PostMapping(value = "mypage/update_ok.do", produces = "text/plain;charset=utf-8")
 	public String mypage_update_ok(UserVO vo) {
 		String result = "";
 		boolean bCheck = dao.userUpdate(vo);
@@ -45,11 +45,10 @@ public class MypageRestController {
 		}
 		return result;
 	}
-
-	@PostMapping(value = "mypage/update_pwd_ok.do", produces = "text/plain;charset=utf-8")
+*/
+	@GetMapping(value = "mypage/update_pwd_ok.do", produces = "text/plain;charset=utf-8")
 	public String mypage_update_pwd_ok(UserVO vo) {
 		String result = "";
-		// DB 처리
 		boolean bCheck = dao.userPwdUpdate(vo);
 		if (bCheck == true) {
 			result = "YES";
@@ -58,4 +57,7 @@ public class MypageRestController {
 		}
 		return result;
 	}
+	
+	
+
 }

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -65,7 +66,7 @@ public class UserDAO {
 	}
 
 	// 유저정보 수정
-	public boolean userUpdate(UserVO vo) {
+/*	public boolean userUpdate(UserVO vo) {
 		boolean bCheck = false;
 		String db_pwd = mapper.userGetPassword(vo.getU_id());
 		if (db_pwd.equals(vo.getU_password())) {
@@ -73,7 +74,7 @@ public class UserDAO {
 			mapper.userUpdate(vo);
 		}
 		return bCheck;
-	}
+	}*/
 
 	public boolean userPwdUpdate(UserVO vo) {
 		boolean bCheck=false;
@@ -85,9 +86,9 @@ public class UserDAO {
 		   }
 		   else
 		   {
-			   // 비밀번호가 틀린 상태 
 			   bCheck=false;
 		   }
 		   return bCheck;
 	}
+	
 }

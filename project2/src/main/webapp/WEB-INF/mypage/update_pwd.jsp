@@ -15,14 +15,14 @@
       <div class="row">
         <div class="col-md-7">
           <div>기존 비밀번호</div>
-          <div><input type="password" name="password" id="password" placeholder="비밀번호를 입력하세요" v-model="password"></div>
+          <div><input type="text" name="password" id="password" placeholder="비밀번호를 입력하세요" v-model="password"></div>
         </div>
       </div>
       <div class="row">
         <div class="col-md-7">
           <div>새 비밀번호</div>
-          <div><input type="password" name="new_password" id="new_password" placeholder="새 비밀번호를 입력하세요" v-model="new_password"></div>
-          <div><input type="password" id="new_password2" placeholder="새 비밀번호를 재입력하세요"></div>
+          <div><input type="text" name="new_password" id="new_password" placeholder="새 비밀번호를 입력하세요" v-model="new_password"></div>
+          <div><input type="text" id="new_password2" placeholder="새 비밀번호를 재입력하세요"></div>
           <div><input type="button" id="submit-btn" class="btn btn-primary" value="제출" v-on:click="submit()"></div>
         </div>
       </div>
@@ -33,13 +33,16 @@ new Vue({
  	el:'#update_pwd',
  	data:{
  		password:'',
- 		new_password:''
+ 		new_password:'',
+ 		id:'${id}',
+ 		vo:{}
  	},
  	mounted:function(){
  		
     },
  	methods:{
  		submit:function(){
+ 			//let _this=this;
  			let password=$('#password').val();
  			if(password.trim()=="")
  			{
@@ -58,27 +61,22 @@ new Vue({
  				$('#new_password2').focus();
  				return;
  			}
+ 			
+ 			
  			// 서버실행 전 확인
- 			axios.post("http://localhost:8080/web/mypage/update_pwd_ok.do",null,{
+ 			axios.get("http://localhost:8080/web/mypage/update_pwd_ok.do",{
  	            params:{
+ 	            	id:this.id,
  	            	password:this.password,
  	            	u_password:this.new_password
  	            }
  	        }).then(res=>{
- 	        	if(res.data=="YES")
-				{
- 	        		alert("비밀번호가 변경!!");
-					location.href="mypage/update_pwd.do"
-				}
-				else
-				{
-					alert("비밀번호가 틀립니다!!")
-					$('#password').val("");
-					$('#new_password').val("");
-					$('#new_password2').val("");
- 					$('#password').focus();
-    				
-				}
+ 	        	//_this.data=res.data;
+ 	        	if(res.data=="YES") {
+                    alert("비밀번호 변경 완료");
+                } else {
+                	alert("변경 안됨");
+                }
  	        })
  		}
  	}
