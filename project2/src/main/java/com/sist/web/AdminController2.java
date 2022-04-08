@@ -89,8 +89,4 @@ public class AdminController2 {
 		return "admin/ask_admin";
 	}
 
-	@GetMapping("user_management.do")
-	public String user_management() {
-		return "admin/user_management";
-	}
 }

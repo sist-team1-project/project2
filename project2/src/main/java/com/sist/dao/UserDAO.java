@@ -1,6 +1,7 @@
 package com.sist.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
@@ -66,29 +67,35 @@ public class UserDAO {
 	}
 
 	// 유저정보 수정
-/*	public boolean userUpdate(UserVO vo) {
+	/*
+	 * public boolean userUpdate(UserVO vo) { boolean bCheck = false; String db_pwd
+	 * = mapper.userGetPassword(vo.getU_id()); if
+	 * (db_pwd.equals(vo.getU_password())) { bCheck = true; mapper.userUpdate(vo); }
+	 * return bCheck; }
+	 */
+
+	public boolean userPwdUpdate(UserVO vo) {
 		boolean bCheck = false;
 		String db_pwd = mapper.userGetPassword(vo.getU_id());
 		if (db_pwd.equals(vo.getU_password())) {
 			bCheck = true;
-			mapper.userUpdate(vo);
+			mapper.userPwdUpdate(vo);
+		} else {
+			bCheck = false;
 		}
 		return bCheck;
-	}*/
-
-	public boolean userPwdUpdate(UserVO vo) {
-		boolean bCheck=false;
-		   String db_pwd=mapper.userGetPassword(vo.getU_id());
-		   if(db_pwd.equals(vo.getU_password()))
-		   { 
-			   bCheck=true;
-			   mapper.userPwdUpdate(vo);
-		   }
-		   else
-		   {
-			   bCheck=false;
-		   }
-		   return bCheck;
 	}
-	
+
+	/******* USER admin **********/
+	public List<UserVO> userList(Map map) {
+		return mapper.userList(map);
+	}
+
+	public int userTotalPage() {
+		return mapper.userTotalPage();
+	}
+
+	public int userCount() {
+		return mapper.userCount();
+	}
 }
