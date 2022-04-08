@@ -95,7 +95,7 @@ public interface GoodsMapper {
 	@Select("SELECT COUNT(*) FROM Goods_1")
 	public int goodsCount();
 
-	@Select("SELECT g_id,g_name,g_brand,g_price,g_sale,g_image,g_detail,g_status,g_stock FROM Goods_1 "
+	@Select("SELECT g_id, c_id, g_name,g_brand,g_price,g_sale,g_image,g_detail,g_status,g_stock FROM Goods_1 "
 			+"WHERE g_id=#{gid}")
 	public GoodsVO goodsDetail(String gid);
 
@@ -103,7 +103,7 @@ public interface GoodsMapper {
 	public void goodsInsert(GoodsVO vo);
 
 	@Select("SELECT eg_id, e_id FROM event_goods_1 WHERE g_id = #{g_id}")
-	public EventGoodsVO eventGoodsData(int g_id);
+	public EventGoodsVO eventGoodsData(String g_id);
 	
 	@Select("<script>"
 			+ "SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status, TO_CHAR(g_regdate,'YYYY-MM-DD HH24:MI:SS')as g_regdate, num "

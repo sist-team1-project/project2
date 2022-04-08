@@ -43,8 +43,7 @@
 									<span class="stext-110 cl2"> 상품명 </span>
 								</div>
 								<div class="size-209">
-									<input id="gname" type=text size=65 class="input-sm bor15" value=${vo.g_name }>
-									<!-- <span class="mtext-110 cl2"> $10 </span> -->
+									<input id="gname" type=text size=65 class="input-sm bor15" value='${vo.g_name }'>
 								</div>
 							</div>
 
@@ -53,8 +52,7 @@
 									<span class="stext-110 cl2"> 브랜드 </span>
 								</div>
 								<div class="size-209">
-									<input id="gbrand" type=text size=65 class="input-sm bor15" v-model="gbrand" value=${vo.g_brand }>
-									<!-- <span class="mtext-110 cl2"> $10 </span> -->
+									<input id="gbrand" type=text size=65 class="input-sm bor15" value='${vo.g_brand }'>
 								</div>
 							</div>
 
@@ -63,8 +61,7 @@
 									<span class="stext-110 cl2"> 가격 </span>
 								</div>
 								<div class="size-209">
-									<input id="gprice" type=text size=65 class="input-sm bor15" v-model="gprice" value=${vo.g_price }>
-									<!-- <span class="mtext-110 cl2"> $10 </span> -->
+									<input id="gprice" type=text size=65 class="input-sm bor15" value='${vo.g_price }'>
 								</div>
 							</div>
 
@@ -73,8 +70,7 @@
 									<span class="stext-110 cl2"> 할인율 </span>
 								</div>
 								<div class="size-209">
-									<input id="gsale" type=text size=65 class="input-sm bor15" v-model="gsale" value=${vo.g_sale }>
-									<!-- <span class="mtext-110 cl2"> $10 </span> -->
+									<input id="gsale" type=text size=65 class="input-sm bor15" value=${vo.g_sale }>
 								</div>
 							</div>
 
@@ -83,8 +79,7 @@
 									<span class="stext-110 cl2"> 재고수량 </span>
 								</div>
 								<div class="size-209">
-									<input id="gstock" type=text size=65 class="input-sm bor15" v-model="gstock" value=${vo.g_stock }>
-									<!-- <span class="mtext-110 cl2"> $10 </span> -->
+									<input id="gstock" type=text size=65 class="input-sm bor15" value=${vo.g_stock }>
 								</div>
 							</div>
 
@@ -93,12 +88,11 @@
 									<span class="stext-110 cl2"> 판매 상태 </span>
 								</div>
 								<div class="size-209">
-									<select id="gstatus" v-model="gstatus" value=${vo.g_status }>
+									<select id="gstatus" value=${vo.g_status }>
 										<option value="">판매상태</option>
 										<option value="1" ${vo.g_status == '1'? 'selected="selected"' : '' }>판매중</option>
 										<option value="0" ${vo.g_status == '0'? 'selected="selected"' : '' }>판매중단</option>
 									</select>
-									<!-- <span class="mtext-110 cl2"> $10 </span> -->
 								</div>
 							</div>
 
@@ -107,8 +101,7 @@
 									<span class="stext-110 cl2"> 대표이미지 첨부 </span>
 								</div>
 								<div class="size-209">
-									<input id="gimage" type=text size=65 class="input-sm bor15" v-model="gimage" value=${vo.g_image }>
-									<!-- <span class="mtext-110 cl2"> $89.65 </span> -->
+									<input id="gimage" type=text size=65 class="input-sm bor15" value='${vo.g_image }'>
 								</div>
 							</div>
 
@@ -117,8 +110,7 @@
 									<span class="stext-110 cl2"> 상세정보 </span>
 								</div>
 								<div class="size-209">
-									<input id="gdetail" type=text size=65 class="input-sm bor15" v-model="gdetail" value=${vo.g_detail }>
-									<!-- <span class="mtext-110 cl2"> $10 </span> -->
+									<input id="gdetail" type=text size=65 class="input-sm bor15" value='${vo.g_detail }'>
 								</div>
 							</div>
 
@@ -127,22 +119,21 @@
 									<span class="stext-110 cl2"> 이벤트 여부 </span>
 								</div>
 								<div class="row size-209">
-									<input type="checkbox" class="input-sm bor15" value="1" name="evstatus" id="evstatus">
+									<input type="checkbox" class="input-sm bor15" value="1" name="evstatus">
 									&nbsp; 인기상품 &nbsp; &nbsp;
-									<input type="checkbox" class="input-sm bor15" value="2" name="evstatus" id="evstatus">
+									<input type="checkbox" class="input-sm bor15" value="2" name="evstatus">
 									&nbsp; 추천상품 &nbsp; &nbsp;
-									<input type="checkbox" class="input-sm bor15" value="3" name="evstatus" id="evstatus">
+									<input type="checkbox" class="input-sm bor15" value="3" name="evstatus">
 									&nbsp; 할인상품 &nbsp; &nbsp;
-									<!-- <span class="mtext-110 cl2"> $10 </span> -->
 								</div>
 							</div>
 
 							<div class="row">
 								<div class="p-t-35 col-md-6">
-									<input type=button class="btn flex-c-m stext-101 cl1 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" v-on:click="submit()" value="수정">
+									<input type=button class="btn flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer btn-pro-color2" v-on:click="submit()" value="수정">
 								</div>
 								<div class="p-t-35 col-md-6">
-									<input type=button class="btn flex-c-m stext-101 cl1 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" value="취소" onclick="javascript:history.back()">
+									<input type=button class="btn flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer btn-pro-color2" value="취소" onclick="javascript:history.back()">
 								</div>
 							</div>
 
@@ -156,11 +147,18 @@
 
 
 	<script type="text/javascript">
-		console.log("콘솔")
-		console.log('${vo.g_id}')
-		console.log('${e_id}')
+	window.onload = function() {
+			for (var i = 0; i < $("input[name='evstatus']").length; i++) {
+        if (parseInt($("input[name='evstatus']").eq(i).val()) == '${e_id}') {
+            $("input[name='evstatus']").eq(i).prop("checked", true);
+        }
+	    }  
+	};
+
 	</script>
-	<!-- <script>
+
+
+	<script>
 	new Vue({
 	    el: '#GoodsUpdate',
 	    data: {
@@ -176,8 +174,7 @@
 	        gimage: '',
 	        eid: [],
 	        categories1: [],
-	        categories2: [],
-
+	        categories2: []
 	    },
 	    mounted: function() {
 	        this.cate1();
@@ -187,13 +184,13 @@
 	        cate1: function() {
 	            axios.get("http://localhost:8080/web/main/category_1_vue.do", {}).then(result => {
 	                this.categories1 = result.data;
-	                this.cid1 = result.data[0].cid
+	                this.cid1 = '${cid1}'
 	            })
 	        },
 	        cate2: function() {
 	            axios.get("http://localhost:8080/web/main/category_2_vue.do", {}).then(result => {
 	                this.categories2 = result.data;
-	                this.cid2 = result.data[0].cid
+	                this.cid2 = '${cid2}';
 	            })
 	        },
 	        submit: function() {
@@ -252,7 +249,7 @@
 	    }
 	})
 	
-	</script> -->
+	</script>
 
 </body>
 </html>

@@ -79,7 +79,7 @@ public class GoodsDAO {
 		}
 	}
 	
-	public int goodsEidData(int g_id) {
+	public int goodsEidData(String g_id) {
 		return mapper2.goodsEidData(g_id);
 	}
 }
