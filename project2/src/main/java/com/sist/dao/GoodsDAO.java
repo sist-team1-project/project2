@@ -24,10 +24,10 @@ public class GoodsDAO {
 		return mapper.goodsMaxPrice(cid);
 	}
 
-	public List<GoodsVO> goodsList(Map map) {
-		return mapper.goodsList(map);
-	}
-
+	public List<Map<String,Object>> goodsList(Map map) {
+        return mapper.goodsList(map);
+    }
+	
 	public int goodsListTotalpage(Map map) {
 		return mapper.goodsListTotalpage(map);
 	}
