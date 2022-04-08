@@ -98,4 +98,9 @@ public class UserDAO {
 	public int userCount() {
 		return mapper.userCount();
 	}
+	
+	public int gradeupdate(Map map) {
+		return mapper.gradeupdate(map);
+	}
+	
 }

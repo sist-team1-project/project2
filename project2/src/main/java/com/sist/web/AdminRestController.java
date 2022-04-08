@@ -180,4 +180,13 @@ public class AdminRestController {
         }
         return arr.toJSONString();
     }
+    
+    @PostMapping(value = "user_grade_update_ok.do", produces = "text/plain;charset=utf-8")
+    public void user_grade_update_ok(int grade, String uid) {
+        Map map = new HashMap();
+        map.put("grade",grade);
+        map.put("uid",uid);
+        odao.stateupdate(map);
+    }
+    
 }

@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="../css/order.css">
+<link rel="stylesheet" type="text/css" href="../css/admin.css">
 <style type="text/css">
 td {
     width: 150px;
@@ -40,6 +41,7 @@ td {
               <th>전화번호</th>
               <th>이메일</th>
               <th>가입일</th>
+              <th>등급</th>
               <th>차단</th>
             </tr>
             <tr v-for="u in userlist" class="table_row fs-13 text-center">
@@ -49,7 +51,12 @@ td {
               <td>{{u.phone}}</td>
               <td>{{u.email}}</td>
               <td>{{u.regdate}}</td>
-              <td>{{u.grade}}</td>
+              <td v-if="u.grade==-1">차단유저</td>
+              <td v-if="u.grade==0">관리자</td>
+              <td v-if="u.grade==1">일반유저</td>
+              <td>
+       		    <input type="button" class="btn btn-sm btn-pro-color2 p-tb-4 dis-inline-block" value="차단" @click="xclick(, u.uid)">
+              </td>
              </tr>
           </table>
         </div>
@@ -69,7 +76,7 @@ td {
         </li>
       </ul>
     </div>
-      
+ 
   <script>
     new Vue({
         el:'#usermg',
@@ -110,7 +117,18 @@ td {
             getpage : function(event){
                 this.curpage = event.currentTarget.value;
                 this.uList();
-            }
+            },
+           xclick:function(event, uid){
+        	   let state = event.currentTarget.value;
+        	   axios.post("http://localhost:8080/web/admin/user_grade_update_ok.do",null,{
+                   params:{
+                       grade: grade,
+                       uid: uid
+                   }
+        	   }).then(res=>{
+                   
+               })
+           }
         }
     })
   </script>

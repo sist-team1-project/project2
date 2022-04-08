@@ -63,4 +63,9 @@ public interface UserMapper {
 	/* 페이징 사용 */
 	@Select("SELECT COUNT(*) FROM user_1")
     public int userCount();
+	
+	/* 유저등급 변경 */
+	 @Update("UPDATE user_1 SET u_grade=#{grade} WHERE u_id=#{uid}")
+	 public int gradeupdate(Map map);
+	 
 }

@@ -231,3 +231,10 @@
 .p-t-20-admin-td td{
 	padding-top: 20px;
 }
+
+.button1 {
+  background-color: #dbd0be;
+  color: black;
+  border: 2px solid #dbd0be; 
+}
+
