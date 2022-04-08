@@ -38,7 +38,7 @@
           </div>
         </div>
         <div class="col-sm-12 col-lg-6 m-lr-auto m-b-50">
-          <div class="bor10 p-lr-40 p-t-30 p-b-40 p-lr-15-sm">
+          <div class="bor10 p-lr-40 p-t-30 p-b-40 p-lr-15-sm"
             <h4 class="mtext-109 cl2 p-b-30">Cart Totals</h4>
 
             <div class="flex-w flex-t bor12 p-b-13">
