@@ -19,9 +19,9 @@ public interface NoticeMapper {
     
     @Select("SELECT CEIL(COUNT(*)/10.0) FROM notice_1")
     public int noticeTotalPage();
-
-    @Insert("INSERT INTO notice_1(n_id,u_id,n_title,n_content,n_regdate,n_visits) "
-  		 +"VALUES(notice_id_seq_1.nextval,#{u_id},#{n_title},#{n_content},"
+    
+    @Insert("INSERT INTO notice_1 "
+  		 +"VALUES (notice_id_seq_1.nextval,#{u_id},#{n_title},#{n_content},"
   		 +"SYSDATE,0)")
     public void noticeInsertData(NoticeVO vo);
     
