@@ -52,12 +52,15 @@ public class MainRestController {
     public String main_category_1_vue() {
         
         List<CategoryVO> list = cdao.categoryList_1();
+        
         JSONArray arr = new JSONArray();
         
         for(CategoryVO vo : list) {
             JSONObject obj = new JSONObject();
+            
             obj.put("cid", vo.getC_id());
             obj.put("title", vo.getC_title());
+            
             arr.add(obj);
         }
         return arr.toJSONString();
@@ -65,17 +68,21 @@ public class MainRestController {
     
     @GetMapping(value = "category_2_vue.do", produces = "text/plain;charset=utf-8")
     public String main_category_2_vue() {
+        List<CategoryVO> list = cdao.categoryList_1();
+        List<CategoryVO> list2 = cdao.categoryList_2();
         
-        List<CategoryVO> list = cdao.categoryList_2();
         JSONArray arr = new JSONArray();
-        
-        int i = 0;
         for(CategoryVO vo : list) {
-            JSONObject obj = new JSONObject();
-            obj.put("cid", vo.getC_id());
-            obj.put("title", vo.getC_title());
-            arr.add(obj);
-            i++;
+            JSONArray arr2 = new JSONArray();
+            for(CategoryVO vo2 : list2) {
+                if(vo2.getC_id().startsWith(vo.getC_id())) {
+                    JSONObject obj = new JSONObject();
+                    obj.put("cid", vo2.getC_id());
+                    obj.put("title", vo2.getC_title());
+                    arr2.add(obj);
+                }
+            }
+            arr.add(arr2); 
         }
         return arr.toJSONString();
     }

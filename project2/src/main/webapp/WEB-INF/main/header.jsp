@@ -51,9 +51,9 @@
             <ul class="main-menu">
               <li><a href="../main/main.do">홈</a></li>
               <li><a href="../goods/list.do">전체</a></li>
-              <li v-for="cate in categories1"><a :href="'../goods/list.do?cid=' + cate.cid">{{cate.title}}</a>
+              <li v-for="(cate,index) in categories1"><a :href="'../goods/list.do?cid=' + cate.cid">{{cate.title}}</a>
                 <ul class="sub-menu">
-                  <li v-for="cate2 in categories2" v-if="cate2.cid.indexOf(cate.cid) > -1"><a :href="'../goods/list.do?cid=' + cate2.cid">{{cate2.title}}</a></li>
+                  <li v-for="cate2 in categories2[index]"><a :href="'../goods/list.do?cid=' + cate2.cid">{{cate2.title}}</a></li>
                 </ul>
               </li>
             </ul>
@@ -146,9 +146,9 @@
       <ul class="main-menu-m">
         <li><a href="index.html">홈</a></li>
         <li><a href="../goods/list.do">전체</a></li>
-        <li v-for="cate in categories1"><a v-bind:href="'../goods/list.do?cid=' + cate.cid">{{cate.title}}</a><span class="arrow-main-menu-m"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+        <li v-for="(cate,index) in categories1"><a v-bind:href="'../goods/list.do?cid=' + cate.cid">{{cate.title}}</a><span class="arrow-main-menu-m"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
           <ul class="sub-menu-m">
-            <li v-for="cate2 in categories2" v-if="cate2.cid.indexOf(cate.cid) > -1"><a v-bind:href="'../goods/list.do?cid=' + cate2.cid">{{cate2.title}}</a></li>
+            <li v-for="cate2 in categories2[index]"><a v-bind:href="'../goods/list.do?cid=' + cate2.cid">{{cate2.title}}</a></li>
           </ul>
         </li>
       </ul>

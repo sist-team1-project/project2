@@ -101,8 +101,10 @@ public interface GoodsMapper {
 			+"WHERE g_id=#{gid}")
 	public GoodsVO goodsDetail(String gid);
 
-	@Insert("INSERT INTO goods_1 VALUES(goods_id_seq_1.NEXTVAL, #{c_id}, #{g_name}, #{g_brand}, #{g_price}, #{g_sale}, #{g_image}, #{g_detail}, #{g_stock}, 0, #{g_status}, SYSDATE)")
-	public void goodsInsert(GoodsVO vo);
+	@Insert("INSERT INTO goods_1 VALUES(#{g_id}, #{c_id}, #{g_name}, #{g_brand}, #{g_price}, #{g_sale}, #{g_image}, #{g_detail}, #{g_stock}, 0, #{g_status}, SYSDATE)")
+    @SelectKey(statement="SELECT goods_id_seq_1.NEXTVAL FROM DUAL", keyProperty="g_id", before=true, resultType=int.class)
+	@Options(useGeneratedKeys=true, keyProperty="g_id", keyColumn="g_id")
+	public int goodsInsert(GoodsVO vo);
 
 	@Select("SELECT eg_id, e_id FROM event_goods_1 WHERE g_id = #{g_id}")
 	public EventGoodsVO eventGoodsData(String g_id);
