@@ -57,13 +57,13 @@ public class GoodsDAO {
         return mapper.adminGoodsFind(map);
     }
     
+    /*  ------- 상품 등록 -------  */
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public void goodsInsert(Map map) {
+    public void goodsInsert(Map map) { // Map에 GoodsVO랑 eid
         
-        GoodsVO vo = (GoodsVO) map.get("vo");
+        GoodsVO vo = (GoodsVO) map.get("vo"); // GoodsVO로 형변환
         
-        mapper.goodsInsert(vo);
-        System.out.println("index:" + vo.getG_id());
+        mapper.goodsInsert(vo); // Insert하고 SelectKey로 vo.g_id에 시퀀스 값을 넣어줌
         
         int gid = vo.getG_id();
         String eid = (String) map.get("eid");
@@ -75,7 +75,6 @@ public class GoodsDAO {
                 evo.setE_id(Integer.parseInt(st.nextToken()));
                 evo.setG_id(gid);
                 
-                System.out.println(evo.getE_id() + " " + evo.getG_id());
                 mapper2.goodsEventInsert(evo);
             }
         }
