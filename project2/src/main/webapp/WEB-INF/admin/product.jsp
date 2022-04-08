@@ -101,16 +101,21 @@
 
 			<div class="text-center">
 				<ul class="pagination">
-					<li class="page-item" v-bind:class="{'disabled':startPage==1}"><button class="page-link" :value="startPage-1" v-on:click="prev($event)">
+					<li class="page-item" v-bind:class="{'disabled':startPage==1}">
+						<button class="page-link" :value="startPage-1" v-on:click="paging($event)">
 							<i class="fa fa-chevron-left" aria-hidden="true"></i>
-						</button></li>
-					<li class="page-item" v-for="i in pages" v-bind:class="{'active':i==curpage}"><button class="page-link" :value="i" v-on:click="getpage($event)">{{i}}</button></li>
-					<li class="page-item" v-bind:class="{'disabled':endPage==totalpage}"><button class="page-link" :value="endPage+1" v-on:click="next($event)">
-							<i class="fa fa-chevron-right" aria-hidden="true"></i>
-						</button></li>
+						</button>
+					</li>
+					<li class="page-item" v-for="i in pages" v-bind:class="{'active':i==curpage}">
+						<button class="page-link" :value="i" v-on:click="paging($event)">{{i}}</button>
+					</li>
+					<li class="page-item" v-bind:class="{'disabled':endPage==totalpage}">
+						<button class="page-link" :value="endPage+1" v-on:click="paging($event)">
+								<i class="fa fa-chevron-right" aria-hidden="true"></i>
+						</button>
+					</li>
 				</ul>
 			</div>
-
 
 
 		</div>
@@ -197,16 +202,8 @@
 	                }
 	            })
 	        },
-	        prev: function(event) {
-	            this.curpage = event.currentTarget.getAttribute('value');
-	            this.dataSend();
-	        },
-	        next: function(event) {
-	            this.curpage = event.currentTarget.getAttribute('value');
-	            this.dataSend();
-	        },
-	        getpage: function(event) {
-	            this.curpage = event.currentTarget.getAttribute('value');
+	        paging: function(event) {
+	            this.curpage = event.currentTarget.value;
 	            this.dataSend();
 	        },
 	        gfind: function() {
