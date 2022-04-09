@@ -18,12 +18,15 @@ import com.sist.service.AdminService;
 public class AdminController {
 	@Autowired
 	private AdminService service;
-
+	
 	@Autowired
 	private OrderDAO odao;
 	
 	@Autowired
 	private OrderDetailDAO oddao;
+	
+	@Autowired
+	private UserDAO udao;
 
 	@GetMapping("orderlist.do")
 	public String adorder(String oid, Model model) {
@@ -36,5 +39,11 @@ public class AdminController {
 	public String adorder_detail(String oid, Model model) {
 		model.addAttribute("oid",oid);
 		return "admin/orderdetail/vue";
+	}
+	
+	@GetMapping("user_management.do")
+	public String userlist(String uid, Model model) {
+		model.addAttribute("u_id",uid);
+		return "admin/user_management";
 	}
 }

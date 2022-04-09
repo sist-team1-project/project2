@@ -48,6 +48,7 @@
                 <td v-if="order.state==2" class="tleft" colspan="3">배송중</td>
                 <td v-if="order.state==3" class="tleft" colspan="3">배송완료</td>
             </tr>
+            <!----------------------------------------------------->
             <tr>
            	  <th class="adt-light" >상품번호</th>
               <th class="adt-light" colspan="3">상품명</th>
@@ -60,6 +61,7 @@
               <td colspan="2" class="tright">{{od.price | currency }}원<br>
               ( {{od.quantity}} 개)</td>
             </tr>
+            <!----------------------------------------------------->
             <tr>
               <th class="adtable" colspan="6">주문/결제금액</th>
             </tr>
@@ -78,6 +80,7 @@
               <th class="adt-light">할인금액</th>
               <td class="tright">- {{od.price * (od.sale/100) | currency}}원</td>
 			</tr>
+			<!----------------------------------------------------->
             <tr>
               <th class="adtable" colspan="6">배송정보</th>
             </tr>

@@ -25,6 +25,9 @@ public class AdminRestController {
     @Autowired
     private OrderDetailDAO oddao;
     
+    @Autowired
+    private UserDAO udao;
+    
     @GetMapping(value = "orderlist_vue.do", produces = "text/plain;charset=utf-8")
     public String orderFull(int page) {
         
@@ -126,4 +129,64 @@ public class AdminRestController {
         map.put("oid",oid);
         odao.stateupdate(map);
     }
+    
+    /****************************** USER *****************************/
+    @GetMapping(value = "userlist_vue.do", produces = "text/plain;charset=utf-8")
+    public String userlist(int page,Model model) {
+        
+        int curpage = page;
+        
+        int rowSize = 10;
+        int start = (curpage * rowSize) - (rowSize - 1);
+        int end = (rowSize * curpage);
+        
+        Map map = new HashMap();
+        
+        map.put("start", start);
+        map.put("end", end);
+        
+        int totalpage = udao.userTotalPage();
+        int count = udao.userCount();
+
+        final int BLOCK = 10;
+        int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
+        int endPage = ((curpage - 1) / BLOCK * BLOCK) + BLOCK;
+        if (endPage > totalpage) {
+            endPage = totalpage;
+        }
+        
+        List<UserVO> list = udao.userList(map);
+        
+        JSONArray arr = new JSONArray();
+		int i = 0;
+        for (UserVO vo:list) {
+			JSONObject obj = new JSONObject();
+			obj.put("uid", vo.getU_id());
+			obj.put("name", vo.getU_name());
+			obj.put("gender", vo.getU_gender());
+			obj.put("phone", vo.getU_phone());
+			obj.put("email", vo.getU_email());
+			obj.put("regdate", vo.getU_regdate());
+			obj.put("grade", vo.getU_grade());
+			
+            if(i == 0) {
+                obj.put("startPage", startPage);
+                obj.put("endPage", endPage);
+                obj.put("totalpage", totalpage);
+                obj.put("curpage", curpage);
+                obj.put("count", count);
+            }
+            arr.add(obj);
+        }
+        return arr.toJSONString();
+    }
+    
+    @PostMapping(value = "user_grade_update_ok.do", produces = "text/plain;charset=utf-8")
+    public void user_grade_update_ok(int grade, String uid) {
+        Map map = new HashMap();
+        map.put("grade",grade);
+        map.put("uid",uid);
+        odao.stateupdate(map);
+    }
+    
 }
