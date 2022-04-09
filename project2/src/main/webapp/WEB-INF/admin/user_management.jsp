@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="../css/order.css">
-
+<link rel="stylesheet" type="text/css" href="../css/admin.css">
 <style type="text/css">
 td {
     width: 150px;
@@ -56,7 +56,8 @@ td {
             <td v-if="u.grade==0">관리자</td>
             <td v-if="u.grade==1">일반유저</td>
             <td>
-       		  <input type="button" class="btn btn-sm btn-pro-color2 p-tb-4 dis-inline-block" value="차단" @click="xclick(event, u.uid)">
+       		  <button v-if="u.grade==1" class="btn btn-sm btn-pro-color2 p-tb-4 dis-inline-block" value="-1" v-on:click="xclick($event, u.uid)">차단</button>
+       		  <button v-if="u.grade==-1" class="btn btn-sm btn-pro-color2 p-tb-4 dis-inline-block" value="1" v-on:@click="xclick($event, u.uid)">취소</button>
             </td>
            </tr>
         </table>
@@ -118,15 +119,17 @@ td {
                 this.uList();
             },
             xclick:function(event, uid){
-        	   let state = event.currentTarget.value;
+        	   let grade = event.currentTarget.value;
         	   axios.post("http://localhost:8080/web/admin/user_grade_update_ok.do",null,{
                    params:{
                        grade: grade,
                        uid: uid
                    }
         	   }).then(res=>{
-                   
-               })
+                 	 if(grade == 1 ){	// grade가 1이면  -1로 변경
+                 		 this.grade = -1;
+                 	 } 
+               }) 
            }
         }
     })

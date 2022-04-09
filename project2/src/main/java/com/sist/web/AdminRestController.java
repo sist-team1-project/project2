@@ -186,7 +186,7 @@ public class AdminRestController {
         Map map = new HashMap();
         map.put("grade",grade);
         map.put("uid",uid);
-        odao.stateupdate(map);
+        udao.gradeupdate(map);
     }
     
 }

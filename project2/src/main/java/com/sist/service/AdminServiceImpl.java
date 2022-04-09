@@ -37,11 +37,6 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<String> nameData(String oid) {
-		return oddao.nameData(oid);
-	}
-
-	@Override
 	public int orderTotalPage() {
 		return odao.orderTotalPage();
 	}

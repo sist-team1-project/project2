@@ -47,5 +47,4 @@ public interface OrderMapper {
 	 @Update("UPDATE order_1 SET o_state=#{state} WHERE o_id=#{oid}")
 	 public int stateupdate(Map map);
 	 
-	 
 }
