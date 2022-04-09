@@ -34,13 +34,13 @@
         <div class="col-md-6 col-lg-5 p-b-30">
           <div class="p-r-50 p-t-5 p-lr-0-lg">
             <h4 class="cl2 js-name-detail p-b-14">{{goods.name}}</h4>
-            <span class="fs-14 cl2 p-t-20 p-b-10 dis-block"><b>가격</b>&emsp;{{goods.price }}<br></span>
+            <span class="fs-14 cl2 p-t-20 p-b-10 dis-block"><b>가격</b>&emsp;{{goods.price|currency}}<br></span>
             <span class="fs-14 cl2 p-tb-10 dis-block"><b>브랜드</b>&emsp;{{goods.brand }}<br></span>
             <span class="fs-14 cl2 p-tb-10 dis-block"><b>배송비</b>&emsp;5,000원<br></span>
-            <span class="fs-14 cl2 p-tb-10 dis-block"><b>할인율</b>&emsp;{{goods.sale }}</span>
+            <span class="fs-14 cl2 p-tb-10 dis-block"><b>할인율</b>&emsp;{{goods.sale }} %</span>
             <!--  -->
             <div class="p-t-20">
-              <c:if test="${sessionScope.grade=='1' }">
+              <c:if test="${sessionScope.id!=null }">
                 <div class="flex-w flex-c-m p-b-10">
                   <div class="wrap-num-product flex-w m-r-20 m-tb-10">
                     <div v-on:click="qDown()" class="btn-num-product-down cl8 hov-btn1 trans-04 flex-c-m"><i class="fs-16 zmdi zmdi-minus"></i></div>
@@ -93,10 +93,10 @@
               <div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
                 <div class="p-b-30 m-lr-15-sm">
                   <!-- 평점 -->
-                  <div class="flex-w flex-t p-b-68">
+                  <div v-for="r in reviews" class="flex-w flex-t p-b-68">
                     <div class="size-207">
                       <div class="flex-w flex-sb-m p-b-17">
-                        <span class="mtext-107 cl2 p-r-20">Ariana Grande</span> <!-- 아이디 -->
+                        <span class="mtext-107 cl2 p-r-20"></span> <!-- 아이디 -->
                         <span class="fs-18 cl11"> <!-- 평점 -->
                           <i class="zmdi zmdi-star"></i>
                           <i class="zmdi zmdi-star"></i>
@@ -151,7 +151,18 @@
             images:[],
             image:'',
             details:[],
-            quantity:1
+            quantity:1,
+            reviews:[],
+            curpage:1,
+            start:1,
+            end:1,
+            pages:[]
+        },
+        filters:{
+            currency: function(value){ // 금액 3자리 수 마다 따옴표 필터
+                let num = new Number(value);
+                return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,")
+            }
         },
         mounted:function(){
     	   	axios.get('http://localhost:8080/web/goods/detail_vue.do',{
@@ -164,6 +175,7 @@
     	   		this.details=this.goods.detail.split(";");
     	   		this.image=this.images[0];
     	    })
+    	    this.replyList();
         },
         methods: {
             showImg:function(link){
@@ -192,6 +204,20 @@
             	if(this.quantity>1){
             		this.quantity=this.quantity-1;
             	}
+            },
+            replyList:function(){
+                axios.get('http://localhost:8080/web/goods/review_vue.do',{
+                    params:{
+                        g_id:this.gid,
+                        page: this.curpage
+                    }
+                }).then(res=>{
+                    this.reviews = res.data;
+                    this.curpage = res.data[0].curpage;
+                    this.totalpage = res.data[0].totalpage;
+                    this.start = res.data[0].start;
+                    this.end = res.data[0].end;
+                })
             }
         }
         

@@ -14,8 +14,22 @@ public class GoodsServiceImpl implements GoodsService{
 	@Autowired
 	private GoodsDAO gdao;
 	
+    @Autowired
+    private ReviewGoodsDAO rgdao;
+    
+    
 	@Override
-	public GoodsVO goodsDetail(String gid) {
+	public GoodsVO goodsDetail(int gid) {
 		return gdao.goodsDetail(gid);
 	}
+    
+    @Override
+    public List<ReviewGoodsVO> reviewList(Map map) {
+        return rgdao.reviewList(map);
+    }
+    
+    @Override
+    public int reviewListTotalpage(int gid) {
+        return rgdao.reviewListTotalpage(gid);
+    }
 }

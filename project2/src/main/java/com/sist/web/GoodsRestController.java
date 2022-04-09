@@ -1,16 +1,13 @@
 package com.sist.web;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-import org.json.simple.JSONObject;
+import org.json.simple.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.sist.service.GoodsService;
-import com.sist.vo.GoodsVO;
+import com.sist.service.*;
+import com.sist.vo.*;
 
 @RestController
 @RequestMapping("goods/")
@@ -20,7 +17,7 @@ public class GoodsRestController {
     private GoodsService service;
 
     @GetMapping(value = "detail_vue.do", produces = "text/plain;charset=utf-8")
-    public String goods_detail(String gid) {
+    public String goods_detail(int gid) {
         
         GoodsVO vo = service.goodsDetail(gid);
         
@@ -37,5 +34,50 @@ public class GoodsRestController {
         obj.put("status", vo.getG_status());   
         obj.put("stock", vo.getG_stock());
         return obj.toJSONString();
+    }
+    
+    @GetMapping(value = "review_vue.do", produces = "text/plain;charset=utf-8")
+    public String goods_review_vue(int g_id, int page) {
+        
+        int curpage = page;
+        
+        int rowSize = 20;
+        int start = (rowSize * curpage) - (rowSize - 1);
+        int end = (rowSize * curpage);
+        
+        Map map = new HashMap();
+        map.put("gid", g_id);
+        map.put("start", start);
+        map.put("end", end);
+        List<ReviewGoodsVO> list = service.reviewList(map);
+        
+        int totalpage = service.reviewListTotalpage(g_id);
+        
+        final int BLOCK = 10;
+        int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
+        int endPage = ((curpage - 1) / BLOCK * BLOCK) + BLOCK;
+        if (endPage > totalpage) {
+            endPage = totalpage;
+        }
+        
+        JSONArray arr = new JSONArray();
+        int i = 0;
+        for (ReviewGoodsVO vo : list) {
+            JSONObject obj = new JSONObject();
+            
+            if (i == 0) {
+                obj.put("curpage", curpage);
+                obj.put("totalpage", totalpage);
+                obj.put("start", startPage);
+                obj.put("end", endPage);
+            }
+            obj.put("rid", vo.getR_id());
+            obj.put("rate", vo.getR_rate());
+            obj.put("content", vo.getR_content());
+            obj.put("r_regdate", vo.getR_regdate());
+            arr.add(obj);
+            i++;
+        }
+        return arr.toJSONString();
     }
 }

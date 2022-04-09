@@ -49,7 +49,7 @@ public class GoodsDAO {
         return mapper.goodsCount();
     }
 
-    public GoodsVO goodsDetail(String gid) {
+    public GoodsVO goodsDetail(int gid) {
         return mapper.goodsDetail(gid);
     }
 

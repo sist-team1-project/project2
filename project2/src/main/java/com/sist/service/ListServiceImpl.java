@@ -27,7 +27,6 @@ public class ListServiceImpl implements ListService {
     
     @Override
     public List<Map<String,Object>> goodsList(Map map) {
-        // TODO Auto-generated method stub
         return gdao.goodsList(map);
     }
     
