@@ -244,7 +244,7 @@
                 form.append('eid', this.eid.join(","));
                 
                 axios.post('http://localhost:8080/web/admin/goods_add_ok.do', form, {}) .then((response) => {
-                    //location.href="../admin/adlist.do"
+                    location.href="../admin/adlist.do"
                 })
             },
             selectIndex: function(event) {
