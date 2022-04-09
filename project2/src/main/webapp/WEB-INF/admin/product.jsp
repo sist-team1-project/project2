@@ -86,7 +86,7 @@
 									</div>
 								</td>
 								<td>
-									<button class="flex-c-m stext-101 cl0 btn-sm btn-pro-color2 bor1 hov-btn1 p-lr-15 trans-04  fs-10" :index="index" v-on:click="goods_update($event)">수정</button>
+									<a :href="'../admin/goods_update.do?g_id='+goods.g_id" value="{{goods.g_id}}"><button class="flex-c-m stext-101 cl0 btn-sm btn-pro-color2 bor1 hov-btn1 p-lr-15 trans-04  fs-10" >수정</button></a>
 								</td>
 							</tr>
 
@@ -195,7 +195,6 @@
 	                this.startPage = res.data[0].startPage;
 	                this.endPage = res.data[0].endPage;
 	                this.count = res.data[0].count;
-
 	                this.pages = [];
 	                for (i = this.startPage; i <= this.endPage; i++) {
 	                    this.pages.push(i);
@@ -219,20 +218,6 @@
 	                console.log(this.fs)
 	            }
 	            this.dataSend();
-	        },
-	        goods_update: function() {
-	            console.log("상품 수정");
-	            var index = event.currentTarget.getAttribute('index');
-	            this.g_id = this.goodsList[index].g_id;
-	            console.log(this.g_id);
-
-	            axios.post("http://localhost:8080/web/admin/goods_update_ok.do", {
-	                params: {
-	                    g_id: this.g_id
-	                }
-	            }).then(res => {})
-	            
-	            location.href = '../admin/goods_update.do?g_id=' + this.g_id;
 	        },
 	        goods_detail: function(detailId) {
 	            this.gdetail = detailId;

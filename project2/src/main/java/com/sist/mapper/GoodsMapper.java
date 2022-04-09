@@ -65,6 +65,8 @@ public interface GoodsMapper {
 			+ "WHERE num BETWEEN #{start} AND #{end}")
 	public List<GoodsVO> goodsTotalList(Map map);
 
+	
+	/* ---------------------- 관리자 상품 검색 시 페이징  ----------------------------  */
 	@Select("<script>"
 			+"SELECT CEIL(COUNT(*) / 10.0) "
 			+"FROM (SELECT g_id, c_id, g_name, g_brand "
@@ -93,10 +95,12 @@ public interface GoodsMapper {
 			+ ")"
 			+ "</script>")
 	public int goodsTotalPage(Map map);
-
+	
+	/* ---------------------- 관리자 상품 개수  ----------------------------  */
 	@Select("SELECT COUNT(*) FROM Goods_1")
 	public int goodsCount();
 
+	/* ---------------------- 관리자 상세 정보 ----------------------------  */
 	@Select("SELECT g_id, c_id, g_name,g_brand,g_price,g_sale,g_image,g_detail,g_status,g_stock FROM Goods_1 "
 			+"WHERE g_id=#{gid}")
 	public GoodsVO goodsDetail(String gid);
@@ -108,9 +112,11 @@ public interface GoodsMapper {
 	public int goodsInsert(GoodsVO vo);
 	/*  ----------------------------  */
 	
+	/* ---------------------- 관리자  이벤트 정보 ----------------------------  */
 	@Select("SELECT eg_id, e_id FROM event_goods_1 WHERE g_id = #{g_id}")
 	public EventGoodsVO eventGoodsData(String g_id);
 	
+	/* ---------------------- 관리자 상품 목록 + 검색  ----------------------------  */
 	@Select("<script>"
 			+ "SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status, TO_CHAR(g_regdate,'YYYY-MM-DD HH24:MI:SS')as g_regdate, num "
 			  +"FROM (SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status, g_regdate, rownum as num "
@@ -143,6 +149,7 @@ public interface GoodsMapper {
 			  + "</script>")
 		public List<GoodsVO> adminGoodsFind(Map map);
 	   
+	/* ---------------------- 관리자 상품 수정  ----------------------------  */
 	@Update("UPDATE goods_1 SET "
 			+ "c_id=#{c_id}, g_name=#{g_name}, g_brand = #{g_brand}, g_price = #{g_price}, g_sale = #{g_sale}, g_image = #{g_image}, g_detail = #{g_detail}, g_stock = #{g_stock}, g_status = #{g_status} "
 			+ "WHERE g_id = #{g_id}")
