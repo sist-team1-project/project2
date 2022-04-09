@@ -31,28 +31,7 @@ public class AdminController2 {
 
 	@GetMapping("goods_update.do")
 	public String goods_update(String g_id, Model model) {
-
-		GoodsVO vo = dao.goodsDetail(g_id);
-		String cid1 = vo.getC_id().substring(0, 3);
-		String cid2 = vo.getC_id();
-
-		int e_id = 0;
-
-		try {
-			int eidtest = dao.goodsEidData(g_id);
-			System.out.println("eid : " + eidtest);
-			e_id = eidtest;
-
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-
-		System.out.println("c_id : " + vo.getC_id());
-
-		model.addAttribute("e_id", e_id);
-		model.addAttribute("vo", vo);
-		model.addAttribute("cid1", cid1);
-		model.addAttribute("cid2", cid2);
+		model.addAttribute("gid", g_id);
 		return "admin/goods_update";
 	}
 

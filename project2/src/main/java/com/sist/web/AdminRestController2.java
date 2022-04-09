@@ -105,7 +105,7 @@ public class AdminRestController2 {
 	}
 
 	@PostMapping("goods_update_ok.do")
-	public String goods_update_ok(@RequestBody HashMap<String, Object> map) {
+	public String goods_update_ok(@ModelAttribute GoodsVO vo, @RequestParam String eid, HttpServletRequest request) {
 
 		return "";
 	}
@@ -176,4 +176,40 @@ public class AdminRestController2 {
         gdao.goodsInsert(vo, eid);
         return "ok";
     }
+    
+    @GetMapping(value = "goodsdetaildata.do", produces = "text/plain;charset=utf-8")
+    public String adminGoodsDetail(String gid) {
+    	GoodsVO vo = gdao.goodsDetail(gid);
+    	List<EventGoodsVO> list = gdao.goodsEidData(gid);
+    	
+    	JSONArray arr = new JSONArray();
+    	JSONObject obj = new JSONObject();
+    	obj.put("g_id", vo.getG_id());
+    	String c_id1 = vo.getC_id().substring(0,3);
+    	obj.put("cid1", c_id1);
+		obj.put("c_id", vo.getC_id());
+		obj.put("g_name", vo.getG_name());
+		obj.put("g_brand", vo.getG_brand());
+		obj.put("g_price", vo.getG_price());
+		obj.put("g_sale", vo.getG_sale());
+		String images = vo.getG_image();
+		String[] image = images.split(";");
+		obj.put("g_image", image[0]);
+		obj.put("g_detail", vo.getG_detail());
+		obj.put("g_stock", vo.getG_stock());
+		obj.put("g_sold", vo.getG_sold());
+		obj.put("g_status", vo.getG_status());
+		obj.put("g_regdate", vo.getG_regdate());
+		arr.add(obj);
+		
+		System.out.println("list0 : " + list.get(0).getE_id());
+//		if (list.size() != 0) {
+//			JSONObject obj2 = new JSONObject();
+//			
+//		}
+//		arr.add(list);
+		
+    	return arr.toJSONString();
+    }
+    
 }

@@ -29,11 +29,11 @@
 				<tr>
 					<td colspan="4" class="text-right">
 						<c:if test="${sessionScope.grade=='0'}">
-							<a href="../ask/reply.do?no=${vo.a_id }" class="btn btn-xs" style="background-color: #eeeee6">답변</a>
+							<a href="../support/ask_reply.do?no=${vo.a_id }" class="btn btn-xs" style="background-color: #eeeee6">답변</a>
 						</c:if>
 						<c:if test="${vo.u_id==sessionScope.id}">
-							<a href="../ask/update.do?no=${vo.a_id }" class="btn btn-xs" style="background-color: #eeeee6">수정</a>
-							<a href="../ask/delete.do?no=${vo.a_id }" class="btn btn-xs" style="background-color: #eeeee6">삭제</a>
+							<a href="../support/ask_update.do?no=${vo.a_id }" class="btn btn-xs" style="background-color: #eeeee6">수정</a>
+							<a href="../support/ask_delete.do?no=${vo.a_id }" class="btn btn-xs" style="background-color: #eeeee6">삭제</a>
 						</c:if>
 						<c:choose>
 							<c:when test="${sessionScope.grade=='0'}">
