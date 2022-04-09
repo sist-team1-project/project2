@@ -111,26 +111,28 @@
           <div class="p-tb-20"><h3 class="ltext-103 cl5">Product Overview</h3></div>
           <div v-for="e in events">
             <div class="p-t-40 p-b-10"><h4>{{e.title}}</h4></div>
-            <div v-for="eg in event_goods" v-if="eg.eid == e.eid" class="col-sm-6 col-md-4 col-lg-3 p-b-35 women">
-              <div class="block2">
-                <div class="block2-pic hov-img0"><a :href="'../goods/detail.do?gid=' + eg.gid"><img onerror="this.src='../images/image_ready.jpg'" :src="eg.image"></a></div>
-                <div class="block2-txt flex-w flex-t p-t-14">
+            <div class="row">
+              <div v-for="eg in event_goods" v-if="eg.eid == e.eid" class="col-sm-6 col-md-4 col-lg-3 p-b-35">
+                <div class="block2">
+                  <div class="block2-pic hov-img0"><a :href="'../goods/detail.do?gid=' + eg.gid"><img onerror="this.src='../images/image_ready.jpg'" :src="eg.image"></a></div>
+                  <div class="block2-txt flex-w flex-t p-t-14">
+                    
+                    <div class="block2-txt-child1 flex-col-l short">
+                      <a :href="'../goods/detail.do?gid=' + eg.gid" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">{{eg.name}}</a>
+                      <div class="cl4">₩{{eg.price | currency}}</div>
+                    </div>
                   
-                  <div class="block2-txt-child1 flex-col-l short">
-                    <a :href="'../goods/detail.do?gid=' + eg.gid" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">{{eg.name}}</a>
-                    <div class="cl4">₩{{eg.price | currency}}</div>
-                  </div>
-                
-                  <div class="block2-txt-child2 flex-r">
-                    <span class="btn-addwish-b2 dis-block pos-relative">
-                      <c:if test="${sessionScope.id!=null }">
-                        <img v-if="eg.lid==0" class="icon-heart1 trans-04 pointer" src="../images/icons/icon-heart-01.png" @click="like(eg.gid); eg.lid=1; alert('즐겨찾기에 등록되었습니다')">
-                        <img v-if="eg.lid>0" class="icon-heart2 trans-04 pointer" src="../images/icons/icon-heart-02.png" @click="unlike(eg.lid); eg.lid=0; alert('즐겨찾기가 해제되었습니다')">
-                      </c:if>
-                      <c:if test="${sessionScope.id==null }">
-                        <img class="icon-heart1 trans-04 pointer" src="../images/icons/icon-heart-01.png" @click="if(confirm('로그인창으로 이동하시겠습니까?')) return location.href='../user/login.do'">
-                      </c:if>
-                    </span>
+                    <div class="block2-txt-child2 flex-r">
+                      <span class="btn-addwish-b2 dis-block pos-relative">
+                        <c:if test="${sessionScope.id!=null }">
+                          <img v-if="eg.lid==0" class="icon-heart1 trans-04 pointer" src="../images/icons/icon-heart-01.png" @click="like(eg.gid); eg.lid=1; alert('즐겨찾기에 등록되었습니다')">
+                          <img v-if="eg.lid>0" class="icon-heart2 trans-04 pointer" src="../images/icons/icon-heart-02.png" @click="unlike(eg.lid); eg.lid=0; alert('즐겨찾기가 해제되었습니다')">
+                        </c:if>
+                        <c:if test="${sessionScope.id==null }">
+                          <img class="icon-heart1 trans-04 pointer" src="../images/icons/icon-heart-01.png" @click="if(confirm('로그인창으로 이동하시겠습니까?')) return location.href='../user/login.do'">
+                        </c:if>
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
