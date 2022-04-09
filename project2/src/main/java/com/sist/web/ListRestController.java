@@ -111,13 +111,18 @@ public class ListRestController {
     }
     
     @PostMapping("like_insert_ok.do")
-    public void like_insert_ok(int gid, HttpSession session) {
+    public String like_insert_ok(int gid, HttpSession session) {
         String uid = (String) session.getAttribute("id");
         
         LikeVO vo = new LikeVO();
         vo.setG_id(gid);
         vo.setU_id(uid);
-        service.likeInsert(vo);
+        
+        service.likeInsert(vo); // 추가하고 추가한 ID를 돌려 받음
+        
+        JSONObject obj = new JSONObject();
+        obj.put("lid", vo.getL_id());
+        return obj.toJSONString();
     }
     
     @PostMapping("like_delete_ok.do")

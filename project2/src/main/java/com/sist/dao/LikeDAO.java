@@ -15,8 +15,8 @@ public class LikeDAO {
 	@Autowired
 	private LikeMapper mapper;
     
-	public void likeInsert(LikeVO vo) {
-		mapper.likeInsert(vo);
+	public int likeInsert(LikeVO vo) {
+		return mapper.likeInsert(vo);
 	}
 	
 	public void likeDelete(LikeVO vo) {

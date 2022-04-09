@@ -119,18 +119,18 @@ td {
                 this.uList();
             },
             xclick:function(event, uid){
-        	   let grade = event.currentTarget.value;
-        	   axios.post("http://localhost:8080/web/admin/user_grade_update_ok.do",null,{
-                   params:{
-                       grade: grade,
-                       uid: uid
-                   }
-        	   }).then(res=>{
-                 	 if(grade == 1 ){	// grade가 1이면  -1로 변경
-                 		 this.grade = -1;
-                 	 } 
-               }) 
-           }
+        	    let grade = event.currentTarget.value;
+        	    axios.post("http://localhost:8080/web/admin/user_grade_update_ok.do",null,{
+                    params:{
+                        grade: grade,
+                        uid: uid
+                    }
+        	    }).then(res=>{
+                  	if(grade == 1 ){	// grade가 1이면  -1로 변경
+                  	    this.grade = -1;
+                 	} 
+                }) 
+            }
         }
     })
   </script>

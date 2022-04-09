@@ -49,7 +49,7 @@
       <!-- --------------------- -->
       <div class="row" v-if="empty==false"> <!-- 상품이 하나도 없으면 아예 출력을하지 않는다 -->
         <!-- 아이템 -->
-        <div v-for="vo in goods" class="col-sm-6 col-md-4 col-lg-3 p-b-35">
+        <div v-for="(vo,index) in goods" class="col-sm-6 col-md-4 col-lg-3 p-b-35">
           <div class="block2">
             <div class="block2-pic hov-img0"><a :href="'../goods/detail.do?gid=' + vo.gid"><img onerror="this.src='../images/image_ready.jpg'" :src="vo.image"></a></div>
             <div class="block2-txt flex-w flex-t p-t-14">
@@ -62,7 +62,7 @@
               <div class="block2-txt-child2 flex-r">
                 <span class="btn-addwish-b2 dis-block pos-relative">
                   <c:if test="${sessionScope.id!=null }">
-                    <img v-if="vo.lid==0" class="icon-heart1 trans-04 pointer" src="../images/icons/icon-heart-01.png" @click="like(vo.gid); vo.lid=1; alert('즐겨찾기에 등록되었습니다')">
+                    <img v-if="vo.lid==0" class="icon-heart1 trans-04 pointer" src="../images/icons/icon-heart-01.png" @click="like(vo.gid,index); alert('즐겨찾기에 등록되었습니다')">
                     <img v-if="vo.lid>0" class="icon-heart2 trans-04 pointer" src="../images/icons/icon-heart-02.png" @click="unlike(vo.lid); vo.lid=0; alert('즐겨찾기가 해제되었습니다')">
                   </c:if>
                   <c:if test="${sessionScope.id==null }">
@@ -205,8 +205,12 @@
             brandCheck:function() {
                 this.checkAll = false;
             },
-            like:function(gid) { // 좋아요
-                axios.post("http://localhost:8080/web/goods/like_insert_ok.do",null,{params:{gid: gid}})
+            like:function(gid, index) { // 좋아요
+                axios.post("http://localhost:8080/web/goods/like_insert_ok.do",null,{
+                    params:{gid: gid}
+                }).then(result=>{
+                    this.goods[index].lid = result.data.lid;
+                })
             },
             unlike:function(lid) { // 싫어요
                 axios.post("http://localhost:8080/web/goods/like_delete_ok.do",null,{params:{lid: lid}})
