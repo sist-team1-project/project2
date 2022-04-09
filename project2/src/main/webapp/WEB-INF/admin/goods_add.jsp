@@ -87,7 +87,13 @@
                   <span class="stext-110 cl2"> 대표이미지 첨부 </span>
                 </div>
                 <div class="size-209">
-                  <input ref="gimage" type=text class="bor10 p-tb-3 p-lr-5 w-full" v-model="gimage">
+                  <div class="p-b-20">
+                      첨부 파일로 추가
+                      <input v-model="gimage" ref="file1" type="file" accept="image/*">
+                  </div>
+                  <div>
+                    <input ref="gimage2" type=text min="0" class="bor10 p-tb-3 p-lr-5 w-full" v-model="gimage2">
+                  </div>
                 </div>
               </div>
 
@@ -96,7 +102,14 @@
                   <span class="stext-110 cl2"> 상세정보 </span>
                 </div>
                 <div class="size-209">
-                  <input ref="gdetail" type=text class="bor10 p-tb-3 p-lr-5 w-full" v-model="gdetail">
+                  <div class="p-b-20">
+                    첨부 파일로 추가
+                    <input v-model="gdetail" ref="file2" type="file" accept="image/*">
+                  </div>
+                  <div>
+                    직접 경로 작성 ( 여러 이미지일시 구분자 ; )
+                    <input ref="gdetail2" type=text min="0" class="bor10 p-tb-3 p-lr-5 w-full" v-model="gdetail2">
+                  </div>
                 </div>
               </div>
 
@@ -133,10 +146,12 @@
             gbrand: '',
             gprice: '',
             gsale: '',
-            gimage: '',
-            gdetail: '',
             gstock: '',
             gstatus: '',
+            gimage: '',
+            gdetail: '',
+            gimage2: '',
+            gdetail2: '',
             eid: [],
             categories1: [],
             categories2: [],
@@ -168,58 +183,67 @@
             },
             submitForm:function(){
                 if (this.gname == "") {
-                    $('#gname').focus();
+                    this.$refs.gname.focus();
                     return;
                 } else if (this.gbrand == "") {
-                    $('#gbrand').focus();
+                    this.$refs.gbrand.focus();
                     return;
                 } else if (this.gprice == "") {
-                    $('#gprice').focus();
+                    this.$refs.gprice.focus();
                     return;
                 } else if (this.gsale == "") {
-                    $('#gsale').focus();
+                    this.$refs.gsale.focus();
                     return;
                 } else if (this.gstock == "") {
-                    $('#gstock').focus();
+                    this.$refs.gstock.focus();
                     return;
-                } else if (this.gimage == "") {
-                    $('#giamge').focus();
-                    return;
-                } else if (!$('#gstatus>option:selected').val()) {
+                } else if (this.gstatus == "") {
                     alert("상태 확인 필요");
                     return;
-                }
-
-                console.log("======= vue ========")
-                console.log("cid1 : " + this.cid1);
-                console.log("cid2 : " + this.cid2);
-                console.log("name : " + this.gname)
-                console.log("brand : " + this.gbrand);
-                console.log("price : " + this.gprice);
-                console.log("gsale : " + this.gsale);
-                console.log("gdetail : " + this.gdetail);
-                console.log("gstock: " + this.gstock);
-                console.log("gstatus : " + this.gstatus);
-                console.log("gimage : " + this.gimage);
-                console.log("eid : " + this.eid);
-                            
+                } 
+                
                 if (this.eid == null) {
                     this.eid.push(0);
                 }
-                let map = {
-                    cid: this.cid2,
-                    gname: this.gname,
-                    gbrand: this.gbrand,
-                    gprice: this.gprice,
-                    gsale: this.gsale,
-                    gimage: this.gimage,
-                    gdetail: this.gdetail,
-                    gstock: this.gstock,
-                    gstatus: this.gstatus,
-                    eid: this.eid.join(",")
-                };
-                axios.post("http://localhost:8080/web/admin/goods_add_ok.do", map).then(res => {
-                    //location.href = '../admin/adlist.do';
+                
+                let file1 = '';
+                let file2 = '';
+                if (this.gimage == "") {
+                    if (this.gimage2 == "") {
+                        alert("제품 이미지를 첨부해주세요");
+                        return;
+                    }
+                    file1 = new File(['empty'], 'empty', {type: 'text/plain', lastModified: new Date()}); // 파일 추가를 하지 않으면 컨트롤러에서 오류가 나므로 빈 객체를 만듬
+                } else {
+                    file1 = this.$refs.file1.files[0];
+                }
+                
+                if (this.gdetail == "") {
+                    if (this.gimage2 == "") {
+                        alert("제품 상세 이미지를 첨부해주세요");
+                        return;
+                    }
+                    file2 = new File(['empty.txt'], 'empty.txt', {type: 'text/plain', lastModified: new Date()}); // 파일 추가를 하지 않으면 컨트롤러에서 오류가 나므로 빈 객체를 만듬
+                } else {
+                    file2 = this.$refs.file2.files[0];
+                }
+                
+                var form = new FormData();
+                form.append('file_gimage', file1);
+                form.append('file_gdetail', file2);
+                form.append('g_image', this.gimage2);
+                form.append('g_detail', this.gdetail2);
+                form.append('c_id', this.cid2);
+                form.append('g_name', this.gname);
+                form.append('g_brand', this.gbrand);
+                form.append('g_price', this.gprice);
+                form.append('g_sale', this.gsale);
+                form.append('g_stock', this.gstock);
+                form.append('g_status', this.gstatus);
+                form.append('eid', this.eid.join(","));
+                
+                axios.post('http://localhost:8080/web/admin/goods_add_ok.do', form, {}) .then((response) => {
+                    //location.href="../admin/adlist.do"
                 })
             },
             selectIndex: function(event) {

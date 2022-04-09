@@ -33,6 +33,7 @@ public class GoodsRestController {
         obj.put("sale", vo.getG_sale());
         obj.put("image", vo.getG_image());
         obj.put("detail", vo.getG_detail());
+        System.out.println(vo.getG_detail());
         obj.put("status", vo.getG_status());   
         obj.put("stock", vo.getG_stock());
         return obj.toJSONString();

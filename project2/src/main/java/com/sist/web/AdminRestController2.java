@@ -1,5 +1,7 @@
 package com.sist.web;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import org.json.simple.*;
@@ -7,6 +9,7 @@ import org.json.simple.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.sist.dao.*;
 import com.sist.vo.*;
@@ -121,28 +124,46 @@ public class AdminRestController2 {
         return arr.toJSONString();
     }
 	
-	@PostMapping("goods_add_ok.do")
-	public String goods_add_vue_ok(@RequestBody HashMap<String, Object> map) {
-	    	    
-		GoodsVO vo = new GoodsVO();
-    	vo.setC_id((String) map.get("cid"));
-    	vo.setG_name((String) map.get("gname"));
-    	vo.setG_brand((String) map.get("gbrand"));
-    	vo.setG_price(Integer.parseInt(map.get("gprice").toString()));
-    	vo.setG_sale(Integer.parseInt(map.get("gsale").toString()));
-    	vo.setG_detail((String) map.get("gdetail"));
-    	vo.setG_stock(Integer.parseInt(map.get("gstock").toString()));
-    	vo.setG_status(Integer.parseInt(map.get("gstatus").toString()));
-    	vo.setG_image((String) map.get("gimage"));
-    	
-    	Map map2 = new HashMap();
-    	map2.put("vo", vo);
-    	String eid = (String) map.get("eid");
-    	if(eid == null) eid = "";
-    	map2.put("eid", eid);
-    	
-    	gdao.goodsInsert(map2);
+    @PostMapping("goods_add_ok.do")
+    public String goods_add_vue_ok(@ModelAttribute GoodsVO vo, @RequestParam String eid) {
+        try {
+            // 이미지 확장자(jpg,png)를 위해 이미지의 기존 이름 가져오기
+            String gimageName = vo.getFile_gimage().getOriginalFilename();
+            String gdetailName = vo.getFile_gimage().getOriginalFilename();
+            
+            // 새로운 이미지 파일 이름을 등록 날짜&시간으로 설정
+            SimpleDateFormat fmt = new SimpleDateFormat ( "YYYYMMDDHHMMSS");
+            Calendar cal = Calendar.getInstance();
+            
+            String gimagePath = "c:\\upload\\image_" + fmt.format(cal.getTime()) + gimageName.substring(gimageName.lastIndexOf("."));
+            String gdetailPath = "c:\\upload\\detail_" + fmt.format(cal.getTime()) + gdetailName.substring(gdetailName.lastIndexOf("."));
+            
+            // 경로에 새 파일만들기
+            File gimage = new File(gimagePath);
+            File gdetail = new File(gdetailPath);
+            
+            // 파일 옮기기
+            try {
+                vo.getFile_gimage().transferTo(gimage);
+                vo.getFile_gdetail().transferTo(gdetail);
+            } catch(Exception ex){}
+            
+            if(vo.getG_image().equals("")) { // 만약 직접 작성된 이미지 경로가 없다면
+                vo.setG_image(gimagePath);   // 첨부된 이미지를 넣기
+            } else {
+                vo.setG_image(vo.getG_image() + ";" + gimagePath); // 작성된 이미지 경로가 있다면 구분자로 추가                
+            }
+            
+            if (vo.getG_detail().equals("")) { // 만약 직접 작성된 이미지 경로가 없다면
+                vo.setG_detail(gdetailPath);   // 첨부된 이미지를 넣기
+            } else {
+                vo.setG_detail(vo.getG_detail() + ";" + gimagePath); // 작성된 이미지 경로가 있다면 구분자로 추가 
+            }
+            
+        } catch (Exception ex) {
+        }
         
-		return "ok";
-	}
+        gdao.goodsInsert(vo, eid);
+        return "ok";
+    }
 }

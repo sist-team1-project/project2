@@ -100,12 +100,14 @@ public interface GoodsMapper {
 	@Select("SELECT g_id, c_id, g_name,g_brand,g_price,g_sale,g_image,g_detail,g_status,g_stock FROM Goods_1 "
 			+"WHERE g_id=#{gid}")
 	public GoodsVO goodsDetail(String gid);
-
+	
+	/*  ------- 상품 등록 페이지 -------  */
 	@Insert("INSERT INTO goods_1 VALUES(#{g_id}, #{c_id}, #{g_name}, #{g_brand}, #{g_price}, #{g_sale}, #{g_image}, #{g_detail}, #{g_stock}, 0, #{g_status}, SYSDATE)")
     @SelectKey(statement="SELECT goods_id_seq_1.NEXTVAL FROM DUAL", keyProperty="g_id", before=true, resultType=int.class)
 	@Options(useGeneratedKeys=true, keyProperty="g_id", keyColumn="g_id")
 	public int goodsInsert(GoodsVO vo);
-
+	/*  ----------------------------  */
+	
 	@Select("SELECT eg_id, e_id FROM event_goods_1 WHERE g_id = #{g_id}")
 	public EventGoodsVO eventGoodsData(String g_id);
 	
@@ -140,12 +142,9 @@ public interface GoodsMapper {
 			  +"WHERE num BETWEEN #{start} AND #{end}"
 			  + "</script>")
 		public List<GoodsVO> adminGoodsFind(Map map);
-	
-
+	   
 	@Update("UPDATE goods_1 SET "
 			+ "c_id=#{c_id}, g_name=#{g_name}, g_brand = #{g_brand}, g_price = #{g_price}, g_sale = #{g_sale}, g_image = #{g_image}, g_detail = #{g_detail}, g_stock = #{g_stock}, g_status = #{g_status} "
 			+ "WHERE g_id = #{g_id}")
 	public void goodsupdate(GoodsVO vo);
-	
-	
 }

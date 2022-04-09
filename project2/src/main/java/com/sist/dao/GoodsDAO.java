@@ -59,14 +59,11 @@ public class GoodsDAO {
     
     /*  ------- 상품 등록 -------  */
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public void goodsInsert(Map map) { // Map에 GoodsVO랑 eid
-        
-        GoodsVO vo = (GoodsVO) map.get("vo"); // GoodsVO로 형변환
+    public void goodsInsert(GoodsVO vo, String eid) {
         
         mapper.goodsInsert(vo); // Insert하고 SelectKey로 vo.g_id에 시퀀스 값을 넣어줌
         
         int gid = vo.getG_id();
-        String eid = (String) map.get("eid");
         
         if(eid != "") {
             StringTokenizer st = new StringTokenizer(eid,",");
