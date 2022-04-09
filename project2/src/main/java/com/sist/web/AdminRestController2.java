@@ -4,6 +4,8 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.json.simple.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -125,7 +127,7 @@ public class AdminRestController2 {
     }
 	
     @PostMapping("goods_add_ok.do")
-    public String goods_add_vue_ok(@ModelAttribute GoodsVO vo, @RequestParam String eid) {
+    public String goods_add_vue_ok(@ModelAttribute GoodsVO vo, @RequestParam String eid, HttpServletRequest request) {
         try {
             // 이미지 확장자(jpg,png)를 위해 이미지의 기존 이름 가져오기
             String gimageName = vo.getFile_gimage().getOriginalFilename();
@@ -135,8 +137,13 @@ public class AdminRestController2 {
             SimpleDateFormat fmt = new SimpleDateFormat ( "YYYYMMDDHHMMSS");
             Calendar cal = Calendar.getInstance();
             
-            String gimagePath = "c:\\upload\\image_" + fmt.format(cal.getTime()) + gimageName.substring(gimageName.lastIndexOf("."));
-            String gdetailPath = "c:\\upload\\detail_" + fmt.format(cal.getTime()) + gdetailName.substring(gdetailName.lastIndexOf("."));
+            // 저장 경로 만들기
+            String path = request.getSession().getServletContext().getRealPath("/") + "images\\goods\\";
+            path = path.replace("\\", File.separator);
+            String newImageName = "image" + fmt.format(cal.getTime()) + gimageName.substring(gimageName.lastIndexOf("."));
+            String newDetailName = "detail" + fmt.format(cal.getTime()) + gdetailName.substring(gdetailName.lastIndexOf("."));
+            String gimagePath = path + newImageName;
+            String gdetailPath = path + newDetailName;
             
             // 경로에 새 파일만들기
             File gimage = new File(gimagePath);
@@ -148,16 +155,19 @@ public class AdminRestController2 {
                 vo.getFile_gdetail().transferTo(gdetail);
             } catch(Exception ex){}
             
-            if(vo.getG_image().equals("")) { // 만약 직접 작성된 이미지 경로가 없다면
-                vo.setG_image(gimagePath);   // 첨부된 이미지를 넣기
+            // 데이터베이스에 경로 저장
+            String imgPath = "..\\images\\goods\\";
+            imgPath = imgPath.replace("\\", File.separator);
+            if(vo.getG_image().equals("")) { // 만약 직접 작성된 대표 이미지 경로가 없다면
+                vo.setG_image(imgPath + newImageName);   // 첨부된 대표 이미지를 넣기
             } else {
-                vo.setG_image(vo.getG_image() + ";" + gimagePath); // 작성된 이미지 경로가 있다면 구분자로 추가                
+                vo.setG_image(vo.getG_image() + ";" + imgPath + newImageName); // 작성된 대표 이미지 경로가 있다면 구분자로 추가                
             }
             
-            if (vo.getG_detail().equals("")) { // 만약 직접 작성된 이미지 경로가 없다면
-                vo.setG_detail(gdetailPath);   // 첨부된 이미지를 넣기
+            if (vo.getG_detail().equals("")) { // 만약 직접 작성된 상세 이미지 경로가 없다면
+                vo.setG_detail(imgPath + newDetailName);   // 첨부된 상세 이미지를 넣기
             } else {
-                vo.setG_detail(vo.getG_detail() + ";" + gimagePath); // 작성된 이미지 경로가 있다면 구분자로 추가 
+                vo.setG_detail(vo.getG_detail() + ";" + imgPath + newDetailName); // 작성된 상세 이미지 경로가 있다면 구분자로 추가 
             }
             
         } catch (Exception ex) {
