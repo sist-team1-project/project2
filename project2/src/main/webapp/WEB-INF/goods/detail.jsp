@@ -40,16 +40,16 @@
             <span class="fs-14 cl2 p-tb-10 dis-block"><b>할인율</b>&emsp;{{goods.sale }}</span>
             <!--  -->
             <div class="p-t-20">
-             <c:if test="${sessionScope.grade=='1' }">
-              <div class="flex-w flex-c-m p-b-10">
-                <div class="wrap-num-product flex-w m-r-20 m-tb-10">
-                  <div v-on:click="qDown()" class="btn-num-product-down cl8 hov-btn1 trans-04 flex-c-m"><i class="fs-16 zmdi zmdi-minus"></i></div>
-                  <input v-model="quantity" class="mtext-104 cl3 text-center num-product" type="number" name="num-product">
-                  <div v-on:click="qUp()" class="btn-num-product-up cl8 hov-btn1 trans-04 flex-c-m"><i class="fs-16 zmdi zmdi-plus"></i></div>
-                </div>
-                <button v-on:click="insertCart()" class="stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-10 trans-04 js-addcart-detail">장바구니</button>
-                </c:if>
-              </div>  
+              <c:if test="${sessionScope.grade=='1' }">
+                <div class="flex-w flex-c-m p-b-10">
+                  <div class="wrap-num-product flex-w m-r-20 m-tb-10">
+                    <div v-on:click="qDown()" class="btn-num-product-down cl8 hov-btn1 trans-04 flex-c-m"><i class="fs-16 zmdi zmdi-minus"></i></div>
+                    <input v-model="quantity" class="mtext-104 cl3 text-center num-product" type="number" name="num-product">
+                    <div v-on:click="qUp()" class="btn-num-product-up cl8 hov-btn1 trans-04 flex-c-m"><i class="fs-16 zmdi zmdi-plus"></i></div>
+                  </div>
+                  <button v-on:click="insertCart()" class="stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-10 trans-04 js-addcart-detail">장바구니</button>
+                </div>  
+              </c:if>
             </div>
             <!--  -->
             <div class="flex-w flex-c-m p-t-10">
@@ -81,10 +81,8 @@
         <div class="tab-content p-t-43">
           <!-- 설명 -->
           <div class="tab-pane fade show active" id="description" role="tabpanel">
-            <div class="how-pos2 p-lr-15-md">
-              <p class="stext-102 cl6">
-               <img :src="goods.detail" alt="IMG-PRODUCT">
-              </p>
+            <div class="how-pos2 p-lr-15-md flex-c-m flex-column">
+              <img v-for="d in details" :src="d" class="dis-block">
             </div>
           </div>
           <!-- --------- -->
@@ -152,6 +150,7 @@
             goods:{},
             images:[],
             image:'',
+            details:[],
             quantity:1
         },
         mounted:function(){
@@ -161,8 +160,8 @@
     	   		}
     	    }).then(res=>{
     	   		this.goods=res.data;
-    	   		console.log(res.data.image);
     	   		this.images=this.goods.image.split(";");
+    	   		this.details=this.goods.detail.split(";");
     	   		this.image=this.images[0];
     	    })
         },
@@ -199,11 +198,10 @@
     })
     
     
- 
    <!-- 사진 크게보여주는 팝업 -->
-    $('.gallery-lb').each(function() { // the containers for all your galleries
+    $('.gallery-lb').each(function() {
         $(this).magnificPopup({
-            delegate: 'a', // the selector for gallery item
+            delegate: 'a',
             type: 'image',
             gallery: {
                 enabled:true
