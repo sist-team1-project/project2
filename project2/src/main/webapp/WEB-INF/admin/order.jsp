@@ -87,13 +87,13 @@ td {
       <div class="s-full" v-on:click="odetail_close"></div>
       <div class="header-admin flex-col-l p-l-65 p-r-25">
         <div class="header-admin-title flex-w flex-sb-m p-b-8">
-          <span class="mtext-103 cl2"> Detail </span>
+          <span class="mtext-103 cl2"> 주문 상세 정보 </span>
           <div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04">
             <i class="zmdi zmdi-close" v-on:click="odetail_close"></i>
           </div>
         </div>
-        <div class="header-admin-content flex-w js-pscroll">
-          <iframe height="800px" width="600px" :src="iframe"></iframe>
+        <div class="header-admin-content flex-w">
+          <iframe height="100%" width="600px" :src="iframe"></iframe>
         </div>
       </div>
     </div>
