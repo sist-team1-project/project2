@@ -50,7 +50,7 @@ public interface UserMapper {
 	
 	
 	/******************* User admin  ********************************/
-	@Select("SELECT u_id, u_name, u_gender, u_email, u_phone, TO_CHAR(u_regdate,'YY-MM-DD')as u_regdate, u_grade,num "
+	@Select("SELECT u_id, u_name, u_gender, u_email, u_phone, TO_CHAR(u_regdate,'YY-MM-DD')as u_regdate, u_grade, num "
 			+ "FROM (SELECT u_id, u_name, u_gender, u_email, u_phone, u_regdate, u_grade, rownum as num "
 			+ "FROM (SELECT u_id, u_name, u_gender, u_email, u_phone, u_regdate, u_grade from user_1)) "
 			+ "WHERE num BETWEEN #{start} AND #{end}")
