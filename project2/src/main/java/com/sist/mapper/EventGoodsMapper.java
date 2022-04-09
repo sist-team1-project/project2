@@ -7,7 +7,16 @@ import org.apache.ibatis.annotations.*;
 import com.sist.vo.*;
 
 public interface EventGoodsMapper {
-
+    
+    /*   메인 페이지   */
+    @Select("SELECT NVL(l.l_id,0) AS l_id,g.g_id,g.g_name,g.g_price,g.g_image,g.e_id "
+            + "FROM (SELECT l_id,g_id FROM like_1 WHERE u_id=#{uid}) l, (SELECT g.g_id,g.g_name,g.g_price,g.g_image,g.g_status,eg.e_id "
+            + "FROM goods_1 g, (SELECT /*+ INDEX_DESC(event_goods_1 eg_eg_id_pk_1)*/ e_id,g_id FROM event_goods_1) eg "
+            + "WHERE g.g_id=eg.g_id AND g.g_status=1) g "
+            + "WHERE l.g_id(+)=g.g_id")
+    public List<Map<String,Object>> eventGoodsList(String uid);
+    
+    /*   상품 등록   */
 	@Insert("INSERT INTO event_goods_1 VALUES(event_goods_id_seq_1.NEXTVAL, #{e_id}, #{g_id})")
 	public void goodsEventInsert(EventGoodsVO vo);
 
@@ -19,5 +28,4 @@ public interface EventGoodsMapper {
 	
 	@Select("select e_id from event_goods_1 where g_id = #{g_id}")
 	public int goodsEidData(String g_id);
-	
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,7 +55,7 @@
             <!-- 배너 1 -->
             <div class="block1 wrap-pic-w">
               <img src="../images/banner-01.jpg">
-              <a href="'../goods/list.do?eid=' + vo.eid" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+              <a href="../goods/list.do?cid=001" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
                 <div class="block1-txt-child1 flex-col-l">
                   <span class="block1-name ltext-102 trans-04 p-b-8">텐트 </span>
                   <span class="block1-info stext-102 trans-04">인기 제품 </span>
@@ -72,7 +73,7 @@
             <!-- 배너 2 -->
             <div class="block1 wrap-pic-w">
               <img src="../images/banner-02.jpg">
-              <a href="../goods/list.do" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+              <a href="../goods/list.do?cid=002" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
                 <div class="block1-txt-child1 flex-col-l">
                   <span class="block1-name ltext-102 trans-04 p-b-8">타프 </span>
                   <span class="block1-info stext-102 trans-04">인기 제품 </span>
@@ -89,7 +90,7 @@
             <!-- 배너 3 -->
             <div class="block1 wrap-pic-w">
               <img src="../images/banner-03.jpg">
-              <a href="../goods/list.do" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+              <a href="../goods/list.do?cid=008" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
                 <div class="block1-txt-child1 flex-col-l">
                   <span class="block1-name ltext-102 trans-04 p-b-8">그릴 </span>
                   <span class="block1-info stext-102 trans-04">인기 제품 </span>
@@ -108,50 +109,28 @@
       <section>
         <div class="bg0 p-t-23 p-b-140">
           <div class="p-tb-20"><h3 class="ltext-103 cl5">Product Overview</h3></div>
-          <div class="p-t-40 p-b-10"><h4>인기 상품</h4></div>
-          <div class="row">
-            <!-- 아이템 루프로 돌리기 -->
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 women" v-for="vo in goods">
+          <div v-for="e in events">
+            <div class="p-t-40 p-b-10"><h4>{{e.title}}</h4></div>
+            <div v-for="eg in event_goods" v-if="eg.eid == e.eid" class="col-sm-6 col-md-4 col-lg-3 p-b-35 women">
               <div class="block2">
-                <a href="../goods/detail.do">
-                <div class="block2-pic hov-img0"><img :src="vo.image"></div></a>
-    
+                <div class="block2-pic hov-img0"><a :href="'../goods/detail.do?gid=' + eg.gid"><img onerror="this.src='../images/image_ready.jpg'" :src="eg.image"></a></div>
                 <div class="block2-txt flex-w flex-t p-t-14">
-                  <div class="block2-txt-child1 flex-col-l ">
-                    <a href="../goods/detail.do" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">{{vo.name}}</a>
-                    <span class="stext-105 cl3"></span>
+                  
+                  <div class="block2-txt-child1 flex-col-l short">
+                    <a :href="'../goods/detail.do?gid=' + eg.gid" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">{{eg.name}}</a>
+                    <div class="cl4">₩{{eg.price | currency}}</div>
                   </div>
-    
-                  <div class="block2-txt-child2 flex-r p-t-3">
-                    <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                      <img class="icon-heart1 dis-block trans-04" src="../images/icons/icon-heart-01.png">
-                      <img class="icon-heart2 dis-block trans-04 ab-t-l" src="../images/icons/icon-heart-02.png">
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="p-t-40 p-b-10"><h4>추천 상품</h4></div>
-          <div class="row">
-            <!-- 아이템 루프로 돌리기 -->
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 women" v-for="vo in goods">
-              <div class="block2">
-                <a href="../goods/detail.do">
-                <div class="block2-pic hov-img0"><img :src="vo.image"></div></a>
-    
-                <div class="block2-txt flex-w flex-t p-t-14">
-                  <div class="block2-txt-child1 flex-col-l ">
-                    <a href="../goods/detail.do" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">{{vo.name}}</a>
-                    <span class="stext-105 cl3"></span>
-                  </div>
-    
-                  <div class="block2-txt-child2 flex-r p-t-3">
-                    <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                      <img class="icon-heart1 dis-block trans-04" src="../images/icons/icon-heart-01.png">
-                      <img class="icon-heart2 dis-block trans-04 ab-t-l" src="../images/icons/icon-heart-02.png">
-                    </a>
+                
+                  <div class="block2-txt-child2 flex-r">
+                    <span class="btn-addwish-b2 dis-block pos-relative">
+                      <c:if test="${sessionScope.id!=null }">
+                        <img v-if="eg.lid==0" class="icon-heart1 trans-04 pointer" src="../images/icons/icon-heart-01.png" @click="like(eg.gid); eg.lid=1; alert('즐겨찾기에 등록되었습니다')">
+                        <img v-if="eg.lid>0" class="icon-heart2 trans-04 pointer" src="../images/icons/icon-heart-02.png" @click="unlike(eg.lid); eg.lid=0; alert('즐겨찾기가 해제되었습니다')">
+                      </c:if>
+                      <c:if test="${sessionScope.id==null }">
+                        <img class="icon-heart1 trans-04 pointer" src="../images/icons/icon-heart-01.png" @click="if(confirm('로그인창으로 이동하시겠습니까?')) return location.href='../user/login.do'">
+                      </c:if>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -166,14 +145,30 @@
     new Vue({
         el:'#event',
         data:{
-            goods:[]
+            events:[],
+            event_goods:[]
         },
-        mounted:function(){
-            axios.get("http://localhost:8080/web/main/events.do",{
+        filters:{ // 금액 3자리 수 마다 따옴표 필터
+            currency: function(value){
+                let num = new Number(value);
+                return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,")
+            }
+        },
+        mounted:function(){ // 이벤트 상품 정보를 가져옴
+            axios.get("http://localhost:8080/web/main/event_list.do",{
                 
             }).then(result=>{
-                this.goods=result.data;
+                this.events=result.data[0];
+                this.event_goods=result.data[1];
             })
+        },
+        methods:{
+            like:function(gid) { // 좋아요
+                axios.post("http://localhost:8080/web/goods/like_insert_ok.do",null,{params:{gid: gid}})
+            },
+            unlike:function(lid) { // 싫어요
+                axios.post("http://localhost:8080/web/goods/like_delete_ok.do",null,{params:{lid: lid}})
+            }
         }
     })
   </script>

@@ -17,36 +17,56 @@ import com.sist.vo.*;
 public class MainRestController {
     
     @Autowired
-    private GoodsDAO gdao;
+    private EventDAO edao;
+    
+    @Autowired
+    private EventGoodsDAO egdao;
     
     @Autowired
     private CategoryDAO cdao;
     
     @Autowired
     private CartDAO cartdao;
-    /*
-    @GetMapping(value = "main/events.do", produces = "text/plain;charset=utf-8")
-    public String event_goods() {
+    
+    @GetMapping(value = "event_list.do", produces = "text/plain;charset=utf-8")
+    public String event_goods(HttpSession session) {
+        String uid = (String) session.getAttribute("id");
+        if (uid == null) {
+            uid = "";
+        }
         
-        List<GoodsVO> list = dao.goodsList();
+        List<Map<String,Object>> glist = egdao.eventGoodsList(uid);
+        List<EventVO> elist = edao.eventList();
         
         JSONArray arr = new JSONArray();
         
-        for (GoodsVO vo : list) {
+        JSONArray eArr = new JSONArray();
+        for (EventVO i : elist) {
             JSONObject obj = new JSONObject();
-            obj.put("gid", vo.getG_id());
-            String name = vo.getG_name();
-            if (name.length() >= 22)
-                name = name.substring(0, 22) + "...";
-            obj.put("name", name);
-            obj.put("price", vo.getG_price());
-            String images = vo.getG_image();
-            String[] image = images.split(";"); // tokenizer 쓰는게 더 나음
-            obj.put("image", image[0]);
-            arr.add(obj);
+            obj.put("eid", i.getE_id());
+            obj.put("title", i.getE_title());
+            eArr.add(obj);
         }
+        arr.add(eArr);
+        
+        JSONArray egArr = new JSONArray();
+        for (int i = 0; i < glist.size(); i++) {
+            JSONObject obj = new JSONObject();
+            obj.put("lid", glist.get(i).get("L_ID").toString());
+            obj.put("gid", glist.get(i).get("G_ID").toString());
+            obj.put("name", glist.get(i).get("G_NAME").toString());
+            obj.put("price", glist.get(i).get("G_PRICE").toString());
+            obj.put("eid", glist.get(i).get("E_ID").toString());
+            
+            String images = (String) glist.get(i).get("G_IMAGE");
+            String[] image = images.split(";");
+            obj.put("image", image[0]);
+            egArr.add(obj);
+        }
+        arr.add(egArr);
+        
         return arr.toJSONString();
-    }*/
+    }
     
     @GetMapping(value = "category_1_vue.do", produces = "text/plain;charset=utf-8")
     public String main_category_1_vue() {
