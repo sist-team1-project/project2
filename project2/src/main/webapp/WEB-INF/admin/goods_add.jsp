@@ -92,6 +92,7 @@
                       <input v-model="gimage" ref="file1" type="file" accept="image/*">
                   </div>
                   <div>
+                    직접 경로 작성 ( 여러 이미지일시 구분자 ; )
                     <input ref="gimage2" type=text min="0" class="bor10 p-tb-3 p-lr-5 w-full" v-model="gimage2">
                   </div>
                 </div>
