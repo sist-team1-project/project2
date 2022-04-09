@@ -47,9 +47,9 @@
         <button class="cl2" :class="{'activeFilter':order=='D'}" value="D" @click="searchByOrder($event)">높은가격 순</button>
       </div>
       <!-- --------------------- -->
-      <div class="row" v-if="empty==1"> <!-- 상품이 하나도 없으면 아예 출력을하지 않는다 -->
+      <div class="row" v-if="empty==false"> <!-- 상품이 하나도 없으면 아예 출력을하지 않는다 -->
         <!-- 아이템 -->
-        <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 women" v-for="vo in goods">
+        <div v-for="vo in goods" class="col-sm-6 col-md-4 col-lg-3 p-b-35 women">
           <div class="block2">
             <div class="block2-pic hov-img0"><a :href="'../goods/detail.do?gid=' + vo.gid"><img onerror="this.src='../images/image_ready.jpg'" :src="vo.image"></a></div>
             <div class="block2-txt flex-w flex-t p-t-14">
@@ -99,20 +99,19 @@
             order:'A',
             goods:[],
             totalpage:0,
-            empty: 1,
+            empty: false,
             curpage:1,
             start:1,
             end:1,
             pages:[]
         },
         filters:{
-            currency: function(value){
+            currency: function(value){ // 금액 3자리 수 마다 따옴표 필터
                 let num = new Number(value);
                 return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,")
             }
         },
         mounted:function(){
-            
             this.brandListAndCname();
             /* 가격 슬라이더 */
             $("#slider-range").slider({
@@ -153,11 +152,11 @@
                     this.start = result.data[0].start;
                     this.end = result.data[0].end;
                     
-                    // 검색 결과가 없을 경우
+                    // 검색 결과가 없을 경우 (cid, page 등 페이지에 관한 정보는 가지고 오기 때문에 goods의 길이는 무조건 1 이상)
                     if(result.data[0].name == null) {
-                        this.empty = 0;
+                        this.empty = true;
                     } else {
-                        this.empty = 1;
+                        this.empty = false;
                     }
                     this.pages = [];
                     for(i = this.start; i <= this.end; i++) {
@@ -206,23 +205,11 @@
             brandCheck:function() {
                 this.checkAll = false;
             },
-            like:function(gid) {
-                axios.post("http://localhost:8080/web/goods/like_insert_ok.do",null,{
-                    params:{
-                        gid: gid
-                    }
-                }).then(result=>{
-                    
-                })
+            like:function(gid) { // 좋아요
+                axios.post("http://localhost:8080/web/goods/like_insert_ok.do",null,{params:{gid: gid}})
             },
-            unlike:function(lid) {
-                axios.post("http://localhost:8080/web/goods/like_delete_ok.do",null,{
-                    params:{
-                        lid: lid
-                    }
-                }).then(result=>{
-                    
-                })
+            unlike:function(lid) { // 싫어요
+                axios.post("http://localhost:8080/web/goods/like_delete_ok.do",null,{params:{lid: lid}})
             }
         }
     })
