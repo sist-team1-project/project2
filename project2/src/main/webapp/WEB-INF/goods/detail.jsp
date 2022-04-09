@@ -18,13 +18,13 @@
             <!-- ----------- 갤러리 ------------ -->
             <div class="gallery-lb">
               <div id="img-area" class="wrap-pic-w pos-relative">
-                <img class="bor8" :src="image">
+                <img onerror="this.src='../images/image_ready.jpg'" class="bor8" :src="image">
                 <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" :href="image">
-                    <i class="fa fa-expand"></i>
+                  <i class="fa fa-expand"></i>
                 </a>
               </div>
               <div id="thumbnails">
-                <img v-for="img in images" v-on:click="showImg(img)" class="w-30 bor8" :src="img">
+                <img onerror="this.src='../images/image_ready.jpg'" v-for="img in images" v-on:click="showImg(img)" class="w-30 bor8" :src="img">
               </div>
             </div>
             <!-- -------------- -->
@@ -82,7 +82,7 @@
           <!-- 설명 -->
           <div class="tab-pane fade show active" id="description" role="tabpanel">
             <div class="how-pos2 p-lr-15-md flex-c-m flex-column">
-              <img v-for="d in details" :src="d" class="dis-block">
+              <img onerror="this.src='../images/image_ready.jpg'" v-for="d in details" :src="d" class="dis-block">
             </div>
           </div>
           <!-- --------- -->
