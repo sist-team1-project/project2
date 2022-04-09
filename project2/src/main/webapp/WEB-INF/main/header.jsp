@@ -27,7 +27,7 @@
             <div class="left-top-bar">${sessionScope.id}님 안녕하세요!</div>
             <div class="right-top-bar flex-w h-full">
               <a href="../user/logout.do" class="flex-c-m trans-04 p-lr-25">로그아웃</a>
-              <c:if test="${sessionScope.grade=='1' }">
+              <c:if test="${sessionScope.grade=='1' || sessionScope.grade=='0' }">
                 <a href="../mypage/mypage.do" class="flex-c-m trans-04 p-lr-25">마이페이지</a>
               </c:if>
               <c:if test="${sessionScope.grade=='0' }">
@@ -94,7 +94,7 @@
         <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
           <i class="zmdi zmdi-search"></i>
         </div>
-        <c:if test="${sessionScope.id!=null }">
+        <c:if test="${sessionScope.grade=='1' || sessionScope.grade=='0' }">
           <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" :data-notify="cart" @click="cList()">
             <i class="zmdi zmdi-shopping-cart"></i>
           </div>
