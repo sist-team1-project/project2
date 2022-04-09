@@ -84,13 +84,11 @@ public class UserRestController {
 		Map map = new HashMap();
 		map.put("name", name);
 		map.put("email", email);
-
+		
 		String result = dao.userFind(map);
 		return result;
 	}
-
 	
-
 	@PostMapping(value = "pwdfind_ok.do", produces = "text/plain;charset=utf-8")
 	public String user_pwdfind_ok(String id, String email) {
 		return "";

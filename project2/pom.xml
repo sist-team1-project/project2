@@ -53,6 +53,17 @@
 	        <scope>system</scope>
 	        <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/org.snu.ids.ha.jar</systemPath>
 	    </dependency>
+	    <!-- 이메일 보내기 -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>javax.mail-api</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.sun.mail</groupId>
+		    <artifactId>javax.mail</artifactId>
+		    <version>1.6.2</version>
+		</dependency>
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>

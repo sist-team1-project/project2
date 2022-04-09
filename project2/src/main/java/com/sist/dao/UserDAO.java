@@ -1,23 +1,20 @@
 package com.sist.dao;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.StringTokenizer;
+import java.util.*;
 
-import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sist.vo.*;
 import com.sist.mapper.*;
+import com.sist.manager.*;
 
 @Repository
 public class UserDAO {
 
 	@Autowired
 	private UserMapper mapper;
-
+	
 	public String isLogin(String id, String pwd) {
 		String result = "";
 		int count = mapper.idCount(id);
@@ -46,9 +43,12 @@ public class UserDAO {
 		int result = mapper.emailCount(email);
 		return result;
 	}
-
+	
 	public void userJoin(UserVO vo) {
 		mapper.userJoin(vo);
+	    MailSender sender = new MailSender();
+	    sender.joinMailSend(vo);
+		System.out.println(vo.getU_email());
 	}
 
 	public UserVO userInfo(String uid) {
@@ -102,5 +102,4 @@ public class UserDAO {
 	public int gradeupdate(Map map) {
 		return mapper.gradeupdate(map);
 	}
-	
 }
