@@ -229,7 +229,7 @@
                     file2 = this.$refs.file2.files[0];
                 }
                 
-                var form = new FormData();
+                let form = new FormData();
                 form.append('file_gimage', file1);
                 form.append('file_gdetail', file2);
                 form.append('g_image', this.gimage2);
@@ -253,7 +253,6 @@
             }
         }
     })
-    
-    </script>
+  </script>
 </body>
 </html>
