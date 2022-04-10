@@ -19,10 +19,10 @@
               <div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
                 <span class="ltext-101 text-white respon2">Healing Camp</span></div>
               <div class="layer-slick1 animated visible-false" data-appear="fadeInUp" data-delay="800">
-                <h2 class="ltext-201 text-white p-t-19 p-b-43 respon1">2022년 신상 모음</h2>
+                <h2 class="ltext-201 text-white p-t-19 p-b-43 respon1">2022년 제품 모음</h2>
               </div>
               <div class="layer-slick1 animated visible-false" data-appear="zoomIn" data-delay="1600">
-                <a href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">상품 보러가기</a>
+                <a href="../goods/list.do" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">상품 보러가기</a>
               </div>
             </div>
           </div>
@@ -36,7 +36,7 @@
                 <h2 class="ltext-201 text-black p-t-19 p-b-43 respon1">텐트 모음</h2>
               </div>
               <div class="layer-slick1 animated visible-false" data-appear="zoomIn" data-delay="1600">
-                <a href="product.html" class="flex-c-m stext-101 cl1 size-101 bg3 bor1 hov-btn3 p-lr-15 trans-04">상품 보러가기</a>
+                <a href="../goods/list.do?cid=001" class="flex-c-m stext-101 cl1 size-101 bg3 bor1 hov-btn3 p-lr-15 trans-04">상품 보러가기</a>
               </div>
             </div>
           </div>
@@ -165,8 +165,12 @@
             })
         },
         methods:{
-            like:function(gid) { // 좋아요
-                axios.post("http://localhost:8080/web/goods/like_insert_ok.do",null,{params:{gid: gid}})
+            like:function(gid, index) { // 좋아요
+                axios.post("http://localhost:8080/web/goods/like_insert_ok.do",null,{
+                    params:{gid: gid}
+                }).then(result=>{
+                    this.goods[index].lid = result.data.lid;
+                })
             },
             unlike:function(lid) { // 싫어요
                 axios.post("http://localhost:8080/web/goods/like_delete_ok.do",null,{params:{lid: lid}})
