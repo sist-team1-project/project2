@@ -26,13 +26,12 @@
           <c:if test="${sessionScope.id!=null }">
             <div class="left-top-bar">${sessionScope.id}님 안녕하세요!</div>
             <div class="right-top-bar flex-w h-full">
-              <a href="../user/logout.do" class="flex-c-m trans-04 p-lr-25">로그아웃</a>
-              <c:if test="${sessionScope.grade=='1' || sessionScope.grade=='0' }">
-                <a href="../mypage/mypage.do" class="flex-c-m trans-04 p-lr-25">마이페이지</a>
-              </c:if>
+              <a href="../support/notice.do" class="flex-c-m trans-04 p-lr-25">고객센터</a>
+              <a href="../mypage/mypage.do" class="flex-c-m trans-04 p-lr-25">마이페이지</a>
               <c:if test="${sessionScope.grade=='0' }">
                 <a href="../admin/adlist.do" class="flex-c-m trans-04 p-lr-25">관리자페이지</a>
               </c:if>
+              <a href="../user/logout.do" class="flex-c-m trans-04 p-lr-25">로그아웃</a>
             </div>
           </c:if>
         </div>

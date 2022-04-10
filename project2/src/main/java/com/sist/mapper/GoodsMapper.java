@@ -10,7 +10,7 @@ public interface GoodsMapper {
     
     /*  ------- 리스트 페이지 -------  */
     @Select("SELECT MAX(g_price) FROM goods_1 WHERE c_id LIKE #{cid}||'%'")
-    public int goodsMaxPrice(String cid);
+    public String goodsMaxPrice(String cid);
     
     @Select("<script>"
             + "SELECT NVL(l.l_id,0) AS l_id,g.g_id,g.g_name,g.g_price,g.g_image "

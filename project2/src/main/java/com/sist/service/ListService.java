@@ -7,7 +7,7 @@ import com.sist.dao.*;
 
 public interface ListService {
     
-    public int goodsMaxPrice(String cid);
+    public String goodsMaxPrice(String cid);
     public List<Map<String,Object>> goodsList(Map map);
     public int goodsListTotalpage(Map map);
     public List<String> brandList(String cid);

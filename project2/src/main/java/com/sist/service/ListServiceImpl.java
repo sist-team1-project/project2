@@ -21,7 +21,7 @@ public class ListServiceImpl implements ListService {
     private LikeDAO ldao;
     
     @Override
-    public int goodsMaxPrice(String cid) {
+    public String goodsMaxPrice(String cid) {
         return gdao.goodsMaxPrice(cid);
     }
     

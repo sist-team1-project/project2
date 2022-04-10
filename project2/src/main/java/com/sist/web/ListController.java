@@ -18,7 +18,10 @@ public class ListController {
     public String goods_list(String cid, String keyword, Model model) {
         if (cid == null) cid = "";
         if (keyword == null) keyword = "";
-        int maxPrice = service.goodsMaxPrice(cid);
+        
+        String maxPrice = service.goodsMaxPrice(cid);
+        if (maxPrice == null) maxPrice = "0";
+        
         model.addAttribute("cid", cid);
         model.addAttribute("keyword", keyword);
         model.addAttribute("maxPrice", maxPrice);

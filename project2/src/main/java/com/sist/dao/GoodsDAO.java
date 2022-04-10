@@ -20,7 +20,7 @@ public class GoodsDAO {
     private EventGoodsMapper mapper2;
     
     /*  ------- 리스트 페이지 -------  */
-    public int goodsMaxPrice(String cid) {
+    public String goodsMaxPrice(String cid) {
         return mapper.goodsMaxPrice(cid);
     }
 
