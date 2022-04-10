@@ -39,8 +39,9 @@ public class MypageController {
 	}
 	
 	@GetMapping("mypage/delete.do")
-    public String delete(String id, Model model) {
+    public String mypage_delete(String id, Model model) {
 		model.addAttribute("id", id);
+
         return "mypage/delete";
     }
 }

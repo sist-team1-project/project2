@@ -107,7 +107,7 @@ public class UserDAO {
 		return result;
 	}
 
-	// 비밀번호 변경
+	// 비밀번호 변경 - 아이디에 따른 비번이 서버 비번과 일치시 변경
 	public boolean userPwdUpdate(Map map) {
 		boolean bCheck = false;
 		String db_pwd = mapper.userGetPassword((String) map.get("id"));
@@ -120,7 +120,7 @@ public class UserDAO {
 		return bCheck;
 	}
 
-	// 계정 삭제
+	// 계정 삭제 - 아이디에 따른 비번이 서버 비번과 일치시 삭제
 	public boolean userDelete(Map map) {
 		boolean bCheck = false;
 		String db_pwd = mapper.userGetPassword((String) map.get("id"));
