@@ -60,9 +60,11 @@ public interface UserMapper {
     @Select("SELECT u_password FROM user_1 WHERE u_id=#{id}")
     public String userGetPassword(String id);
     
+    // 비밀번호 변경
     @Update("UPDATE user_1 SET u_password=#{password} WHERE u_id=#{id}")
     public void userPwdUpdate(Map map);
 	
+    // 계정 삭제
     @Delete("DELETE FROM user_1 WHERE u_id=#{id}")
     public void userDelete(String id);
     
