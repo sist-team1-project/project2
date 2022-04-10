@@ -19,24 +19,24 @@
 				<table class="table-checkout">
 					<tr style="height: 50px">
 						<th width=20% class="text-center warning">번호</th>
-						<td width=30% class="text-center">{{vo.nid}}</td>
+						<td width=30% class="text-center">{{vo.n_id}}</td>
 						<th width=20% class="text-center warning">작성일</th>
-						<td width=30% class="text-center">{{vo.nregdate}}</td>
+						<td width=30% class="text-center">{{vo.n_regdate}}</td>
 					</tr>
 					<tr style="height: 50px">
 						<th width=20% class="text-center warning">이름</th>
-						<td width=30% class="text-center">{{vo.uid}}</td>
+						<td width=30% class="text-center">{{vo.u_id}}</td>
 						<th width=20% class="text-center warning">조회수</th>
-						<td width=30% class="text-center">{{vo.nvisits}}</td>
+						<td width=30% class="text-center">{{vo.n_visits}}</td>
 					</tr>
 					<tr style="height: 50px">
 						<th width=20% class="text-center warning">제목</th>
-						<td colspan="3">{{vo.ntitle}}</td>
+						<td colspan="3">{{vo.n_title}}</td>
 					</tr>
 					<tr>
 						<td colspan="4" class="text-left" valign="top" height="300">
 							<pre
-								style="white-space: pre-wrap; background-color: white; border: none">{{vo.ncontent}}</pre>
+								style="white-space: pre-wrap; background-color: white; border: none">{{vo.n_content}}</pre>
 						</td>
 					</tr>
 				</table>
@@ -84,7 +84,6 @@
   </script>
 </body>
 </html>
-
 
 
 

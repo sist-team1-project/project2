@@ -15,18 +15,18 @@
        <table class="table">
         <tr>
          <th width=20% class="text-right warning">작성자</th>
-         <td width=80%><input type=text id="uid" size=15 
-         v-model="uid" :value="uid"></td>
+         <td width=80%><input type=text id="u_id" size=15 
+         v-model="u_id" :value="u_id"></td>
         </tr>
         <tr>
          <th width=20% class="text-right warning">제목</th>
-         <td width=80%><input type=text id="ntitle" size=50 
-         v-model="ntitle" :value="ntitle"></td>
+         <td width=80%><input type=text id="n_title" size=50 
+         v-model="n_title" :value="n_title"></td>
         </tr>
         <tr>
          <th width=20% class="text-right warning">내용</th>
          <td width=80%>
-          <textarea rows="10" cols="55" id="ncontent" v-model="ncontent">{{vo.ncontent}}</textarea>
+          <textarea rows="10" cols="55" id="n_content" v-model="n_content">{{vo.n_content}}</textarea>
          </td>
         </tr>
        </table>
@@ -42,9 +42,9 @@
     new Vue({
     	el:'#notice_update',
     	data:{
-    		uid:'',
-    		ntitle:'',
-    		ncontent:'',
+    		u_id:'',
+    		n_title:'',
+    		n_content:'',
     		no:${no},
     		vo:{}
     	},
@@ -56,43 +56,43 @@
     		}).then(res=>{
     			console.log(res.data);
     			this.vo=res.data;
-    			this.uid=this.vo.uid;
-    			this.ntitle=this.vo.ntitle;
-    			this.ncontent=this.vo.ncontent;
+    			this.u_id=this.vo.u_id;
+    			this.n_title=this.vo.n_title;
+    			this.n_content=this.vo.n_content;
     		})
     	},
     	methods:{
     		write:function(){
-    			if(this.uid=='')
+    			if(this.u_id=='')
     			{
-    				let n=document.getElementById("uid");
+    				let n=document.getElementById("u_id");
     				n.focus();
     				return;
     			}
-    			if(this.ntitle=='')
+    			if(this.n_title=='')
     			{
-    				let n=document.getElementById("ntitle");
+    				let n=document.getElementById("n_title");
     				n.focus();
     				return;
     			}
-    			if(this.ncontent=='')
+    			if(this.n_content=='')
     			{
-    				let n=document.getElementById("ncontent");
+    				let n=document.getElementById("n_content");
     				n.focus();
     				return;
     			}
     			
-    			// 전송 서버 
     			axios.get('http://localhost:8080/web/support/notice_update_ok_vue.do',{
     				params:{
     					no:this.no,
-    					uid:this.uid,
-    					ntitle:this.ntitle,
-    					ncontent:this.ncontent
+    					u_id:this.u_id,
+    					n_title:this.n_title,
+    					n_content:this.n_content
     				}
     			}).then(res=>{
+    				if(res.data=="YES")
     				{
-    			 		location.href="notice_detail.do?no="+this.no
+    			 		location.href="../support/notice_detail.do?no="+this.no
     				}
     			})
     		},
@@ -104,3 +104,4 @@
    </script>
 </body>
 </html>
+

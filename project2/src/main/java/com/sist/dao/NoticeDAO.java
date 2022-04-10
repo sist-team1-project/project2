@@ -44,16 +44,16 @@ public class NoticeDAO {
     
     public NoticeVO noticeUpdateData(int no)
     {
- 	   return mapper.noticeDetailData(no);
+ 	    return mapper.noticeDetailData(no);
     }
     
     public void noticeUpdate(NoticeVO vo)
     {
- 		   mapper.noticeUpdate(vo);
+ 		mapper.noticeUpdate(vo);
     }
     
-    public void noticeDelete(int no,String pwd)
+    public void noticeDelete(int no)
     {
- 		   mapper.noticeDelete(no);
+ 		mapper.noticeDelete(no);
     }
 }

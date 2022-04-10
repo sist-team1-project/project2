@@ -41,10 +41,6 @@ public interface NoticeMapper {
   		  +"WHERE n_id=#{n_id}")
     public void noticeUpdate(NoticeVO vo);
     
-    @Select("SELECT n_pwd FROM notice_1 "
-    		+"WHERE n_id=#{n_id}")
-    public String noticeGetPassword(int no);
-
     @Delete("DELETE FROM notice_1 "
   		  +"WHERE n_id=#{n_id}")
     public void noticeDelete(int no);

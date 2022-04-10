@@ -26,11 +26,11 @@
 					</tr>
 
 					<tr class="table_row"  v-for="vo in notice_list">
-						<th width=10% class="text-center">{{vo.nid}}</th>
-						<td width=50%><a :href="'notice_detail.do?no=' + vo.nid">{{vo.ntitle}}</a></td>
-						<td width=10% class="text-center">{{vo.uid}}</td>
-						<td width=20% class="text-center">{{vo.nregdate}}</td>
-						<td width=10% class="text-center">{{vo.nvisits}}</td>
+						<th width=10% class="text-center">{{vo.n_id}}</th>
+						<td width=50%><a :href="'notice_detail.do?no=' + vo.n_id">{{vo.n_title}}</a></td>
+						<td width=10% class="text-center">{{vo.u_id}}</td>
+						<td width=20% class="text-center">{{vo.n_regdate}}</td>
+						<td width=10% class="text-center">{{vo.n_visits}}</td>
 					</tr>
 				</table>
 				<c:if test="${sessionScope.grade=='0'}">
@@ -54,7 +54,7 @@
     		curpage:1,
     		totalpage:0
     	},
-    	// 시작 => window.onload , $(function(){})
+
     	mounted:function(){
     		this.dataSend();
     	},
@@ -80,7 +80,7 @@
     			this.dataSend();
     		},
     		insert:function(){
-    			location.href="notice_insert.do";
+    			location.href="../support/notice_insert.do";
     		}
     	}
     })

@@ -38,7 +38,7 @@ public class SupportController {
 	@GetMapping("notice_insert_ok.do")
 	@ResponseBody
 	public String notice_insert_ok(NoticeVO vo, HttpSession session) {
-		session.setAttribute("uid", vo.getN_id());
+		session.setAttribute("u_id", vo.getN_id());
 		ndao.noticeInsertData(vo);
 		return "ok";
 	}
@@ -60,7 +60,7 @@ public class SupportController {
 		model.addAttribute("no", no);
 		return "support/notice_delete";
 	}
-
+    
 	// 1:1 문의
 	@GetMapping("ask.do")
 	public String askListData(String page, Model model) {

@@ -22,6 +22,7 @@ public class SupportRestController {
 	@Autowired
 	private AskDAO adao;
 
+	// 공지사항
 	@GetMapping(value = "support/notice_vue.do", produces = "text/plain;charset=utf-8")
 	public String notice_list_vue(String page) {
 		String result = "";
@@ -42,11 +43,11 @@ public class SupportRestController {
 			int i = 0;
 			for (NoticeVO vo : list) {
 				JSONObject obj = new JSONObject();
-				obj.put("nid", vo.getN_id());
-				obj.put("ntitle", vo.getN_title());
-				obj.put("uid", vo.getU_id());
-				obj.put("nregdate", vo.getN_regdate());
-				obj.put("nvisits", vo.getN_visits());
+				obj.put("n_id", vo.getN_id());
+				obj.put("n_title", vo.getN_title());
+				obj.put("u_id", vo.getU_id());
+				obj.put("n_regdate", vo.getN_regdate());
+				obj.put("n_visits", vo.getN_visits());
 				if (i == 0) {
 					obj.put("curpage", curpage);
 					obj.put("totalpage", totalpage);
@@ -67,12 +68,12 @@ public class SupportRestController {
 		try {
 			NoticeVO vo = ndao.noticeDetailData(no);
 			JSONObject obj = new JSONObject();
-			obj.put("nid", vo.getN_id());
-			obj.put("ntitle", vo.getN_title());
-			obj.put("uid", vo.getU_id());
-			obj.put("nregdate", vo.getN_regdate());
-			obj.put("ncontent", vo.getN_content());
-			obj.put("nvisits", vo.getN_visits());
+			obj.put("n_id", vo.getN_id());
+			obj.put("n_title", vo.getN_title());
+			obj.put("u_id", vo.getU_id());
+			obj.put("n_regdate", vo.getN_regdate());
+			obj.put("n_content", vo.getN_content());
+			obj.put("n_visits", vo.getN_visits());
 
 			result = obj.toJSONString();
 			System.out.println(result);
@@ -88,9 +89,9 @@ public class SupportRestController {
 		try {
 			NoticeVO vo = ndao.noticeUpdateData(no);
 			JSONObject obj = new JSONObject();
-			obj.put("uid", vo.getU_id());
-			obj.put("ntitle", vo.getN_title());
-			obj.put("ncontent", vo.getN_content());
+			obj.put("u_id", vo.getU_id());
+			obj.put("n_title", vo.getN_title());
+			obj.put("n_content", vo.getN_content());
 
 			result = obj.toJSONString();
 		} catch (Exception ex) {
@@ -101,17 +102,21 @@ public class SupportRestController {
 	@GetMapping(value = "support/notice_update_ok_vue.do", produces = "text/plain;charset=utf-8")
 	public String food_update_ok_vue(NoticeVO vo) {
 		String result = "";
-		result = "<script>location.href=\"../ask/detail.do?no=" + vo.getN_id() + "\";</script>";
-		return result;
-	}
-
-	@GetMapping(value = "support/notice_delete_ok.do", produces = "text/plain;charset=utf-8")
-	public String board_delete(int no, String pwd) {
-		String result = "";
+		ndao.noticeUpdate(vo);
 		result = "YES";
 		return result;
 	}
 
+	@GetMapping(value = "support/notice_delete_ok.do", produces = "text/plain;charset=utf-8")
+	public String board_delete(int no) {
+		String result = "";
+		ndao.noticeDelete(no);
+		result = "YES";
+		return result;
+	}
+    
+	
+	// 1:1 문의
 	@PostMapping("support/ask_update_ok.do")
 	public String askUpdateOk(AskVO vo) {
 		String result = "";

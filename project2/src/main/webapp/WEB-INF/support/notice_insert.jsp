@@ -15,14 +15,19 @@
 		<div class="row">
 			<table class="table">
 				<tr>
+					<th width=20% class="text-right warning">작성자</th>
+					<td width=80%><input type=text id="u_id" size=20
+						v-model="u_id"></td>
+				</tr>
+				<tr>
 					<th width=20% class="text-right warning">제목</th>
-					<td width=80%><input type=text id="ntitle" size=50
-						v-model="ntitle"></td>
+					<td width=80%><input type=text id="n_title" size=50
+						v-model="n_title"></td>
 				</tr>
 				<tr>
 					<th width=20% class="text-right warning">내용</th>
-					<td width=80%><textarea rows="10" cols="55" id="ncontent"
-						v-model="ncontent"></textarea></td>
+					<td width=80%><textarea rows="10" cols="55" id="n_content"
+						v-model="n_content"></textarea></td>
 				</tr>
 			</table>
 		</div>
@@ -38,20 +43,27 @@
     new Vue({
     	el:'#notice_insert',
     	data:{
-    		ntitle:'',
-    		ncontent:''
+    		u_id:'',
+    		n_title:'',
+    		n_content:''
     	},
     	methods:{
     		write:function(){
-    			if(this.ntitle=='')
+    			if(this.u_id=='')
     			{
-    				let n=document.getElementById("ntitle");
+    				let n=document.getElementById("u_id");
     				n.focus();
     				return;
     			}
-    			if(this.ncontent=='')
+    			if(this.n_title=='')
     			{
-    				let n=document.getElementById("ncontent");
+    				let n=document.getElementById("n_title");
+    				n.focus();
+    				return;
+    			}
+    			if(this.n_content=='')
+    			{
+    				let n=document.getElementById("n_content");
     				n.focus();
     				return;
     			}
@@ -59,14 +71,13 @@
     			
     			axios.get('http://localhost:8080/web/support/notice_insert_ok.do',{
     				params:{
-    					ntitle:this.ntitle,
-    					ncontent:this.ncontent
+    					u_id:this.u_id,
+    					n_title:this.n_title,
+    					n_content:this.n_content
 
     				}
     			}).then(res=>{
-    				console.log("title : " + this.ntitle);
-					console.log("cont : " + this.ncontent);
-    				//location.href="../support/notice.do"
+    				location.href="../support/notice.do"
     				
     			})
     		},
@@ -79,8 +90,6 @@
 
 </body>
 </html>
-
-
 
 
 

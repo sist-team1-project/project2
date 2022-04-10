@@ -11,10 +11,7 @@
 <body>
 	<div class="container bg0" id="notice_delete">
 		<h3 class="text-center" style="padding-bottom: 20px">삭제하기</h3>
-		<div class="row">
-				    	비밀번호 : <input type=password id="pwd" size=15 v-model="pwd">
-		</div>
-		<div class="text-right" style="padding-top: 10px;">
+		<div class="text-center" style="padding-top: 10px;">
 			<button class="btn btn-sm" style="background-color: #eeeee6"
 				v-on:click="del()">삭제</button>
 			<button class="btn btn-sm" style="background-color: #dbd0be"
@@ -25,7 +22,6 @@
     new Vue({
     	el:'#notice_delete',
     	data:{
-    		pwd:'',
     		no:${no},
     		msg:''
     	},
@@ -35,30 +31,16 @@
     		},
     		del:function(){
     			let _this=this;
-    			if(this.pwd=="")
-    			{
-    				let p=document.getEelementById("pwd");
-    				p.focus();
-    				return;
-    			}
     			axios.get('http://localhost:8080/web/support/notice_delete_ok.do',{
     				params:{
     					no:this.no,
-    					pwd:this.pwd
     				}
     			}).then(function(res){
     				console.log(res.data);
     				_this.msg=res.data
     				if(_this.msg=="YES")
     				{
-    					location.href="notice.do";
-    				}
-    				else
-    				{
-    					alert("비밀번호가 틀립니다!!")
-    					let i=document.getElementById("pwd");
-    					_this.pwd="";
-    					i.focus();
+    					location.href="../support/notice.do";
     				}
     			})
     		}
@@ -67,7 +49,6 @@
    </script>
 </body>
 </html>
-
 
 
 
