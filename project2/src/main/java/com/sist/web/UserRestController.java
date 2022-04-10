@@ -18,8 +18,10 @@ public class UserRestController {
 	private UserDAO dao;
 
 	@PostMapping("login_ok.do")
-	public String user_login_ok(String id, String pwd, HttpSession session) {// id pwd
-		String result = dao.isLogin(id, pwd);
+	public String user_login_ok(@RequestBody HashMap<String, Object> map, HttpSession session) {
+	    String id = (String) map.get("id");
+	    String pwd = (String) map.get("pwd");
+	    String result = dao.isLogin(id, pwd);
 		if (!(result.equals("NOID") || result.equals("NOPWD"))) {
 			// 로그인이 된 상태
 			session.setAttribute("id", id);
@@ -85,18 +87,29 @@ public class UserRestController {
 		map.put("name", name);
 		map.put("email", email);
 		
-		String result = dao.userFind(map);
+		String result = dao.idFind(map);
 		return result;
 	}
 	
-	@PostMapping(value = "pwdfind_ok.do", produces = "text/plain;charset=utf-8")
+	@GetMapping(value = "pwdfind_ok.do", produces = "text/plain;charset=utf-8")
 	public String user_pwdfind_ok(String id, String email) {
-		return "";
+	    Map map = new HashMap();
+	    map.put("id", id);
+	    map.put("email", email);
+	    
+	    String result = dao.pwdFind(map);
+		return result;
 	}
-
-	/*
-	 * @PostMapping("user/pwdfind2_ok.do") public String user_pwdfind2_ok(String
-	 * question, String answer) { String result = dao.userAnswer(question, answer);
-	 * return result; }
-	 */
+	
+	@GetMapping(value = "pwdfind2_ok.do", produces = "text/plain;charset=utf-8")
+    public String user_pwdfind2_ok(String id, String email, String question, String answer) {
+        Map map = new HashMap();
+        map.put("id", id);
+        map.put("email", email);
+        map.put("question", question);
+        map.put("answer", answer);
+        
+        String result = dao.pwdFind2(map);
+        return result;
+    }
 }

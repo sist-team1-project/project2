@@ -46,8 +46,12 @@
     <definition name="*/*" extends="main">
         <put-attribute name="content" value="/WEB-INF/{1}/{2}.jsp"/>
     </definition>
-    
+       
     <definition name="user/idfind/vue" template="/WEB-INF/user/idfind.jsp"></definition>
+    <definition name="user/idfind2/vue" template="/WEB-INF/user/idfind2.jsp"></definition>
+    <definition name="user/pwdfind/vue" template="/WEB-INF/user/pwdfind.jsp"></definition>
+    <definition name="user/pwdfind2/vue" template="/WEB-INF/user/pwdfind2.jsp"></definition>
+    <definition name="user/pwdfind3/vue" template="/WEB-INF/user/pwdfind3.jsp"></definition>
     <definition name="user/idcheck/vue" template="/WEB-INF/user/idcheck.jsp"></definition>
     <definition name="admin/orderdetail/vue" template="/WEB-INF/admin/orderdetail.jsp"></definition>
 </tiles-definitions> 

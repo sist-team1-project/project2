@@ -55,16 +55,51 @@ public class UserDAO {
 		return mapper.userInfo(uid);
 	}
 
-	public String userFind(Map map) {
-		String result = "";
-		int idCount = mapper.idEmailCount(map);
-		if (idCount == 0) {
-			result = "NORESULT";
-		} else {
-			result = mapper.idFind(map);
-		}
-		return result;
-	}
+    public String idFind(Map map) {
+        String result = "";
+        int count = mapper.nameEmailCount(map);
+        if (count == 0) {
+            result = "NORESULT";
+        } else {
+            result = mapper.idFind(map);
+        }
+        return result;
+    }
+    
+    // 비밀번호 찾기: 아이디와 이메일로 존재 여부 확인 → 존재하면 질문 가져옴
+    public String pwdFind(Map map) {
+        String result = "";
+        
+        int count = mapper.idEmailCount(map);
+        if (count == 0) {
+            result = "NORESULT";
+        } else {
+            result = mapper.questionFind(map);
+        }
+        return result;
+    }
+    
+    // 비밀번호 찾기: 질문과 답변이 일치하면 이메일로 초기화된 비밀번호를 보냄
+    public String pwdFind2(Map map) {
+        String result = "";
+        
+        int count = mapper.questionAnswerCount(map);
+        if (count == 0) {
+            result = "NORESULT";
+        } else {
+            UserVO user = mapper.userInfo((String) map.get("id"));
+            
+            MailSender sender = new MailSender();
+            String newPassword = sender.resetPwdMailSend(user);
+            
+            Map map2 = new HashMap();
+            map2.put("id", (String) map.get("id"));
+            map2.put("password", newPassword);
+            mapper.userPwdUpdate(map2);
+            
+        }
+        return result;
+    }
 
 	// 유저정보 수정
 	/*
@@ -74,21 +109,18 @@ public class UserDAO {
 	 * return bCheck; }
 	 */
 
-	public boolean userPwdUpdate(String id, String pwd, Map map) {
-		boolean bCheck = false;
-		System.out.println(id+"aaaaaaaaaaaaaaaaaaaaaaaaaaa");
-		String db_pwd = mapper.userGetPassword(id);
-		System.out.println(db_pwd + "bbbbbbbbbbbbbbbbbbbbbbb");
-		if (db_pwd.equals(pwd)) {
-			bCheck = true;
-			mapper.userPwdUpdate(map);
-			System.out.println("true                cccccccccccccccccccccccccc");
-		} else {
-			bCheck = false;
-			System.out.println("false                cccccccccccccccccccccccccc");
-		}
-		return bCheck;
-	}
+
+    public boolean userPwdUpdate(Map map) {
+        boolean bCheck = false;
+        String db_pwd = mapper.userGetPassword((String) map.get("id"));
+        if (db_pwd.equals((String) map.get("password"))) {
+            bCheck = true;
+            mapper.userPwdUpdate(map);
+        } else {
+            bCheck = false;
+        }
+        return bCheck;
+    }
 
 	/******* USER admin **********/
 	public List<UserVO> userList(Map map) {

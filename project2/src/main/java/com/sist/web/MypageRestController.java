@@ -1,6 +1,6 @@
 package com.sist.web;
 
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -8,11 +8,12 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.sist.dao.UserDAO;
-import com.sist.vo.UserVO;
+import com.sist.dao.*;
+import com.sist.vo.*;
 
 @RestController
 public class MypageRestController {
+    
 	@Autowired
 	private UserDAO dao;
 
@@ -48,18 +49,19 @@ public class MypageRestController {
 		return result;
 	}
 */
-	@PostMapping(value = "mypage/update_pwd_ok.do", produces = "text/plain;charset=utf-8")
-	public String mypage_update_pwd_ok(String id, String pwd, Map map) {
-		String result = "";
-		boolean bCheck = dao.userPwdUpdate(id, pwd, map);
-		if (bCheck == true) {
-			result = "YES";
-		} else {
-			result = "NO";
-		}
-		return result;
-	}
-	
-	
 
+    @GetMapping(value = "mypage/update_pwd_ok.do", produces = "text/plain;charset=utf-8")
+    public String mypage_update_pwd_ok(UserVO vo) {
+        String result = "";
+        Map map = new HashMap();
+        map.put("id", vo.getU_id());
+        map.put("password", vo.getU_password());
+        boolean bCheck = dao.userPwdUpdate(map);
+        if (bCheck == true) {
+            result = "YES";
+        } else {
+            result = "NO";
+        }
+        return result;
+    }
 }

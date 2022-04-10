@@ -1,86 +1,68 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+  <meta charset="UTF-8">
+  <title>Insert title here</title>
+  <link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../fonts/iconic/css/material-design-iconic-font.min.css">
+  <link rel="stylesheet" type="text/css" href="../fonts/linearicons-v1.0.0/icon-font.min.css">
+  <link rel="stylesheet" type="text/css" href="../css/util.css">
+  <link rel="stylesheet" type="text/css" href="../css/main.css">
+  <script src="../vendor/jquery/jquery-3.2.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+  <script src="http://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
-  <div class="container bg0 p-t-150 p-b-30" id="pwdfind">
+  <div class="container" id="pwdfind2">
+    <div class="flex-c-m">
+        <h4 class="mtext-109 cl2 p-b-20">비밀번호 찾기</h4>
+    </div>
+    <div class="flex-c-m p-tb-10">
+      ${question}
+    </div>
+    <div class="flex-c-m p-tb-10">
+       <input class="dis-inline-block bor10" type="text" ref="answer" name="answer" placeholder="답 입력" v-model="answer">
+    </div>
     
-      <div class="col-sm-12 col-lg-4 m-lr-auto m-b-50">
-        <div class="bor10 p-lr-40 p-t-30 p-b-25 p-lr-15-sm">
-          <h4 class="flex-c-m mtext-109 cl2 p-b-30">비밀번호 찾기</h4>
-            <div class="row">
-		      <div class="col-sm-7">
-		      	<div class="col-sm-5 flex-c-m">
-               	  질문
-			  	</div>
-                <div class="col-sm-7 bor10">
-                  {{question}}
-                </div>
-              </div>
-              <div class="col-sm-7">
-            	<div class="col-sm-5 flex-c-m">
-               	 답변
-			  	</div>
-			    <div class="col-sm-7 bor10">
-                  <input type="text" id="answer" name="answer" placeholder="답변 입력" v-model="answer">
-                </div>
-              </div>
-              
-			</div>
-			<div class="row flex-c-m p-t-15">
-			  <div class="flex-c-m">
-				<a id="pwdfind()"> 비밀번호 찾기 </a>&nbsp;|&nbsp;
-				<a id=""> 취소 </a>
-			  </div>
-			</div>
-         </div>  
-       </div>
+    <div class="row flex-c-m p-t-15">
+      <div class="flex-c-m">
+        <a href="#" @click="pwdfind2" style="color:#666666"> 제출 </a>
+      </div>
+    </div>
   </div>
   <script>
-new Vue({
- 	el:'#pwdfind',
- 	data:{
- 		answer:''
- 	},
- 	mounted:function(){
- 		
-    },
- 	methods:{
- 		pwdfind:function(){
- 			let answer=$('#answer').val();
- 			if(answer.trim()=="")
- 			{
- 				$('#answer').focus();
- 				return;
- 			}// 서버실행 전 확인
- 			
- 			axios.post("http://localhost:8080/web/user/pwdfind2_ok.do",null,{
- 	            params:{
- 	                
- 	            }
- 	        }).then(res=>{
- 	        	console.log(res.data);
- 	        	if(res.data=='ok')
- 				{
- 	        		
- 	        		answer이 맞으면 메일센더~
- 	        		
- 	        		
- 				}
- 				else
- 			    {
- 					alert("비밀번호가 올바르지 않습니다.")
- 					$('#answer').val("");
- 					$('#answer').focus();
- 			    }
- 	        })
- 		}
- 	}
-})
+    new Vue({
+     	el:'#pwdfind2',
+     	data:{
+     		answer:''
+     	},
+     	methods:{
+     		pwdfind2:function(){
+     			if(this.answer == '') {
+     				this.$refs.answer.focus();
+     				return;
+     			}
+     			axios.get("http://localhost:8080/web/user/pwdfind2_ok.do",{
+                    params:{
+                        id: '${id}',
+                        email: '${email}',
+                        question: '${question}',
+                        answer: this.answer
+                    }
+                }).then(res=>{
+                    if(res.data == "NORESULT") {
+                        alert("일치하지 않습니다");
+                    } else {
+                        location.href = "../user/pwdfind3.do";
+                    }
+                })
+     		}
+     	}
+    })
   </script>
 </body>
 </body>

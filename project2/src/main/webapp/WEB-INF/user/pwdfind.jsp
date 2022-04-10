@@ -3,93 +3,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+  <meta charset="UTF-8">
+  <title>Insert title here</title>
+  <link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../fonts/iconic/css/material-design-iconic-font.min.css">
+  <link rel="stylesheet" type="text/css" href="../fonts/linearicons-v1.0.0/icon-font.min.css">
+  <link rel="stylesheet" type="text/css" href="../css/util.css">
+  <link rel="stylesheet" type="text/css" href="../css/main.css">
+  <script src="../vendor/jquery/jquery-3.2.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+  <script src="http://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
-  <div class="container bg0 p-t-150 p-b-30" id="pwdfind">
+  <div class="container" id="pwdfind">
+    <div class="flex-c-m">
+        <h4 class="mtext-109 cl2 p-b-20">비밀번호 찾기</h4>
+    </div>
+    <div class="flex-c-m p-tb-10">
+      아이디&nbsp;&nbsp;<input class="dis-inline-block bor10" type="text" ref="id" name="id" placeholder="아이디 입력" v-model="id">
+    </div>
+    <div class="flex-c-m p-tb-10">
+       이메일&nbsp;&nbsp;<input class="dis-inline-block bor10" type="text" ref="email" name="email" placeholder="이메일 입력" v-model="email">
+    </div>
     
-      <div class="col-sm-12 col-lg-4 m-lr-auto m-b-50">
-        <div class="bor10 p-lr-40 p-t-30 p-b-25 p-lr-15-sm">
-          <h4 class="flex-c-m mtext-109 cl2 p-b-30">비밀번호 찾기</h4>
-            <div class="row">
-		      <div class="col-sm-7">
-		      	<div class="col-sm-5 flex-c-m">
-               	 아이디
-			  	</div>
-                <div class="col-sm-7 bor10">
-                  <input type="text" id="id" name="id" placeholder="아이디 입력" v-model="id">
-                </div>
-              </div>
-              <div class="col-sm-7">
-            	<div class="col-sm-5 flex-c-m">
-               	 이메일
-			  	</div>
-			    <div class="col-sm-7 bor10">
-                  <input type="text" id="email" name="email" placeholder="이메일 입력" v-model="email">
-                </div>
-              </div>
-              
-			</div>
-			<div class="row flex-c-m p-t-15">
-			  <div class="flex-c-m">
-				<a id="pwdfind()"> 비밀번호 찾기 </a>&nbsp;|&nbsp;
-				<a id=""> 취소 </a>
-			  </div>
-			</div>
-         </div>  
-       </div>
+    <div class="row flex-c-m p-t-15">
+      <div class="flex-c-m">
+        <a href="#" @click="pwdfind" style="color:#666666"> 비밀번호 찾기 </a>
+      </div>
+    </div>
   </div>
   <script>
-new Vue({
- 	el:'#pwdfind',
- 	data:{
- 		id:'',
- 		email:''
- 	},
- 	mounted:function(){
- 		
-    },
- 	methods:{
- 		pwdfind:function(){
- 			let id=$('#id').val();
- 			if(id.trim()=="")
- 			{
- 				$('#id').focus();
- 				return;
- 			}
- 			let email=$('#email').val();
- 			if(email.trim()=="")
- 			{
- 				$('#email').focus();
- 				return;
- 			}// 서버실행 전 확인
- 			
- 			axios.post("http://localhost:8080/web/user/pwdfind_ok.do",null,{
- 	            params:{
- 	                id: this.id,
- 	                email: this.email
- 	            }
- 	        }).then(res=>{
- 	        	console.log(res.data);
- 	        	if(res.data=='ADMIT')
- 				{
- 	        		
- 	        		location.href = "../pwd/pwd.do"
- 	        		
- 	        		
- 				}
- 				else
- 			    {
- 					alert("올바른 정보를 입력하세요.")
- 					$('#id').val("");
- 					$('#email').val("");
- 					$('#id').focus();
- 			    }
- 	        })
- 		}
- 	}
-})
+    new Vue({
+        el:'#pwdfind',
+        data:{
+            id:'',
+            email:''
+        },
+        methods:{
+            pwdfind:function(){
+                if(this.id == '') {
+                    this.$refs.id.focus();
+                    return;
+                }
+                if(this.email == '') {
+                    this.$refs.email.focus();
+                    return;
+                }
+                axios.get("http://localhost:8080/web/user/pwdfind_ok.do",{
+                    params:{
+                        id: this.id,
+                        email: this.email
+                    }
+                }).then(res=>{
+                    if(res.data == 'NORESULT'){
+                        alert("해당 정보로 일치하는 아이디가 존재하지 않습니다");
+                    }
+                    else {
+                        location.href = "../user/pwdfind2.do?id=" + this.id + "&email=" + this.email + "&question=" + res.data;
+                    }
+                })
+            }
+        }
+    })
   </script>
 </body>
 </body>
