@@ -176,10 +176,6 @@
 	    },
 	    methods: {
 	        dataSend: function() {
-	            if (!this.ss) {
-	                console.log("ss null :  " + this.ss)
-	            }
-
 	            axios.get("http://localhost:8080/web/admin/adlist_vue.do", {
 	                params: {
 	                    page: this.curpage,

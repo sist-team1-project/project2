@@ -196,7 +196,6 @@ public class AdminRestController2 {
         obj.put("g_image", image[0]);
         obj.put("g_detail", vo.getG_detail());
         obj.put("g_stock", vo.getG_stock());
-        obj.put("g_sold", vo.getG_sold());
         obj.put("g_status", vo.getG_status());
         JSONArray arr = new JSONArray();
         for(EventGoodsVO i : list) {

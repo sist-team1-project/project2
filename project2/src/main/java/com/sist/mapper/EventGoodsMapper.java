@@ -27,6 +27,6 @@ public interface EventGoodsMapper {
 	@Select("SELECT eg_id FROM event_goods_1 WHERE g_id = #{g_id} AND e_id = #{e_id}")
 	public int goodsEGidData(EventGoodsVO vo);
 	
-	@Select("select e_id from event_goods_1 where g_id = #{g_id}")
+	@Select("select eg_id, e_id from event_goods_1 where g_id = #{g_id}")
 	public List<EventGoodsVO> goodsEidData(int g_id);
 }
