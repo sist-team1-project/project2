@@ -65,9 +65,9 @@ public class UserRestController {
         JSONObject obj = new JSONObject();
         int idcheck = dao.idCheck(id);
         if (idcheck == 0) {
-            result = id; // 저장한 id를 jsp까지 가져가기
+            result = id;
         } else {
-            result = "no"; // 현재 얘는 출력됨
+            result = "no";
         }
         return result;
     }

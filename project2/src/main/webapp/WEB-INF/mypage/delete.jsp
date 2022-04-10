@@ -43,7 +43,7 @@ new Vue({
  				$('#password').focus();
  				return;
  			}
- 			 			// 서버실행 전 확인
+ 			// 서버실행 전 확인
  			axios.get("http://localhost:8080/web/mypage/delete_ok.do",{
  	            params:{
  	            	id:this.id,
