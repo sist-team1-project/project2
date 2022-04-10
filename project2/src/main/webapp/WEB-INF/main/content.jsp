@@ -105,14 +105,15 @@
         </div>
       </section>
       
-      <!-- 상품 -->
+      <!-- 이벤트 타이틀 -->
       <section>
         <div class="bg0 p-t-23 p-b-140">
           <div class="p-tb-20"><h3 class="ltext-103 cl5">Product Overview</h3></div>
           <div v-for="e in events">
             <div class="p-t-40 p-b-10"><h4>{{e.title}}</h4></div>
             <div class="row">
-              <div v-for="eg in event_goods" v-if="eg.eid == e.eid" class="col-sm-6 col-md-4 col-lg-3 p-b-35">
+              <!--    상 품    -->
+              <div v-for="(eg,index) in event_goods" v-if="eg.eid == e.eid" class="col-sm-6 col-md-4 col-lg-3 p-b-35">
                 <div class="block2">
                   <div class="block2-pic hov-img0"><a :href="'../goods/detail.do?gid=' + eg.gid"><img onerror="this.src='../images/image_ready.jpg'" :src="eg.image"></a></div>
                   <div class="block2-txt flex-w flex-t p-t-14">
@@ -125,7 +126,7 @@
                     <div class="block2-txt-child2 flex-r">
                       <span class="btn-addwish-b2 dis-block pos-relative">
                         <c:if test="${sessionScope.id!=null }">
-                          <img v-if="eg.lid==0" class="icon-heart1 trans-04 pointer" src="../images/icons/icon-heart-01.png" @click="like(eg.gid); eg.lid=1; alert('즐겨찾기에 등록되었습니다')">
+                          <img v-if="eg.lid==0" class="icon-heart1 trans-04 pointer" src="../images/icons/icon-heart-01.png" @click="like(eg.gid,index); alert('즐겨찾기에 등록되었습니다')">
                           <img v-if="eg.lid>0" class="icon-heart2 trans-04 pointer" src="../images/icons/icon-heart-02.png" @click="unlike(eg.lid); eg.lid=0; alert('즐겨찾기가 해제되었습니다')">
                         </c:if>
                         <c:if test="${sessionScope.id==null }">
@@ -136,11 +137,12 @@
                   </div>
                 </div>
               </div>
+              <!-- -------- -->
             </div>
           </div>
-          
         </div>
       </section>
+      <!-- -------- -->
     </div>
   </div>
   <script>
@@ -169,7 +171,7 @@
                 axios.post("http://localhost:8080/web/goods/like_insert_ok.do",null,{
                     params:{gid: gid}
                 }).then(result=>{
-                    this.goods[index].lid = result.data.lid;
+                    this.event_goods[index].lid = result.data.lid;
                 })
             },
             unlike:function(lid) { // 싫어요
@@ -178,8 +180,6 @@
         }
     })
   </script>
-
-
 
 </body>
 </html>
