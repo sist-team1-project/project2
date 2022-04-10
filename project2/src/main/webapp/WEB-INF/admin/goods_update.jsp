@@ -8,8 +8,6 @@
 <link rel="stylesheet" type="text/css" href="../css/admin.css">
 </head>
 <body>
-  <!-- 테이블이 필요하실땐 cart나 checkout쪽에서 사용한 테이블 사용하시면 편할거에요 -->
-
   <div class="container bg0 p-t-70 p-b-10" id="GoodsUpdate">
     <div class="row">
       <div class="col-lg-12 m-lr-auto">
@@ -87,9 +85,9 @@
                 </div>
                 <div class="size-209">
                   <select id="gstatus" v-model="gstatus" class="bor10 p-tb-3 p-lr-5">
-                    <option value="">판매상태</option>
-                    <option value="1">판매중</option>
-                    <option value="0">판매중단</option>
+                    <option value=-1>판매상태</option>
+                    <option value=1>판매중</option>
+                    <option value=0>판매중단</option>
                   </select>
                 </div>
               </div>
@@ -193,9 +191,7 @@
                 for (var i = 0; i < result.data.eid.length; i++) {
 					this.eid.push(i);
 				}
-                console.log(result.data)
             })
-	        console.log("gid : " + this.gid);
 	    },
 	    methods: {
 	    	cate1: function() {
@@ -231,7 +227,7 @@
 	            } else if (this.gstock == "") {
 	                this.$refs.gstock.focus();
 	                return;
-	            } else if (this.gstatus == "") {
+	            } else if (this.gstatus == -1) {
 	                alert("상태 확인 필요");
 	                return;
 	            }
@@ -252,10 +248,10 @@
 	            form.append('g_stock', this.gstock);
 	            form.append('g_status', this.gstatus);
 	            form.append('eid', this.eid.join(","));
-
+	            
 	            axios.post('http://localhost:8080/web/admin/goods_update_ok.do', form, {}).then((response) => {
 	                location.href = "../admin/adlist.do"
-	            })
+	            }) 
 	        },
 	        selectIndex: function(event) {
 	            this.cindex = event.target.selectedIndex;
