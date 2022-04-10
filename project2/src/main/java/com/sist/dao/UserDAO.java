@@ -74,14 +74,18 @@ public class UserDAO {
 	 * return bCheck; }
 	 */
 
-	public boolean userPwdUpdate(UserVO vo) {
+	public boolean userPwdUpdate(String id, String pwd, Map map) {
 		boolean bCheck = false;
-		String db_pwd = mapper.userGetPassword(vo.getU_id());
-		if (db_pwd.equals(vo.getU_password())) {
+		System.out.println(id+"aaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		String db_pwd = mapper.userGetPassword(id);
+		System.out.println(db_pwd + "bbbbbbbbbbbbbbbbbbbbbbb");
+		if (db_pwd.equals(pwd)) {
 			bCheck = true;
-			mapper.userPwdUpdate(vo);
+			mapper.userPwdUpdate(map);
+			System.out.println("true                cccccccccccccccccccccccccc");
 		} else {
 			bCheck = false;
+			System.out.println("false                cccccccccccccccccccccccccc");
 		}
 		return bCheck;
 	}

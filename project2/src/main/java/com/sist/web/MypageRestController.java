@@ -1,5 +1,7 @@
 package com.sist.web;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -46,10 +48,10 @@ public class MypageRestController {
 		return result;
 	}
 */
-	@GetMapping(value = "mypage/update_pwd_ok.do", produces = "text/plain;charset=utf-8")
-	public String mypage_update_pwd_ok(UserVO vo) {
+	@PostMapping(value = "mypage/update_pwd_ok.do", produces = "text/plain;charset=utf-8")
+	public String mypage_update_pwd_ok(String id, String pwd, Map map) {
 		String result = "";
-		boolean bCheck = dao.userPwdUpdate(vo);
+		boolean bCheck = dao.userPwdUpdate(id, pwd, map);
 		if (bCheck == true) {
 			result = "YES";
 		} else {

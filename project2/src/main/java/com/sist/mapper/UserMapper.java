@@ -46,7 +46,7 @@ public interface UserMapper {
 	public String userGetPassword(String uid);
 
 	@Update("UPDATE user_1 SET u_password=#{password} WHERE u_id=#{uid}")
-	public void userPwdUpdate(UserVO vo);
+	public void userPwdUpdate(Map map);
 	
 	
 	/******************* User admin  ********************************/

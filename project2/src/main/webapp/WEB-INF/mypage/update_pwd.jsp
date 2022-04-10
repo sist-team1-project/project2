@@ -28,6 +28,8 @@
       </div>
     </div>
   </div>
+</body>
+</html>
   <script>
 new Vue({
  	el:'#update_pwd',
@@ -62,6 +64,10 @@ new Vue({
  				return;
  			}
  			
+ 			if(password == new_password || new_password != new_password2){
+ 				alert("비밀번호 양식이 이상함");
+ 				return;
+ 			}
  			
  			// 서버실행 전 확인
  			axios.get("http://localhost:8080/web/mypage/update_pwd_ok.do",{
@@ -70,11 +76,12 @@ new Vue({
  	            	password:this.password,
  	            	u_password:this.new_password
  	            }
- 	        }).then(res=>{
+ 	        }).then(res => {
  	        	//_this.data=res.data;
  	        	if(res.data=="YES") {
                     alert("비밀번호 변경 완료");
                 } else {
+                	console.log(res)
                 	alert("변경 안됨");
                 }
  	        })
@@ -82,5 +89,3 @@ new Vue({
  	}
 })
   </script>
-</body>
-</html>
