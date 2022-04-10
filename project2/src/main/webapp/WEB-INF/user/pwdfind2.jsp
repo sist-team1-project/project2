@@ -25,7 +25,7 @@
       ${question}
     </div>
     <div class="flex-c-m p-tb-10">
-       <input class="dis-inline-block bor10" type="text" ref="answer" name="answer" placeholder="답 입력" v-model="answer">
+       <input class="dis-inline-block bor10 p-lr-6 p-tb-6" type="text" ref="answer" name="answer" placeholder="답 입력" v-model="answer">
     </div>
     
     <div class="row flex-c-m p-t-15">

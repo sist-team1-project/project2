@@ -71,14 +71,17 @@
                 axios.post("http://localhost:8080/web/user/login_ok.do",this.form,{
                 }).then(res=>{
                     console.log()
-                    if(res.data=='NOID') {
+                    if(res.data == 'NOID') {
                         alert("아이디가 존재하지 않습니다.")
                         this.form.id = '';
                         this.form.pwd = '';
                         this.refs.id.focus();
-                    }
-                    else if(res.data=='NOPWD') {
+                    } else if(res.data == 'NOPWD') {
                         alert("비밀번호가 틀립니다.")
+                        this.form.pwd = '';
+                        this.refs.pwd.focus();
+                    } else if (res.data == 'BLOCKED') {
+                        alert("차단된 유저입니다.")
                         this.form.pwd = '';
                         this.refs.pwd.focus();
                     }

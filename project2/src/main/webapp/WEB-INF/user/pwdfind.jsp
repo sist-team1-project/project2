@@ -18,16 +18,16 @@
 <body>
   <div class="container" id="pwdfind">
     <div class="flex-c-m">
-        <h4 class="mtext-109 cl2 p-b-20">비밀번호 찾기</h4>
+        <h4 class="mtext-109 cl2 p-b-10">비밀번호 찾기</h4>
     </div>
     <div class="flex-c-m p-tb-10">
-      아이디&nbsp;&nbsp;<input class="dis-inline-block bor10" type="text" ref="id" name="id" placeholder="아이디 입력" v-model="id">
+      아이디&nbsp;&nbsp;<input class="dis-inline-block bor10 p-lr-6 p-tb-6" type="text" ref="id" name="id" placeholder="아이디 입력" v-model="id">
     </div>
     <div class="flex-c-m p-tb-10">
-       이메일&nbsp;&nbsp;<input class="dis-inline-block bor10" type="text" ref="email" name="email" placeholder="이메일 입력" v-model="email">
+       이메일&nbsp;&nbsp;<input class="dis-inline-block bor10 p-lr-6 p-tb-6" type="text" ref="email" name="email" placeholder="이메일 입력" v-model="email">
     </div>
     
-    <div class="row flex-c-m p-t-15">
+    <div class="row flex-c-m p-t-10">
       <div class="flex-c-m">
         <a href="#" @click="pwdfind" style="color:#666666"> 비밀번호 찾기 </a>
       </div>

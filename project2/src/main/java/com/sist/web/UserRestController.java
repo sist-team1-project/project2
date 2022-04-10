@@ -23,9 +23,13 @@ public class UserRestController {
 	    String pwd = (String) map.get("pwd");
 	    String result = dao.isLogin(id, pwd);
 		if (!(result.equals("NOID") || result.equals("NOPWD"))) {
-			// 로그인이 된 상태
-			session.setAttribute("id", id);
-			session.setAttribute("grade", result);
+		    if (result.equals("-1")) {
+		        result = "BLOCKED";
+		    } else {
+		        // 로그인이 된 상태
+		        session.setAttribute("id", id);
+		        session.setAttribute("grade", result);		        
+		    }
 		}
 		return result;
 	}
