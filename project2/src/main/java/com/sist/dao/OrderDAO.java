@@ -15,9 +15,6 @@ public class OrderDAO {
     @Autowired
     private OrderMapper mapper;
     
-    public List<OrderVO> orderList(Map map){
-    	return mapper.orderList(map);
-    }
     public int orderTotalPage() {
     	return mapper.orderTotalPage();
     }
@@ -36,4 +33,5 @@ public class OrderDAO {
     public int stateupdate(Map map) {
     	return mapper.stateupdate(map);
     }
+    
 }

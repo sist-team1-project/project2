@@ -7,13 +7,7 @@ import org.apache.ibatis.annotations.*;
 import com.sist.vo.*;
 
 public interface OrderMapper {
-	/* 판매관리 목록 리스트 - 삭제예정 */
-	@Select("SELECT o_id,u_id,o_request,TO_CHAR(o_regdate,'YYYY-MM-DD HH24:MI:SS')as o_regdate,o_shipping,o_state,num "
-			+ "FROM (SELECT o_id,u_id,o_request,o_regdate,o_shipping,o_state, rownum as num "
-			+ "FROM (SELECT o_id,u_id,o_request,o_regdate,o_shipping,o_state from order_1)) "
-			+ "WHERE num BETWEEN #{start} AND #{end}")
-	public List<OrderVO> orderList(Map map);
-
+	/********************** 관리자 부분 ************************************/
 	/* 페이징 사용 */
 	@Select("SELECT CEIL(COUNT(*) / 10.0) " + "FROM order_1 ")
 	public int orderTotalPage();
@@ -46,5 +40,7 @@ public interface OrderMapper {
 	 /* 주문상태 변경 */
 	 @Update("UPDATE order_1 SET o_state=#{state} WHERE o_id=#{oid}")
 	 public int stateupdate(Map map);
+	 
+	 /********************************************************************/
 	 
 }
