@@ -12,6 +12,8 @@ import com.sist.vo.*;
 import com.sist.dao.*;
 import java.util.*;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("support/")
 public class SupportController {
@@ -35,7 +37,8 @@ public class SupportController {
 
 	@GetMapping("notice_insert_ok.do")
 	@ResponseBody
-	public String notice_insert_ok(NoticeVO vo) {
+	public String notice_insert_ok(NoticeVO vo, HttpSession session) {
+		session.setAttribute("uid", vo.getN_id());
 		ndao.noticeInsertData(vo);
 		return "ok";
 	}

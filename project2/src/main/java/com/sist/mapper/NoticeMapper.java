@@ -37,7 +37,7 @@ public interface NoticeMapper {
     public NoticeVO noticeDetailData(int no);
     
     @Update("UPDATE notice_1 SET "
-  		  +"n_title=#{n_title},n_content=#{n_content} "
+  		  +"u_id=#{u_id},n_title=#{n_title},n_content=#{n_content} "
   		  +"WHERE n_id=#{n_id}")
     public void noticeUpdate(NoticeVO vo);
     

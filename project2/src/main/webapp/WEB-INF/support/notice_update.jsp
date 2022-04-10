@@ -14,24 +14,20 @@
 		<div class="row">
        <table class="table">
         <tr>
-         <th width=15% class="text-right warning">이름</th>
-         <td width=85%><input type=text id="name" size=15 
-         v-model="name" :value="name"></td>
+         <th width=20% class="text-right warning">작성자</th>
+         <td width=80%><input type=text id="uid" size=15 
+         v-model="uid" :value="uid"></td>
         </tr>
         <tr>
-         <th width=15% class="text-right warning">제목</th>
-         <td width=85%><input type=text id="subject" size=50 
-         v-model="subject" :value="subject"></td>
+         <th width=20% class="text-right warning">제목</th>
+         <td width=80%><input type=text id="ntitle" size=50 
+         v-model="ntitle" :value="ntitle"></td>
         </tr>
         <tr>
-         <th width=15% class="text-right warning">내용</th>
-         <td width=85%>
-          <textarea rows="10" cols="55" id="content" v-model="content">{{vo.ncontent}}</textarea>
+         <th width=20% class="text-right warning">내용</th>
+         <td width=80%>
+          <textarea rows="10" cols="55" id="ncontent" v-model="ncontent">{{vo.ncontent}}</textarea>
          </td>
-        </tr>
-        <tr>
-         <th width=15% class="text-right warning">비밀번호</th>
-         <td width=85%><input type=password id="pwd" size=10 v-model="pwd"></td>
         </tr>
        </table>
      </div>
@@ -46,10 +42,9 @@
     new Vue({
     	el:'#notice_update',
     	data:{
-    		name:'',
-    		subject:'',
-    		content:'',
-    		pwd:'',
+    		uid:'',
+    		ntitle:'',
+    		ncontent:'',
     		no:${no},
     		vo:{}
     	},
@@ -61,62 +56,44 @@
     		}).then(res=>{
     			console.log(res.data);
     			this.vo=res.data;
-    			this.name=this.vo.name;
-    			this.subject=this.vo.subject;
-    			this.content=this.vo.content;
+    			this.uid=this.vo.uid;
+    			this.ntitle=this.vo.ntitle;
+    			this.ncontent=this.vo.ncontent;
     		})
     	},
     	methods:{
     		write:function(){
-    			if(this.name=='')
+    			if(this.uid=='')
     			{
-    				let n=document.getElementById("name");
+    				let n=document.getElementById("uid");
     				n.focus();
     				return;
     			}
-    			if(this.subject=='')
+    			if(this.ntitle=='')
     			{
-    				let n=document.getElementById("subject");
+    				let n=document.getElementById("ntitle");
     				n.focus();
     				return;
     			}
-    			if(this.content=='')
+    			if(this.ncontent=='')
     			{
-    				let n=document.getElementById("content");
+    				let n=document.getElementById("ncontent");
     				n.focus();
     				return;
     			}
-    			if(this.pwd=='')
-    			{
-    				let n=document.getElementById("pwd");
-    				n.focus();
-    				return;
-    			} 
     			
     			// 전송 서버 
     			axios.get('http://localhost:8080/web/support/notice_update_ok_vue.do',{
     				params:{
     					no:this.no,
-    					name:this.name,
-    					subject:this.subject,
-    					content:this.content,
-    					pwd:this.pwd
+    					uid:this.uid,
+    					ntitle:this.ntitle,
+    					ncontent:this.ncontent
     				}
     			}).then(res=>{
-    				if(res.data=="YES")
     				{
-    					location.href="notice_detail.do?no="+this.no
-        				// return "redirect:board_detail.do?no="+no
+    			 		location.href="notice_detail.do?no="+this.no
     				}
-    				else
-    				{
-    					alert("비밀번호가 틀립니다!!")
-    					let n=document.getElementById("pwd");
-    					this.pwd="";
-    					n.focus();
-        				
-    				}
-    				
     			})
     		},
     		cancel:function(){

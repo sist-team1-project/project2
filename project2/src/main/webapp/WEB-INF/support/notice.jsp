@@ -35,7 +35,7 @@
 				</table>
 				<c:if test="${sessionScope.grade=='0'}">
 				<div class="text-right" style="padding-top: 10px;">
-					<button class="btn btn-sm" style="background-color: #dbd0be" v-on:click="insert()">새글</button>
+					<button class="btn btn-sm" style="background-color: #dbd0be" v-on:click="insert()">글쓰기</button>
 				</div>
 				</c:if>
 				<div class="text-center">

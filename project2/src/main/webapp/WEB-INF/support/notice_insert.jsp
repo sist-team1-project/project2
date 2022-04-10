@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,19 +15,14 @@
 		<div class="row">
 			<table class="table">
 				<tr>
-					<th width=20% class="text-right">작성자</th>
-					<td width=80%><input type=text name="u_id" size=15
-					    v-model="u_id"></td>
-				</tr>
-				<tr>
 					<th width=20% class="text-right warning">제목</th>
-					<td width=80%><input type=text id="n_title" size=50
-						v-model="n_title"></td>
+					<td width=80%><input type=text id="ntitle" size=50
+						v-model="ntitle"></td>
 				</tr>
 				<tr>
 					<th width=20% class="text-right warning">내용</th>
-					<td width=80%><textarea rows="10" cols="55" id="n_content"
-							v-model="n_content"></textarea></td>
+					<td width=80%><textarea rows="10" cols="55" id="ncontent"
+						v-model="ncontent"></textarea></td>
 				</tr>
 			</table>
 		</div>
@@ -37,43 +33,40 @@
 				style="background-color: #dbd0be">취소</button>
 		</div>
 	</div>
+	
 	<script>
     new Vue({
     	el:'#notice_insert',
     	data:{
-    		u_id:'',
-    		n_title:'',
-    		n_content:''
+    		ntitle:'',
+    		ncontent:''
     	},
     	methods:{
     		write:function(){
-    			if(this.u_id=='')
+    			if(this.ntitle=='')
     			{
-    				let n=document.getElementById("u_id");
+    				let n=document.getElementById("ntitle");
     				n.focus();
     				return;
     			}
-    			if(this.n_title=='')
+    			if(this.ncontent=='')
     			{
-    				let n=document.getElementById("n_title");
-    				n.focus();
-    				return;
-    			}
-    			if(this.n_content=='')
-    			{
-    				let n=document.getElementById("n_content");
+    				let n=document.getElementById("ncontent");
     				n.focus();
     				return;
     			}
     			
+    			
     			axios.get('http://localhost:8080/web/support/notice_insert_ok.do',{
     				params:{
-    					u_id:this.u_id,
-    					n_title:this.n_title,
-    					n_content:this.n_content
+    					ntitle:this.ntitle,
+    					ncontent:this.ncontent
+
     				}
     			}).then(res=>{
-    				location.href="notice.do"
+    				console.log("title : " + this.ntitle);
+					console.log("cont : " + this.ncontent);
+    				//location.href="../support/notice.do"
     				
     			})
     		},

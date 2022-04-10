@@ -82,46 +82,47 @@ public class SupportRestController {
 		return result;
 	}
 
+	@GetMapping(value = "support/notice_update_vue.do", produces = "text/plain;charset=utf-8")
+	public String food_board_update_vue(int no) {
+		String result = "";
+		try {
+			NoticeVO vo = ndao.noticeUpdateData(no);
+			JSONObject obj = new JSONObject();
+			obj.put("uid", vo.getU_id());
+			obj.put("ntitle", vo.getN_title());
+			obj.put("ncontent", vo.getN_content());
+
+			result = obj.toJSONString();
+		} catch (Exception ex) {
+		}
+		return result;
+	}
+
+	@GetMapping(value = "support/notice_update_ok_vue.do", produces = "text/plain;charset=utf-8")
+	public String food_update_ok_vue(NoticeVO vo) {
+		String result = "";
+		result = "<script>location.href=\"../ask/detail.do?no=" + vo.getN_id() + "\";</script>";
+		return result;
+	}
+
 	@GetMapping(value = "support/notice_delete_ok.do", produces = "text/plain;charset=utf-8")
 	public String board_delete(int no, String pwd) {
 		String result = "";
-		boolean bCheck = ndao.noticeDelete(no, pwd);
-		if (bCheck == true) {
-			result = "YES";
-		} else {
-			result = "NO";
-		}
+		result = "YES";
 		return result;
 	}
 
 	@PostMapping("support/ask_update_ok.do")
 	public String askUpdateOk(AskVO vo) {
 		String result = "";
-		boolean bCheck = adao.askUpdate(vo);
-		if (bCheck == true) {
-			result = "<script>location.href=\"../ask/detail.do?no=" + vo.getA_id() + "\";</script>";
-		} else {
-			result = "<script>" + "alert(\"Password Fail!!\");" + "history.back();" + "</script>";
-		}
+		result = "<script>location.href=\"../ask/detail.do?no=" + vo.getA_id() + "\";</script>";
 		return result;
 	}
 
 	@PostMapping("support/ask_delete_ok.do")
 	public String askDeleteOk(int no, String pwd) {
 		String result = "";
-		AskVO vo = adao.askDetailData(no);
-		boolean bCheck = false;
-		if (vo.getA_group_step() == 0) {
-			bCheck = adao.askDelete1(no, vo.getA_group_id(), pwd);
-		} else {
-			bCheck = adao.askDelete2(no, pwd);
-		}
-
-		if (bCheck == true) {
-			result = "<script>location.href=\"../support/ask.do\";</script>";
-		} else {
-			result = "<script>" + "alert(\"Password Fail!!\");" + "history.back();" + "</script>";
-		}
+		result = "<script>location.href=\"../support/ask.do\";</script>";
 		return result;
 	}
 }

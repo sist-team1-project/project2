@@ -139,7 +139,7 @@
 
 							<div class="row">
 								<div class="p-t-35 col-md-6">
-									<input type=submit class="btn flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer btn-pro-color2" value="등록">
+									<input type=submit class="btn flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer btn-pro-color2" value="수정">
 								</div>
 								<div class="p-t-35 col-md-6">
 									<input type=button class="btn flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer btn-pro-color2" value="취소" onclick="javascript:history.back()">
@@ -152,37 +152,63 @@
 		</div>
 	</div>
 	<script>
-    new Vue({
-        el: '#GoodsUpdate',
-        data: {
-        		gid: ${gid},
-            cid1: '',
-            cid2: '',
-            gname: '',
-            gbrand: '',
-            gprice: '',
-            gsale: '',
-            gstock: '',
-            gstatus: '',
-            gimage: '',
-            gdetail: '',
-            gimage2: '',
-            gdetail2: '',
-            eid: [],
-            categories1: [],
-            categories2: [],
-            cindex: 0,
-            events: []
-        },
-        mounted: function() {
-            this.cate1();
-            this.cate2();
-            this.eventList();
-            this.goodsdetail();
-            console.log("gid : " +this.gid);
-        },
-        methods: {
-            cate1: function() {
+	new Vue({
+	    el: '#GoodsUpdate',
+	    data: {
+	        gid: '${gid}',
+	        cid1: '',
+	        cid2: '',
+	        gname: '',
+	        gbrand: '',
+	        gprice: '',
+	        gsale: '',
+	        gstock: '',
+	        gstatus: '',
+	        gimage: '',
+	        gdetail: '',
+	        gimage2: '',
+	        gdetail2: '',
+	        eid: [],
+	        categories1: [],
+	        categories2: [],
+	        cindex: 0,
+	        events: [],
+	        detaildata: []
+	        
+	    },
+	    mounted: function() {
+	        this.cate1();
+	        this.cate2();
+	        this.eventList();
+	        //this.goodsdetail();
+	        axios.get("http://localhost:8080/web/admin/goodsdetaildata.do", {
+	                params: {
+	                    g_id: this.gid
+	                }
+	            }).then(result => {
+	                this.detaildata = result.data;
+	                	console.log("result : " + this.detaildata)
+ 	                this.gname = result.data[0].g_name;
+	                console.log("gname : " + this.gname)
+	                this.cid1 = result.data[0].cid1,
+	                    console.log("cid1 : " + this.cid1);
+	                this.cid2 = result.data[0].c_id,
+	                    console.log("cid2 : " + this.cid2);
+	                this.gbrand = result.data[0].g_brand,
+                    this.gprice = result.data[0].g_price,
+                    this.gsale = result.data[0].g_sale,
+                    this.gstock = result.data[0].g_stock,
+                    this.gstatus = result.data[0].g_status,
+                    this.gimage = result.data[0].g_image,
+                    this.gdetail = result.data[0].g_detail,
+
+                    this.eid = [];
+	                console.log("eid : " + this.eid)
+	            })
+	        console.log("gid : " + this.gid);
+	    },
+	    methods: {
+	    	cate1: function() {
                 axios.get("http://localhost:8080/web/main/category_1_vue.do", {}).then(result => {
                     this.categories1 = result.data;
                     this.cid1 = result.data[0].cid
@@ -199,104 +225,109 @@
                     this.events = result.data;
                 })
             },
-            submitForm:function(){
-                if (this.gname == "") {
-                    this.$refs.gname.focus();
-                    return;
-                } else if (this.gbrand == "") {
-                    this.$refs.gbrand.focus();
-                    return;
-                } else if (this.gprice == "") {
-                    this.$refs.gprice.focus();
-                    return;
-                } else if (this.gsale == "") {
-                    this.$refs.gsale.focus();
-                    return;
-                } else if (this.gstock == "") {
-                    this.$refs.gstock.focus();
-                    return;
-                } else if (this.gstatus == "") {
-                    alert("상태 확인 필요");
-                    return;
-                } 
-                
-                if (this.eid == null) {
-                    this.eid.push(0);
-                }
-                
-                let file1 = '';
-                let file2 = '';
-                if (this.gimage == "") {
-                    if (this.gimage2 == "") {
-                        alert("제품 이미지를 첨부해주세요");
-                        return;
-                    }
-                    file1 = new File(['empty'], 'empty', {type: 'text/plain', lastModified: new Date()}); // 파일 추가를 하지 않으면 컨트롤러에서 오류가 나므로 빈 객체를 만듬
-                } else {
-                    file1 = this.$refs.file1.files[0];
-                }
-                
-                if (this.gdetail == "") {
-                    if (this.gimage2 == "") {
-                        alert("제품 상세 이미지를 첨부해주세요");
-                        return;
-                    }
-                    file2 = new File(['empty.txt'], 'empty.txt', {type: 'text/plain', lastModified: new Date()}); // 파일 추가를 하지 않으면 컨트롤러에서 오류가 나므로 빈 객체를 만듬
-                } else {
-                    file2 = this.$refs.file2.files[0];
-                }
-                
-                let form = new FormData();
-                form.append('file_gimage', file1);
-                form.append('file_gdetail', file2);
-                form.append('g_image', this.gimage2);
-                form.append('g_detail', this.gdetail2);
-                form.append('c_id', this.cid2);
-                form.append('g_name', this.gname);
-                form.append('g_brand', this.gbrand);
-                form.append('g_price', this.gprice);
-                form.append('g_sale', this.gsale);
-                form.append('g_stock', this.gstock);
-                form.append('g_status', this.gstatus);
-                form.append('eid', this.eid.join(","));
-                
-                axios.post('http://localhost:8080/web/admin/goods_update_ok.do', form, {}) .then((response) => {
-                    location.href="../admin/adlist.do"
-                })
-            },
-            selectIndex: function(event) {
-                this.cindex = event.target.selectedIndex;
-                this.cid2 = this.categories2[this.cindex][0].cid;
-            },
-            goodsdetail: function() {
-            	 	axios.get("http://localhost:8080/web/admin/goodsdetaildata.do", {
-            	 		params: {
-            	 			gid : this.gid
-            	 		}
-            	 	}).then(result => {
-                     this.goodsdetail = result.data;
-                     console.log("result : " + this.goodsdetail)
-                     this.gname = result.data[0].g_name;
-                     console.log("gname : " + this.gname)
-                     this.cid1 = result.data[0].cid1,
-                     console.log("cid1 : " + this.cid1);
-                     this.cid2 = result.data[0].c_id,
-                     console.log("cid2 : " + this.cid2);
-                     this.gbrand = result.data[0].b_brand,
-                     this.gprice = result.data[0].g_price,
-                     this.gsale = result.data[0].g_sale,
-                     this.gstock = result.data[0].g_stock,
-                     this.gstatus = result.data[0].g_status,
-                     this.gimage = result.data[0].g_image,
-                     this.gdetail = result.data[0].g_detail,
+	        submitForm: function() {
+	            if (this.gname == "") {
+	                this.$refs.gname.focus();
+	                return;
+	            } else if (this.gbrand == "") {
+	                this.$refs.gbrand.focus();
+	                return;
+	            } else if (this.gprice == "") {
+	                this.$refs.gprice.focus();
+	                return;
+	            } else if (this.gsale == "") {
+	                this.$refs.gsale.focus();
+	                return;
+	            } else if (this.gstock == "") {
+	                this.$refs.gstock.focus();
+	                return;
+	            } else if (this.gstatus == "") {
+	                alert("상태 확인 필요");
+	                return;
+	            }
 
-                     
-                     this.eid = [];
-                     console.log("eid : " + this.eid)
-                })
-						}
-        }
-    })
+	            if (this.eid == null) {
+	                this.eid.push(0);
+	            }
+
+	            let file1 = '';
+	            let file2 = '';
+	            if (this.gimage == "") {
+	                if (this.gimage2 == "") {
+	                    alert("제품 이미지를 첨부해주세요");
+	                    return;
+	                }
+	                file1 = new File(['empty'], 'empty', {
+	                    type: 'text/plain',
+	                    lastModified: new Date()
+	                }); // 파일 추가를 하지 않으면 컨트롤러에서 오류가 나므로 빈 객체를 만듬
+	            } else {
+	                file1 = this.$refs.file1.files[0];
+	            }
+
+	            if (this.gdetail == "") {
+	                if (this.gimage2 == "") {
+	                    alert("제품 상세 이미지를 첨부해주세요");
+	                    return;
+	                }
+	                file2 = new File(['empty.txt'], 'empty.txt', {
+	                    type: 'text/plain',
+	                    lastModified: new Date()
+	                }); // 파일 추가를 하지 않으면 컨트롤러에서 오류가 나므로 빈 객체를 만듬
+	            } else {
+	                file2 = this.$refs.file2.files[0];
+	            }
+
+	            let form = new FormData();
+	            form.append('file_gimage', file1);
+	            form.append('file_gdetail', file2);
+	            form.append('g_image', this.gimage2);
+	            form.append('g_detail', this.gdetail2);
+	            form.append('c_id', this.cid2);
+	            form.append('g_name', this.gname);
+	            form.append('g_brand', this.gbrand);
+	            form.append('g_price', this.gprice);
+	            form.append('g_sale', this.gsale);
+	            form.append('g_stock', this.gstock);
+	            form.append('g_status', this.gstatus);
+	            form.append('eid', this.eid.join(","));
+
+	            axios.post('http://localhost:8080/web/admin/goods_update_ok.do', form, {}).then((response) => {
+	                location.href = "../admin/adlist.do"
+	            })
+	        },
+	        selectIndex: function(event) {
+	            this.cindex = event.target.selectedIndex;
+	            this.cid2 = this.categories2[this.cindex][0].cid;
+	        },
+	        goodsdetail: function() {
+	            axios.get("http://localhost:8080/web/admin/goodsdetaildata.do", {
+	                params: {
+	                    g_id: this.gid
+	                }
+	            }).then(result => {
+	                this.detaildata = result.data;
+	                	console.log("result : " + this.detaildata)
+ 	                this.gname = result.data[0].g_name;
+	                console.log("gname : " + this.gname)
+	                this.cid1 = result.data[0].cid1,
+	                    console.log("cid1 : " + this.cid1);
+	                this.cid2 = result.data[0].c_id,
+	                    console.log("cid2 : " + this.cid2);
+	                this.gbrand = result.data[0].g_brand,
+                    this.gprice = result.data[0].g_price,
+                    this.gsale = result.data[0].g_sale,
+                    this.gstock = result.data[0].g_stock,
+                    this.gstatus = result.data[0].g_status,
+                    this.gimage = result.data[0].g_image,
+                    this.gdetail = result.data[0].g_detail,
+
+                    this.eid = [];
+	                console.log("eid : " + this.eid)
+	            })
+	        }
+	    }
+	})
   </script>
 
 </body>

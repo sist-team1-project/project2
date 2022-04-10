@@ -101,9 +101,9 @@ public interface GoodsMapper {
 	public int goodsCount();
 
 	/* ---------------------- 관리자 상세 정보 ----------------------------  */
-	@Select("SELECT g_id, c_id, g_name,g_brand,g_price,g_sale,g_image,g_detail,g_status,g_stock FROM Goods_1 "
+	@Select("SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_status, g_stock FROM Goods_1 "
 			+"WHERE g_id=#{gid}")
-	public GoodsVO goodsDetail(int gid);
+	public GoodsVO goodsDetail(String gid);
 	
 	/*  ------- 상품 등록 페이지 -------  */
 	@Insert("INSERT INTO goods_1 VALUES(#{g_id}, #{c_id}, #{g_name}, #{g_brand}, #{g_price}, #{g_sale}, #{g_image}, #{g_detail}, #{g_stock}, 0, #{g_status}, SYSDATE)")
