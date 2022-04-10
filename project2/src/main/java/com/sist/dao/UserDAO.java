@@ -15,6 +15,7 @@ public class UserDAO {
 	@Autowired
 	private UserMapper mapper;
 
+	// 로그인: 아이디, 비밀번호로 유저 존재 여부 확인 → 존재하면 유저 등급 가져옴 
 	public String isLogin(String id, String pwd) {
 		String result = "";
 		int count = mapper.idCount(id);
@@ -34,16 +35,19 @@ public class UserDAO {
 		return result;
 	}
 
+	// 회원가입 & 회원정보 변경: 아이디 중복체크
 	public int idCheck(String id) {
 		int result = mapper.idCount(id);
 		return result;
 	}
 
+	// 회원가입 & 회원정보 변경: 이메일 중복체크
 	public int emailCheck(String email) {
 		int result = mapper.emailCount(email);
 		return result;
 	}
 
+	// 회원가입: 이메일 발송
 	public void userJoin(UserVO vo) {
 		mapper.userJoin(vo);
 		MailSender sender = new MailSender();
@@ -51,10 +55,12 @@ public class UserDAO {
 		System.out.println(vo.getU_email());
 	}
 
+	// 회원정보 출력
 	public UserVO userInfo(String uid) {
 		return mapper.userInfo(uid);
 	}
 
+	// 아이디 찾기: 이름과 이메일로 존재 여부 확인
 	public String idFind(Map map) {
 		String result = "";
 		int count = mapper.nameEmailCount(map);
@@ -101,6 +107,7 @@ public class UserDAO {
 		return result;
 	}
 
+	// 비밀번호 변경
 	public boolean userPwdUpdate(Map map) {
 		boolean bCheck = false;
 		String db_pwd = mapper.userGetPassword((String) map.get("id"));
@@ -113,7 +120,7 @@ public class UserDAO {
 		return bCheck;
 	}
 
-	// 계정 삭제: 패스워드 일치하면 삭제
+	// 계정 삭제
 	public boolean userDelete(Map map) {
 		boolean bCheck = false;
 		String db_pwd = mapper.userGetPassword((String) map.get("id"));

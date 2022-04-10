@@ -78,9 +78,9 @@ public class UserRestController {
         JSONObject obj = new JSONObject();
         int emailcheck = dao.emailCheck(email);
         if (emailcheck == 0) {
-            result = email; // 저장한 email을 jsp까지 가져가기
+            result = email;
         } else {
-            result = "no"; // 현재 얘는 출력됨
+            result = "no"; 
         }
         return result;
     }
