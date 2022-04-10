@@ -85,8 +85,16 @@
               <th class="adt-light">배송비</th>
               <th class="adt-light">할인금액</th>
               <th class="adt-light">총<br>주문금액</th>
-            </tr>  
-			<template v-for="od in orderDetailList">
+            </tr> 
+            <tr>
+              <td class="tright" >{{sumPrice(orderDetailList) | currency}}원</td>
+              <td class="tright">5,000원</td>
+              <td class="tright">- 원</td>
+              <th class="tright">
+                 원
+              </th>
+            </tr>
+			<!-- <template v-for="od in orderDetailList">
             <tr>
               <td class="tright" >{{od.price | currency}}원</td>
               <td class="tright">{{order.shipping | currency}}원</td>
@@ -95,7 +103,7 @@
               	{{od.price + order.shipping - (od.price * (od.sale/100)) | currency}} 원
               </th>
 			</tr>
-			</template>
+			</template> -->
           </table>
         </div>
       </div>
@@ -119,7 +127,7 @@
         mounted:function(){
             this.odList();
             this.orList();
-            console.log(this.oid);
+            
         },
         methods:{
             odList:function(){
@@ -128,7 +136,7 @@
                         oid: this.oid
                     }
                 }).then(res=>{
-  				console.log(res.data);
+
   				this.orderDetailList = res.data;
                 })
             },
@@ -138,9 +146,14 @@
                         oid: this.oid
                     }
                 }).then(res=>{
-  				console.log(res.data);
+
   				this.order = res.data;
                 })
+            },
+            sumPrice:function(list) {
+                let sum = 0;
+                list.forEach(i=>{sum+=i.price*i.quantity})
+                return sum;
             }
         }
     })
