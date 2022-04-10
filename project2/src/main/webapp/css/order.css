@@ -5,6 +5,14 @@
 	border-color: #dbd0be;
 	height: 100%;
 }
+.lineframe {
+	border-bottom: 0.5px solid #dbd0be;
+}
+.framsize {
+	width:90px;
+	padding: 0;
+	margin: 0;
+}
 td {
 	width: 65px;
 	height: 30px;

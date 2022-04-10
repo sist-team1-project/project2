@@ -29,7 +29,7 @@
             </tr>
             <tr>
               <th class="adt-light">주문자</th>
-                <td>{{order.uid}}</td>
+                <td colspan="2">{{order.uid}}</td>
               <th class="adt-light">연락처</th>
                 <td colspan="2">{{order.phone}}</td>
             </tr>
@@ -67,11 +67,10 @@
               <th class="adt-light"> 상품금액(수량)</th>
             </tr>
             <template v-for="od in orderDetailList">
-            <tr>
+            <tr class="lineframe">
               <td>{{od.gid}}</td>
               <td colspan="3" class="tleft">{{od.name}}</td>
-              <td colspan="2" class="tright">{{od.price | currency }}원<br>
-              ( {{od.quantity}} 개)</td>
+              <td colspan="2" class="tright framsize">{{od.price | currency }}원 <br>({{od.quantity}}개)</td>
             </tr>
 			</template>
           </table>
@@ -87,23 +86,11 @@
               <th class="adt-light">총<br>주문금액</th>
             </tr> 
             <tr>
-              <td class="tright" >{{sumPrice(orderDetailList) | currency}}원</td>
-              <td class="tright">5,000원</td>
-              <td class="tright">- 원</td>
-              <th class="tright">
-                 원
-              </th>
+              <td class="tcenter" >{{sumPrice(orderDetailList) | currency}}원</td>
+              <td class="tcenter">5,000원</td>
+              <td class="tcenter">- {{salePrice(orderDetailList) | currency }}원</td>
+              <th class="tcenter">{{totalPrice(orderDetailList) + 5000 | currency}}원 </th>
             </tr>
-			<!-- <template v-for="od in orderDetailList">
-            <tr>
-              <td class="tright" >{{od.price | currency}}원</td>
-              <td class="tright">{{order.shipping | currency}}원</td>
-              <td class="tright">- {{od.price * (od.sale/100) | currency}}원</td>
-              <th class="tright">
-              	{{od.price + order.shipping - (od.price * (od.sale/100)) | currency}} 원
-              </th>
-			</tr>
-			</template> -->
           </table>
         </div>
       </div>
@@ -115,8 +102,8 @@
         el:'#adorderdetail',
         data:{
             oid:'${oid }',
-            orderDetailList:[],	// List
-            order: {} 			// vo
+            orderDetailList:[],	
+            order: {} 			
         },
         filters:{
   			currency: function(value){
@@ -150,10 +137,24 @@
   				this.order = res.data;
                 })
             },
+            // 합계금액
             sumPrice:function(list) {
                 let sum = 0;
-                list.forEach(i=>{sum+=i.price*i.quantity})
+                list.forEach(i=>{sum += i.price * i.quantity})
                 return sum;
+            },
+            // 할인금액
+            salePrice:function(list) {
+                let salesum = 0;
+                list.forEach(i=>{salesum += i.price * (i.sale/100) })
+                //od.price * (od.sale/100)
+                return salesum;
+            },
+            // 총 주문금액
+            totalPrice:function(list) {
+                let totalsum = 0;
+                list.forEach(i=>{totalsum += (i.price*i.quantity) - (i.price * (i.sale/100)) })
+                return totalsum;
             }
         }
     })
