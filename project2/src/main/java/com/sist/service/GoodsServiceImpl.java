@@ -19,8 +19,8 @@ public class GoodsServiceImpl implements GoodsService{
     
     
 	@Override
-	public GoodsVO goodsDetail(int gid) {
-		return gdao.goodsDetail(gid);
+	public Map<String,Object> goodsDetail(Map map) {
+		return gdao.goodsDetail(map);
 	}
     
     @Override

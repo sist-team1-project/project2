@@ -37,6 +37,13 @@ public class GoodsDAO {
     }
     /*  --------------------------  */
     
+    /*  ------- 제품 상세 -------  */
+    public Map<String,Object> goodsDetail(Map map) {
+        return mapper.goodsDetail(map);
+    }
+    /*  --------------------------  */
+    
+    
     public List<GoodsVO> goodsTotalList(Map map) {
         return mapper.goodsTotalList(map);
     }
@@ -48,11 +55,11 @@ public class GoodsDAO {
     public int goodsCount() {
         return mapper.goodsCount();
     }
-
-    public GoodsVO goodsDetail(int gid) {
-        return mapper.goodsDetail(gid);
+    
+    public GoodsVO adminGoodsDetail(int gid) {
+        return mapper.adminGoodsDetail(gid);
     }
-
+    
     public List<GoodsVO> adminGoodsFind(Map map) {
         return mapper.adminGoodsFind(map);
     }

@@ -54,7 +54,13 @@
             <!--  -->
             <div class="flex-w flex-c-m p-t-10">
               <div class="flex-m bor9 p-r-10 m-r-11">
-                <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist"><i class="zmdi zmdi-favorite"></i></a>
+              <c:if test="${sessionScope.id!=null }">
+                <a v-if="goods.lid==0" href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist" @click="like(goods.gid); alert('즐겨찾기에 등록되었습니다')"><i class="zmdi zmdi-favorite-outline"></i></a>
+                <a v-if="goods.lid>0" href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist" @click="unlike(goods.lid); goods.lid=0; alert('즐겨찾기가 해제되었습니다')"><i class="zmdi zmdi-favorite"></i></a>
+              </c:if>
+              <c:if test="${sessionScope.id==null }">
+                <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist" @click="if(confirm('로그인창으로 이동하시겠습니까?')) return location.href='../user/login.do'"><i class="zmdi zmdi-favorite-outline"></i></a>
+              </c:if>
               </div>
               <a href="https://www.facebook.com/" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook"><i class="fa fa-facebook"></i></a>
               <a href="https://www.twitter.com/" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter"><i class="fa fa-twitter"></i></a>
@@ -218,6 +224,16 @@
                     this.start = res.data[0].start;
                     this.end = res.data[0].end;
                 })
+            },
+            like:function(gid) { // 좋아요
+                axios.post("http://localhost:8080/web/goods/like_insert_ok.do",null,{
+                    params:{gid: gid}
+                }).then(result=>{
+                    this.goods.lid = result.data.lid;
+                })
+            },
+            unlike:function(lid) { // 싫어요
+                axios.post("http://localhost:8080/web/goods/like_delete_ok.do",null,{params:{lid: lid}})
             }
         }
         

@@ -59,12 +59,17 @@ public interface GoodsMapper {
 	public List<String> brandList(String cid);
     /*  --------------------------  */
 	
+	@Select("SELECT NVL(l.l_id,0) AS l_id,g.g_id,g.c_id,g.g_name,g.g_brand,g.g_price,g.g_sale,g.g_image,g.g_detail,g.g_status,g.g_stock "
+            + "FROM (SELECT l_id,g_id FROM like_1 WHERE g_id=#{gid} AND u_id=#{uid}) l, "
+            + "(SELECT g_id,c_id,g_name,g_brand,g_price,g_sale,g_image,g_detail,g_status,g_stock FROM goods_1 WHERE g_id=237) g "
+            + "WHERE l.g_id(+)=g.g_id")
+    public Map<String,Object> goodsDetail(Map map);
+	
 	@Select("SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status, TO_CHAR(g_regdate,'YYYY-MM-DD HH24:MI:SS')as g_regdate, num "
 			+ "FROM (SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status, g_regdate, rownum as num " 
 			+ "FROM (SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status, g_regdate FROM Goods_1)) "
 			+ "WHERE num BETWEEN #{start} AND #{end}")
 	public List<GoodsVO> goodsTotalList(Map map);
-
 	
 	/* ---------------------- 관리자 상품 검색 시 페이징  ----------------------------  */
 	@Select("<script>"
@@ -102,8 +107,8 @@ public interface GoodsMapper {
 
 	/* ---------------------- 관리자 상세 정보 ----------------------------  */
 	@Select("SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_status, g_stock FROM Goods_1 "
-			+"WHERE g_id=#{gid}")
-	public GoodsVO goodsDetail(int gid);
+	         +"WHERE g_id=#{gid}")
+	public GoodsVO adminGoodsDetail(int gid);
 	
 	/*  ------- 상품 등록 페이지 -------  */
 	@Insert("INSERT INTO goods_1 VALUES(#{g_id}, #{c_id}, #{g_name}, #{g_brand}, #{g_price}, #{g_sale}, #{g_image}, #{g_detail}, #{g_stock}, 0, #{g_status}, SYSDATE)")

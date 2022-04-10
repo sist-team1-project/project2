@@ -179,7 +179,7 @@ public class AdminRestController2 {
     
     @GetMapping(value = "goodsdetaildata.do", produces = "text/plain;charset=utf-8")
     public String adminGoodsDetail(int g_id) {
-    	GoodsVO vo = gdao.goodsDetail(g_id);
+    	GoodsVO vo = gdao.adminGoodsDetail(g_id);
     	List<EventGoodsVO> list = gdao.goodsEidData(g_id);
     	
     	JSONObject obj = new JSONObject();
