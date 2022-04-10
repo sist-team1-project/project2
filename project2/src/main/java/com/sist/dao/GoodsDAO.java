@@ -49,7 +49,7 @@ public class GoodsDAO {
         return mapper.goodsCount();
     }
 
-    public GoodsVO goodsDetail(String gid) {
+    public GoodsVO goodsDetail(int gid) {
         return mapper.goodsDetail(gid);
     }
 
@@ -94,7 +94,7 @@ public class GoodsDAO {
             }
         }
     }
-    public List<EventGoodsVO> goodsEidData(String g_id) {
+    public List<EventGoodsVO> goodsEidData(int g_id) {
         return mapper2.goodsEidData(g_id);
     }
 }
