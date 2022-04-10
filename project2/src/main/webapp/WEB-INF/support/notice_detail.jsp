@@ -41,12 +41,10 @@
 					</tr>
 				</table>
 				<div class="text-right" style="padding-top: 10px;">
-			      <c:if test="${vo.u_id==sessionScope.id}">
 					<button class="btn btn-sm" style="background-color: #eeeee6"
 						v-on:click="update()">수정</button>
 					<button class="btn btn-sm" style="background-color: #eeeee6"
 						v-on:click="del()">삭제</button>
-			      </c:if>
 					<button class="btn btn-sm" style="background-color: #dbd0be"
 						v-on:click="list()">목록</button>
 				</div>

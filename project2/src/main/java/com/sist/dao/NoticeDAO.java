@@ -1,5 +1,6 @@
 package com.sist.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -46,31 +47,13 @@ public class NoticeDAO {
  	   return mapper.noticeDetailData(no);
     }
     
-    public boolean noticeUpdate(NoticeVO vo)
+    public void noticeUpdate(NoticeVO vo)
     {
- 	   boolean bCheck=false;
- 	   String db_pwd=mapper.noticeGetPassword(vo.getN_id());
- 	   if(db_pwd.equals(vo.getN_pwd()))
- 	   {
- 		   bCheck=true;
  		   mapper.noticeUpdate(vo);
- 	   }
- 	   return bCheck;
     }
     
-    public boolean noticeDelete(int no,String pwd)
+    public void noticeDelete(int no,String pwd)
     {
- 	   boolean bCheck=false;
- 	   String db_pwd=mapper.noticeGetPassword(no);
- 	   if(db_pwd.equals(pwd))
- 	   {
- 		   bCheck=true;
  		   mapper.noticeDelete(no);
- 	   }
- 	   else
- 	   {
- 		   bCheck=false;
- 	   }
- 	  return bCheck;
     }
 }
