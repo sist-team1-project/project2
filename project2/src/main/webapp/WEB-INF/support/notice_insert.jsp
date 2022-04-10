@@ -61,9 +61,12 @@
     				params:{
     					ntitle:this.ntitle,
     					ncontent:this.ncontent
+
     				}
     			}).then(res=>{
-    				location.href="../support/notice.do"
+    				console.log("title : " + this.ntitle);
+					console.log("cont : " + this.ncontent);
+    				//location.href="../support/notice.do"
     				
     			})
     		},
