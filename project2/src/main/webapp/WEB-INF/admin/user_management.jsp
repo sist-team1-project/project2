@@ -115,7 +115,7 @@ td {
                 })
             },
             getpage : function(event){
-                this.curpage = curpage;
+            	this.curpage = event.currentTarget.value;
                 this.uList();
             },
             xclick:function(event, uid){
