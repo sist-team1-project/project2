@@ -63,7 +63,9 @@ public interface UserMapper {
     @Update("UPDATE user_1 SET u_password=#{password} WHERE u_id=#{id}")
     public void userPwdUpdate(Map map);
 	
-	
+    @Delete("DELETE FROM user_1 WHERE u_id=#{id}")
+    public void userDelete(String id);
+    
 	/******************* User admin  ********************************/
 	@Select("SELECT u_id, u_name, u_gender, u_email, u_phone, TO_CHAR(u_regdate,'YY-MM-DD')as u_regdate, u_grade, num "
 			+ "FROM (SELECT u_id, u_name, u_gender, u_email, u_phone, u_regdate, u_grade, rownum as num "

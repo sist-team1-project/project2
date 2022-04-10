@@ -64,4 +64,19 @@ public class MypageRestController {
         }
         return result;
     }
+    
+    @GetMapping(value = "mypage/delete_ok.do", produces = "text/plain;charset=utf-8")
+    public String mypage_delete_ok(UserVO vo) {
+        String result = "";
+        Map map = new HashMap();
+        map.put("id", vo.getU_id());
+        map.put("password", vo.getU_password());
+        boolean bCheck = dao.userDelete(map);
+        if (bCheck == true) {
+            result = "YES";
+        } else {
+            result = "NO";
+        }
+        return result;
+    }
 }

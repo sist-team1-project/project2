@@ -37,4 +37,10 @@ public class MypageController {
 		model.addAttribute("id", id);
 		return "mypage/update_pwd";
 	}
+	
+	@GetMapping("mypage/delete.do")
+    public String delete(String id, Model model) {
+		model.addAttribute("id", id);
+        return "mypage/delete";
+    }
 }
