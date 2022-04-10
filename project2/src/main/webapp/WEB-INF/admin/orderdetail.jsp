@@ -64,7 +64,7 @@
             <tr>
            	  <th class="adt-light">상품번호</th>
               <th class="adt-light" colspan="3">상품명</th>
-              <th class="adt-light"> 상품금액(수량)</th>
+              <th class="adt-light"> 상품금액<br>(수량)</th>
             </tr>
             <template v-for="od in orderDetailList">
             <tr class="lineframe">
