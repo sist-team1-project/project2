@@ -34,6 +34,18 @@ td {
             총 {{count | currency}} 개
         </div>
       </div>
+      
+      <!---------------- 주문상태 정렬  -------------------->
+      <div id="sort" class="col-lg-5 m-lr-auto p-tb-10 dis-flex flex-sb flex-m"></div>
+      <div id="sort" class="col-lg-7 m-lr-auto p-tb-10 dis-flex flex-sb flex-m">
+	    <button class="cl2" :class="{'activeFilter':sort== -1}" value="-1" @click="orderstate($event)">주문취소</button> &nbsp;&nbsp;| &nbsp;&nbsp;
+	    <button class="cl2" :class="{'activeFilter':sort== 0 }" value="0" @click="orderstate($event)">대기중</button> &nbsp;&nbsp;| &nbsp;&nbsp;
+        <button class="cl2" :class="{'activeFilter':sort== 1 }" value="1" @click="orderstate($event)">상품준비중</button> &nbsp;&nbsp;| &nbsp;&nbsp;
+        <button class="cl2" :class="{'activeFilter':sort== 2 }" value="2" @click="orderstate($event)">배송중</button> &nbsp;&nbsp;| &nbsp;&nbsp;
+        <button class="cl2" :class="{'activeFilter':sort== 3 }" value="3" @click="orderstate($event)">배송완료</button>
+      </div>
+      <!----------------------------------------------->
+      
       <div class="col-lg-12 m-lr-auto m-b-50">
         <div class="wrap-table js-pscroll">
           <table class="table-checkout text-center">
@@ -112,9 +124,10 @@ td {
               endPage : 0,
               pages : [],
               count : 0,
-              iframe:'',
-              selected:[],
-              state : 0
+              iframe :'',
+              selected : [],
+              state : 0,
+              sort : 0
         },
         filters:{
               currency: function(value){
@@ -169,6 +182,11 @@ td {
             /* 디테일 닫기 */
             odetail_close : function(){
                 $('.js-panel-admin').removeClass('show-header-admin');
+            },
+            orderstate:function(event) {
+                this.curpage = 1; // 페이지 초기화
+                this.order = event.currentTarget.value; // 누른 버튼의 값(원하는 순서)을 가지고옴
+                this.list();      // 목록 출력
             }
         }
     })
