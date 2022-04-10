@@ -57,7 +57,7 @@ td {
             <td v-if="u.grade==1">일반유저</td>
             <td>
        		  <button v-if="u.grade==1" class="btn btn-sm btn-pro-color2 p-tb-4 dis-inline-block" value="-1" v-on:click="xclick($event, u.uid)">차단</button>
-       		  <button v-if="u.grade==-1" class="btn btn-sm btn-pro-color2 p-tb-4 dis-inline-block" value="1" v-on:@click="xclick($event, u.uid)">취소</button>
+       		  <button v-if="u.grade==-1" class="btn btn-sm btn-pro-color2 p-tb-4 dis-inline-block" value="1" v-on:click="xclick($event, u.uid)">취소</button>
             </td>
            </tr>
         </table>
@@ -115,7 +115,7 @@ td {
                 })
             },
             getpage : function(event){
-                this.curpage = event.currentTarget.value;
+                this.curpage = curpage;
                 this.uList();
             },
             xclick:function(event, uid){
@@ -126,9 +126,9 @@ td {
                         uid: uid
                     }
         	    }).then(res=>{
-                  	if(grade == 1 ){	// grade가 1이면  -1로 변경
-                  	    this.grade = -1;
-                 	} 
+                   	if(grade == 1 ){	// grade가 1이면  -1로 변경
+                   	    this.grade = -1;
+                  	} 
                 }) 
             }
         }
