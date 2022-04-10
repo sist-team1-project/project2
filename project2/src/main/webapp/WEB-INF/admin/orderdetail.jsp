@@ -14,13 +14,6 @@
 </head>
 <body>
   <div class="container bg0" id="adorderdetail">
-    <div class="row" id="orderpage">
-      <div class="col-lg-12 m-lr-auto">
-        <div class="p-b-20">
-          <h3>주문 상세정보</h3>
-        </div>
-      </div>
-    </div>
     <div class="row p-t-10">
       <div class="col-lg-12 m-lr-auto m-b-50">
         <div class="wrap-table js-pscroll">
@@ -48,43 +41,9 @@
                 <td v-if="order.state==2" class="tleft" colspan="3">배송중</td>
                 <td v-if="order.state==3" class="tleft" colspan="3">배송완료</td>
             </tr>
-            <!----------------------------------------------------->
-            <tr>
-           	  <th class="adt-light" >상품번호</th>
-              <th class="adt-light" colspan="3">상품명</th>
-              <th class="adt-light"> 상품금액(수량)</th>
-            </tr>
-            <template v-for="od in orderDetailList">
-            <tr>
-              <td>{{od.gid}}</td>
-              <td colspan="3" class="tleft">{{od.name}}</td>
-              <td colspan="2" class="tright">{{od.price | currency }}원<br>
-              ( {{od.quantity}} 개)</td>
-            </tr>
-            <!----------------------------------------------------->
-            <tr>
-              <th class="adtable" colspan="6">주문/결제금액</th>
-            </tr>
-            <tr>
-              <th class="adt-light">상품금액</th>
-              <td class="tright">{{od.price | currency}}원</td>
-              <th rowspan="3" class="adt-light">총<br>주문금액</th>
-              <th rowspan="3" colspan="2" class="tright">
-              	{{od.price + order.shipping - (od.price * (od.sale/100)) | currency}} 원
-              </th>
-            <tr>
-              <th class="adt-light">배송비</th>
-              <td class="tright">{{order.shipping | currency}}원</td>
-            </tr>
-            <tr>
-              <th class="adt-light">할인금액</th>
-              <td class="tright">- {{od.price * (od.sale/100) | currency}}원</td>
-			</tr>
-			<!----------------------------------------------------->
             <tr>
               <th class="adtable" colspan="6">배송정보</th>
             </tr>
-            </template>
             <tr>
               <th class="adt-light">수령자</th>
               <td>{{order.receiver}}</td>              
@@ -99,6 +58,44 @@
               <th class="adt-light">배송지</th>
               <td colspan="5" class="tleft">({{order.post}}) {{order.addr1}}{{order.addr2}}</td>
             </tr>
+          </table>
+            <!----------------------------------------------------->
+          <table class="table-order fs-11">
+            <tr>
+           	  <th class="adt-light">상품번호</th>
+              <th class="adt-light" colspan="3">상품명</th>
+              <th class="adt-light"> 상품금액(수량)</th>
+            </tr>
+            <template v-for="od in orderDetailList">
+            <tr>
+              <td>{{od.gid}}</td>
+              <td colspan="3" class="tleft">{{od.name}}</td>
+              <td colspan="2" class="tright">{{od.price | currency }}원<br>
+              ( {{od.quantity}} 개)</td>
+            </tr>
+			</template>
+          </table>
+			<!---------------------------------------------------->
+          <table class="table-order fs-11">
+            <tr>
+              <th class="adtable" colspan="6">주문/결제금액</th>
+            </tr>
+            <tr>
+              <th class="adt-light">상품금액</th>
+              <th class="adt-light">배송비</th>
+              <th class="adt-light">할인금액</th>
+              <th class="adt-light">총<br>주문금액</th>
+            </tr>  
+			<template v-for="od in orderDetailList">
+            <tr>
+              <td class="tright" >{{od.price | currency}}원</td>
+              <td class="tright">{{order.shipping | currency}}원</td>
+              <td class="tright">- {{od.price * (od.sale/100) | currency}}원</td>
+              <th class="tright">
+              	{{od.price + order.shipping - (od.price * (od.sale/100)) | currency}} 원
+              </th>
+			</tr>
+			</template>
           </table>
         </div>
       </div>

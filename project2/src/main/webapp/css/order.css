@@ -3,15 +3,16 @@
 	border-collapse: collapse;
 	width: 100%;
 	border-color: #dbd0be;
-	height: 550px;
+	height: 100%;
 }
 td {
 	width: 65px;
-	height: 
+	height: 30px;
 	margin: 0px auto;
 }
 th {
 	width: 70px;
+	height : 30px;
 	margin: 0px auto;
 	text-align: center;
 }
