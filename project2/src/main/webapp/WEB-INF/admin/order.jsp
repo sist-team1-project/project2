@@ -54,7 +54,7 @@ td {
               <th>주문금액</th>
               <th>주문상태</th>
             </tr>
-            <tr v-for="o in orderFullList" class="table_row fs-13 text-center">
+            <tr v-for="o in orderFullList" class="table_row_order fs-13 text-center">
               <td>{{o.regdate}}</td>
               <td><a class="cl8" href="#" data-toggle="modal" @click="odetail(o.oid)">{{o.oid}}</a></td>
               <td>{{o.usid}}</td>
@@ -166,8 +166,6 @@ td {
                         state: state,
                         oid: oid
                     }
-                }).then(res=>{
-                    
                 })
             },
             /* 디테일 열기 */

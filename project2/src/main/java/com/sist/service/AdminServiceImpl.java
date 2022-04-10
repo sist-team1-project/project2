@@ -37,8 +37,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public int orderTotalPage() {
-		return odao.orderTotalPage();
+	public int orderTotalPage(Map map) {
+		return odao.orderTotalPage(map);
 	}
 
 	@Override

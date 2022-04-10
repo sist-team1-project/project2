@@ -26,6 +26,7 @@ body, html {
 a:focus {outline: none;}
 a:hover {text-decoration: none;}
 select:focus {outline: none;}
+button:focus {outline: none;}
 /*---------------------------------------------*/
 h1,h2,h3,h4,h5,h6,p {margin: 0px;}
 

@@ -45,7 +45,7 @@ td {
             <th>등급</th>
             <th>차단</th>
           </tr>
-          <tr v-for="u in userlist" class="table_row fs-13 text-center">
+          <tr v-for="(u,index) in userlist" class="table_row_order fs-13">
             <td>{{u.uid}}</td>
             <td>{{u.name}}</td>
             <td>{{u.gender}}</td>
@@ -56,8 +56,8 @@ td {
             <td v-if="u.grade==0">관리자</td>
             <td v-if="u.grade==1">일반유저</td>
             <td>
-       		  <button v-if="u.grade==1" class="btn btn-sm btn-pro-color2 p-tb-4 dis-inline-block" value="-1" v-on:click="xclick($event, u.uid)">차단</button>
-       		  <button v-if="u.grade==-1" class="btn btn-sm btn-pro-color2 p-tb-4 dis-inline-block" value="1" v-on:click="xclick($event, u.uid)">취소</button>
+       		  <button v-if="u.grade==1" class="bor20 cl2 btn-pro-color2 p-tb-4 p-lr-10" value="-1" v-on:click="xclick($event, u.uid); u.grade=-1">차단</button>
+       		  <button v-if="u.grade==-1" class="bor20 cl2 bg2 cl2 p-tb-4 p-lr-10" value="1" v-on:click="xclick($event, u.uid); u.grade=1">취소</button>
             </td>
            </tr>
         </table>
@@ -92,7 +92,6 @@ td {
         },
         mounted:function(){
             this.uList();
-            //console.log(this.oid);
         },
         methods:{
             uList:function(){
@@ -107,7 +106,6 @@ td {
                     this.startPage = res.data[0].startPage;
                     this.endPage = res.data[0].endPage;
                     this.count = res.data[0].count;
-                    console.log(this.count);
                     this.pages=[];
                     for(i = this.startPage; i <= this.endPage; i++) {
                         this.pages.push(i);
@@ -125,11 +123,7 @@ td {
                         grade: grade,
                         uid: uid
                     }
-        	    }).then(res=>{
-                   	if(grade == 1 ){	// grade가 1이면  -1로 변경
-                   	    this.grade = -1;
-                  	} 
-                }) 
+        	    })
             }
         }
     })

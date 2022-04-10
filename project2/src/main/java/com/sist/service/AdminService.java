@@ -10,7 +10,7 @@ public interface AdminService {
 	
 	public List<GoodsVO> goodsTotalList(Map map);
 	
-	public int orderTotalPage();
+	public int orderTotalPage(Map map);
 	public List<Map<String,Object>> orderFullList(Map map);
 	public List<OrderDetailVO> orderDetailList(Map map);
 	public List<OrderDetailVO> orderListDetail();
