@@ -75,15 +75,17 @@
                         alert("아이디가 존재하지 않습니다.")
                         this.form.id = '';
                         this.form.pwd = '';
-                        this.refs.id.focus();
+                        this.$refs.id.focus();
                     } else if(res.data == 'NOPWD') {
                         alert("비밀번호가 틀립니다.")
                         this.form.pwd = '';
-                        this.refs.pwd.focus();
+                        this.$refs.pwd.focus();
                     } else if (res.data == 'BLOCKED') {
                         alert("차단된 유저입니다.")
+                        this.form.id = '';
                         this.form.pwd = '';
-                        this.refs.pwd.focus();
+                        this.$refs.pwd.focus();
+                        location.href="../main/main.do";
                     }
                     else {
                         location.href="../main/main.do";
