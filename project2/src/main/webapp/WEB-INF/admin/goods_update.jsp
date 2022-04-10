@@ -155,7 +155,7 @@
 	new Vue({
 	    el: '#GoodsUpdate',
 	    data: {
-	        gid: '${gid}',
+	        gid: ${gid},
 	        cid1: '',
 	        cid2: '',
 	        gname: '',
@@ -180,31 +180,25 @@
 	        this.cate1();
 	        this.cate2();
 	        this.eventList();
-	        //this.goodsdetail();
 	        axios.get("http://localhost:8080/web/admin/goodsdetaildata.do", {
-	                params: {
-	                    g_id: this.gid
-	                }
-	            }).then(result => {
-	                this.detaildata = result.data;
-	                	console.log("result : " + this.detaildata)
- 	                this.gname = result.data[0].g_name;
-	                console.log("gname : " + this.gname)
-	                this.cid1 = result.data[0].cid1,
-	                    console.log("cid1 : " + this.cid1);
-	                this.cid2 = result.data[0].c_id,
-	                    console.log("cid2 : " + this.cid2);
-	                this.gbrand = result.data[0].g_brand,
-                    this.gprice = result.data[0].g_price,
-                    this.gsale = result.data[0].g_sale,
-                    this.gstock = result.data[0].g_stock,
-                    this.gstatus = result.data[0].g_status,
-                    this.gimage = result.data[0].g_image,
-                    this.gdetail = result.data[0].g_detail,
-
-                    this.eid = [];
-	                console.log("eid : " + this.eid)
-	            })
+                params: {
+                    g_id: this.gid
+                }
+            }).then(result => {
+                this.detaildata = result.data;
+                this.gname = result.data.g_name;
+                this.cid1 = result.data.cid1;
+                this.cid2 = result.data.c_id;
+                this.gbrand = result.data.g_brand;
+                this.gprice = result.data.g_price;
+                this.gsale = result.data.g_sale;
+                this.gstock = result.data.g_stock;
+                this.gstatus = result.data.g_status;
+                //this.gimage = result.data.g_image;
+                //this.gdetail = result.data.g_detail;
+                //this.eid = [];
+                console.log(result.data)
+            })
 	        console.log("gid : " + this.gid);
 	    },
 	    methods: {
@@ -299,32 +293,6 @@
 	        selectIndex: function(event) {
 	            this.cindex = event.target.selectedIndex;
 	            this.cid2 = this.categories2[this.cindex][0].cid;
-	        },
-	        goodsdetail: function() {
-	            axios.get("http://localhost:8080/web/admin/goodsdetaildata.do", {
-	                params: {
-	                    g_id: this.gid
-	                }
-	            }).then(result => {
-	                this.detaildata = result.data;
-	                	console.log("result : " + this.detaildata)
- 	                this.gname = result.data[0].g_name;
-	                console.log("gname : " + this.gname)
-	                this.cid1 = result.data[0].cid1,
-	                    console.log("cid1 : " + this.cid1);
-	                this.cid2 = result.data[0].c_id,
-	                    console.log("cid2 : " + this.cid2);
-	                this.gbrand = result.data[0].g_brand,
-                    this.gprice = result.data[0].g_price,
-                    this.gsale = result.data[0].g_sale,
-                    this.gstock = result.data[0].g_stock,
-                    this.gstatus = result.data[0].g_status,
-                    this.gimage = result.data[0].g_image,
-                    this.gdetail = result.data[0].g_detail,
-
-                    this.eid = [];
-	                console.log("eid : " + this.eid)
-	            })
 	        }
 	    }
 	})

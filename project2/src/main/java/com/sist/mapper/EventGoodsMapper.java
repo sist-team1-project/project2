@@ -28,5 +28,5 @@ public interface EventGoodsMapper {
 	public int goodsEGidData(EventGoodsVO vo);
 	
 	@Select("select e_id from event_goods_1 where g_id = #{g_id}")
-	public List<EventGoodsVO> goodsEidData(String g_id);
+	public List<EventGoodsVO> goodsEidData(int g_id);
 }

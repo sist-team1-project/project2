@@ -178,38 +178,32 @@ public class AdminRestController2 {
     }
     
     @GetMapping(value = "goodsdetaildata.do", produces = "text/plain;charset=utf-8")
-    public String adminGoodsDetail(String g_id) {
+    public String adminGoodsDetail(int g_id) {
     	GoodsVO vo = gdao.goodsDetail(g_id);
     	List<EventGoodsVO> list = gdao.goodsEidData(g_id);
     	
-    	JSONArray arr = new JSONArray();
     	JSONObject obj = new JSONObject();
     	obj.put("g_id", vo.getG_id());
-		obj.put("c_id", vo.getC_id());
-		String c_id1 = vo.getC_id().substring(0,3);
-    	obj.put("cid1", c_id1);
-		obj.put("g_name", vo.getG_name());
-		obj.put("g_brand", vo.getG_brand());
-		obj.put("g_price", vo.getG_price());
-		obj.put("g_sale", vo.getG_sale());
-		String images = vo.getG_image();
-		String[] image = images.split(";");
-		obj.put("g_image", image[0]);
-		obj.put("g_detail", vo.getG_detail());
-		obj.put("g_stock", vo.getG_stock());
-		obj.put("g_sold", vo.getG_sold());
-		obj.put("g_status", vo.getG_status());
-		obj.put("g_regdate", vo.getG_regdate());
-		arr.add(obj);
-		System.out.println("gname : " + vo.getG_name());
-		System.out.println("list0 : " + list.get(0).getE_id());
-//		if (list.size() != 0) {
-//			JSONObject obj2 = new JSONObject();
-//			
-//		}
-//		arr.add(list);
-		//return "";
-    	return arr.toJSONString();
+        obj.put("c_id", vo.getC_id());
+        String c_id1 = vo.getC_id().substring(0,3);
+       	obj.put("cid1", c_id1);
+       	obj.put("g_name", vo.getG_name());
+       	obj.put("g_brand", vo.getG_brand());
+        obj.put("g_price", vo.getG_price());
+        obj.put("g_sale", vo.getG_sale());
+        String images = vo.getG_image();
+        String[] image = images.split(";");
+        obj.put("g_image", image[0]);
+        obj.put("g_detail", vo.getG_detail());
+        obj.put("g_stock", vo.getG_stock());
+        obj.put("g_sold", vo.getG_sold());
+        obj.put("g_status", vo.getG_status());
+        JSONArray arr = new JSONArray();
+        for(EventGoodsVO i : list) {
+            arr.add(i.getE_id());
+        }
+		obj.put("eid", arr);
+    	return obj.toJSONString();
     }
     
 }
