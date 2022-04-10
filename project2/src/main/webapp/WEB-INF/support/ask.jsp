@@ -48,6 +48,7 @@
 		  </c:otherwise>
 		</c:choose>
 		</div>
+	</div>
 		<nav class="pagination">
 			<ul>
 				<c:if test="${startPage>1 }">
@@ -70,6 +71,5 @@
 				</c:if>
 			</ul>
 		</nav>
-	</div>
 </body>
 </html> 

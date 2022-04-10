@@ -26,7 +26,8 @@
         <tr>
          <th width=20% class="text-right warning">내용</th>
          <td width=80%>
-          <textarea rows="10" cols="55" id="n_content" v-model="n_content">{{vo.n_content}}</textarea>
+          <textarea rows="10" cols="55" id="n_content" 
+          v-model="n_content" :value="n_content"></textarea>
          </td>
         </tr>
        </table>

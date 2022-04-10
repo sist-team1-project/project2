@@ -100,7 +100,7 @@ public class SupportRestController {
 	}
 
 	@GetMapping(value = "support/notice_update_ok_vue.do", produces = "text/plain;charset=utf-8")
-	public String food_update_ok_vue(NoticeVO vo) {
+	public String notice_update(NoticeVO vo) {
 		String result = "";
 		ndao.noticeUpdate(vo);
 		result = "YES";
@@ -108,7 +108,7 @@ public class SupportRestController {
 	}
 
 	@GetMapping(value = "support/notice_delete_ok.do", produces = "text/plain;charset=utf-8")
-	public String board_delete(int no) {
+	public String notice_delete(int no) {
 		String result = "";
 		ndao.noticeDelete(no);
 		result = "YES";

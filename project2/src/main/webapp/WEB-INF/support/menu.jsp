@@ -18,11 +18,13 @@
         공지사항
       </a>
     </li>
+    <c:if test="${sessionScope.id!=null }">
     <li class="bor18">
       <a href="../support/ask.do" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-14 p-lr-4">
         1:1 문의
       </a>
     </li>
+    </c:if>
   </ul>
 
 

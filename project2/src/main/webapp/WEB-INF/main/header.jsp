@@ -20,6 +20,7 @@
           
           <c:if test="${sessionScope.id==null }">
             <div class="right-top-bar flex-w h-full">
+              <a href="../support/notice.do" class="flex-c-m trans-04 p-lr-25">고객센터</a>
               <a href="../user/login.do" class="flex-c-m trans-04 p-lr-25">로그인</a>
             </div>
           </c:if>
