@@ -18,31 +18,28 @@ td {
   <div class="container bg0 p-t-70 p-b-10" id="adorder">
     <div class="row" id="orderpage">
       <div class="col-lg-12 m-lr-auto">
-        <div class="p-b-20">
+        <div class="p-b-10">
           <h3>판매 목록</h3>
         </div>
       </div>
-      <div class="col-lg-12 flex-m">
-        <input type="text" size=20 class="bor4 p-tb-4 dis-inline-block">
-          &nbsp;&nbsp;
-        <input type="button" class="btn btn-sm btn-pro-color2 p-tb-4 dis-inline-block" value="검색" v-on:click="ofind()">
-      </div>
     </div>
     <div class="row p-t-10">
-      <div class="col-lg-12 m-lr-auto p-tb-10 dis-flex flex-sb flex-m">
-        <div class="fs-13">
-            총 {{count | currency}} 개
+      <div class="col-md-12 dis-flex flex-sb">
+        <div class="p-tb-10 flex-l">
+          <div class="fs-13">
+              총 {{count | currency}} 개
+          </div>
         </div>
-      </div>
-      
-      <!---------------- 주문상태 정렬  -------------------->
-      <div id="sort" class="col-lg-5 m-lr-auto p-tb-10 dis-flex flex-sb flex-m"></div>
-      <div id="sort" class="col-lg-7 m-lr-auto p-tb-10 dis-flex flex-sb flex-m">
-	    <button class="cl2" :class="{'activeFilter':sort== -1}" value="-1" @click="orderstate($event)">주문취소</button> &nbsp;&nbsp;| &nbsp;&nbsp;
-	    <button class="cl2" :class="{'activeFilter':sort== 0 }" value="0" @click="orderstate($event)">대기중</button> &nbsp;&nbsp;| &nbsp;&nbsp;
-        <button class="cl2" :class="{'activeFilter':sort== 1 }" value="1" @click="orderstate($event)">상품준비중</button> &nbsp;&nbsp;| &nbsp;&nbsp;
-        <button class="cl2" :class="{'activeFilter':sort== 2 }" value="2" @click="orderstate($event)">배송중</button> &nbsp;&nbsp;| &nbsp;&nbsp;
-        <button class="cl2" :class="{'activeFilter':sort== 3 }" value="3" @click="orderstate($event)">배송완료</button>
+        
+        <!---------------- 주문상태 정렬  -------------------->
+        <div id="sort" class="p-tb-10 flex-r p-tb-3 p-lr-5">
+          <button class="cl2" :class="{'activeFilter':sort=='A'}" value="A" @click="orderstate($event)">전체</button> &nbsp;&nbsp;| &nbsp;&nbsp;
+  	      <button class="cl2" :class="{'activeFilter':sort=='B'}" value="B" @click="orderstate($event)">주문취소</button> &nbsp;&nbsp;| &nbsp;&nbsp;
+  	      <button class="cl2" :class="{'activeFilter':sort=='C'}" value="C" @click="orderstate($event)">대기중</button> &nbsp;&nbsp;| &nbsp;&nbsp;
+          <button class="cl2" :class="{'activeFilter':sort=='D'}" value="D" @click="orderstate($event)">상품준비중</button> &nbsp;&nbsp;| &nbsp;&nbsp;
+          <button class="cl2" :class="{'activeFilter':sort=='E'}" value="E" @click="orderstate($event)">배송중</button> &nbsp;&nbsp;| &nbsp;&nbsp;
+          <button class="cl2" :class="{'activeFilter':sort=='F'}" value="F" @click="orderstate($event)">배송완료</button>
+        </div>
       </div>
       <!----------------------------------------------->
       
@@ -98,7 +95,7 @@ td {
     <div class="wrap-header-admin js-panel-admin">
       <div class="s-full" v-on:click="odetail_close"></div>
       <div class="header-admin flex-col-l p-l-65 p-r-25">
-        <div class="header-admin-title flex-w flex-sb-m p-b-8">
+        <div class="header-admin-title flex-w flex-sb flex-b p-b-8">
           <span class="mtext-103 cl2"> 주문 상세 정보 </span>
           <div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04">
             <i class="zmdi zmdi-close" v-on:click="odetail_close"></i>
@@ -116,18 +113,17 @@ td {
         el:'#adorder',
         data:{
             oid:'${oid }',
-            orderFullList: [],
-            //order: [],             
+            orderFullList: [],        
             curpage : 1,
-              totalpage : 0,
-              startPage : 0,
-              endPage : 0,
-              pages : [],
-              count : 0,
-              iframe :'',
-              selected : [],
-              state : 0,
-              sort : 0
+            totalpage : 0,
+            startPage : 0,
+            endPage : 0,
+            pages : [],
+            count : 0,
+            iframe :'',
+            selected : [],
+            state : 0,
+            sort : 'A'
         },
         filters:{
               currency: function(value){
@@ -137,13 +133,13 @@ td {
           },
         mounted:function(){
             this.oList();
-            //console.log(this.oid);
         },
         methods:{
             oList:function(){
                 axios.get("http://localhost:8080/web/admin/orderlist_vue.do",{
                     params:{
-                        page: this.curpage
+                        page: this.curpage,
+                        sort: this.sort
                     }
                 }).then(res=>{
                     this.orderFullList = res.data;
@@ -185,8 +181,8 @@ td {
             },
             orderstate:function(event) {
                 this.curpage = 1; // 페이지 초기화
-                this.order = event.currentTarget.value; // 누른 버튼의 값(원하는 순서)을 가지고옴
-                this.list();      // 목록 출력
+                this.sort = event.currentTarget.value; // 누른 버튼의 값(원하는 순서)을 가지고옴
+                this.oList();      // 목록 출력
             }
         }
     })

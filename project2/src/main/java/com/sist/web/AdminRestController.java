@@ -29,7 +29,7 @@ public class AdminRestController {
     private UserDAO udao;
     
     @GetMapping(value = "orderlist_vue.do", produces = "text/plain;charset=utf-8")
-    public String orderFull(int page) {
+    public String orderFull(int page, String sort) {
         
         int curpage = page;
         
@@ -39,11 +39,13 @@ public class AdminRestController {
         
         Map map = new HashMap();
         
+        map.put("sort", sort);
+        int totalpage = odao.orderTotalPage(map);
+        int count = odao.orderCount(map);
+        
         map.put("start", start);
         map.put("end", end);
         
-        int totalpage = odao.orderTotalPage();
-        int count = odao.orderCount();
 
         final int BLOCK = 10;
         int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;

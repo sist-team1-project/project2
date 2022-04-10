@@ -3211,3 +3211,10 @@ input.num-product::-webkit-inner-spin-button {
 .modal {
   z-index: 100001 !important;
 }
+
+
+/*///////////////////////////////////////////////////////////////////////
+[필터]*/
+.activeFilter {
+  font-weight: bold;
+}

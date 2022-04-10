@@ -1,7 +1,6 @@
 package com.sist.dao;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,11 +14,11 @@ public class OrderDAO {
     @Autowired
     private OrderMapper mapper;
     
-    public int orderTotalPage() {
-    	return mapper.orderTotalPage();
+    public int orderTotalPage(Map map) {
+    	return mapper.orderTotalPage(map);
     }
-    public int orderCount() {
-    	return mapper.orderCount();
+    public int orderCount(Map map) {
+    	return mapper.orderCount(map);
     }
 	
 	public OrderVO order(String oid){
