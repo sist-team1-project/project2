@@ -29,7 +29,7 @@ public class UserRestController {
 	}
 	
     @PostMapping("join_ok.do")
-    public void user_join(UserVO vo) {
+    public void user_join(@RequestBody UserVO vo) {
         dao.userJoin(vo);
     }
 
