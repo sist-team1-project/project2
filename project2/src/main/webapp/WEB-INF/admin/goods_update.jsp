@@ -18,18 +18,19 @@
       <div class="col-lg-12-add flex-m">
         <div class="col-sm-12-add col-md-12 m-lr-auto m-b-50">
           <div class="bor10 p-lr-40 p-t-30 p-b-40 p-lr-0-sm">
-
+            
             <form @submit.prevent="submitForm">
-
+            
               <div class="flex-w flex-t bor12 p-b-20">
                 <div class="size-208 w-full-ssm">
                   <span class="stext-110 cl2"> 카테고리 </span>
                 </div>
                 <div class="size-209">
                   <select ref="select1" v-model="cid1" @change="selectIndex($event)" class="bor10 p-tb-3 p-lr-5">
-                    <option v-for="(cate,index) in categories1" :value="cate.cid">{{cate.title}}</option>
-                  </select> &nbsp;&nbsp; <select ref="good" v-model="cid2" class="bor10 p-tb-3 p-lr-5">
-                    <option v-for="(cate2,index2) in categories2[cindex]" :value="cate2.cid">{{cate2.title}}</option>
+                    <option v-for="cate in categories1" :value="cate.cid">{{cate.title}}</option>
+                  </select> &nbsp;&nbsp; 
+                  <select ref="good" v-model="cid2" class="bor10 p-tb-3 p-lr-5">
+                    <option v-for="cate2 in categories2[cindex]" :value="cate2.cid">{{cate2.title}}</option>
                   </select>
                 </div>
               </div>
@@ -121,9 +122,7 @@
                   <span class="stext-110 cl2"> 이벤트 여부 </span>
                 </div>
                 <div class="row size-209">
-                  <span v-for="e in events" class="dis-inline-block"><input type="checkbox" class="bor10 dis-inline-block" :value="e.eid"
-                      v-model="eid"
-                    > &nbsp;{{e.etitle}} &nbsp;&nbsp;</span>
+                  <span v-for="e in events" class="dis-inline-block"><input type="checkbox" class="bor10 dis-inline-block" :value="e.eid" v-model="eid"> &nbsp;{{e.etitle}} &nbsp;&nbsp;</span>
                 </div>
               </div>
 
@@ -132,9 +131,7 @@
                   <input type=submit class="btn flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer btn-pro-color2" value="수정">
                 </div>
                 <div class="p-t-35 col-md-6">
-                  <input type=button class="btn flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer btn-pro-color2" value="취소"
-                    onclick="javascript:history.back()"
-                  >
+                  <input type=button class="btn flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer btn-pro-color2" value="취소" onclick="javascript:history.back()">
                 </div>
               </div>
             </form>
@@ -180,6 +177,12 @@
                 this.detaildata = result.data;
                 this.gname = result.data.g_name;
                 this.cid1 = result.data.cid1;
+                // 카테고리 대분류 목록에서 소분류 배열의 인덱스를 찾음
+                for(i = 0; i < this.categories1.length; i++) {
+                    if(this.cid1.startsWith(this.categories1[i].cid)) {
+                        this.cindex = i;
+                    }
+                }
                 this.cid2 = result.data.c_id;
                 this.gbrand = result.data.g_brand;
                 this.gprice = result.data.g_price;
@@ -189,9 +192,8 @@
                 this.gimage2 = result.data.g_image;
                 this.gdetail2 = result.data.g_detail;
                 for (var i = 0; i < result.data.eid.length; i++) {
-								this.eid.push(result.data.eid[i]);
-							}
-                console.log(result.data);
+					this.eid.push(result.data.eid[i]);
+				}
           })
 	    },
 	    methods: {
