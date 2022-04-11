@@ -2,6 +2,7 @@ package com.sist.web;
 
 import java.util.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -13,7 +14,7 @@ import com.sist.vo.*;
 
 @RestController
 public class MypageRestController {
-    
+
 	@Autowired
 	private UserDAO dao;
 
@@ -36,45 +37,44 @@ public class MypageRestController {
 		obj.put("regdate", vo.getU_regdate());
 		return obj.toJSONString();
 	}
-	
-	@GetMapping(value = "mypage/update_ok.do", produces = "text/plain;charset=utf-8")
-	public String mypage_update_ok(UserVO vo) {
+
+	@PostMapping(value = "mypage/update_ok.do", produces = "text/plain;charset=utf-8")
+	public String mypage_update_ok(@ModelAttribute UserVO vo, @RequestParam String id, HttpServletRequest request) {
 		String result = "";
 		boolean bCheck = dao.userUpdate(vo);
 		if (bCheck == true) {
-			result = "<script>location.href=\"../mypage/mypage.do\";</script>";
+			result = "YES";
 		} else {
-			result = "<script>" + "alert(\"Password Fail!!\");" + "history.back();" + "</script>";
+			result = "NO";
 		}
 		return result;
 	}
 
+	@PostMapping(value = "mypage/update_pwd_ok.do", produces = "text/plain;charset=utf-8")
+	public String mypage_update_pwd_ok(@RequestBody HashMap<String, Object> map) {
+		String result = "";
+		System.out.println(map.get("newPassword"));
+		boolean bCheck = dao.userPwdUpdate(map);
+		if (bCheck == true) {
+			result = "YES";
+		} else {
+			result = "NO";
+		}
+		return result;
+	}
 
-    @PostMapping(value = "mypage/update_pwd_ok.do", produces = "text/plain;charset=utf-8")
-    public String mypage_update_pwd_ok(@RequestBody HashMap<String, Object> map) {
-        String result = "";
-        System.out.println(map.get("newPassword"));
-        boolean bCheck = dao.userPwdUpdate(map);
-        if (bCheck == true) {
-            result = "YES";
-        } else {
-            result = "NO";
-        }
-        return result;
-    }
-    
-    @GetMapping(value = "mypage/delete_ok.do", produces = "text/plain;charset=utf-8")
-    public String mypage_delete_ok(String id, String pwd) {
-        String result = "";
-        Map map = new HashMap();
-        map.put("id", id);
-        map.put("password", pwd);
-        boolean bCheck = dao.userDelete(map);
-        if (bCheck == true) {
-            result = "YES";
-        } else {
-            result = "NO";
-        }
-        return result;
-    }
+	@GetMapping(value = "mypage/delete_ok.do", produces = "text/plain;charset=utf-8")
+	public String mypage_delete_ok(String id, String pwd) {
+		String result = "";
+		Map map = new HashMap();
+		map.put("id", id);
+		map.put("password", pwd);
+		boolean bCheck = dao.userDelete(map);
+		if (bCheck == true) {
+			result = "YES";
+		} else {
+			result = "NO";
+		}
+		return result;
+	}
 }

@@ -189,11 +189,19 @@
                     this.$refs.answer.focus();
                     return;
                 }
-                axios.post("http://localhost:8080/web/mypage/update_ok.do",this.form,{
-                }).then(res=>{
-                    alert("회원정보 변경 완료")
-                })
-            },
+       
+	            axios.post('http://localhost:8080/web/mypage/update_ok.do', this.form, {
+
+	            }).then(res=> {
+	            	if(res.data=="YES") {
+                        alert("변경이 완료되었습니다.");
+                        location.href = "../mypage/mypage.do"
+	            	} else {
+                        console.log(res)
+                        alert("정보가 일치하지 않습니다");
+                    }
+	            })
+	        },
             idCheck:function() {
                 if(this.form.u_id != ''){
                     axios.get("http://localhost:8080/web/user/idcheck_ok.do",{

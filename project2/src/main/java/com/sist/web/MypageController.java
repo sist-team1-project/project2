@@ -28,7 +28,8 @@ public class MypageController {
 	}
 
 	@GetMapping("mypage/update.do")
-	public String mypage_update() {
+	public String mypage_update(String id, Model model) {
+		model.addAttribute("id", id);
 		return "mypage/update";
 	}
 
@@ -37,11 +38,11 @@ public class MypageController {
 		model.addAttribute("id", id);
 		return "mypage/update_pwd";
 	}
-	
+
 	@GetMapping("mypage/delete.do")
-    public String mypage_delete(String id, Model model) {
+	public String mypage_delete(String id, Model model) {
 		model.addAttribute("id", id);
 
-        return "mypage/delete";
-    }
+		return "mypage/delete";
+	}
 }

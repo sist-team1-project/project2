@@ -14,15 +14,42 @@
 
       <table class="table">
         <tr>
-          <th width=10% class="text-center">답변상태</th>
+          <th width=10% class="text-center">답변여부</th>
           <th width=15% class="text-center">유형</th>
           <th width=60% class="text-center">제목</th>
           <th width=15% class="text-center">작성일</th>
         </tr>
         <c:forEach var="vo" items="${list }">
-          <c:if test="${sessionScope.id==vo.u_id }">
+		  <c:if test="${sessionScope.grade=='0' }">
+          <c:if test="${vo.a_group_tab==0 }">
             <tr>
-              <td width=10% class="text-center">미완료</td>
+              <td class="p-t-10 text-center"><c:if test="${vo.a_group_tab==1 }">답변완료</c:if> <c:if test="${vo.a_group_tab==0 }">미답변</c:if></td>
+              <td width=15% class="text-center">${vo.a_type }</td>
+              <td width=60%><c:if test="${vo.a_group_tab==1 }">
+                &nbsp;&nbsp;
+                <img src="../images/demo/re_icon.png">
+                </c:if> <a href="../support/ask_detail.do?no=${vo.a_id }">${vo.a_title }</a></td>
+              <td width=15% class="text-center">${vo.a_regdate }</td>
+            </tr>
+          </c:if>
+          </c:if>        
+        
+          <c:if test="${sessionScope.id==vo.u_id }">
+          <c:if test="${vo.a_group_tab==0 }">
+            <tr>
+              <td class="p-t-10 text-center"><c:if test="${vo.a_group_tab==1 }">답변완료</c:if> <c:if test="${vo.a_group_tab==0 }">미답변</c:if></td>
+              <td width=15% class="text-center">${vo.a_type }</td>
+              <td width=60%><c:if test="${vo.a_group_tab==1 }">
+                &nbsp;&nbsp;
+                <img src="../images/demo/re_icon.png">
+                </c:if> <a href="../support/ask_detail.do?no=${vo.a_id }">${vo.a_title }</a></td>
+              <td width=15% class="text-center">${vo.a_regdate }</td>
+            </tr>
+          </c:if>
+          </c:if>
+          <c:if test="${vo.a_group_tab==1 }">
+            <tr>
+              <th width=10% class="text-center">
               <td width=15% class="text-center">${vo.a_type }</td>
               <td width=60%><c:if test="${vo.a_group_tab==1 }">
                 &nbsp;&nbsp;

@@ -21,7 +21,7 @@ public class SupportController {
 
 	@Autowired
 	private AskDAO adao;
-	
+
 	// 공지사항
 	@GetMapping("notice.do")
 	public String notice_list() {
@@ -58,7 +58,7 @@ public class SupportController {
 		model.addAttribute("no", no);
 		return "support/notice_delete";
 	}
-    
+
 	// 1:1 문의
 	@GetMapping("ask.do")
 	public String askListData(String page, Model model) {
@@ -107,7 +107,9 @@ public class SupportController {
 	@GetMapping("ask_detail.do")
 	public String askDetailData(int no, Model model) {
 		AskVO vo = adao.askDetailData(no);
+		int count = adao.askCount(vo.getA_group_id());
 		model.addAttribute("vo", vo);
+		model.addAttribute("count", count);
 		return "support/ask_detail";
 	}
 
@@ -119,14 +121,14 @@ public class SupportController {
 
 	@PostMapping("ask_reply_ok.do")
 	public String askReplyInsert(int pno, AskVO vo) {
-		AskVO pvo = adao.askParentInfoData(pno);
+		AskVO pvo=adao.askParentInfoData(pno);
 		vo.setA_group_id(pvo.getA_group_id());
 		vo.setA_group_step(pvo.getA_group_step() + 1);
 		vo.setA_group_tab(pvo.getA_group_tab() + 1);
-		
+
 		adao.askReplyInsert(vo);
-		
-		return "redirect:list.do";
+
+		return "redirect:../admin/ask_admin.do";
 	}
 
 	@GetMapping("ask_update.do")
