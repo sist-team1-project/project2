@@ -26,10 +26,10 @@
                 <div class="size-208 w-full-ssm"><span class="stext-110 cl2"> 카테고리 </span></div>
                 <div class="size-209">
                   <select ref="select1" v-model="cid1" @change="selectIndex($event)" class="bor10 p-tb-3 p-lr-5">
-                    <option v-for="(cate,index) in categories1" :value="cate.cid">{{cate.title}}</option>
+                    <option v-for="cate in categories1" :value="cate.cid">{{cate.title}}</option>
                   </select> &nbsp;&nbsp;
                   <select ref="good" v-model="cid2" class="bor10 p-tb-3 p-lr-5">
-                    <option v-for="(cate2,index2) in categories2[cindex]" :value="cate2.cid">{{cate2.title}}</option>
+                    <option v-for="cate2 in categories2[cindex]" :value="cate2.cid">{{cate2.title}}</option>
                   </select>
                 </div>
               </div>

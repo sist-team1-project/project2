@@ -15,8 +15,7 @@
           <tr>
             <th width=15% class="text-right">이름</th>
             <td width=85%><input type=text name=u_id size=15
-              class="input-sm" value="${vo.u_id }">
-              <input type=hidden name=no value="${vo.a_id }"></td>
+              class="input-sm" value="${sessionScope.id }">
           </tr>
           <tr>
             <th width=15% class="text-right">제목</th>
@@ -26,11 +25,6 @@
           <tr>
             <th width=15% class="text-right">내용</th>
             <td width=85%><textarea rows="10" cols="58" name=content>${vo.a_content }</textarea></td>
-          </tr>
-          <tr>
-            <th width=15% class="text-right">비밀번호</th>
-            <td width=85%><input type=password name=a_pwd size=10
-              class="input-sm"></td>
           </tr>
         </table>
         <div colspan="2" class="text-right">

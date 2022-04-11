@@ -38,10 +38,10 @@ public interface AskMapper {
 			+"WHERE a_id=#{a_id}")
 	public AskVO askParentInfoData(int no);
 
-	@Insert("INSERT INTO ask_1(a_id,u_id,a_type,a_content,"
+	@Insert("INSERT INTO ask_1(a_id,u_id,a_type,a_title,a_content,"
 			+"a_group_id,a_group_step,a_group_tab) "
 			+"VALUES(ask_id_seq_1.nextval,"
-			+"#{u_id},#{a_type},#{a_content},"
+			+"#{u_id},#{a_type},#{a_title},#{a_content},"
 			+"#{a_group_id},#{a_group_step},#{a_group_tab})")
 	public void askReplyInsert(AskVO vo);
 

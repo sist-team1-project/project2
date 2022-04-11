@@ -5,7 +5,6 @@
 <head>
   <meta charset="UTF-8">
   <title>Insert title here</title>
-  <link rel="stylesheet" type="text/css" href="../css/login.css">
 </head>
 <body>
   <div class="container bg0 flex-c-m h-full" id="login">

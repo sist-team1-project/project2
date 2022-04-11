@@ -173,6 +173,18 @@
                     this.$refs.answer.focus();
                     return;
                 }
+                if(this.idOk != '') {
+                    this.$refs.id.focus();
+                    return
+                }
+                if(this.pwdOk != '') {
+                    this.$refs.password.focus();
+                    return;
+                }
+                if(this.emailOk != '') {
+                    this.$refs.email.focus();
+                    return;
+                }
                 axios.post("http://localhost:8080/web/user/join_ok.do",this.form,{
                 }).then(res=>{
                     location.href="../user/login.do";
@@ -233,7 +245,7 @@
                 }
             },
             pwdValidate:function() {
-                password = this.form.u_password;
+                let password = this.form.u_password;
                 let num = password.search(/[0-9]/g);
                 let eng = password.search(/[a-z]/ig);
                 if(password == '') {
