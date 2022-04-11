@@ -1,5 +1,8 @@
 @charset "UTF-8";
 
+.w-20 {
+  width: 20%;
+}
 .p-l-20 {
   padding-left: 20px;
 }

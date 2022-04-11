@@ -50,12 +50,10 @@ public class MypageRestController {
 	}
 */
 
-    @GetMapping(value = "mypage/update_pwd_ok.do", produces = "text/plain;charset=utf-8")
-    public String mypage_update_pwd_ok(UserVO vo) {
+    @PostMapping(value = "mypage/update_pwd_ok.do", produces = "text/plain;charset=utf-8")
+    public String mypage_update_pwd_ok(@RequestBody HashMap<String, Object> map) {
         String result = "";
-        Map map = new HashMap();
-        map.put("id", vo.getU_id());
-        map.put("password", vo.getU_password());
+        System.out.println(map.get("newPassword"));
         boolean bCheck = dao.userPwdUpdate(map);
         if (bCheck == true) {
             result = "YES";
