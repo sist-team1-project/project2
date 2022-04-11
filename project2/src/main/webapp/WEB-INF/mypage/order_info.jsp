@@ -25,11 +25,11 @@
               <th>주문번호</th>
               <th>주문상태</th>
             </tr>
-            <tr class="table_row_order fs-13 text-center">
-              <td> {{uid}} </td>
-              <td> {{regdate}}  </td>
-              <td><a class="cl8" href="#"> {{oid}} </a></td>
-              <td> {{state}} </td>
+            <tr v-for="my in orderInfoList" class="table_row_order fs-13 text-center">
+              <td> {{my.uid}} </td>
+              <td> {{my.regdate}}  </td>
+              <td><a class="cl8" href="#"> {{my.oid}} </a></td>
+              <td> {{my.state}} </td>
              </tr>
           </table>
         </div>
@@ -55,14 +55,13 @@
     new Vue({
         el:'#orderinfo',
         data:{
-            uid:'${uid }',
             orderInfoList: [],        
             curpage : 1,
             totalpage : 0,
             startPage : 0,
             endPage : 0,
-            pages : [],
-            count : 0
+            pages : []
+           // count : 0
         },
         mounted:function(){
             this.infoList();
@@ -71,16 +70,17 @@
             infoList:function(){
                 axios.get("http://localhost:8080/web/mypage/orderInfoList_vue.do",{
                     params:{
-                        page: this.curpage
+                    	page: this.curpage
                     }
                 }).then(res=>{
+                	console.log(result.data);
                     this.orderInfoList = res.data;
                     this.curpage = res.data[0].curpage;
                     this.totalpage = res.data[0].totalpage;
                     this.startPage = res.data[0].startPage;
                     this.endPage = res.data[0].endPage;
-                    this.count = res.data[0].count;
-                    console.log(this.count);
+                  //  this.count = res.data[0].count;
+                  //  console.log(this.count);
                     this.pages=[];
                     for(i = this.startPage; i <= this.endPage; i++) {
                         this.pages.push(i);
@@ -89,7 +89,7 @@
             },
             getpage : function(event){
                 this.curpage = event.currentTarget.value;
-                this.oList();
+                this.infoList();
             }
         }
     })

@@ -93,7 +93,7 @@ public class MypageRestController {
 		return result;
 	}
 	/* 유저 주문정보 */
-	@GetMapping(value = "orderInfoList_vue.do", produces = "text/plain;charset=utf-8")
+	@GetMapping(value = "mypage/orderInfoList_vue.do", produces = "text/plain;charset=utf-8")
     public String orderInfoList(int page, HttpSession session) {
 	    String uid = (String) session.getAttribute("id");
 	    
