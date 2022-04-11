@@ -8,6 +8,8 @@ import com.sist.dao.*;
 import com.sist.vo.*;
 import java.util.*;
 
+import javax.mail.Session;
+
 @Controller
 @RequestMapping("admin/")
 public class AdminController2 {
@@ -40,6 +42,7 @@ public class AdminController2 {
 		if (page == null) {
 			page = "1";
 		}
+		
 		int curpage = Integer.parseInt(page);
 		Map map = new HashMap();
 		int rowSize = 10;
@@ -47,7 +50,8 @@ public class AdminController2 {
 		int end = rowSize * curpage;
 		map.put("start", start);
 		map.put("end", end);
-		List<AskVO> list = adao.askListData(map);
+		
+		List<AskVO> list = adao.askListData_admin(map);
 		int totalpage = adao.askTotalPage();
 
 		int count = adao.askRowCount();
@@ -58,7 +62,7 @@ public class AdminController2 {
 
 		if (endPage > totalpage)
 			endPage = totalpage;
-
+		
 		model.addAttribute("list", list);
 		model.addAttribute("curpage", curpage);
 		model.addAttribute("totalpage", totalpage);

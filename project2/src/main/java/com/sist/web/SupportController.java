@@ -122,11 +122,14 @@ public class SupportController {
 	@PostMapping("ask_reply_ok.do")
 	public String askReplyInsert(int pno, AskVO vo) {
 		AskVO pvo=adao.askParentInfoData(pno);
+		AskVO detailvo = adao.askDetailData(pno);
+		
 		vo.setA_group_id(pvo.getA_group_id());
 		vo.setA_group_step(pvo.getA_group_step() + 1);
 		vo.setA_group_tab(pvo.getA_group_tab() + 1);
-		
+
 		adao.askReplyInsert(vo);
+		adao.asktabReply(detailvo);
 
 		return "redirect:../admin/ask_admin.do";
 	}

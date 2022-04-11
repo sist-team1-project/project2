@@ -62,4 +62,9 @@ public class AskDAO {
 	public void askDelete2(int no) {
 			mapper.askDelete2(no);
 	}
+	
+	/* -- 댓글 작성 시 질문 tab 증가 -- */
+	public void asktabReply(AskVO vo) {
+			mapper.asktabReply(vo);
+	}
 }
