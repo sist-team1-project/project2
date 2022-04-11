@@ -183,7 +183,8 @@ public class AdminRestController {
         }
         return arr.toJSONString();
     }
-    /************ 유저 등급 관리 *************/
+    
+    /************ 유저 차단 관리 *************/
     @PostMapping(value = "user_grade_update_ok.do", produces = "text/plain;charset=utf-8")
     public void user_grade_update_ok(int grade, String uid) {
         Map map = new HashMap();

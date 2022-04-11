@@ -116,7 +116,10 @@ public interface OrderMapper {
 		public int userOrderTotalPage(Map map);
 	 
 	 /* 유저  - 주문정보 페이징 */
-	@Select("SELECT COUNT(*) FROM order_1")
+	 @Select("SELECT COUNT(*) FROM order_1")
 	    public int userOrderCount();
 	 
+	 /* 유저  - 주문상태 변경 */
+	 @Update("UPDATE order_1 SET o_state=#{state} WHERE o_id=#{oid}")
+	 public int userOrderCancel(Map map);
 }

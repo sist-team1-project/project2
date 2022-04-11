@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="../css/order.css">
+<link rel="stylesheet" type="text/css" href="../css/admin.css">
 </head>
 <body>
   <div class="container bg0 p-t-70 p-b-10" id="orderinfo">
@@ -31,7 +32,9 @@
               <td> {{my.regdate}} </td>
               <td><a class="cl8" href="#" data-toggle="modal" @click="odetail(my.oid)"> {{my.oid}} </a></td>
               <td v-if="my.state==-1">주문취소</td>
-              <td v-if="my.state==0">대기중</td>
+              <td v-if="my.state==0">대기중 <br>
+               <button class="bor20 cl2 btn-pro-color2 p-tb-4 p-lr-10" value="-1" v-on:click="cancel($event, my.oid); my.state=-1">주문취소</button>
+              </td>
               <td v-if="my.state==1">상품준비중</td>
               <td v-if="my.state==2">배송중</td>
               <td v-if="my.state==3">배송완료</td>
@@ -56,6 +59,23 @@
       </ul>
     </div>
 
+    <!-- 사이드 Detail -->
+    <div class="wrap-header-admin js-panel-admin">
+      <div class="s-full" v-on:click="odetail_close"></div>
+      <div class="header-admin flex-col-l p-l-65 p-r-25">
+        <div class="header-admin-title flex-w flex-sb flex-b p-b-8">
+          <span class="mtext-103 cl2"> 주문 상세 정보 </span>
+          <div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04">
+            <i class="zmdi zmdi-close" v-on:click="odetail_close"></i>
+          </div>
+        </div>
+        <div class="header-admin-content flex-w">
+          <iframe height="100%" width="580px" :src="iframe"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+  
   <script>
     new Vue({
         el:'#orderinfo',
@@ -66,7 +86,8 @@
             startPage : 0,
             endPage : 0,
             pages : [],
-            count : 0
+            count : 0,
+            iframe :''
         },
         mounted:function(){
             this.infoList();
@@ -95,6 +116,25 @@
             getpage : function(event){
                 this.curpage = event.currentTarget.value;
                 this.infoList();
+            },
+            /* 디테일 열기 */
+            odetail : function(oid) {
+                this.iframe = '../admin/orderdetail.do?oid=' + oid;
+                $('.js-panel-admin').addClass('show-header-admin');
+            },
+            /* 디테일 닫기 */
+            odetail_close : function(){
+                $('.js-panel-admin').removeClass('show-header-admin');
+            },
+            /* 주문취소 */
+            cancel:function(event, oid){
+        	    let state = event.currentTarget.value;
+        	    axios.post("http://localhost:8080/web/mypage/user_state_cancel_ok.do",null,{
+                    params:{
+                        state: state,
+                        oid: oid
+                    }
+        	    })
             }
         }
     })

@@ -45,5 +45,7 @@ public class OrderDAO {
     public int userOrderCount() {
     	return mapper.userOrderCount();
     }
-    
+    public int userOrderCancel(Map map) {
+    	return mapper.userOrderCancel(map);
+    }
 }
