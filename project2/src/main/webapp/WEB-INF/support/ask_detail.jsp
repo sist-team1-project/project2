@@ -12,7 +12,7 @@
     <div class="row">
       <table class="table">
         <tr>
-          <th class="text-center" width=20%>문의유형</th>
+          <th class="text-center" width=20%>유형</th>
           <td class="text-center" width=30%>${vo.a_type }</td>
           <th class="text-center" width=20%>작성일</th>
           <td class="text-center" width=30%>${vo.a_regdate }</td>

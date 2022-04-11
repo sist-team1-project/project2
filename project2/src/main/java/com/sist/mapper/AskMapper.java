@@ -8,13 +8,21 @@ import com.sist.vo.*;
 
 public interface AskMapper {
 	@Select("SELECT a_id,u_id,a_type,a_title,TO_CHAR(a_regdate,'YYYY-MM-DD') as a_regdate,"
-			 +"a_group_tab,num "
-			 +"FROM (SELECT a_id,u_id,a_type,a_title,a_regdate,a_group_tab,rownum as num "
-			 +"FROM (SELECT a_id,u_id,a_type,a_title,a_regdate,a_group_tab "
+			 +"a_group_id,a_group_tab,num "
+			 +"FROM (SELECT a_id,u_id,a_type,a_title,a_regdate,a_group_id,a_group_tab,rownum as num "
+			 +"FROM (SELECT a_id,u_id,a_type,a_title,a_regdate,a_group_id,a_group_tab "
 			 +"FROM ask_1 ORDER BY a_group_id DESC, a_group_step ASC)) "
 			 +"WHERE num BETWEEN #{start} AND #{end}")
 	public List<AskVO> askListData(Map map);
 
+	@Select("SELECT a_id,u_id,a_type,a_title,TO_CHAR(a_regdate,'YYYY-MM-DD') as a_regdate,"
+			 +"a_group_id,a_group_tab,num "
+			 +"FROM (SELECT a_id,u_id,a_type,a_title,a_regdate,a_group_id,a_group_tab,rownum as num "
+			 +"FROM (SELECT a_id,u_id,a_type,a_title,a_regdate,a_group_id,a_group_tab "
+			 +"FROM ask_1 ORDER BY a_group_id DESC, a_group_step ASC)) "
+			 +"WHERE a_group_tab!=0")
+	public List<AskVO> replyListData(Map map);
+	
 	@Select("SELECT COUNT(*) FROM ask_1")
 	public int askRowCount();
 

@@ -18,6 +18,10 @@ public class AskDAO {
 	public List<AskVO> askListData(Map map) {
 		return mapper.askListData(map);
 	}
+	
+	public List<AskVO> replyListData(Map map) {
+		return mapper.replyListData(map);
+	}
 
 	public int askRowCount() {
 		return mapper.askRowCount();
