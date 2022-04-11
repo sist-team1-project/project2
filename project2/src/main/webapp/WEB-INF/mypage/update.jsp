@@ -9,12 +9,14 @@
   <script type="text/javascript" src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
-  <div class="container p-t-50 p-b-60" id="mypage_update">
-    <div class="col-sm-6 bor10 p-lr-40 p-t-30 p-b-25 p-lr-15-sm">
-      <h4>회원정보 변경</h4>
+  <div class="row">
+    <div class="col-sm-12 p-l-30 p-t-50"><h3>회원정보 변경</h3></div>
+  </div>
+  <div class="container p-t-20 p-b-60" id="mypage_update">
+    <div class="col-sm-7 bor10 p-lr-40 p-t-30 p-b-25 p-lr-15-sm">
       <form @submit.prevent="submitForm">
         <div class="text-left"> 
-          <div class="p-t-20 p-b-10">
+          <div class="p-t-15 p-b-10">
             <div>아이디</div>
             <input class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" type="text" ref="id" v-model="u_id" readonly style="background-color:#eeeee6">
           </div>
@@ -42,8 +44,8 @@
         
           <div class="p-tb-10">
             <div>우편번호</div>
-            <input type="text" class="bor10 p-lr-5 p-tb-3 cl3 fs-13 dis-inline-block" ref="post" v-model="form.u_post" readonly>
-            <input type="button" class="cl0 bg2 fs-13 bor4 p-lr-5 p-tb-4 trans-04 pointer dis-inline-block" value="우편번호 찾기" @click="postFind">
+            <input type="text" class="bor10 p-lr-5 p-tb-3 cl3 fs-13 dis-inline-block" ref="post" v-model="form.u_post" readonly style="background-color:#eeeee6">
+            &nbsp;&nbsp;<input type="button" style="background-color:#dbd0be" class="cl0 btn-pro-color2 fs-13 p-lr-5 p-tb-4 trans-04 pointer dis-inline-block" value="우편번호 찾기" @click="postFind">
             <div>주소</div>
             <input type="text" class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" ref="address1" v-model="form.u_address1" readonly>
             <div>상세주소</div>
@@ -74,7 +76,7 @@
           </div>
         </div>
     
-        <div class="flex-c-m p-t-30">
+        <div class="flex-c-m p-t-20 p-b-10">
           <input type="submit" class="cl1 size-101 bg3 bor1 hov-btn3 trans-04 pointer dis-inline-block" value="수정">
           
         </div>
