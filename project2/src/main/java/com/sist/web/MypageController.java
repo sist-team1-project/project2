@@ -45,6 +45,6 @@ public class MypageController {
 	
 	@GetMapping("mypage/like.do")
     public String mypage_like() {
-        return "mypage/delete";
+        return "mypage/like";
     }
 }

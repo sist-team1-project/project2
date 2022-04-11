@@ -23,6 +23,9 @@ public class MypageRestController {
 	@Autowired
 	private OrderDAO odao;
 	
+	@Autowired
+    private LikeDAO ldao;
+	
 	@GetMapping(value = "mypage/info_vue.do", produces = "text/plain;charset=utf-8")
 	public String mypage_info_vue(HttpSession session) {
 		String uid = (String) session.getAttribute("id");
@@ -107,7 +110,7 @@ public class MypageRestController {
         
         int totalpage = odao.userOrderTotalPage(map);
         int count = odao.userOrderCount();
-
+        
         final int BLOCK = 10;
         int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
         int endPage = ((curpage - 1) / BLOCK * BLOCK) + BLOCK;
@@ -134,6 +137,52 @@ public class MypageRestController {
                 obj.put("count", count);
             }
             arr.add(obj);
+        }
+        return arr.toJSONString();
+    }
+	
+	@GetMapping(value = "mypage/likeList_vue.do", produces = "text/plain;charset=utf-8")
+    public String likeList(int page, HttpSession session) {
+        String uid = (String) session.getAttribute("id");
+        
+        int curpage = page;
+        
+        int rowSize = 10;
+        int start = (curpage * rowSize) - (rowSize - 1);
+        int end = (rowSize * curpage);
+        
+        int totalpage = ldao.likeListTotalPage(uid);
+        
+        final int BLOCK = 10;
+        int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
+        int endPage = ((curpage - 1) / BLOCK * BLOCK) + BLOCK;
+        if (endPage > totalpage) {
+            endPage = totalpage;
+        }
+        
+        Map map = new HashMap();
+        map.put("uid", uid);
+        map.put("start", start);
+        map.put("end", end);
+        
+        List<Map<String,Object>> list = ldao.likeList(map);
+        
+        JSONArray arr = new JSONArray();
+        int i = 0;
+        for (Map<String,Object> j : list) {
+            JSONObject obj = new JSONObject();
+            obj.put("lid", j.get("L_ID"));
+            obj.put("gid", j.get("G_ID"));
+            obj.put("gname", j.get("G_NAME"));
+            
+            if(i == 0) {
+                obj.put("startPage", startPage);
+                obj.put("endPage", endPage);
+                obj.put("totalpage", totalpage);
+                obj.put("curpage", curpage);
+            }
+            arr.add(obj);
+            i++;
         }
         return arr.toJSONString();
     }

@@ -22,4 +22,12 @@ public class LikeDAO {
 	public void likeDelete(LikeVO vo) {
 	    mapper.likeDelete(vo);
 	}
+	
+	public List<Map<String,Object>> likeList(Map map) {
+	    return mapper.likeList(map);
+	}
+	
+	public int likeListTotalPage(String uid) {
+	    return mapper.likeListTotalPage(uid);
+	}
 }
