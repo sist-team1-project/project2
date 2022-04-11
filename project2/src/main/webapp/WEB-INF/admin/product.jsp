@@ -192,6 +192,7 @@
                         status: this.status
                     }
                 }).then(res => {
+                    console.log(res.data)
                     this.goodsList = res.data;
                     this.curpage = res.data[0].curpage;
                     this.totalpage = res.data[0].totalpage;
@@ -236,7 +237,6 @@
             /* 검색 순서 버튼 */
             searchByOrder:function(event) {
                 this.curpage = 1; // 페이지 초기화
-
                 this.order = event.currentTarget.value; // 누른 버튼의 값(원하는 순서)을 가지고옴
                 this.dataSend();      // 목록 출력
             },

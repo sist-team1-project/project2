@@ -26,66 +26,66 @@
                   <span class="stext-110 cl2"> 카테고리 </span>
                 </div>
                 <div class="size-209">
-                  <select ref="select1" v-model="cid1" @change="selectIndex($event)" class="bor10 p-tb-3 p-lr-5">
+                  <select ref="select1" v-model="cid1" @change="selectIndex($event)" class="bor10 cl3 p-tb-3 p-lr-5">
                     <option v-for="cate in categories1" :value="cate.cid">{{cate.title}}</option>
                   </select> &nbsp;&nbsp; 
-                  <select ref="good" v-model="cid2" class="bor10 p-tb-3 p-lr-5">
+                  <select ref="good" v-model="cid2" class="bor10 cl3 p-tb-3 p-lr-5">
                     <option v-for="cate2 in categories2[cindex]" :value="cate2.cid">{{cate2.title}}</option>
                   </select>
                 </div>
               </div>
-
-              <div class="flex-w flex-t bor12 p-t-20 p-b-20">
+        
+              <div class="flex-w flex-t bor12 p-tb-20">
                 <div class="size-208 w-full-ssm">
                   <span class="stext-110 cl2"> 상품명 </span>
                 </div>
                 <div class="size-209">
-                  <input ref="gname" type=text class="bor10 p-tb-3 p-lr-5 w-full" v-model="gname">
+                  <input ref="gname" type=text class="bor10 cl3 p-tb-3 p-lr-5 w-full" v-model="gname">
                 </div>
               </div>
 
-              <div class="flex-w flex-t bor12 p-t-20 p-b-20">
+              <div class="flex-w flex-t bor12 p-tb-20">
                 <div class="size-208 w-full-ssm">
                   <span class="stext-110 cl2"> 브랜드 </span>
                 </div>
                 <div class="size-209">
-                  <input ref="gbrand" type=text class="bor10 p-tb-3 p-lr-5 w-full" v-model="gbrand">
+                  <input ref="gbrand" type=text class="bor10 cl3 p-tb-3 p-lr-5 w-full" v-model="gbrand">
                 </div>
               </div>
 
-              <div class="flex-w flex-t bor12 p-t-20 p-b-20">
+              <div class="flex-w flex-t bor12 p-tb-20">
                 <div class="size-208 w-full-ssm">
                   <span class="stext-110 cl2"> 가격 (₩) </span>
                 </div>
                 <div class="size-209">
-                  <input ref="gprice" type=number min="0" class="bor10 p-tb-3 p-lr-5 w-full" v-model="gprice">
+                  <input ref="gprice" type=number min="0" class="bor10 cl3 p-tb-3 p-lr-5 w-full" v-model="gprice">
                 </div>
               </div>
 
-              <div class="flex-w flex-t bor12 p-t-20 p-b-20">
+              <div class="flex-w flex-t bor12 p-tb-20">
                 <div class="size-208 w-full-ssm">
                   <span class="stext-110 cl2"> 할인율 (%) </span>
                 </div>
                 <div class="size-209">
-                  <input ref="gsale" type=number min="0" class="bor10 p-tb-3 p-lr-5 w-full" v-model="gsale">
+                  <input ref="gsale" type=number min="0" class="bor10 cl3 p-tb-3 p-lr-5 w-full" v-model="gsale">
                 </div>
               </div>
 
-              <div class="flex-w flex-t bor12 p-t-20 p-b-20">
+              <div class="flex-w flex-t bor12 p-tb-20">
                 <div class="size-208 w-full-ssm">
                   <span class="stext-110 cl2"> 재고수량 </span>
                 </div>
                 <div class="size-209">
-                  <input ref="gstock" type=number min="0" class="bor10 p-tb-3 p-lr-5 w-full" v-model="gstock">
+                  <input ref="gstock" type=number min="0" class="bor10 cl3 p-tb-3 p-lr-5 w-full" v-model="gstock">
                 </div>
               </div>
 
-              <div class="flex-w flex-t bor12 p-t-20 p-b-20">
+              <div class="flex-w flex-t bor12 p-tb-20">
                 <div class="size-208 w-full-ssm">
                   <span class="stext-110 cl2"> 판매 상태 </span>
                 </div>
                 <div class="size-209">
-                  <select id="gstatus" v-model="gstatus" class="bor10 p-tb-3 p-lr-5">
+                  <select id="gstatus" v-model="gstatus" class="bor10 cl3 p-tb-3 p-lr-5">
                     <option value=-1>판매상태</option>
                     <option value=1>판매중</option>
                     <option value=0>판매중단</option>
@@ -100,7 +100,7 @@
                 <div class="size-209">
                   <div>
                     직접 경로 작성 ( 여러 이미지일시 구분자 ; )
-                    <input ref="gimage2" type=text min="0" class="bor10 p-tb-3 p-lr-5 w-full" v-model="gimage2">
+                    <input ref="gimage" type=text min="0" class="bor10 cl3 p-tb-3 p-lr-5 w-full" v-model="gimage">
                   </div>
                 </div>
               </div>
@@ -112,7 +112,7 @@
                 <div class="size-209">
                   <div>
                     직접 경로 작성 ( 여러 이미지일시 구분자 ; )
-                    <input ref="gdetail2" type=text min="0" class="bor10 p-tb-3 p-lr-5 w-full" v-model="gdetail2">
+                    <input ref="gdetail" type=text min="0" class="bor10 cl3 p-tb-3 p-lr-5 w-full" v-model="gdetail">
                   </div>
                 </div>
               </div>
@@ -122,7 +122,7 @@
                   <span class="stext-110 cl2"> 이벤트 여부 </span>
                 </div>
                 <div class="row size-209">
-                  <span v-for="e in events" class="dis-inline-block"><input type="checkbox" class="bor10 dis-inline-block" :value="e.eid" v-model="eid"> &nbsp;{{e.etitle}} &nbsp;&nbsp;</span>
+                  <span v-for="e in events" class="dis-inline-block"><input type="checkbox" class="bor10 cl3 dis-inline-block" :value="e.eid" v-model="eid"> &nbsp;{{e.etitle}} &nbsp;&nbsp;</span>
                 </div>
               </div>
 
@@ -155,8 +155,6 @@
 	        gstatus: '',
 	        gimage: '',
 	        gdetail: '',
-	        gimage2: '',
-	        gdetail2: '',
 	        eid: [],
 	        categories1: [],
 	        categories2: [],
@@ -189,8 +187,8 @@
                 this.gsale = result.data.g_sale;
                 this.gstock = result.data.g_stock;
                 this.gstatus = result.data.g_status;
-                this.gimage2 = result.data.g_image;
-                this.gdetail2 = result.data.g_detail;
+                this.gimage = result.data.g_image;
+                this.gdetail = result.data.g_detail;
                 for (var i = 0; i < result.data.eid.length; i++) {
 					this.eid.push(result.data.eid[i]);
 				}
@@ -230,19 +228,25 @@
 	            } else if (this.gstock == "") {
 	                this.$refs.gstock.focus();
 	                return;
-	            } else if (this.gstatus == -1) {
+	            } else if (this.gimage == "") {
+                    this.$refs.gimage.focus();
+                    return;
+                } else if (this.gdetail == "") {
+                    this.$refs.gdetail.focus();
+                    return;
+                } else if (this.gstatus == -1) {
 	                alert("상태 확인 필요");
 	                return;
 	            }
-
+	            
 	            if (this.eid == null) {
 	                this.eid.push(0);
 	            }
-
+	            
 	            let form = new FormData();
 	            form.append('g_id', this.gid);
-	            form.append('g_image', this.gimage2);
-	            form.append('g_detail', this.gdetail2);
+	            form.append('g_image', this.gimage);
+	            form.append('g_detail', this.gdetail);
 	            form.append('c_id', this.cid2);
 	            form.append('g_name', this.gname);
 	            form.append('g_brand', this.gbrand);

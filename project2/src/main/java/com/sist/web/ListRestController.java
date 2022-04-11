@@ -69,11 +69,15 @@ public class ListRestController {
             
             for (int i = 0; i < list.size(); i++) {
                 JSONObject obj = new JSONObject();
+                
                 obj.put("lid", list.get(i).get("L_ID").toString());
                 obj.put("gid", list.get(i).get("G_ID").toString());
                 obj.put("name", list.get(i).get("G_NAME").toString());
                 obj.put("price", list.get(i).get("G_PRICE").toString());
                 String images = list.get(i).get("G_IMAGE").toString();
+                if (images == null) {
+                    images = "";
+                }
                 String[] image = images.split(";");
                 obj.put("image", image[0]);
                 

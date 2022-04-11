@@ -3222,3 +3222,13 @@ input.num-product::-webkit-inner-spin-button {
 .activeFilter {
   font-weight: bold;
 }
+
+/*///////////////////////////////////////////////////////////////////////
+[링크]*/
+a,
+a:visited,
+a:active,
+a:hover {
+  color: #555;
+  text-decoration: none;
+}

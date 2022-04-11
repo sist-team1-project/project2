@@ -15,7 +15,7 @@ public class UserDAO {
 	@Autowired
 	private UserMapper mapper;
 
-	// 로그인: 아이디, 비밀번호로 유저 존재 여부 확인 → 존재하면 유저 등급 가져옴 
+	// 로그인: 아이디, 비밀번호로 유저 존재 여부 확인 → 존재하면 유저 등급 가져옴
 	public String isLogin(String id, String pwd) {
 		String result = "";
 		int count = mapper.idCount(id);
@@ -134,12 +134,15 @@ public class UserDAO {
 	}
 
 	// 유저정보 수정
-	/*
-	 * public boolean userUpdate(UserVO vo) { boolean bCheck = false; String db_pwd
-	 * = mapper.userGetPassword(vo.getU_id()); if
-	 * (db_pwd.equals(vo.getU_password())) { bCheck = true; mapper.userUpdate(vo); }
-	 * return bCheck; }
-	 */
+	public boolean userUpdate(UserVO vo) {
+		boolean bCheck = false;
+		String db_pwd = mapper.userGetPassword(vo.getU_id());
+		if (db_pwd.equals(vo.getU_password())) {
+			bCheck = true;
+			mapper.userUpdate(vo);
+		}
+		return bCheck;
+	}
 
 	/******* USER admin **********/
 	public List<UserVO> userList(Map map) {
