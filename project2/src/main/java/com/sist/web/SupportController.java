@@ -1,16 +1,14 @@
 package com.sist.web;
 
+import java.util.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.sist.vo.*;
 import com.sist.dao.*;
-import java.util.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -125,9 +123,9 @@ public class SupportController {
 		vo.setA_group_id(pvo.getA_group_id());
 		vo.setA_group_step(pvo.getA_group_step() + 1);
 		vo.setA_group_tab(pvo.getA_group_tab() + 1);
-
+		
 		adao.askReplyInsert(vo);
-
+		
 		return "redirect:list.do";
 	}
 

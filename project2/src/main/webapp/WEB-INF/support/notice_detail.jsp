@@ -5,10 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
-<script src="http://unpkg.com/axios/dist/axios.min.js"></script>
+  <meta charset="UTF-8">
+  <title>Insert title here</title>
 </head>
 <body>
 	<div class="container bg0" id="notice_detail">
@@ -40,7 +38,7 @@
 						</td>
 					</tr>
 				</table>
-				<div class="text-right" style="padding-top: 10px;">
+				<div class="text-right p-t-10">
 					<c:if test="${sessionScope.grade=='0' }">
 					<button class="btn btn-sm" style="background-color: #eeeee6"
 						v-on:click="update()">수정</button>
@@ -54,35 +52,35 @@
 		</div>
 	</div>
 	<script>
-   new Vue({
-	   	el:'#notice_detail',
-	   	data:{
-	   		vo:{},
-	   		no:${no}
-	   	},
-	   	mounted:function(){
-	   		axios.get('http://localhost:8080/web/support/notice_detail_vue.do',{
-	   			params:{
-	   				no:this.no
-	   			}
-	   		}).then(res=>{
-	   			console.log(res.data)
-	   			this.vo=res.data;
-	   		})
-	   	},
-	   	
-		methods:{
-	   		list:function(){
-	   			location.href="notice.do"
-	   		},
-	   		update:function(){
-	   			location.href="notice_update.do?no="+this.no
-	   		},
-	   		del:function(){
-	   			location.href="notice_delete.do?no="+this.no;
-	   		}
-	   	}
-	   }) 
+    new Vue({
+  	   	el:'#notice_detail',
+  	   	data:{
+  	   		vo:{},
+  	   		no:${no}
+  	   	},
+  	   	mounted:function(){
+  	   		axios.get('http://localhost:8080/web/support/notice_detail_vue.do',{
+  	   			params:{
+  	   				no:this.no
+  	   			}
+  	   		}).then(res=>{
+  	   			console.log(res.data)
+  	   			this.vo=res.data;
+  	   		})
+  	   	},
+  	   	
+  		methods:{
+  	   		list:function(){
+  	   			location.href="notice.do"
+  	   		},
+  	   		update:function(){
+  	   			location.href="notice_update.do?no="+this.no
+  	   		},
+  	   		del:function(){
+  	   			location.href="notice_delete.do?no="+this.no;
+  	   		}
+  	   	}
+	}) 
   </script>
 </body>
 </html>

@@ -1,11 +1,8 @@
 package com.sist.web;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import org.json.simple.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +11,7 @@ import com.sist.dao.*;
 import com.sist.vo.*;
 
 @RestController
+@RequestMapping("support/")
 public class SupportRestController {
 
 	@Autowired
@@ -23,7 +21,7 @@ public class SupportRestController {
 	private AskDAO adao;
 
 	// 공지사항
-	@GetMapping(value = "support/notice_vue.do", produces = "text/plain;charset=utf-8")
+	@GetMapping(value = "notice_vue.do", produces = "text/plain;charset=utf-8")
 	public String notice_list_vue(String page) {
 		String result = "";
 		try {
@@ -62,7 +60,7 @@ public class SupportRestController {
 		return result;
 	}
 
-	@GetMapping(value = "support/notice_detail_vue.do", produces = "text/plain;charset=utf-8")
+	@GetMapping(value = "notice_detail_vue.do", produces = "text/plain;charset=utf-8")
 	public String notice_detail_vue(int no) {
 		String result = "";
 		try {
@@ -83,7 +81,7 @@ public class SupportRestController {
 		return result;
 	}
 
-	@GetMapping(value = "support/notice_update_vue.do", produces = "text/plain;charset=utf-8")
+	@GetMapping(value = "notice_update_vue.do", produces = "text/plain;charset=utf-8")
 	public String food_board_update_vue(int no) {
 		String result = "";
 		try {
@@ -99,7 +97,7 @@ public class SupportRestController {
 		return result;
 	}
 
-	@GetMapping(value = "support/notice_update_ok_vue.do", produces = "text/plain;charset=utf-8")
+	@GetMapping(value = "notice_update_ok_vue.do", produces = "text/plain;charset=utf-8")
 	public String notice_update(NoticeVO vo) {
 		String result = "";
 		ndao.noticeUpdate(vo);
@@ -107,7 +105,7 @@ public class SupportRestController {
 		return result;
 	}
 
-	@GetMapping(value = "support/notice_delete_ok.do", produces = "text/plain;charset=utf-8")
+	@GetMapping(value = "notice_delete_ok.do", produces = "text/plain;charset=utf-8")
 	public String notice_delete(int no) {
 		String result = "";
 		ndao.noticeDelete(no);
@@ -117,14 +115,14 @@ public class SupportRestController {
     
 	
 	// 1:1 문의
-	@PostMapping("support/ask_update_ok.do")
+	@PostMapping("ask_update_ok.do")
 	public String askUpdateOk(AskVO vo) {
 		String result = "";
 		result = "<script>location.href=\"../ask/detail.do?no=" + vo.getA_id() + "\";</script>";
 		return result;
 	}
 
-	@PostMapping("support/ask_delete_ok.do")
+	@PostMapping("ask_delete_ok.do")
 	public String askDeleteOk(int no, String pwd) {
 		String result = "";
 		result = "<script>location.href=\"../support/ask.do\";</script>";
