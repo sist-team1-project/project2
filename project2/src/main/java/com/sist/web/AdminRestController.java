@@ -27,7 +27,7 @@ public class AdminRestController {
     
     @Autowired
     private UserDAO udao;
-    
+    /************ 주문 관리 ***************/
     @GetMapping(value = "orderlist_vue.do", produces = "text/plain;charset=utf-8")
     public String orderFull(int page, String sort) {
         
@@ -80,7 +80,7 @@ public class AdminRestController {
         return arr.toJSONString();
     }
 
-    /**************** 주문상세페이지 ********************/
+    /**************** 주문상세 1 ********************/
     @GetMapping(value = "orderdetail_vue.do", produces = "text/plain;charset=utf-8")
     public String orderdetail_vue(String oid) {
         System.out.println(oid);
@@ -102,7 +102,7 @@ public class AdminRestController {
         }
         return arr.toJSONString();
     }
-    
+    /*** 주문 상세2 ***/
     @GetMapping(value = "order.do", produces = "text/plain;charset=utf-8")
     public String order(String oid) {
 
@@ -123,6 +123,7 @@ public class AdminRestController {
         return obj.toJSONString();
     }
     
+    /**************** 주문상태 업데이트 **********************/
     @PostMapping(value = "order_state_update_ok.do", produces = "text/plain;charset=utf-8")
     public void order_state_update_ok(int state, String oid) {
         
@@ -132,7 +133,7 @@ public class AdminRestController {
         odao.stateupdate(map);
     }
     
-    /****************************** USER *****************************/
+    /****************************** USER 관리 *****************************/
     @GetMapping(value = "userlist_vue.do", produces = "text/plain;charset=utf-8")
     public String userlist(int page,Model model) {
         
@@ -182,7 +183,7 @@ public class AdminRestController {
         }
         return arr.toJSONString();
     }
-    
+    /************ 유저 등급 관리 *************/
     @PostMapping(value = "user_grade_update_ok.do", produces = "text/plain;charset=utf-8")
     public void user_grade_update_ok(int grade, String uid) {
         Map map = new HashMap();
