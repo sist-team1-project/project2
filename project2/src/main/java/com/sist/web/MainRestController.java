@@ -59,6 +59,9 @@ public class MainRestController {
             obj.put("eid", glist.get(i).get("E_ID").toString());
             
             String images = (String) glist.get(i).get("G_IMAGE");
+            if (images == null) {
+                images = "";
+            }
             String[] image = images.split(";");
             obj.put("image", image[0]);
             egArr.add(obj);
