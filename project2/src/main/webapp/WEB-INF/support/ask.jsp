@@ -33,7 +33,7 @@
             </tr>
           </c:if>
           </c:if>        
-        
+          <c:if test="${sessionScope.grade=='1' }">
           <c:if test="${sessionScope.id==vo.u_id }">
           <c:if test="${vo.a_group_tab==0 }">
             <tr>
@@ -45,6 +45,7 @@
                 </c:if> <a href="../support/ask_detail.do?no=${vo.a_id }">${vo.a_title }</a></td>
               <td width=15% class="text-center">${vo.a_regdate }</td>
             </tr>
+          </c:if>
           </c:if>
           </c:if>
           <c:if test="${vo.a_group_tab!=0 }">
