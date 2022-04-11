@@ -11,21 +11,21 @@
   <div class="row p-b-20">
     <div class="col-md-7"><h4>비밀번호 변경</h4></div>
   </div>
-  <div class="border col-md-7">
-      <div class="row">
-        <div class="col-md-7">
-          <div>기존 비밀번호</div>
-          <div><input type="password" class="bor10 p-lr-5 p-tb-3 cl3 fs-13" name="password" ref="password" placeholder="비밀번호를 입력하세요" v-model="form.password"></div>
+  <div class="border col-md-5 p-lr-50 p-t-30 p-b-20">
+      <div class="row flex-c">
+        <div class="p-b-20">
+          <div class="p-b-8"><b>기존 비밀번호</b></div>
+          <div><input type="password" size=40% class="bor10 p-lr-5 p-tb-3 cl3 fs-13" name="password" ref="password" placeholder="비밀번호를 입력하세요" v-model="form.password"></div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-7">
-          <div>새 비밀번호</div>
-          <div><input type="password" class="bor10 p-lr-5 p-tb-3 cl3 fs-13" name="newPassword" ref="newPassword" placeholder="새 비밀번호를 입력하세요" @blur="pwdValidate" v-model="form.newPassword" @click="form.newPassword=''; newPassword2=''"></div> 
+      <div class="row flex-c">
+        <div class="p-b-10">
+          <div class="p-b-8"><b>새 비밀번호</b></div>
+          <div><input type="password" size=40% class="bor10 p-lr-5 p-tb-3 cl3 fs-13" name="newPassword" ref="newPassword" placeholder="새 비밀번호를 입력하세요" @blur="pwdValidate" v-model="form.newPassword" @click="form.newPassword=''; newPassword2=''"></div> 
           <p class="fs-12 cl3">{{pwdOk}}</p>
-          <div><input type="password" class="bor10 p-lr-5 p-tb-3 cl3 fs-13" ref="newPassword2" placeholder="새 비밀번호를 재입력하세요" @blur="pwd2Validate" v-model="newPassword2" @click="newPassword2=''"></div>
-          <p class="fs-12 cl3">{{pwdOk2}}</p>
-          <div><input type="button" class="bor10 bg1 p-lr-5 p-tb-3 cl3 fs-13" value="제출" @click="submit()"></div>
+          <div class="p-t-8"><input type="password" size=40% class="bor10 p-lr-5 p-tb-3 cl3 fs-13" ref="newPassword2" placeholder="새 비밀번호를 재입력하세요" @blur="pwd2Validate" v-model="newPassword2" @click="newPassword2=''"></div>
+          <p class="fs-12 cl3 p-b-30">{{pwdOk2}}</p>
+          <div class="flex-c"><input type="button" class="flex-c-m stext-101 cl0 btn-sm btn-pro-color2 bor1 hov-btn1 p-lr-15 trans-04 fs-10" style="background-color:#dbd0be" value="제출" @click="submit()"></div>
         </div>
       </div>
     </div>

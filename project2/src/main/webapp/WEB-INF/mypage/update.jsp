@@ -10,7 +10,7 @@
 </head>
 <body>
   <div class="row">
-    <div class="col-sm-12 p-l-30 p-t-50"><h3>회원정보 변경</h3></div>
+    <div class="col-sm-12 p-l-30 p-t-50"><h3>회원정보 수정</h3></div>
   </div>
   <div class="container p-t-20 p-b-60" id="mypage_update">
     <div class="col-sm-7 bor10 p-lr-40 p-t-30 p-b-25 p-lr-15-sm">
