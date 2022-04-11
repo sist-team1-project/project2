@@ -135,13 +135,23 @@ public class SupportRestController {
 	@PostMapping("ask_update_ok.do")
 	public String askUpdateOk(AskVO vo) {
 		String result = "";
+		adao.askUpdate(vo);
 		result = "<script>location.href=\"../ask/detail.do?no=" + vo.getA_id() + "\";</script>";
 		return result;
 	}
 
 	@PostMapping("ask_delete_ok.do")
-	public String askDeleteOk(int no, String pwd) {
+	public String askDeleteOk(int no) {
 		String result = "";
+		AskVO vo=adao.askDetailData(no);
+		if(vo.getA_group_step()==0)
+    	{
+    		adao.askDelete1(no, vo.getA_group_id());
+    	}
+    	else
+    	{
+    		adao.askDelete2(no);
+    	}
 		result = "<script>location.href=\"../support/ask.do\";</script>";
 		return result;
 	}

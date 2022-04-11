@@ -35,8 +35,8 @@ public class AskDAO {
 		return mapper.askDetailData(no);
 	}
 
-	public int askCount(int group_id) {
-		return mapper.askCount(group_id);
+	public int askCount(int a_group_id) {
+		return mapper.askCount(a_group_id);
 	}
 
 	public AskVO askParentInfoData(int no) {
