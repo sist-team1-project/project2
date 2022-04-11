@@ -71,6 +71,9 @@ public interface AskMapper {
 	/*   --- 질문 그룹탭 +1 --- */
 	@Update("UPDATE ask_1 SET a_group_tab = #{a_group_tab}+1 WHERE a_id = #{a_id} ")
 	public void asktabReply(AskVO vo);
+	
+	@Select("SELECT a_group_id FROM ask_1 WHERE a_id = #{a_id}")
+	public int agid(int a_id);
 
 	
 }

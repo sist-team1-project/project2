@@ -63,6 +63,10 @@ public class AskDAO {
 			mapper.askDelete2(no);
 	}
 	
+	public List<AskVO> askListData_admin(Map map){
+		return mapper.askListData_admin(map);
+	}
+	
 	/* -- 댓글 작성 시 질문 tab 증가 -- */
 	public void asktabReply(AskVO vo) {
 			mapper.asktabReply(vo);
