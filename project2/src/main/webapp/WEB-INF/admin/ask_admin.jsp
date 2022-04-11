@@ -60,24 +60,26 @@
   </div>
 
   <div class="text-center">
-    <div class="pagination">
-      <ul>
+      <ul class="pagination">
         <c:if test="${startPage>1 }">
-          <li class="paging" data-page="${startPage-1 }"><i class="fa fa-chevron-left" aria-hidden="true"></i></li>
+          <li class="paging page-item" data-page="${startPage-1 }">
+          	<i class="fa fa-chevron-left" aria-hidden="true"></i>
+          </li>
         </c:if>
         <c:forEach var="i" begin="${startPage }" end="${endPage }">
           <c:if test="${i==curPage }">
             <li class="current">${i }</li>
           </c:if>
           <c:if test="${i!=curPage }">
-            <li class="paging" data-page="${i }">${i }</li>
+            <li class="paging page-item" data-page="${i }"><button class="page-link">${i }</button></li>
           </c:if>
         </c:forEach>
         <c:if test="${endPage<totalPage }">
-          <li class="paging" data-page="${endPage+1 }"><i class="fa fa-caret-right" aria-hidden="true"></i></li>
+          <li class="paging page-item" data-page="${endPage+1 }">
+          	<i class="fa fa-caret-right" aria-hidden="true"></i>
+          </li>
         </c:if>
       </ul>
-    </div>
   </div>
 
 
@@ -87,16 +89,9 @@
 				$('.paging').css("cursor", "pointer");
 				$('.paging').click(function() {
 					let page = $(this).attr('data-page');
-					$.ajax({
-						type : 'get',
-						url : '../admin/ask_admin_result.do',
-						data : {
-							"page" : page
-						},
-						success : function(result) {
-							$('#askAdmin').html(result);
-						}
-					});
+					
+					location.href = '../admin/ask_admin.do?page=' + page;
+					
 				})
 			})
 		</script>
