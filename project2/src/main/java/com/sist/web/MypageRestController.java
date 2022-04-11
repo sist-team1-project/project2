@@ -37,7 +37,7 @@ public class MypageRestController {
 		return obj.toJSONString();
 	}
 	
-/*	@PostMapping(value = "mypage/update_ok.do", produces = "text/plain;charset=utf-8")
+	@GetMapping(value = "mypage/update_ok.do", produces = "text/plain;charset=utf-8")
 	public String mypage_update_ok(UserVO vo) {
 		String result = "";
 		boolean bCheck = dao.userUpdate(vo);
@@ -48,7 +48,7 @@ public class MypageRestController {
 		}
 		return result;
 	}
-*/
+
 
     @GetMapping(value = "mypage/update_pwd_ok.do", produces = "text/plain;charset=utf-8")
     public String mypage_update_pwd_ok(UserVO vo) {
@@ -66,11 +66,11 @@ public class MypageRestController {
     }
     
     @GetMapping(value = "mypage/delete_ok.do", produces = "text/plain;charset=utf-8")
-    public String mypage_delete_ok(UserVO vo) {
+    public String mypage_delete_ok(String id, String pwd) {
         String result = "";
         Map map = new HashMap();
-        map.put("id", vo.getU_id());
-        map.put("password", vo.getU_password());
+        map.put("id", id);
+        map.put("password", pwd);
         boolean bCheck = dao.userDelete(map);
         if (bCheck == true) {
             result = "YES";
