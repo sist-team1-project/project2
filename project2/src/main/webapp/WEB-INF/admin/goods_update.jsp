@@ -189,9 +189,10 @@
                 this.gimage2 = result.data.g_image;
                 this.gdetail2 = result.data.g_detail;
                 for (var i = 0; i < result.data.eid.length; i++) {
-					this.eid.push(i);
-				}
-            })
+								this.eid.push(result.data.eid[i]);
+							}
+                console.log(result.data);
+          })
 	    },
 	    methods: {
 	    	cate1: function() {
