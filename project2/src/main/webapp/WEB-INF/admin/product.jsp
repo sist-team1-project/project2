@@ -131,7 +131,7 @@
 
 		<!-- 사이드 Detail -->
 		<div class="wrap-header-admin js-panel-admin">
-			<div class="s-full" v-on:click="goods_detail_close"></div>
+			<div class="s-full" @click="goods_detail_close"></div>
 			<div class="header-admin flex-col-l p-l-65 p-r-25">
 				<div class="header-admin-title flex-w flex-sb-m p-b-8">
 					<span class="mtext-103 cl2"> Detail </span>
@@ -143,7 +143,7 @@
 					<ul class="header-admin-wrapitem w-2full">
 						<li class="header-admin-item flex-w flex-t m-b-12">
 							<div class="header-admin-item-img">
-								<img :src="gdetail" onerror="this.src='../images/image_ready.jpg'">
+								<img v-for="d in gdetail" :src="d" onerror="this.src='../images/image_ready.jpg'">
 							</div>
 						</li>
 					</ul>
@@ -162,8 +162,9 @@
             totalpage: 0,
             startPage: 0,
             endPage: 0,
-            gdetail: '',
+            gdetail: [],
             pages: [],
+            gdetail: [],
             count: 0,
             g_id: 0,
             selected: '',
@@ -192,14 +193,12 @@
                         status: this.status
                     }
                 }).then(res => {
-                    console.log(res.data)
                     this.goodsList = res.data;
-                    this.curpage = res.data[0].curpage;
-                    this.totalpage = res.data[0].totalpage;
-                    this.gdetail = res.data[0].g_detail;
-                    this.startPage = res.data[0].startPage;
-                    this.endPage = res.data[0].endPage;
-                    this.count = res.data[0].count;
+                    this.curpage = res.data.curpage;
+                    this.totalpage = res.data.totalpage;
+                    this.startPage = res.data.startPage;
+                    this.endPage = res.data.endPage;
+                    this.count = res.data.count;
                     this.pages = [];
                     for (i = this.startPage; i <= this.endPage; i++) {
                         this.pages.push(i);
@@ -222,7 +221,7 @@
                 this.dataSend();
             },
             goods_detail: function(detailId) {
-                this.gdetail = detailId;
+                this.gdetail = detailId.split(';');
                 $('.js-panel-admin').addClass('show-header-admin');
             },
             goods_detail_close: function() {

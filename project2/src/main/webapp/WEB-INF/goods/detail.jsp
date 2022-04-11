@@ -181,7 +181,7 @@
     	   		this.details=this.goods.detail.split(";");
     	   		this.image=this.images[0];
     	    })
-    	    this.replyList();
+    	    //this.replyList();
         },
         methods: {
             showImg:function(link){
