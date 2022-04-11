@@ -38,9 +38,14 @@ public class MypageRestController {
 		return obj.toJSONString();
 	}
 
+	// 
 	@PostMapping(value = "mypage/update_ok.do", produces = "text/plain;charset=utf-8")
-	public String mypage_update_ok(@ModelAttribute UserVO vo, @RequestParam String id, HttpServletRequest request) {
-		String result = "";
+	public String mypage_update_ok(@RequestBody UserVO vo, HttpSession session) {
+		String result = "";	
+		if(vo.getU_address2()==null)
+		{
+			vo.setU_address2("");
+		}
 		boolean bCheck = dao.userUpdate(vo);
 		if (bCheck == true) {
 			result = "YES";
@@ -63,12 +68,9 @@ public class MypageRestController {
 		return result;
 	}
 
-	@GetMapping(value = "mypage/delete_ok.do", produces = "text/plain;charset=utf-8")
-	public String mypage_delete_ok(String id, String pwd) {
+	@PostMapping(value = "mypage/delete_ok.do", produces = "text/plain;charset=utf-8")
+	public String mypage_delete_ok(@RequestBody HashMap<String, Object> map) {
 		String result = "";
-		Map map = new HashMap();
-		map.put("id", id);
-		map.put("password", pwd);
 		boolean bCheck = dao.userDelete(map);
 		if (bCheck == true) {
 			result = "YES";

@@ -27,9 +27,8 @@
 new Vue({
  	el:'#delete',
  	data:{
- 		password:'',
  		id:'${id}',
- 		vo:{}
+ 		password:'' 		
  	},
  	mounted:function(){
  		
@@ -44,10 +43,10 @@ new Vue({
  				return;
  			}
  			// 서버실행 전 확인
- 			axios.get("http://localhost:8080/web/mypage/delete_ok.do",{
+ 			axios.post("http://localhost:8080/web/mypage/delete_ok.do",null,{
  	            params:{
  	            	id:this.id,
- 	            	password:this.password
+ 	            	//password:this.password
  	            }
  	        }).then(res => {
  	        	//_this.data=res.data;

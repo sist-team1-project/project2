@@ -16,33 +16,19 @@
         <div class="text-left"> 
           <div class="p-t-20 p-b-10">
             <div>아이디</div>
-            <input class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" type="text" ref="id" v-model="form.u_id" @blur="idCheck" readonly style="background-color:#eeeee6">
-            <p class="fs-12 cl3">{{idOk}}</p>
+            <input class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" type="text" ref="id" v-model="form.u_id" readonly style="background-color:#eeeee6">
           </div>
           
           <div class="p-tb-10">
             <div>이름</div>
-            <input class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" type="text" ref="name" v-model="form.u_name" readonly style="background-color:#eeeee6">
+            <input class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" type="text" ref="name" v-model="u_name" readonly style="background-color:#eeeee6">
           </div>
-          
+                
           <div class="p-tb-10">
             <div>비밀번호 입력</div>
-            <input class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" type="password" ref="password" v-model="form.u_password" @blur="pwdValidate" @click="form.u_password=''; password2=''">
-            <p class="fs-12 cl3">{{pwdOk}}</p>
+            <input class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" type="password" ref="password" v-model="form.u_password">
           </div>
-          
-          <div class="p-tb-10">
-            <div>비밀번호 확인</div>
-            <input class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" type="password" ref="password2" v-model="password2" @blur="pwd2Validate" @click="password2=''">
-            <p class="fs-12 cl3">{{pwdOk2}}</p>
-          </div>
-        
-          <div class="p-tb-10">
-            <div>성별</div>
-            <input class="dis-inline-block cl3 fs-13" type="radio" value="남자" v-model="form.u_gender"> 남자
-            <input class="dis-inline-block cl3 fs-13"  type="radio" value="여자" v-model="form.u_gender"> 여자
-          </div>
-        
+                
           <div class="p-tb-10">
             <div>이메일</div>
             <input class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" type="text" ref="email" v-model="form.u_email" @blur="emailCheck">
@@ -101,34 +87,23 @@
         el:'#mypage_update',
         data:{
             form: {
-                u_id:'',
-                u_name:'',
-                u_password:'',
+            	u_password:'',
                 u_phone:'',
                 u_email:'',
-                u_gender:'남자',
                 u_post:'',
                 u_address1:'',
                 u_address2:'',
-                u_question:'기억에 남는 추억의 장소는?',
+                u_question:'',
                 u_answer:''
             },
-            password2:'',
-            idOk:'',
-            pwdOk:'',
-            pwdOk2:'',
+            u_name:'',
             emailOk:'',
-            
         },
         mounted:function(){
               axios.get("http://localhost:8080/web/mypage/info_vue.do",{
-            	  params:{
-            		 u_id: this.uid
-            	  }
               }).then(res=>{
-            	  this.info=res.data;
             	  this.form.u_id=res.data.uid;
-            	  this.form.u_name=res.data.name;
+            	  this.u_name=res.data.name;
             	  this.form.u_phone=res.data.phone;
             	  this.form.u_email=res.data.email;
             	  this.form.u_post=res.data.post;
@@ -140,28 +115,9 @@
         },
         methods:{
             submitForm:function(){
-                if(this.form.u_id == '' || this.idOk != '') {
-                    this.$refs.id.focus();
-                    return;
-                }
-                if(this.form.u_name == '') {
-                    this.$refs.name.focus();
-                    return;
-                }
                 
                 if(this.form.u_password == '') {
                     this.$refs.password.focus();
-                    return;
-                }
-                
-                if(this.password2 == '') {
-                    this.$refs.password2.focus();
-                    return;
-                }
-                
-                if(this.form.u_password != this.password2) {
-                    this.form.u_password == '';
-                    this.password2 == '';
                     return;
                 }
                 
@@ -189,9 +145,13 @@
                     this.$refs.answer.focus();
                     return;
                 }
-       
+                
+                if(this.emailOk != '') {
+                    this.$refs.email.focus();
+                    return;
+                }
+                
 	            axios.post('http://localhost:8080/web/mypage/update_ok.do', this.form, {
-
 	            }).then(res=> {
 	            	if(res.data=="YES") {
                         alert("변경이 완료되었습니다.");
@@ -238,52 +198,8 @@
                     this.emailOk = '';
                 }
             },
-            idValidate:function(id) {
-                let num = id.search(/[0-9]/g);
-                let eng = id.search(/[a-z]/ig);
-                
-                if(id.length < 6 || id.length > 12){
-                    this.idOk = '아이디는 6자리 ~ 12자리 이내로 입력해주세요';
-                    return;
-                } else if(id.search(/\s/) != -1){
-                    this.idOk = '아이디는 공백 없이 입력해주세요.';
-                    return;
-                } else if(num < 0 || eng < 0){
-                    this.idOk = '아이디는 영문,숫자를 혼합하여 입력해주세요.';
-                    return;
-                } else {
-                    this.idOk = '';
-                    return;
-                }
-            },
-            pwdValidate:function() {
-                password = this.form.u_password;
-                let num = password.search(/[0-9]/g);
-                let eng = password.search(/[a-z]/ig);
-                if(password == '') {
-                    this.pwdOk = '';
-                    return;
-                } if(password.length < 8 || password.length > 20){
-                    this.pwdOk = '비밀번호를 8자리 ~ 20자리 이내로 입력해주세요.';
-                    return;
-                } else if(password.search(/\s/) != -1){
-                    this.pwdOk = '비밀번호는 공백 없이 입력해주세요.';
-                    return;
-                } else if(num < 0 || eng < 0){
-                    this.pwdOk = '비밀번호는 영문,숫자를 혼합하여 입력해주세요.';
-                    return;
-                } else {
-                    this.pwdOk = ''
-                    return;
-                }
-            },
-            pwd2Validate:function() {
-                if(this.form.u_password != this.password2) {
-                    this.pwdOk2 = '재입력이 일치하지 않습니다.';
-                } else {
-                    this.pwdOk2 = '';
-                }
-            },
+           
+            // 이메일 형식 검증
             emailValidate:function() {
                 let re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
                 if(!re.test(this.form.u_email)) {
@@ -292,6 +208,7 @@
                     this.emailOk = '';
                 }
             },
+            // 우
             postFind:function() {
                 this_ = this; // this 주소 저장
                 new daum.Postcode({
