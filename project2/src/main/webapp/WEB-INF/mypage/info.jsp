@@ -25,6 +25,10 @@
       <div class="col-sm-9">{{info.gender }}</div>
     </div>
     <div>
+      <div class="col-sm-3"><b>전화번호</b></div>
+      <div class="col-sm-9">{{info.phone }}</div>
+    </div>
+    <div>
       <div class="col-sm-3"><b>주소</b></div>
       <div class="col-sm-9">
         <div>{{info.address1 }} {{info.address2 }} {{info.post }}</div>
