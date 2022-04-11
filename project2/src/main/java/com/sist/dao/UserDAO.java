@@ -121,12 +121,12 @@ public class UserDAO {
 	}
 
 	// 계정 삭제 - 아이디에 따른 비번이 서버 비번과 일치시 삭제
-	public boolean userDelete(Map map) {
+	public boolean userDelete(String id, String pwd) {
 		boolean bCheck = false;
-		String db_pwd = mapper.userGetPassword((String) map.get("id"));
-		if (db_pwd.equals((String) map.get("password"))) {
+		String db_pwd = mapper.userGetPassword(id);
+		if (db_pwd.equals(pwd)) {
 			bCheck = true;
-			mapper.userDelete((String) map.get("id"));
+			mapper.userDelete(id);
 		} else {
 			bCheck = false;
 		}
