@@ -2,8 +2,8 @@
 .table-order {
 	border-collapse: collapse;
 	width: 100%;
-	border-color: #dbd0be;
 	height: 100%;
+	border-color: #dbd0be;
 }
 .lineframe {
 	border-bottom: 0.5px solid #dbd0be;
@@ -24,13 +24,7 @@ th {
 	margin: 0px auto;
 	text-align: center;
 }
-.ft{
-	font-size: 12pt;
-}
 
-.ft>td {
-	font-size: 11pt;
-}
 .tcenter {
 	text-align: center;
 }

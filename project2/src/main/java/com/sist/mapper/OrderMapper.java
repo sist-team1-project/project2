@@ -66,7 +66,7 @@ public interface OrderMapper {
 	 @Select("<script>"
 	        + "SELECT oid, regdate, shipping, state, usid, name, price, quantity "
 	        + "FROM (SELECT oid, regdate, shipping, state, usid, name, price, quantity, rownum as num "
-	        + "FROM (SELECT o_id as oid, o_regdate as regdate, o_shipping as shipping, o_state as state, u_id as usid, "
+	        + "FROM (SELECT o_id as oid, TO_CHAR(o_regdate,'YYYY-MM-DD HH24:MI:SS') as regdate, o_shipping as shipping, o_state as state, u_id as usid, "
 			+ "g_name || decode(sum(g_quantity),1,'',' 외 ' || (sum(g_quantity)-1) || '개')as name, "
 			+ "sum(g_price) as price, sum(g_quantity) as quantity "
 			+ "FROM (SELECT a.o_id, a.o_regdate, a.o_shipping, a.o_state, a.u_id, "
