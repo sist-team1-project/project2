@@ -131,13 +131,6 @@ public class SupportController {
 		return "redirect:../admin/ask_admin.do";
 	}
 
-	@GetMapping("ask_update.do")
-	public String askUpdate(int no, Model model) {
-		AskVO vo = adao.askUpdateData(no);
-		model.addAttribute("vo", vo);
-		return "support/ask_update";
-	}
-
 	@GetMapping("ask_delete.do")
 	public String askDelete(int no, Model model) {
 		model.addAttribute("no", no);

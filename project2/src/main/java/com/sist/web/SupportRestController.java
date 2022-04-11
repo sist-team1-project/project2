@@ -132,14 +132,6 @@ public class SupportRestController {
 	}
 
 	// 1:1 문의
-	@PostMapping("ask_update_ok.do")
-	public String askUpdateOk(AskVO vo) {
-		String result = "";
-		adao.askUpdate(vo);
-		result = "<script>location.href=\"../ask/detail.do?no=" + vo.getA_id() + "\";</script>";
-		return result;
-	}
-
 	@PostMapping("ask_delete_ok.do")
 	public String askDeleteOk(int no) {
 		String result = "";
