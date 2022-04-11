@@ -126,18 +126,18 @@
         <li>
           <c:if test="${sessionScope.id==null }">
             <div class="right-top-bar flex-w h-full">
-              <a href="#" class="flex-c-m p-lr-10 trans-04">로그인</a>
+              <a href="../support/notice.do" class="flex-c-m p-lr-10 trans-04">고객센터</a>
+              <a href="../user/login.do" class="flex-c-m p-lr-10 trans-04">로그인</a>
             </div>
           </c:if>
           <c:if test="${sessionScope.id!=null }">
             <div class="right-top-bar flex-w h-full">
-              <a href="../user/logout.do" class="flex-c-m p-lr-10 trans-04">로그아웃</a>
-              <c:if test="${sessionScope.grade=='1' }">
+              <a href="../support/notice.do" class="flex-c-m p-lr-10 trans-04">고객센터</a>
                 <a href="../mypage/mypage.do" class="flex-c-m p-lr-10 trans-04">마이페이지</a>
-              </c:if>
               <c:if test="${sessionScope.grade=='0' }">
                 <a href="../admin/adlist.do" class="flex-c-m p-lr-10 trans-04">관리자페이지</a>
               </c:if>
+              <a href="../user/logout.do" class="flex-c-m p-lr-10 trans-04">로그아웃</a>
             </div>
           </c:if>
         </li>

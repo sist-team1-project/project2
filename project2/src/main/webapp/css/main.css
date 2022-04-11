@@ -3225,10 +3225,10 @@ input.num-product::-webkit-inner-spin-button {
 
 /*///////////////////////////////////////////////////////////////////////
 [링크]*/
-a,
-a:visited,
-a:active,
-a:hover {
+td a,
+td a:visited,
+td a:active,
+td a:hover {
   color: #555;
   text-decoration: none;
 }
