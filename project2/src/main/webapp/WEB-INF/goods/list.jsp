@@ -22,7 +22,7 @@
           <div class="p-b-27">
             <div class="mtext-102 cl2 p-b-15">브랜드</div>
             <span id="brand-all" class="p-tb-10 p-r-15 dis-inline-block"><input class="dis-inline-block" type=checkbox value="" v-model="checkAll" @click="brandCheckAll()"> 전체&nbsp;&nbsp;</span>
-            <span class="p-tb-10 p-r-15 dis-inline-block" v-for="b in brands"><input class="dis-inline-block" type=checkbox :value="b.brand" v-model="selectedBrands" @click="brandCheck()"> {{b.brand}}&nbsp;&nbsp;</span>
+            <span class="p-tb-10 p-r-15 dis-inline-block" v-for="b in brands"><input class="dis-inline-block" type=checkbox :value="b.brand" v-model="selectedBrands" @click="checkAll=false"> {{b.brand}}&nbsp;&nbsp;</span>
           </div>
           
           <div class="p-r-15 p-b-27">
@@ -199,10 +199,6 @@
                 } else {                      // 전체 체크 버튼을 해제
                     this.checkAll = false;
                 }
-            },
-            /* 브랜드 전체 체크 해제 버튼 */
-            brandCheck:function() {
-                this.checkAll = false;
             },
             like:function(gid, index) { // 좋아요
                 axios.post("http://localhost:8080/web/goods/like_insert_ok.do",null,{

@@ -22,8 +22,12 @@ public class CartDAO {
 	    if(count == 0) {
 	        mapper.cartInsert(vo);
 	    } else {
-	        mapper.cartUpdate(vo.getG_quantity());
+	        mapper.cartUpdate(vo);
 	    }
+	}
+	
+	public void cartDelete(int cid) {
+	    mapper.cartDelete(cid);
 	}
 	
 	public int countCart(String uid) {

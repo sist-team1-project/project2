@@ -1730,73 +1730,24 @@ input.num-product::-webkit-inner-spin-button {
 /*//////////////////////////////////////////////////////////////////
 [ Table Shopping Cart ]*/
 
-.table-shopping-cart {
-  border-collapse: collapse;
-  width: 100%;
-  min-width: 800px;
-}
-
-.table-shopping-cart .column-1 {
-  width: 100px;
-  padding-left: 50px;
-}
-
-.table-shopping-cart .column-2 {
-  width: 120px;
-}
-
-.table-shopping-cart .column-3 {
-  width: 420px;
-  font-size: 15px;
-}
-
-.table-shopping-cart .column-4 {
-  width: 120px;
-  text-align: center;
-  font-size: 16px;
-}
-
-.table-shopping-cart .column-5 {
-  width: 120px;
-  text-align: right;
-}
-
-.table-shopping-cart .column-6 {
-  width: 120px;
-  text-align: right;
-  font-size: 16px;
-}
-
-.table-shopping-cart .column-7 {
-  width: 170px;
-  padding-right: 50px;
-  text-align: right;
-  font-size: 16px;
-}
-
-.table-shopping-cart tr,
 .table-checkout tr {
   border-top: 1px solid #e6e6e6;
   border-bottom: 1px solid #e6e6e6;
 }
 
-.table-shopping-cart .table_row,
 .table-checkout .table_row {
   border-collapse: collapse;
   height: 70px;
 }
 
-.table-shopping-cart .table_row td,
 .table-checkout .table_row td {
   padding-bottom: 20px;
 }
 
-.table-shopping-cart .table_row td.column-1,
 .table-checkout .table_row td.column-1 {
   padding-bottom: 30px;
 }
 
-.table-shopping-cart .table_head th,
 .table-checkout .table_head th {
   
   font-size: 13px;
@@ -1807,7 +1758,6 @@ input.num-product::-webkit-inner-spin-button {
   padding-bottom: 15px;
 }
 
-.table-shopping-cart td,
 .table-checkout td {
   
   color: #555;

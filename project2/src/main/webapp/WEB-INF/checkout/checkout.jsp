@@ -1,46 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+  <meta charset="UTF-8">
+  <title>Insert title here</title>
+  <link rel="stylesheet" type="text/css" href="../css/cart.css">
 </head>
 <body>
   <form method="post" action="../cart/checkout_ok.do" id="frm">
     <div class="container bg0 p-t-150 p-b-30">
       <div class="row">
         <div class="col-lg-12 m-lr-auto m-b-50">
-            <div class="wrap-table js-pscroll">
-              <table class="table-checkout">
-                <tr class="table_head">
-                  <th class="column-1"></th>
-                  <th class="column-2">제품</th>
-                  <th class="column-3">수량</th>
-                  <th class="column-4">가격</th>
-                  <th class="column-5">할인율</th>
-                  <th class="column-6">할인가격</th>
-                </tr>
-                
-                <!-- 장바구니에서 선택한 제품들 -->
-                <tr class="table_row">
-                  <td class="column-1"><div class="how-itemcart1"><img src="../images/item-cart-04.jpg" ></div></td>
-                  <td class="column-2">Fresh Strawberries</td>
-                  <td class="column-3">
-                    <div class="wrap-num-product flex-w m-l-auto m-r-0">
-                      <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m"><i class="fs-16 zmdi zmdi-minus"></i></div>
-                      <input class="mtext-104 cl3 text-center num-product" type="number" name="num-product1" value="1">
-                      <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m"><i class="fs-16 zmdi zmdi-plus"></i></div>
-                    </div>
-                  </td>
-                  <td class="column-4">$ 36.00</td>
-                  <td class="column-5">10 %</td>
-                  <td class="column-6">$ 36.00</td>
-                </tr>
-                <!-- ------------------- -->
-              </table>
-            </div>
-
+          <div class="wrap-table js-pscroll">
+            <table class="table-cart">
+              <tr class="table_head">
+                <th class="column-1"><input type="checkbox" value="" v-model="checkAll" @click="checkAllBtn"></th>
+                <th class="column-2"></th>
+                <th class="column-3">제품</th>
+                <th class="column-4">수량</th>
+                <th class="column-5">가격</th>
+                <th class="column-6">할인율</th>
+                <th class="column-7">할인가격</th>
+                <th class="column-8">총가격</th>
+                <th class="column-9">삭제</th>
+              </tr>
+              <tr class="table_row" v-for="cart in cartList" >
+                <td class="column-1"><input type="checkbox" name="gid" v-model="selectedGoods" :value="cart" @change="clickCheck"></td>
+                <td class="column-2"><div class="how-itemcart1"><img :src="cart.gimage"></div></td>
+                <td class="column-3" >{{cart.gname }}</td>
+                <td class="column-4">{{cart.gquantity }}</td>
+                <td class="column-5">{{cart.gprice | currency }}원 </td>
+                <td class="column-6">{{cart.gsale }}</td>
+                <td class="column-7">{{cart.gprice - (cart.gprice * cart.gsale / 100) | currency }}원 </td>
+                <td class="column-8">{{(cart.gprice - (cart.gprice * cart.gsale / 100)) * cart.gquantity | currency }}원</td>
+                <td class="column-9">
+                <button type=button @click="cartDelete($event)" :value="cart.cid">삭제</button></td>
+              </tr>
+            </table>
+          </div>
         </div>
         
         <div class="col-sm-12 col-md-6 m-lr-auto m-b-50">
@@ -105,6 +105,63 @@
     </div>
   </form>
   <script>
+    new Vue({
+        el:'#cart',
+        data:{
+            cart:0,
+            cartList: [],
+            checkAll: true,
+            selectedGoods: []
+        },
+        filters:{
+            currency: function(value){
+                let num = new Number(value);
+                return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,")
+            }
+        },
+        mounted:function(){
+            this.cList();
+        },
+        methods:{
+            cList:function(){
+                axios.get("http://localhost:8080/web/cart/cart_list_vue.do",{
+                    params:{
+                    }
+                }).then(result=>{
+                    this.cartList = result.data;
+                    this.selectedGoods = result.data;
+                })
+            },
+            totalPrice:function(list){
+              let totalsum = 0;
+              list.forEach(i=>{totalsum += (i.gprice - (i.gprice * i.gsale / 100)) * i.gquantity})
+              return totalsum;
+            },
+            checkAllBtn:function() {
+                if(this.checkAll == false) {
+                    this.selectedGoods = this.cartList;
+                    this.checkAll = true;
+                } else {
+                    this.selectedGoods = [];
+                    this.checkAll = false;
+                }
+            },
+            cartDelete:function(event) {
+                axios.post("http://localhost:8080/web/cart/delete_ok.do",null,{
+                    params:{cid: event.currentTarget.value}
+                }).then(result=>{
+                    this.cList();                    
+                })
+            },
+            clickCheck:function() {
+                if(this.selectedGoods.length == this.cartList.length) {
+                    this.checkAll = true;
+                } else {
+                    this.checkAll = false;
+                }
+            }
+        }
+    })
     $('.js-pscroll').each(function(){
         $(this).css('position','relative');
         $(this).css('overflow','hidden');

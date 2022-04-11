@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("checkout/")
 public class CheckoutController {
     
-    @GetMapping("checkout.do")
-    public String cart_cart(Model model) {
+    @PostMapping("checkout.do")
+    public String cart_cart(String[] gid) {
+        for(int i = 0; i < gid.length; i++) {
+            System.out.println(gid[i]);
+        }
         return "checkout/checkout";
     }
 }
