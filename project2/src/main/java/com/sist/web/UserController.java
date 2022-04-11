@@ -34,7 +34,7 @@ public class UserController {
 	public String user_join() {
 		return "user/join";
 	}
-	
+
 	@GetMapping("idfind.do")
 	public String idfind() {
 		return "user/idfind/vue";
@@ -42,7 +42,7 @@ public class UserController {
 
 	@GetMapping("idfind2.do")
 	public String idfind2(String id, Model model) {
-	    model.addAttribute("id", id);
+		model.addAttribute("id", id);
 		return "user/idfind2/vue";
 	}
 
@@ -50,17 +50,17 @@ public class UserController {
 	public String pwdfind() {
 		return "user/pwdfind/vue";
 	}
-	
+
 	@GetMapping("pwdfind2.do")
-    public String pwdfind2(String id, String email, String question, Model model) {
-	    model.addAttribute("id", id);
-	    model.addAttribute("email", email);
-	    model.addAttribute("question", question);
-        return "user/pwdfind2/vue";
-    }
-	
+	public String pwdfind2(String id, String email, String question, Model model) {
+		model.addAttribute("id", id);
+		model.addAttribute("email", email);
+		model.addAttribute("question", question);
+		return "user/pwdfind2/vue";
+	}
+
 	@GetMapping("pwdfind3.do")
-    public String pwdfind3() {
-        return "user/pwdfind3/vue";
-    }
+	public String pwdfind3() {
+		return "user/pwdfind3/vue";
+	}
 }
