@@ -27,13 +27,13 @@
               </tr>
               <tr class v-for="cart in cartList" class="table_row">
                 <td class="column-1"><input type="checkbox"></td>
-                <td class="column-2"><div class="how-itemcart1"><img :src="cart.Gimage" ></div></td>
-                <td class="column-3 " >{{cart.Gname }}</td>
-                <td class="column-4">{{cart.Gquantity }}</td>
-                <td class="column-5">{{cart.Gprice | currency }}</td>
-                <td class="column-6">{{cart.Gsale }}</td>
-                <td class="column-7">{{cart.Gprice - (cart.Gprice * cart.Gsale / 100) | currency }}</td>
-				<td class="column-8">{{(cart.Gprice - (cart.Gprice * cart.Gsale / 100)) * cart.Gquantity | currency }}</td>
+                <td class="column-2"><div class="how-itemcart1"><img :src="cart.gimage" ></div></td>
+                <td class="column-3 " >{{cart.gname }}</td>
+                <td class="column-4">{{cart.gquantity }}</td>
+                <td class="column-5">{{cart.gprice | currency }}원 </td>
+                <td class="column-6">{{cart.gsale }}%</td>
+                <td class="column-7">{{cart.gprice - (cart.gprice * cart.gsale / 100) | currency }}원 </td>
+				<td class="column-8">{{(cart.gprice - (cart.gprice * cart.gsale / 100)) * cart.gquantity | currency }}원 </td>
 				<td class="column-9">
 				<button class="delete_btn">삭제</button></td>
               </tr>
@@ -47,7 +47,7 @@
 
             <div class="flex-w flex-t bor12 p-b-13">
               <div class="size-208"><span class="stext-110 cl2"> 금액: </span></div>
-              <div class="size-209"><span class="mtext-110 cl2"> {{total | currency}} </span></div>
+              <div class="size-209"><span class="mtext-110 cl2"> {{totalPrice(cartList) | currency}}원 </span></div>
             </div>
 
             <div class="flex-w flex-t bor12 p-t-15 p-b-30">
@@ -57,7 +57,7 @@
 
             <div class="flex-w flex-t p-t-27 p-b-33">
               <div class="size-208"><span class="mtext-101 cl2"> 총 금액: </span></div>
-              <div class="size-209 p-t-1"><span class="mtext-110 cl2"> {{total | currency}} </span></div>
+              <div class="size-209 p-t-1"><span class="mtext-110 cl2">{{totalPrice(cartList) + 5000 | currency}}원  </span></div>
             </div>
 
             <button class="flex-c-m stext-101 cl1 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer"> 결제하기</button>
@@ -92,7 +92,7 @@
                   params:{
                   }
               }).then(result=>{
-                  this.cart = result.data.Count;
+                  this.cart = result.data.count;
               })
           },
           cList:function(){
@@ -101,8 +101,13 @@
                   }
               }).then(result=>{
                   this.cartList = result.data;
-                  this.total = result.data[0].Sum;
+                  this.total = result.data[0].sum;
               })
+          },
+          totalPrice:function(list){
+        	  let totalsum = 0;
+        	  list.forEach(i=>{totalsum += (i.gprice - (i.gprice * i.gsale / 100)) * i.gquantity})
+        	  return totalsum;
           }
       }
   })

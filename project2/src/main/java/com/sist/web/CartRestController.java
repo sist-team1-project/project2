@@ -34,11 +34,11 @@ public class CartRestController {
         JSONObject obj = new JSONObject();
         
         if(uid == null) {
-            obj.put("Count", 0);
+            obj.put("count", 0);
             return obj.toJSONString();
         }
         int count = cartdao.countCart(uid);
-        obj.put("Count", count);
+        obj.put("count", count);
         return obj.toJSONString();
     }
     
@@ -55,16 +55,16 @@ public class CartRestController {
         }
         for (int i = 0; i < list.size(); i++) {
             JSONObject obj = new JSONObject();
-            obj.put("Gname", list.get(i).get("G_NAME").toString());
+            obj.put("gname", list.get(i).get("G_NAME").toString());
             String images = list.get(i).get("G_IMAGE").toString();
             String[] image = images.split(";");
-            obj.put("Gimage", image[0]);
-            obj.put("Gprice", list.get(i).get("G_PRICE").toString());
-            obj.put("Gid", list.get(i).get("G_ID").toString());
-            obj.put("Gquantity", list.get(i).get("G_QUANTITY").toString());
-            obj.put("Gsale", list.get(i).get("G_SALE").toString());
+            obj.put("gimage", image[0]);
+            obj.put("gprice", list.get(i).get("G_PRICE").toString());
+            obj.put("gid", list.get(i).get("G_ID").toString());
+            obj.put("gquantity", list.get(i).get("G_QUANTITY").toString());
+            obj.put("gsale", list.get(i).get("G_SALE").toString());
             if (i == 0) {
-                obj.put("Sum", sum);
+                obj.put("sum", sum);
             }
             arr.add(obj);
         }
