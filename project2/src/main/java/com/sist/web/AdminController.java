@@ -27,20 +27,21 @@ public class AdminController {
 	
 	@Autowired
 	private UserDAO udao;
-
+	
+	/* 판매관리목록 */
 	@GetMapping("orderlist.do")
 	public String adorder(String oid, Model model) {
 		if(oid==null) oid="";
 		model.addAttribute("oid",oid);
 		return "admin/order";
 	}
-	
+	/* 주문상세 */
 	@GetMapping("orderdetail.do")
 	public String adorder_detail(String oid, Model model) {
 		model.addAttribute("oid",oid);
 		return "admin/orderdetail/vue";
 	}
-	
+	/* 유저 관리 */
 	@GetMapping("user_management.do")
 	public String userlist(String uid, Model model) {
 		model.addAttribute("u_id",uid);

@@ -23,7 +23,7 @@
     <div class="row p-t-10">
       <div class="col-lg-12 m-lr-auto m-b-50">
         <div class="wrap-table js-pscroll">
-          <table class="table-order fs-11">
+          <table class="table-order fs-13">
             <tr>
               <th class="adtable" colspan="6">주문상세정보</th>
             </tr>
@@ -66,7 +66,7 @@
             </tr>
           </table>
             <!----------------------------------------------------->
-          <table class="table-order fs-11">
+          <table class="table-order fs-13">
             <tr>
            	  <th class="adt-light">상품번호</th>
               <th class="adt-light" colspan="3">상품명</th>
@@ -81,7 +81,7 @@
 			</template>
           </table>
 			<!---------------------------------------------------->
-          <table class="table-order fs-11">
+          <table class="table-order fs-13">
             <tr>
               <th class="adtable" colspan="6">주문/결제금액</th>
             </tr>

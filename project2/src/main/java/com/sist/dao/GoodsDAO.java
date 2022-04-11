@@ -85,22 +85,30 @@ public class GoodsDAO {
     }
     
     /* ---------------------- 관리자 상품 수정  ----------------------------  */
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public void goodsUpdate(GoodsVO vo, String eid) {
-        mapper.goodsupdate(vo);
-        int g_id = vo.getG_id();
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public void goodsUpdate(GoodsVO vo, String eid) {
+		mapper.goodsupdate(vo);
+		int g_id = vo.getG_id();
+		List<EventGoodsVO> list = mapper2.goodsEidData(g_id);
+		for (int i = 0; i < list.size(); i++) {
+			EventGoodsVO evo = new EventGoodsVO();
+			evo.setE_id(list.get(i).getE_id());
+			evo.setG_id(g_id);
+			mapper2.goodsEventDelete(evo);
+		}
 
-        if (eid != "") {
-        	StringTokenizer st = new StringTokenizer(eid,",");
-            while(st.hasMoreTokens()){
-                EventGoodsVO evo = new EventGoodsVO();
-                evo.setE_id(Integer.parseInt(st.nextToken()));
-                evo.setG_id(g_id);
-                int eg_id = mapper2.goodsEGidData(evo);
-                mapper2.goodsEventUpdate(evo, eg_id);
-            }
-        }
-    }
+		if (eid != "") {
+			StringTokenizer st = new StringTokenizer(eid, ",");
+			while (st.hasMoreTokens()) {
+				EventGoodsVO evo = new EventGoodsVO();
+				evo.setE_id(Integer.parseInt(st.nextToken()));
+				evo.setG_id(g_id);
+
+				mapper2.goodsEventInsert(evo);
+			}
+		}
+	}
+	
     public List<EventGoodsVO> goodsEidData(int g_id) {
         return mapper2.goodsEidData(g_id);
     }

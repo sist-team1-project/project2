@@ -102,7 +102,7 @@ td {
           </div>
         </div>
         <div class="header-admin-content flex-w">
-          <iframe height="100%" width="600px" :src="iframe"></iframe>
+          <iframe height="100%" width="580px" :src="iframe"></iframe>
         </div>
       </div>
     </div>

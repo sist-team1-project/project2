@@ -27,6 +27,11 @@ public interface EventGoodsMapper {
 	@Select("SELECT eg_id FROM event_goods_1 WHERE g_id = #{g_id} AND e_id = #{e_id}")
 	public int goodsEGidData(EventGoodsVO vo);
 	
+	/* 	이벤트 E_id 리스트   */
 	@Select("select eg_id, e_id from event_goods_1 where g_id = #{g_id}")
 	public List<EventGoodsVO> goodsEidData(int g_id);
+	
+	/* 	이벤트 삭제   */
+	@Delete("DELETE FROM event_goods_1 where g_id = #{g_id} AND e_id = #{e_id}")
+	public void goodsEventDelete(EventGoodsVO vo);
 }
