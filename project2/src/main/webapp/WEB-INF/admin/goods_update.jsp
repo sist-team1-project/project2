@@ -100,7 +100,7 @@
                 <div class="size-209">
                   <div>
                     직접 경로 작성 ( 여러 이미지일시 구분자 ; )
-                    <input ref="gimage2" type=text min="0" class="bor10 p-tb-3 p-lr-5 w-full" v-model="gimage2">
+                    <input ref="gimage" type=text min="0" class="bor10 p-tb-3 p-lr-5 w-full" v-model="gimage">
                   </div>
                 </div>
               </div>
@@ -112,7 +112,7 @@
                 <div class="size-209">
                   <div>
                     직접 경로 작성 ( 여러 이미지일시 구분자 ; )
-                    <input ref="gdetail2" type=text min="0" class="bor10 p-tb-3 p-lr-5 w-full" v-model="gdetail2">
+                    <input ref="gdetail" type=text min="0" class="bor10 p-tb-3 p-lr-5 w-full" v-model="gdetail">
                   </div>
                 </div>
               </div>
@@ -155,8 +155,6 @@
 	        gstatus: '',
 	        gimage: '',
 	        gdetail: '',
-	        gimage2: '',
-	        gdetail2: '',
 	        eid: [],
 	        categories1: [],
 	        categories2: [],
@@ -189,8 +187,8 @@
                 this.gsale = result.data.g_sale;
                 this.gstock = result.data.g_stock;
                 this.gstatus = result.data.g_status;
-                this.gimage2 = result.data.g_image;
-                this.gdetail2 = result.data.g_detail;
+                this.gimage = result.data.g_image;
+                this.gdetail = result.data.g_detail;
                 for (var i = 0; i < result.data.eid.length; i++) {
 					this.eid.push(result.data.eid[i]);
 				}
@@ -230,19 +228,25 @@
 	            } else if (this.gstock == "") {
 	                this.$refs.gstock.focus();
 	                return;
-	            } else if (this.gstatus == -1) {
+	            } else if (this.gimage == "") {
+                    this.$refs.gimage.focus();
+                    return;
+                } else if (this.gdetail == "") {
+                    this.$refs.gdetail.focus();
+                    return;
+                } else if (this.gstatus == -1) {
 	                alert("상태 확인 필요");
 	                return;
 	            }
-
+	            
 	            if (this.eid == null) {
 	                this.eid.push(0);
 	            }
-
+	            
 	            let form = new FormData();
 	            form.append('g_id', this.gid);
-	            form.append('g_image', this.gimage2);
-	            form.append('g_detail', this.gdetail2);
+	            form.append('g_image', this.gimage);
+	            form.append('g_detail', this.gdetail);
 	            form.append('c_id', this.cid2);
 	            form.append('g_name', this.gname);
 	            form.append('g_brand', this.gbrand);
