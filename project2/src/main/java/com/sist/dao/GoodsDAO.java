@@ -38,8 +38,8 @@ public class GoodsDAO {
     /*  --------------------------  */
     
     /*  ------- 제품 상세 -------  */
-    public Map<String,Object> goodsDetail(Map map) {
-        return mapper.goodsDetail(map);
+    public GoodsVO goodsDetail(int gid) {
+        return mapper.goodsDetail(gid);
     }
     /*  --------------------------  */
     

@@ -63,11 +63,8 @@ public interface GoodsMapper {
 	/******************************************************************************/
 	
 	/********************************* 상품 상세 ****************************************/
-	@Select("SELECT NVL(l.l_id,0) AS l_id,g.g_id,g.c_id,g.g_name,g.g_brand,g.g_price,g.g_sale,g.g_image,g.g_detail,g.g_status,g.g_stock "
-            + "FROM (SELECT l_id,g_id FROM like_1 WHERE g_id=#{gid} AND u_id=#{uid}) l, "
-            + "(SELECT g_id,c_id,g_name,g_brand,g_price,g_sale,g_image,g_detail,g_status,g_stock FROM goods_1 WHERE g_id=237) g "
-            + "WHERE l.g_id(+)=g.g_id")
-    public Map<String,Object> goodsDetail(Map map);
+	@Select("SELECT * FROM goods_1 WHERE g_id=#{gid}")
+    public GoodsVO goodsDetail(int gid);
 	/******************************************************************************/
 	
 	/********************************* 관리자 ****************************************/
