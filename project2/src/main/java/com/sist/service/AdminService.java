@@ -7,9 +7,7 @@ import com.sist.vo.OrderDetailVO;
 import com.sist.vo.OrderVO;
 
 public interface AdminService {
-	
-	public List<GoodsVO> goodsTotalList(Map map);
-	
+		
 	public int orderTotalPage(Map map);
 	public List<Map<String,Object>> orderFullList(Map map);
 	public List<OrderDetailVO> orderDetailList(Map map);

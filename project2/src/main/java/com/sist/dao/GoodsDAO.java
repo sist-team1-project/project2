@@ -43,26 +43,23 @@ public class GoodsDAO {
     }
     /*  --------------------------  */
     
-    
-    public List<GoodsVO> goodsTotalList(Map map) {
-        return mapper.goodsTotalList(map);
-    }
-
-    public int goodsTotalPage(Map map) {
-        return mapper.goodsTotalPage(map);
-    }
-
-    public int goodsCount() {
-        return mapper.goodsCount();
+    /*  ------- 관리자  -------  */
+    public List<Map<String,Object>> adminGoodsFind(Map map) {
+        return mapper.adminGoodsFind(map);
     }
     
+    public int adminGoodsTotalPage(Map map) {
+        return mapper.adminGoodsTotalPage(map);
+    }
+
+    public int adminGoodsCount() {
+        return mapper.adminGoodsCount();
+    }
+    /*  --------------------------  */
     public GoodsVO adminGoodsDetail(int gid) {
         return mapper.adminGoodsDetail(gid);
     }
     
-    public List<Map<String,Object>> adminGoodsFind(Map map) {
-        return mapper.adminGoodsFind(map);
-    }
     
     /*  ------- 상품 등록 -------  */
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)

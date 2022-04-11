@@ -48,8 +48,8 @@ public class AdminRestController2 {
 		map.put("status", status);
 		
 		List<Map<String,Object>> list = gdao.adminGoodsFind(map);
-		int totalpage = gdao.goodsTotalPage(map);
-		int count = gdao.goodsCount();
+		int totalpage = gdao.adminGoodsTotalPage(map);
+		int count = gdao.adminGoodsCount();
 		
 		final int BLOCK = 10;
 		int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;

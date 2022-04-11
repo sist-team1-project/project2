@@ -8,7 +8,7 @@ import com.sist.vo.*;
 
 public interface GoodsMapper {
     
-    /*  ------- 리스트 페이지 -------  */
+    /********************************* 리스트 ****************************************/
     @Select("SELECT MAX(g_price) FROM goods_1 WHERE c_id LIKE #{cid}||'%'")
     public String goodsMaxPrice(String cid);
     
@@ -60,80 +60,26 @@ public interface GoodsMapper {
 	
 	@Select("SELECT DISTINCT g_brand FROM goods_1 WHERE c_id LIKE #{cid}||'%'")
 	public List<String> brandList(String cid);
-    /*  --------------------------  */
+	/******************************************************************************/
 	
+	/********************************* 상품 상세 ****************************************/
 	@Select("SELECT NVL(l.l_id,0) AS l_id,g.g_id,g.c_id,g.g_name,g.g_brand,g.g_price,g.g_sale,g.g_image,g.g_detail,g.g_status,g.g_stock "
             + "FROM (SELECT l_id,g_id FROM like_1 WHERE g_id=#{gid} AND u_id=#{uid}) l, "
             + "(SELECT g_id,c_id,g_name,g_brand,g_price,g_sale,g_image,g_detail,g_status,g_stock FROM goods_1 WHERE g_id=237) g "
             + "WHERE l.g_id(+)=g.g_id")
     public Map<String,Object> goodsDetail(Map map);
+	/******************************************************************************/
 	
-	@Select("SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status, TO_CHAR(g_regdate,'YYYY-MM-DD HH24:MI:SS')as g_regdate, num "
-			+ "FROM (SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status, g_regdate, rownum as num " 
-			+ "FROM (SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status, g_regdate FROM Goods_1)) "
-			+ "WHERE num BETWEEN #{start} AND #{end}")
-	public List<GoodsVO> goodsTotalList(Map map);
-	
-	/* ---------------------- 관리자 상품 검색 시 페이징  ----------------------------  */
+	/********************************* 관리자 ****************************************/
+    /* ---------------------- 관리자 상품 검색  ----------------------------  */
     @Select("<script>"
-            + "SELECT CEIL(COUNT(*) / 10.0) "
-            + "FROM (SELECT g_id, c_title, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status "
-            + "FROM (SELECT g.g_id, c.c_title, g.g_name, g.g_brand, g.g_price, g.g_sale, g.g_image, g.g_detail, g.g_stock, g.g_sold, g.g_status "
-            + "FROM (SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status FROM goods_1) g, category_1 c "
+            + "SELECT g_id, c_title, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status, g_regdate "
+            + "FROM (SELECT g_id, c_title, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status, g_regdate, rownum AS num "
+            + "FROM (SELECT g_id, c_title, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status, g_regdate "
+            + "FROM (SELECT g.g_id, c.c_title, g.g_name, g.g_brand, g.g_price, g.g_sale, g.g_image, g.g_detail, g.g_stock, g.g_sold, g.g_status, g.g_regdate "
+            + "FROM (SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status, TO_CHAR(g_regdate,'YYYY-MM-DD HH24:MI:SS') AS g_regdate FROM goods_1) g, category_1 c "
             + "WHERE g.c_id=c.c_id) WHERE g_status=#{status} AND ("
             + "<trim prefixOverrides='OR'>"
-            + "<foreach collection='fsArr' item='fd'>"
-            + "<trim prefix='OR'>"
-            + "<choose>"
-            + "<when test=\"fd=='N'.toString()\">"
-            + "g_id LIKE '%'||#{ss}||'%'"
-            + "</when>"
-            + "<when test=\"fd=='S'.toString()\">"
-            + "c_title LIKE '%'||#{ss}||'%'"
-            + "</when>"
-            + "<when test=\"fd=='C'.toString()\">"
-            + "g_name LIKE '%'||#{ss}||'%'"
-            + "</when>"
-            + "<when test=\"fd=='D'.toString()\">"
-            + "g_brand LIKE '%'||#{ss}||'%'"
-            + "</when>"
-            + "</choose>"
-            + "</trim>"
-            + "</foreach>"
-            + "</trim> "
-            + "))"
-            + "</script>")
-	public int goodsTotalPage(Map map);
-	
-	/* ---------------------- 관리자 상품 개수  ----------------------------  */
-	@Select("SELECT COUNT(*) FROM Goods_1")
-	public int goodsCount();
-
-	/* ---------------------- 관리자 상세 정보 ----------------------------  */
-	@Select("SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_status, g_stock FROM Goods_1 "
-	         +"WHERE g_id=#{gid}")
-	public GoodsVO adminGoodsDetail(int gid);
-	
-	/*  ------- 상품 등록 페이지 -------  */
-	@Insert("INSERT INTO goods_1 VALUES(#{g_id}, #{c_id}, #{g_name}, #{g_brand}, #{g_price}, #{g_sale}, #{g_image}, #{g_detail}, #{g_stock}, 0, #{g_status}, SYSDATE)")
-    @SelectKey(statement="SELECT goods_id_seq_1.NEXTVAL FROM DUAL", keyProperty="g_id", before=true, resultType=int.class)
-	@Options(useGeneratedKeys=true, keyProperty="g_id", keyColumn="g_id")
-	public int goodsInsert(GoodsVO vo);
-	/*  ----------------------------  */
-	
-	/* ---------------------- 관리자  이벤트 정보 ----------------------------  */
-	@Select("SELECT eg_id, e_id FROM event_goods_1 WHERE g_id = #{g_id}")
-	public EventGoodsVO eventGoodsData(String g_id);
-	
-	/* ---------------------- 관리자 상품 목록 + 검색  ----------------------------  */
-	@Select("<script>"
-	        + "SELECT g_id, c_title, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status, g_regdate "
-	        + "FROM (SELECT g_id, c_title, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status, g_regdate, rownum AS num "
-	        + "FROM (SELECT g_id, c_title, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status, g_regdate "
-	        + "FROM (SELECT g.g_id, c.c_title, g.g_name, g.g_brand, g.g_price, g.g_sale, g.g_image, g.g_detail, g.g_stock, g.g_sold, g.g_status, g.g_regdate "
-	        + "FROM (SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status, TO_CHAR(g_regdate,'YYYY-MM-DD HH24:MI:SS') AS g_regdate FROM goods_1) g, category_1 c "
-	        + "WHERE g.c_id=c.c_id) WHERE g_status=#{status} AND ("
-	        + "<trim prefixOverrides='OR'>"
             + "<foreach collection='fsArr' item='fd'>"
             + "<trim prefix='OR'>"
             + "<choose>"
@@ -163,12 +109,63 @@ public interface GoodsMapper {
             + "</when>"
             + "</choose>"
             + ")) WHERE num BETWEEN #{start} AND #{end} "
-	        + "</script>")
-	public List<Map<String,Object>> adminGoodsFind(Map map);
+            + "</script>")
+    public List<Map<String,Object>> adminGoodsFind(Map map);
+    
+	/* ---------------------- 관리자 상품 검색 페이징  ----------------------------  */
+    @Select("<script>"
+            + "SELECT CEIL(COUNT(*) / 10.0) "
+            + "FROM (SELECT g_id, c_title, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status "
+            + "FROM (SELECT g.g_id, c.c_title, g.g_name, g.g_brand, g.g_price, g.g_sale, g.g_image, g.g_detail, g.g_stock, g.g_sold, g.g_status "
+            + "FROM (SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status FROM goods_1) g, category_1 c "
+            + "WHERE g.c_id=c.c_id) WHERE g_status=#{status} AND ("
+            + "<trim prefixOverrides='OR'>"
+            + "<foreach collection='fsArr' item='fd'>"
+            + "<trim prefix='OR'>"
+            + "<choose>"
+            + "<when test=\"fd=='N'.toString()\">"
+            + "g_id LIKE '%'||#{ss}||'%'"
+            + "</when>"
+            + "<when test=\"fd=='S'.toString()\">"
+            + "c_title LIKE '%'||#{ss}||'%'"
+            + "</when>"
+            + "<when test=\"fd=='C'.toString()\">"
+            + "g_name LIKE '%'||#{ss}||'%'"
+            + "</when>"
+            + "<when test=\"fd=='D'.toString()\">"
+            + "g_brand LIKE '%'||#{ss}||'%'"
+            + "</when>"
+            + "</choose>"
+            + "</trim>"
+            + "</foreach>"
+            + "</trim> "
+            + "))"
+            + "</script>")
+	public int adminGoodsTotalPage(Map map);
+	
+	/* ---------------------- 관리자 상품 개수  ----------------------------  */
+	@Select("SELECT COUNT(*) FROM Goods_1")
+	public int adminGoodsCount();
+
+	/* ---------------------- 관리자 상세 정보 ----------------------------  */
+	@Select("SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_status, g_stock FROM Goods_1 "
+	         +"WHERE g_id=#{gid}")
+	public GoodsVO adminGoodsDetail(int gid);
+	
+	/*  --------------------- 상품 등록 페이지 -----------------------------  */
+	@Insert("INSERT INTO goods_1 VALUES(#{g_id}, #{c_id}, #{g_name}, #{g_brand}, #{g_price}, #{g_sale}, #{g_image}, #{g_detail}, #{g_stock}, 0, #{g_status}, SYSDATE)")
+    @SelectKey(statement="SELECT goods_id_seq_1.NEXTVAL FROM DUAL", keyProperty="g_id", before=true, resultType=int.class)
+	@Options(useGeneratedKeys=true, keyProperty="g_id", keyColumn="g_id")
+	public int goodsInsert(GoodsVO vo);
+	
+	/* ---------------------- 관리자  이벤트 정보 ----------------------------  */
+	@Select("SELECT eg_id, e_id FROM event_goods_1 WHERE g_id = #{g_id}")
+	public EventGoodsVO eventGoodsData(String g_id);
 	   
 	/* ---------------------- 관리자 상품 수정  ----------------------------  */
 	@Update("UPDATE goods_1 SET "
 			+ "c_id=#{c_id}, g_name=#{g_name}, g_brand = #{g_brand}, g_price = #{g_price}, g_sale = #{g_sale}, g_image = #{g_image}, g_detail = #{g_detail}, g_stock = #{g_stock}, g_status = #{g_status} "
 			+ "WHERE g_id = #{g_id}")
 	public void goodsupdate(GoodsVO vo);
+	/******************************************************************************/
 }

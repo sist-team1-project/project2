@@ -19,11 +19,6 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private OrderDetailDAO oddao;
 	
-	@Override
-	public List<GoodsVO> goodsTotalList(Map map) {
-		return gdao.goodsTotalList(map);
-	}
-
 	
 	/*********************************************/
 	@Override
