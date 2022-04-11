@@ -18,7 +18,7 @@ public class AskDAO {
 	public List<AskVO> askListData(Map map) {
 		return mapper.askListData(map);
 	}
-	
+
 	public int askRowCount() {
 		return mapper.askRowCount();
 	}
@@ -42,7 +42,7 @@ public class AskDAO {
 	public AskVO askParentInfoData(int no) {
 		return mapper.askParentInfoData(no);
 	}
-	
+
 	public void askReplyInsert(AskVO vo) {
 		mapper.askReplyInsert(vo);
 	}
@@ -52,23 +52,34 @@ public class AskDAO {
 	}
 
 	public void askUpdate(AskVO vo) {
-			mapper.askUpdate(vo);
+		mapper.askUpdate(vo);
 	}
-	
+
 	public void askDelete1(int no, int group_id) {
-			mapper.askDelete1(group_id);
+		mapper.askDelete1(group_id);
 	}
 
 	public void askDelete2(int no) {
-			mapper.askDelete2(no);
+		mapper.askDelete2(no);
 	}
-	
-	public List<AskVO> askListData_admin(Map map){
+
+	public List<AskVO> askListData_admin(Map map) {
 		return mapper.askListData_admin(map);
 	}
-	
+
 	/* -- 댓글 작성 시 질문 tab 증가 -- */
 	public void asktabReply(AskVO vo) {
-			mapper.asktabReply(vo);
+		mapper.asktabReply(vo);
 	}
+
+	/*   --- 질문에 대한 그룹아이디 확인  --- */
+	public int agid(int a_id) {
+		return mapper.agid(a_id);
+	}
+
+	/*   --- 그룹아이디로 댓글 가져오기  --- */
+	public AskVO replyData(int a_group_id) {
+		return mapper.replyData(a_group_id);
+	}
+
 }

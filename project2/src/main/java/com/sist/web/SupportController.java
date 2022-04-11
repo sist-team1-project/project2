@@ -71,7 +71,16 @@ public class SupportController {
 		int end = rowSize * curpage;
 		map.put("start", start);
 		map.put("end", end);
+		
+		int agroupid = 0;
+		AskVO rvo = null;
 		List<AskVO> list = adao.askListData(map);
+		for (AskVO vo : list) {
+			int a_id = vo.getA_id();
+			agroupid = adao.agid(a_id);
+			rvo = adao.replyData(agroupid);
+		}
+		int a_group_id = rvo.getA_group_id();
 		
 		int totalpage = adao.askTotalPage();
 
@@ -83,7 +92,8 @@ public class SupportController {
 
 		if (endPage > totalpage)
 			endPage = totalpage;
-
+		
+		model.addAttribute("ra_group_id", a_group_id);
 		model.addAttribute("list", list);
 		model.addAttribute("curpage", curpage);
 		model.addAttribute("totalpage", totalpage);

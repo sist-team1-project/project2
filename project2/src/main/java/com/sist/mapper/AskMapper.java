@@ -8,9 +8,9 @@ import com.sist.vo.*;
 
 public interface AskMapper {
 	@Select("SELECT a_id,u_id,a_type,a_title,TO_CHAR(a_regdate,'YYYY-MM-DD') as a_regdate,"
-			 +"a_group_id,a_group_tab,num "
-			 +"FROM (SELECT a_id,u_id,a_type,a_title,a_regdate,a_group_id,a_group_tab,rownum as num "
-			 +"FROM (SELECT a_id,u_id,a_type,a_title,a_regdate,a_group_id,a_group_tab "
+			 +"a_group_id,a_group_tab, a_group_step, num "
+			 +"FROM (SELECT a_id,u_id,a_type,a_title,a_regdate,a_group_id,a_group_tab, a_group_step, rownum as num "
+			 +"FROM (SELECT a_id,u_id,a_type,a_title,a_regdate,a_group_id,a_group_tab, a_group_step "
 			 +"FROM ask_1 ORDER BY a_group_id DESC, a_group_step ASC)) "
 			 +"WHERE num BETWEEN #{start} AND #{end}")
 	public List<AskVO> askListData(Map map);
@@ -72,8 +72,27 @@ public interface AskMapper {
 	@Update("UPDATE ask_1 SET a_group_tab = #{a_group_tab}+1 WHERE a_id = #{a_id} ")
 	public void asktabReply(AskVO vo);
 	
+	/*   --- 질문에 대한 그룹아이디 확인  --- */
 	@Select("SELECT a_group_id FROM ask_1 WHERE a_id = #{a_id}")
 	public int agid(int a_id);
 
+	/*   --- 답변 정보  --- */
+	@Select("SELECT a_id, u_id, a_type, a_title, TO_CHAR(a_regdate,'YYYY-MM-DD') as a_regdate, a_group_id,a_group_tab, a_group_step, num "
+			 +"FROM (SELECT a_id,u_id,a_type,a_title,a_regdate,a_group_id,a_group_tab, a_group_step, rownum as num "
+			 +"FROM (SELECT a_id,u_id,a_type,a_title,a_regdate,a_group_id,a_group_tab, a_group_step "
+			 +"FROM ask_1 ORDER BY a_group_id DESC, a_group_step ASC)) "
+			 +"WHERE a_group_id = #{a_group_id} AND a_group_tab = 1 AND a_group_step = 1")
+	public AskVO replyData(int a_group_id);
 	
 }
+
+
+
+
+
+
+
+
+
+
+
