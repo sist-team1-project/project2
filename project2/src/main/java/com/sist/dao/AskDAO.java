@@ -19,10 +19,6 @@ public class AskDAO {
 		return mapper.askListData(map);
 	}
 	
-	public List<AskVO> replyListData(Map map) {
-		return mapper.replyListData(map);
-	}
-
 	public int askRowCount() {
 		return mapper.askRowCount();
 	}
@@ -46,7 +42,7 @@ public class AskDAO {
 	public AskVO askParentInfoData(int no) {
 		return mapper.askParentInfoData(no);
 	}
-
+	
 	public void askReplyInsert(AskVO vo) {
 		mapper.askReplyInsert(vo);
 	}
@@ -58,7 +54,7 @@ public class AskDAO {
 	public void askUpdate(AskVO vo) {
 			mapper.askUpdate(vo);
 	}
-
+	
 	public void askDelete1(int no, int group_id) {
 			mapper.askDelete1(group_id);
 	}

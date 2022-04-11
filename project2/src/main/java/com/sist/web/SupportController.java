@@ -72,7 +72,6 @@ public class SupportController {
 		map.put("start", start);
 		map.put("end", end);
 		List<AskVO> list = adao.askListData(map);
-		List<AskVO> rlist = adao.replyListData(map);
 		
 		int totalpage = adao.askTotalPage();
 
@@ -86,7 +85,6 @@ public class SupportController {
 			endPage = totalpage;
 
 		model.addAttribute("list", list);
-		model.addAttribute("rlist", rlist);
 		model.addAttribute("curpage", curpage);
 		model.addAttribute("totalpage", totalpage);
 		model.addAttribute("startPage", startPage);
@@ -127,7 +125,7 @@ public class SupportController {
 		vo.setA_group_id(pvo.getA_group_id());
 		vo.setA_group_step(pvo.getA_group_step() + 1);
 		vo.setA_group_tab(pvo.getA_group_tab() + 1);
-
+		
 		adao.askReplyInsert(vo);
 
 		return "redirect:../admin/ask_admin.do";
