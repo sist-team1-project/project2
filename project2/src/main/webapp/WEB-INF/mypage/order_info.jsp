@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="../css/order.css">
 </head>
 <body>
   <div class="container bg0 p-t-70 p-b-10" id="orderinfo">
@@ -27,9 +28,13 @@
             </tr>
             <tr v-for="my in orderInfoList" class="table_row_order fs-13 text-center">
               <td> {{my.uid}} </td>
-              <td> {{my.regdate}}  </td>
-              <td><a class="cl8" href="#"> {{my.oid}} </a></td>
-              <td> {{my.state}} </td>
+              <td> {{my.regdate}} </td>
+              <td><a class="cl8" href="#" data-toggle="modal" @click="odetail(my.oid)"> {{my.oid}} </a></td>
+              <td v-if="my.state==-1">주문취소</td>
+              <td v-if="my.state==0">대기중</td>
+              <td v-if="my.state==1">상품준비중</td>
+              <td v-if="my.state==2">배송중</td>
+              <td v-if="my.state==3">배송완료</td>
              </tr>
           </table>
         </div>
@@ -50,7 +55,7 @@
         </li>
       </ul>
     </div>
-      
+
   <script>
     new Vue({
         el:'#orderinfo',
@@ -60,8 +65,8 @@
             totalpage : 0,
             startPage : 0,
             endPage : 0,
-            pages : []
-           // count : 0
+            pages : [],
+            count : 0
         },
         mounted:function(){
             this.infoList();
@@ -73,14 +78,14 @@
                     	page: this.curpage
                     }
                 }).then(res=>{
-                	console.log(result.data);
+                	console.log(res.data);
                     this.orderInfoList = res.data;
                     this.curpage = res.data[0].curpage;
                     this.totalpage = res.data[0].totalpage;
                     this.startPage = res.data[0].startPage;
                     this.endPage = res.data[0].endPage;
-                  //  this.count = res.data[0].count;
-                  //  console.log(this.count);
+                    this.count = res.data[0].count;
+                    console.log(this.count);
                     this.pages=[];
                     for(i = this.startPage; i <= this.endPage; i++) {
                         this.pages.push(i);

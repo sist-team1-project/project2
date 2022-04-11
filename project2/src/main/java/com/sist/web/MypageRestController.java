@@ -107,6 +107,7 @@ public class MypageRestController {
         
         map.put("start", start);
         map.put("end", end);
+        map.put("uid", uid);
         
         int totalpage = odao.userOrderTotalPage(map);
         int count = odao.userOrderCount();
