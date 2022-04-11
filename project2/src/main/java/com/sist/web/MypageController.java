@@ -45,4 +45,12 @@ public class MypageController {
 
 		return "mypage/delete";
 	}
+	
+	/* 주문목록 */
+	@GetMapping("mypage/order_info.do")
+	public String orderInfoList(String uid, Model model) {
+		if(uid==null) uid="";
+		model.addAttribute("uid", uid);
+		return "mypage/order_info";
+	}
 }

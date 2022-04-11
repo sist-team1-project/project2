@@ -5,8 +5,10 @@ import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.sist.dao.*;
@@ -17,7 +19,10 @@ public class MypageRestController {
 
 	@Autowired
 	private UserDAO dao;
-
+	
+	@Autowired
+	private OrderDAO odao;
+	
 	@GetMapping(value = "mypage/info_vue.do", produces = "text/plain;charset=utf-8")
 	public String mypage_info_vue(HttpSession session) {
 		String uid = (String) session.getAttribute("id");
@@ -79,4 +84,51 @@ public class MypageRestController {
 		}
 		return result;
 	}
+	/* 유저 주문정보 */
+	@GetMapping(value = "orderInfoList_vue.do", produces = "text/plain;charset=utf-8")
+    public String orderInfoList(int page,Model model,String uid) {
+        
+        int curpage = page;
+        
+        int rowSize = 10;
+        int start = (curpage * rowSize) - (rowSize - 1);
+        int end = (rowSize * curpage);
+        
+        Map map = new HashMap();
+        
+        map.put("start", start);
+        map.put("end", end);
+        
+        int totalpage = odao.userOrderTotalPage(map);
+        int count = odao.userOrderCount();
+
+        final int BLOCK = 10;
+        int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
+        int endPage = ((curpage - 1) / BLOCK * BLOCK) + BLOCK;
+        if (endPage > totalpage) {
+            endPage = totalpage;
+        }
+        
+        List<OrderVO> list = odao.orderInfoList(map);
+        
+        JSONArray arr = new JSONArray();
+		int i = 0;
+        for (OrderVO vo:list) {
+			JSONObject obj = new JSONObject();
+			obj.put("oid", vo.getO_id());
+			obj.put("uid", vo.getU_id());
+			obj.put("regdate",vo.getO_regdate());
+			obj.put("state",vo.getO_state());
+			
+            if(i == 0) {
+                obj.put("startPage", startPage);
+                obj.put("endPage", endPage);
+                obj.put("totalpage", totalpage);
+                obj.put("curpage", curpage);
+                obj.put("count", count);
+            }
+            arr.add(obj);
+        }
+        return arr.toJSONString();
+    }
 }

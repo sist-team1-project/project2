@@ -33,4 +33,17 @@ public class OrderDAO {
     	return mapper.stateupdate(map);
     }
     
+    /* 유저 주문정보 */
+    public List<OrderVO> orderInfoList(Map map) {
+    	return mapper.orderInfoList(map);
+    }
+    
+    public int userOrderTotalPage(Map map) {
+    	return mapper.orderTotalPage(map);
+    }
+    
+    public int userOrderCount() {
+    	return mapper.userOrderCount();
+    }
+    
 }
