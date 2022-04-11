@@ -46,6 +46,8 @@ public class MypageRestController {
 	// 
 	@PostMapping(value = "mypage/update_ok.do", produces = "text/plain;charset=utf-8")
 	public String mypage_update_ok(@RequestBody UserVO vo, HttpSession session) {
+	    String uid = (String) session.getAttribute("id");
+        vo.setU_id(uid);
 		String result = "";	
 		if(vo.getU_address2()==null)
 		{
@@ -61,7 +63,9 @@ public class MypageRestController {
 	}
 
 	@PostMapping(value = "mypage/update_pwd_ok.do", produces = "text/plain;charset=utf-8")
-	public String mypage_update_pwd_ok(@RequestBody HashMap<String, Object> map) {
+	public String mypage_update_pwd_ok(@RequestBody HashMap<String, Object> map, HttpSession session) {
+	    String uid = (String) session.getAttribute("id");
+        UserVO vo = dao.userInfo(uid);
 		String result = "";
 		System.out.println(map.get("newPassword"));
 		boolean bCheck = dao.userPwdUpdate(map);
@@ -74,7 +78,8 @@ public class MypageRestController {
 	}
 
 	@PostMapping(value = "mypage/delete_ok.do", produces = "text/plain;charset=utf-8")
-	public String mypage_delete_ok(@RequestBody HashMap<String, Object> map) {
+	public String mypage_delete_ok(@RequestBody HashMap<String, Object> map, HttpSession session) {
+	    String uid = (String) session.getAttribute("id");
 		String result = "";
 		boolean bCheck = dao.userDelete(map);
 		if (bCheck == true) {
@@ -86,8 +91,9 @@ public class MypageRestController {
 	}
 	/* 유저 주문정보 */
 	@GetMapping(value = "orderInfoList_vue.do", produces = "text/plain;charset=utf-8")
-    public String orderInfoList(int page,Model model,String uid) {
-        
+    public String orderInfoList(int page, HttpSession session) {
+	    String uid = (String) session.getAttribute("id");
+	    
         int curpage = page;
         
         int rowSize = 10;

@@ -18,39 +18,33 @@ public class MypageController {
 	private UserDAO dao;
 
 	@GetMapping("mypage/mypage.do")
-	public String mypage_mypage(HttpSession session, Model model) {
-		/*
-		 * String uid = (String) session.getAttribute("id"); UserVO vo =
-		 * dao.userInfo(uid); System.out.println(vo.getU_address1());
-		 * model.addAttribute("vo", vo);
-		 */
+	public String mypage_mypage(Model model) {
 		return "mypage/info";
 	}
 
 	@GetMapping("mypage/update.do")
-	public String mypage_update(String id, Model model) {
-		model.addAttribute("id", id);
+	public String mypage_update() {
 		return "mypage/update";
 	}
 
 	@GetMapping("mypage/update_pwd.do")
-	public String user_update_pwd(String id, Model model) {
-		model.addAttribute("id", id);
+	public String user_update_pwd() {
 		return "mypage/update_pwd";
 	}
 
 	@GetMapping("mypage/delete.do")
-	public String mypage_delete(String id, Model model) {
-		model.addAttribute("id", id);
-
+	public String mypage_delete() {
 		return "mypage/delete";
 	}
 	
 	/* 주문목록 */
 	@GetMapping("mypage/order_info.do")
-	public String orderInfoList(String uid, Model model) {
-		if(uid==null) uid="";
-		model.addAttribute("uid", uid);
+	public String orderInfoList() {
 		return "mypage/order_info";
 	}
+	
+	@GetMapping("mypage/like.do")
+    public String mypage_like() {
+        return "mypage/delete";
+    }
 }

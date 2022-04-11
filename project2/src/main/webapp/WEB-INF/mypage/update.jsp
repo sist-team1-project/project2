@@ -16,7 +16,7 @@
         <div class="text-left"> 
           <div class="p-t-20 p-b-10">
             <div>아이디</div>
-            <input class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" type="text" ref="id" v-model="form.u_id" readonly style="background-color:#eeeee6">
+            <input class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" type="text" ref="id" v-model="u_id" readonly style="background-color:#eeeee6">
           </div>
           
           <div class="p-tb-10">
@@ -96,13 +96,14 @@
                 u_question:'',
                 u_answer:''
             },
+            u_id:'',
             u_name:'',
             emailOk:'',
         },
         mounted:function(){
               axios.get("http://localhost:8080/web/mypage/info_vue.do",{
               }).then(res=>{
-            	  this.form.u_id=res.data.uid;
+            	  this.u_id=res.data.uid;
             	  this.u_name=res.data.name;
             	  this.form.u_phone=res.data.phone;
             	  this.form.u_email=res.data.email;

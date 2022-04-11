@@ -37,7 +37,6 @@
         el:'#update_pwd',
         data:{
             form: {
-                id:'${id}',
                 password:'',
                 newPassword:''
             },
