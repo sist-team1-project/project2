@@ -2,6 +2,8 @@ package com.sist.web;
 
 import java.util.*;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.simple.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,42 +24,58 @@ public class SupportRestController {
 
 	// 공지사항
 	@GetMapping(value = "notice_vue.do", produces = "text/plain;charset=utf-8")
-	public String notice_list_vue(String page) {
-		String result = "";
-		try {
-			if (page == null)
-				page = "1";
-			int curpage = Integer.parseInt(page);
-			Map map = new HashMap();
-			int rowSize = 10;
-			int start = (rowSize * curpage) - (rowSize - 1);
-			int end = rowSize * curpage;
-			map.put("start", start);
-			map.put("end", end);
-			List<NoticeVO> list = ndao.noticeListData(map);
-			int totalpage = ndao.noticeTotalPage();
+	public String notice_list_vue(int page, HttpSession session) {
+		String uid = (String) session.getAttribute("id");
+		if (uid == null) {
+			uid = "";
+		}
 
-			JSONArray arr = new JSONArray();
-			int i = 0;
-			for (NoticeVO vo : list) {
+		int curpage = page;
+
+		int rowSize = 10;
+		int start = (rowSize * curpage) - (rowSize - 1);
+		int end = (rowSize * curpage);
+
+		Map map = new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		List<NoticeVO> list = ndao.noticeListData(map);
+		int totalpage = ndao.noticeTotalPage();
+
+		final int BLOCK = 5;
+		int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
+		int endPage = ((curpage - 1) / BLOCK * BLOCK) + BLOCK;
+		if (endPage > totalpage) {
+			endPage = totalpage;
+		}
+
+		JSONArray arr = new JSONArray();
+		if (list.size() == 0) {
+			JSONObject obj = new JSONObject();
+			obj.put("curpage", curpage);
+			obj.put("totalpage", totalpage);
+			obj.put("start", startPage);
+			obj.put("end", endPage);
+			arr.add(obj);
+		} else {
+			for (int i = 0; i < list.size(); i++) {
 				JSONObject obj = new JSONObject();
-				obj.put("n_id", vo.getN_id());
-				obj.put("n_title", vo.getN_title());
-				obj.put("u_id", vo.getU_id());
-				obj.put("n_regdate", vo.getN_regdate());
-				obj.put("n_visits", vo.getN_visits());
+				obj.put("n_id", list.get(i).getN_id());
+				obj.put("n_title", list.get(i).getN_title());
+				obj.put("u_id", list.get(i).getU_id());
+				obj.put("n_regdate", list.get(i).getN_regdate());
+				obj.put("n_visits", list.get(i).getN_visits());
+
 				if (i == 0) {
 					obj.put("curpage", curpage);
 					obj.put("totalpage", totalpage);
+					obj.put("start", startPage);
+					obj.put("end", endPage);
 				}
 				arr.add(obj);
-				i++;
 			}
-			result = arr.toJSONString();
-		} catch (Exception ex) {
 		}
-
-		return result;
+		return arr.toJSONString();
 	}
 
 	@GetMapping(value = "notice_detail_vue.do", produces = "text/plain;charset=utf-8")
@@ -112,8 +130,7 @@ public class SupportRestController {
 		result = "YES";
 		return result;
 	}
-    
-	
+
 	// 1:1 문의
 	@PostMapping("ask_update_ok.do")
 	public String askUpdateOk(AskVO vo) {
@@ -128,4 +145,4 @@ public class SupportRestController {
 		result = "<script>location.href=\"../support/ask.do\";</script>";
 		return result;
 	}
-}
+} 
