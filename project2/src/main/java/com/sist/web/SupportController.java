@@ -72,12 +72,13 @@ public class SupportController {
 		map.put("start", start);
 		map.put("end", end);
 		List<AskVO> list = adao.askListData(map);
-
+		List<AskVO> rlist = adao.replyListData(map);
+		
 		int totalpage = adao.askTotalPage();
 
 		int count = adao.askRowCount();
 		count = count - ((curpage * rowSize) - rowSize);
-		final int BLOCK = 3;
+		final int BLOCK = 5;
 		int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
 		int endPage = ((curpage - 1) / BLOCK * BLOCK) + BLOCK;
 
@@ -85,6 +86,7 @@ public class SupportController {
 			endPage = totalpage;
 
 		model.addAttribute("list", list);
+		model.addAttribute("rlist", rlist);
 		model.addAttribute("curpage", curpage);
 		model.addAttribute("totalpage", totalpage);
 		model.addAttribute("startPage", startPage);
