@@ -31,9 +31,9 @@
                 <td class="column-3 " >{{cart.gname }}</td>
                 <td class="column-4">{{cart.gquantity }}</td>
                 <td class="column-5">{{cart.gprice | currency }}원 </td>
-                <td class="column-6">{{cart.gsale }}%</td>
+                <td class="column-6">{{cart.gsale }}</td>
                 <td class="column-7">{{cart.gprice - (cart.gprice * cart.gsale / 100) | currency }}원 </td>
-				<td class="column-8">{{(cart.gprice - (cart.gprice * cart.gsale / 100)) * cart.gquantity | currency }}원 </td>
+				<td class="column-8">{{(cart.gprice - (cart.gprice * cart.gsale / 100)) * cart.gquantity | currency }}원</td>
 				<td class="column-9">
 				<button class="delete_btn">삭제</button></td>
               </tr>

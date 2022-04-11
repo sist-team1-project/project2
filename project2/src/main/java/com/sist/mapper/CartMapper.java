@@ -16,6 +16,8 @@ public interface CartMapper {
 	
 	@Update("UPDATE cart_1 SET g_quantity=g_quantity+#{quantity}")
 	public void cartUpdate(int quantity);
+	@Delete("DELETE FROM cart_1 WHERE u_id = #{u_id} AND g_id = #{g_id} ")
+	public void cartDelete(CartVO vo);
 	
 	/* ---------- 헤더 ------------ */
 	@Select("SELECT count(*) FROM cart_1 WHERE u_id=#{uid}")
