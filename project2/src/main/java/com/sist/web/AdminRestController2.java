@@ -27,7 +27,7 @@ public class AdminRestController2 {
 	private EventDAO edao;
 
 	@GetMapping(value = "adlist_vue.do", produces = "text/plain;charset=utf-8")
-	public String adlist_vue(String page, String fs, String ss) {
+	public String adlist_vue(String page, String fs, String ss, String order, String status) {
 		if (page == null) {
 			page = "1";
 		}
@@ -44,24 +44,11 @@ public class AdminRestController2 {
 		map.put("end", end);
 		map.put("fsArr", fsArr);
 		map.put("ss", ss);
-
-		List<GoodsVO> list = gdao.adminGoodsFind(map);
+		map.put("order", order);
+		map.put("status", status);
+		
+		List<Map<String,Object>> list = gdao.adminGoodsFind(map);
 		int totalpage = gdao.goodsTotalPage(map);
-
-		for (GoodsVO vo : list) {
-			String g_name = vo.getG_name();
-			if (g_name.length() > 18) {
-				g_name = g_name.substring(0, 18) + "...";
-			}
-			vo.setG_name(g_name);
-
-			String g_image = vo.getG_image();
-			if (g_image.contains(";")) {
-				StringTokenizer st = new StringTokenizer(g_image, ";");
-				g_image = st.nextToken();
-			}
-			vo.setG_image(g_image);
-		}
 		
 		int count = gdao.goodsCount();
 		
@@ -74,27 +61,32 @@ public class AdminRestController2 {
 		
 		int i = 0;
 		JSONArray arr = new JSONArray();
-		for (GoodsVO vo : list) {
+		for (Map<String,Object> j : list) {
 			JSONObject obj = new JSONObject();
-			obj.put("g_id", vo.getG_id());
-			obj.put("c_id", vo.getC_id());
-			obj.put("g_name", vo.getG_name());
-			obj.put("g_brand", vo.getG_brand());
-			obj.put("g_price", vo.getG_price());
-			obj.put("g_sale", vo.getG_sale());
-			String images = vo.getG_image();
+			obj.put("g_id", j.get("G_ID"));
+			obj.put("c_id", j.get("C_ID"));
+			obj.put("c_title", j.get("C_TITLE"));
+			String g_name = (String) j.get("G_NAME");
+            if (g_name.length() > 18) {
+                g_name = g_name.substring(0, 18) + "...";
+            }
+			obj.put("g_name", g_name);
+			obj.put("g_brand", j.get("G_BRAND"));
+			obj.put("g_price", j.get("G_PRICE"));
+			obj.put("g_sale", j.get("G_SALE"));
+			
+			String images = (String) j.get("G_IMAGE");
 			String[] image = images.split(";");
 			obj.put("g_image", image[0]);
-			obj.put("g_detail", vo.getG_detail());
-			obj.put("g_stock", vo.getG_stock());
-			obj.put("g_sold", vo.getG_sold());
-			obj.put("g_status", vo.getG_status());
-			obj.put("g_regdate", vo.getG_regdate());
-			obj.put("startPage", startPage);
-			obj.put("endPage", endPage);
-			
+			obj.put("g_detail", j.get("G_DETAIL"));
+			obj.put("g_stock", j.get("G_STOCK"));
+			obj.put("g_sold", j.get("G_SOLD"));
+			obj.put("g_status", j.get("G_STATUS"));
+			obj.put("g_regdate", j.get("G_REGDATE"));
 			if (i == 0) {
 				obj.put("curpage", curpage);
+				obj.put("startPage", startPage);
+				obj.put("endPage", endPage);
 				obj.put("totalpage", totalpage);
 				obj.put("count", count);
 			}

@@ -60,7 +60,7 @@ public class GoodsDAO {
         return mapper.adminGoodsDetail(gid);
     }
     
-    public List<GoodsVO> adminGoodsFind(Map map) {
+    public List<Map<String,Object>> adminGoodsFind(Map map) {
         return mapper.adminGoodsFind(map);
     }
     

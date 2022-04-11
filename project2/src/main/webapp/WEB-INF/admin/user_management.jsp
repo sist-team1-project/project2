@@ -45,7 +45,7 @@ td {
             <th>등급</th>
             <th>차단</th>
           </tr>
-          <tr v-for="(u,index) in userlist" class="table_row_order fs-13">
+          <tr v-for="(u,index) in userlist" class="table_row_admin fs-13">
             <td>{{u.uid}}</td>
             <td>{{u.name}}</td>
             <td>{{u.gender}}</td>
