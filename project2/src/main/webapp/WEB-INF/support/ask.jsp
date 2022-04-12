@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="../css/support.css">
 </head>
 <body>
 	<div class="container bg0">
@@ -96,28 +98,33 @@
 	</div>
 	
 	<!--  ---------------   페이지   ---------------  -->
-	<nav class="pagination">
-		<ul>
-			<c:if test="${startPage>1 }">
-				<li><a href="../support/ask.do?page=${startPage-1 }">&laquo;
-						Previous</a></li>
-			</c:if>
+		<div class="text-center">
+		<ul class="pagination">
+		  		<li class="paging page-item" data-page="${startPage }">
+				<button class="page-link"><i class="fa fa-chevron-left" aria-hidden="true"></i></button></li>
 			<c:forEach var="i" begin="${startPage }" end="${endPage }">
-				<c:if test="${i==curpage }">
-					<c:set var="style" value="class=current" />
+				<c:if test="${i==curPage }">
+					<li class="current">${i }</li>
 				</c:if>
-				<c:if test="${i!=curpage }">
-					<c:set var="style" value="" />
+				<c:if test="${i!=curPage }">
+					<li class="paging page-item" data-page="${i }"><button class="page-link bg-2 c-w">${i }</button></li>
 				</c:if>
-				<li ${style }><a href="../support/ask.do?page=${i }">${i }</a></li>
 			</c:forEach>
-
-			<c:if test="${endPage<totalpage }">
-				<li><a href="../support/ask.do?page=${endPage+1 }"> <i
-						class="fa fa-caret-right" aria-hidden="true"></i>
-				</a></li>
-			</c:if>
+				<li class="paging page-item" data-page="${endPage }">
+				<button class="page-link"><i class="fa fa-chevron-right" aria-hidden="true"></i></button></li>
 		</ul>
-	</nav>
+	</div>
+
+	<script>
+		$(function() {
+			$('.paging').css("cursor", "pointer");
+			$('.paging').click(function() {
+				let page = $(this).attr('data-page');
+
+				location.href = '../support/ask.do?page=' + page;
+
+			})
+		})
+	</script>
 </body>
 </html>

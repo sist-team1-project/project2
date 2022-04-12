@@ -100,7 +100,7 @@ public class SupportRestController {
 	}
 
 	@GetMapping(value = "notice_update_vue.do", produces = "text/plain;charset=utf-8")
-	public String food_board_update_vue(int no) {
+	public String notice_update_vue(int no) {
 		String result = "";
 		try {
 			NoticeVO vo = ndao.noticeUpdateData(no);
@@ -135,16 +135,13 @@ public class SupportRestController {
 	@PostMapping("ask_delete_ok.do")
 	public String askDeleteOk(int no) {
 		String result = "";
-		AskVO vo=adao.askDetailData(no);
-		if(vo.getA_group_step()==0)
-    	{
-    		adao.askDelete1(no, vo.getA_group_id());
-    	}
-    	else
-    	{
-    		adao.askDelete2(no);
-    	}
+		AskVO vo = adao.askDetailData(no);
+		if (vo.getA_group_step() == 0) {
+			adao.askDelete1(no, vo.getA_group_id());
+		} else {
+			adao.askDelete2(no);
+		}
 		result = "<script>location.href=\"../support/ask.do\";</script>";
 		return result;
 	}
-} 
+}
