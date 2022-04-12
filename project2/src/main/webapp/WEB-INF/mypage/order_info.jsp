@@ -13,7 +13,7 @@
     <div class="row" id="orderpage">
       <div class="col-lg-12 m-lr-auto">
         <div class="p-b-10">
-          <h3>주문 정보</h3>
+          <h3><i class="fa fa-truck" aria-hidden="true"></i>&nbsp;주문 정보</h3>
         </div>
       </div>
     </div>
