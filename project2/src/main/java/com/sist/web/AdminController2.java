@@ -23,7 +23,7 @@ public class AdminController2 {
 	@GetMapping("adlist.do")
 	public String admin_user(String page, Model model) {
 
-		return "admin/product";
+		return "admin/goods_admin";
 	}
 
 	@GetMapping("goods_add.do")
