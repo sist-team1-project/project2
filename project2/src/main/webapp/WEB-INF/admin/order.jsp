@@ -45,7 +45,7 @@ td {
       
       <div class="col-lg-12 m-lr-auto m-b-50">
         <div class="wrap-table js-pscroll">
-          <table class="table-checkout text-center">
+          <table class="table-order text-center">
             <tr class="table_head text-center">
               <th>주문일시</th>
               <th>주문번호</th>

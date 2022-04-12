@@ -20,7 +20,7 @@
     <div class="row p-t-10">
       <div class="col-lg-12 m-lr-auto m-b-50">
         <div class="wrap-table js-pscroll">
-          <table class="table-checkout text-center">
+          <table class="table-order text-center">
             <tr class="table_head text-center">
               <th>주문자</th>
               <th>주문일시</th>
@@ -30,10 +30,10 @@
             <tr v-for="my in orderInfoList" class="table_row_order fs-13 text-center">
               <td> {{my.uid}} </td>
               <td> {{my.regdate}} </td>
-              <td><a class="cl8" href="#" data-toggle="modal" @click="odetail(my.oid)"> {{my.oid}} </a></td>
+              <td><a class="cl8" href="#" data-toggle="modal" @click="odetail($event, my.uid)">{{my.oid}}</a></td>
               <td v-if="my.state==-1">주문취소</td>
               <td v-if="my.state==0">대기중 <br>
-               <button class="bor20 cl2 btn-pro-color2 p-tb-4 p-lr-10" value="-1" v-on:click="cancel($event, my.oid); my.state=-1">주문취소</button>
+               <button class="bor20 cl2 btn-pro-color2 p-tb-4 p-lr-10" value=-1 @click="cancel($event, my.oid);">주문취소</button>
               </td>
               <td v-if="my.state==1">상품준비중</td>
               <td v-if="my.state==2">배송중</td>
@@ -127,14 +127,14 @@
                 $('.js-panel-admin').removeClass('show-header-admin');
             },
             /* 주문취소 */
-            cancel:function(event, oid){
+            cancel:function(event, uid) { 
         	    let state = event.currentTarget.value;
-        	    axios.post("http://localhost:8080/web/mypage/user_state_cancel_ok.do",null,{
+                axios.post("http://localhost:8080/web/mypage/user_state_cancel_ok.do",null,{
                     params:{
-                        state: state,
-                        oid: oid
+                    	state: state,
+                    	uid : uid
                     }
-        	    })
+                })
             }
         }
     })
