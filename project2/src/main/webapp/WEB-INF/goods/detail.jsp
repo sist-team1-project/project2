@@ -45,7 +45,7 @@
                   <div class="wrap-num-product flex-w m-r-20 m-tb-10">
                     <div @click="qDown()" class="btn-num-product-down cl8 hov-btn1 trans-04 flex-c-m"><i class="fs-16 zmdi zmdi-minus"></i></div>
                     <input v-model="quantity" class="mtext-104 cl3 text-center num-product" type="number" name="num-product">
-                    <div class="btn-num-product-up cl8 hov-btn1 trans-04 flex-c-m"><i class="fs-16 zmdi zmdi-plus"></i></div>
+                    <div @click="qUp()" class="btn-num-product-up cl8 hov-btn1 trans-04 flex-c-m"><i class="fs-16 zmdi zmdi-plus"></i></div>
                   </div>
                   <button @click="insertCart()" class="stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-10 trans-04 js-addcart-detail">장바구니</button>
                 </div>  
@@ -194,6 +194,9 @@
         	   		    g_quantity:this.quantity
         	   		}
         	    })
+            },
+            qUp:function(){
+                this.quantity=this.quantity+1;
             },
             qDown:function(){
             	if(this.quantity>1){
