@@ -11,7 +11,7 @@
 </head>
 <body>
   <div class="container bg0">
-    <h3 class="text-left p-b-20">글쓰기</h3>
+    <h3 class="text-center p-b-20">문의사항 등록</h3>
     <div class="row">
       <form method=post action="../support/ask_insert_ok.do">
       
@@ -40,14 +40,16 @@
           </tr>
           <tr>
             <th class="text-right">내용</th>
-            <td><textarea rows="10" cols="100" name=a_content></textarea></td>
+            <td><textarea rows="15" cols="110" name=a_content></textarea></td>
+          </tr>
+          <tr>
+        	<td colspan="2" class="text-right cols-2">
+         	 <input type=submit value="글쓰기" class="btn btn-sm bg-1"> 
+         	 <input type=button value="취소" class="btn btn-sm bg-2" onclick="javasecript:history.back()">
+            </td>
           </tr>
         </table>
         
-        <div class="text-right">
-          <input type=submit value="글쓰기" class="btn btn-sm bg-1"> 
-          <input type=button value="취소" class="btn btn-sm bg-2" onclick="javasecript:history.back()">
-        </div>
       </form>
     </div>
   </div>

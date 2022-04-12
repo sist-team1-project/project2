@@ -1,5 +1,21 @@
 @charset "UTF-8";
 
+.wd-10 {
+  width: 10%;
+}
+
+.wd-20 {
+  width: 20%;
+}
+
+.wd-50 {
+  width: 50%;
+}
+
+.hg-400 {
+  height: 400px;
+}
+
 .bg-1 {
   background-color: #eeeee6;
 }

@@ -9,7 +9,7 @@
 </head>
 <body>
   <div class="container bg0">
-    <h3 class="text-left" style="padding-bottom: 20px">1:1 문의</h3>
+    <h3 class="text-center p-b-20">1:1 문의</h3>
       <div class="row">
     
         <table class="table">
@@ -24,31 +24,30 @@
             <td colspan="3">${vo.a_title }</td>
           </tr>
           <tr>
-            <td colspan="4" valign="top" class="text-left" height="200">
-            <pre style="border: none; background-color: white; white-space: pre-wrap;">${vo.a_content }</pre></td>
+            <td colspan="4" class="text-left hg-400">${vo.a_content }</td>
           </tr>
           
           <tr>
             <td colspan="4" class="text-right">
             <c:if test="${sessionScope.grade=='0'}">
               <c:if test="${vo.a_group_step==0 }">
-                <a href="../support/ask_reply.do?no=${vo.a_id }" class="btn btn-xs bg-1">답변</a>
-                <a href="../support/ask_delete.do?no=${vo.a_id }" class="btn btn-xs bg-1">삭제</a>
-                <a href="../admin/ask_admin.do" class="btn btn-xs bg-2">목록</a>
+                <a href="../support/ask_reply.do?no=${vo.a_id }" class="btn btn-sm bg-1">답변</a>
+                <a href="../support/ask_delete.do?no=${vo.a_id }" class="btn btn-sm bg-1">삭제</a>
+                <a href="../admin/ask_admin.do" class="btn btn-sm bg-2">목록</a>
               </c:if>
               <c:if test="${vo.a_group_step==1 }">
-           	    <a href="../support/ask_delete.do?no=${vo.a_id }" class="btn btn-xs bg-1">삭제</a>
-                <a href="../admin/ask_admin.do" class="btn btn-xs bg-2">목록</a>
+           	    <a href="../support/ask_delete.do?no=${vo.a_id }" class="btn btn-sm bg-1">삭제</a>
+                <a href="../admin/ask_admin.do" class="btn btn-sm bg-2">목록</a>
               </c:if>
             </c:if>
             
             <c:if test="${sessionScope.grade=='1'}">
              <c:if test="${vo.a_group_step==0 }">
-            	<a href="../support/ask_delete.do?no=${vo.a_id }" class="btn btn-xs bg-1">삭제</a>
-             	<a href="../support/ask.do" class="btn btn-xs bg-2">목록</a>
+            	<a href="../support/ask_delete.do?no=${vo.a_id }" class="btn btn-sm bg-1">삭제</a>
+             	<a href="../support/ask.do" class="btn btn-sm bg-2">목록</a>
             </c:if>    
              <c:if test="${vo.a_group_step==1 }">
-                <a href="../support/ask.do" class="btn btn-xs bg-2">목록</a>
+                <a href="../support/ask.do" class="btn btn-sm bg-2">목록</a>
             </c:if>    
             </c:if>
           </td>

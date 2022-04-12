@@ -1,43 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="../css/support.css">
 </head>
 <body>
 	<div class="container bg0" id="notice_update">
-		<h3 class="text-center" style="padding-bottom: 20px">수정하기</h3>
+	  <h3 class="text-center p-b-20">수정하기</h3>
 		<div class="row">
-       <table class="table">
-        <tr>
-         <th width=20% class="text-right warning">작성자</th>
-         <td width=80%><input type=text id="u_id" size=15 
-         v-model="u_id" :value="u_id"></td>
-        </tr>
-        <tr>
-         <th width=20% class="text-right warning">제목</th>
-         <td width=80%><input type=text id="n_title" size=50 
-         v-model="n_title" :value="n_title"></td>
-        </tr>
-        <tr>
-         <th width=20% class="text-right warning">내용</th>
-         <td width=80%>
-          <textarea rows="10" cols="55" id="n_content" 
-          v-model="n_content" :value="n_content"></textarea>
-         </td>
-        </tr>
-       </table>
-     </div>
-       <div class="text-right" style="padding-top: 10px;">
-			<button class="btn btn-sm" style="background-color: #eeeee6"
-				v-on:click="write()">수정</button>
-			<button class="btn btn-sm" style="background-color: #dbd0be"
-				v-on:click="cancel()">취소</button>
+		  <table class="table">
+			<tr>
+		   	  <th class="text-right">작성자</th>
+			  <td><input type=text id="u_id" size=15 v-model="u_id" :value="u_id"></td>
+			</tr>
+			<tr>
+			  <th class="text-right">제목</th>
+			  <td><input type=text id="n_title" size=50 v-model="n_title" :value="n_title"></td>
+			</tr>
+			<tr>
+			  <th class="text-right">내용</th>
+			  <td><textarea rows="15" cols="110" id="n_content" v-model="n_content" :value="n_content"></textarea></td>
+			</tr>
+			<tr>
+			  <td colspan="3" class="text-right">
+		 	   <button class="btn btn-sm bg-1" v-on:click="write()">수정</button>
+		 	   <button class="btn btn-sm bg-2" v-on:click="cancel()">취소</button>
+			  </td>
+			</tr>
+		  </table>
 		</div>
-   </div>
-   <script>
+	</div>
+	
+	
+	<script>
     new Vue({
     	el:'#notice_update',
     	data:{
