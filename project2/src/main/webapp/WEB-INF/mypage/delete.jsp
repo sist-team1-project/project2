@@ -33,6 +33,7 @@
 new Vue({
  	el:'#delete',
  	data:{
+ 		id:'',
  		form: {
  			password:''
  		}
@@ -48,8 +49,12 @@ new Vue({
  			// 서버실행 전 확인
  			
  			axios.get("http://localhost:8080/web/mypage/delete_ok.do", {
+ 				params:{
+ 				id:this.id,
+ 				password:this.form.password
+ 				}
  	        }).then(res => {
- 	        	console.log(res)
+ 	        	//console.log(res)
  	        	if(res.data=="YES") {
                     alert("회원탈퇴 완료");
                 } else {

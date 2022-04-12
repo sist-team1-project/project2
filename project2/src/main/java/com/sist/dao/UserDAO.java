@@ -133,6 +133,19 @@ public class UserDAO {
 		System.out.println(bCheck+"정상 비번입력시에도 bCheck -> fasle로 출력");
 		return bCheck;
 	}
+	/*	public boolean userDelete(Map map) {
+		boolean bCheck = false;
+		String db_pwd = mapper.userGetPassword((String) map.get("id"));
+		if (db_pwd.equals((String) map.get("password"))) {
+			bCheck = true;
+			mapper.userDelete((String) map.get("id"));
+		} else {
+			bCheck = false;
+		}
+		System.out.println(bCheck+"정상 비번입력시에도 bCheck -> fasle로 출력");
+		return bCheck;
+	}
+*/	
 
 	// 유저정보 수정
 	public boolean userUpdate(UserVO vo) {
