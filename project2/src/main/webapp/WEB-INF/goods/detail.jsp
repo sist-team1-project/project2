@@ -193,6 +193,12 @@
         	   		    g_id:this.gid,
         	   		    g_quantity:this.quantity
         	   		}
+        	    }).then(res=>{
+        	        if (res.data == "ADD") {
+        	            alert("장바구니에 추가되었습니다");        	            
+        	        } else if (res.data == "UPDATE") {
+        	            alert("장바구니가 업데이트되었습니다.")
+        	        }
         	    })
             },
             qUp:function(){

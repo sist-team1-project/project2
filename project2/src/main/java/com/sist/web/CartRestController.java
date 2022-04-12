@@ -24,10 +24,11 @@ public class CartRestController {
 	
 
 	@PostMapping("insert_ok.do")
-	public void cart_insert_ok(CartVO vo, HttpSession session) {
+	public String cart_insert_ok(CartVO vo, HttpSession session) {
         String id = (String) session.getAttribute("id");
         vo.setU_id(id);
-        cartdao.cartInsert(vo);
+        String result = cartdao.cartInsert(vo);
+        return result;
 	}
 	
     @PostMapping("delete_ok.do")

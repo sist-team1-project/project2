@@ -8,7 +8,7 @@ import com.sist.vo.*;
 
 public interface CartMapper {
     
-    @Select("SELECT g_quantity FROM cart_1 WHERE u_id=#{u_id} AND g_id=#{g_id}")
+    @Select("SELECT count(*) FROM cart_1 WHERE u_id=#{u_id} AND g_id=#{g_id}")
     public int checkCart(CartVO vo);
     
 	@Insert("INSERT INTO cart_1 VALUES(cart_id_seq_1.NEXTVAL,#{u_id},#{g_id},#{g_quantity})")
