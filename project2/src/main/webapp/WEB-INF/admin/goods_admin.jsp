@@ -64,7 +64,6 @@
 								<th>브랜드</th>
 								<th>가격</th>
 								<th>할인율</th>
-								<th>재고</th>
 								<th>판매량</th>
 								<th>판매상태</th>
 								<th>제품 등록일</th>
@@ -87,7 +86,6 @@
 								<td>{{goods.g_brand}}</td>
 								<td>{{goods.g_price | currency}}</td>
 								<td>{{goods.g_sale }}</td>
-								<td>{{goods.g_stock }}</td>
 								<td>{{goods.g_sold }}</td>
 								<td>{{goods.g_status }}</td>
 								<td>{{goods.g_regdate }}</td>

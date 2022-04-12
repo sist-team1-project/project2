@@ -73,15 +73,6 @@
 
               <div class="flex-w flex-t bor12 p-tb-20">
                 <div class="size-208 w-full-ssm">
-                  <span class="stext-110 cl2"> 재고수량 </span>
-                </div>
-                <div class="size-209">
-                  <input ref="gstock" type=number min="0" class="bor10 cl3 p-tb-3 p-lr-5 w-full" v-model="gstock">
-                </div>
-              </div>
-
-              <div class="flex-w flex-t bor12 p-tb-20">
-                <div class="size-208 w-full-ssm">
                   <span class="stext-110 cl2"> 판매 상태 </span>
                 </div>
                 <div class="size-209">
@@ -151,7 +142,6 @@
 	        gbrand: '',
 	        gprice: '',
 	        gsale: '',
-	        gstock: '',
 	        gstatus: '',
 	        gimage: '',
 	        gdetail: '',
@@ -185,7 +175,6 @@
                 this.gbrand = result.data.g_brand;
                 this.gprice = result.data.g_price;
                 this.gsale = result.data.g_sale;
-                this.gstock = result.data.g_stock;
                 this.gstatus = result.data.g_status;
                 this.gimage = result.data.g_image;
                 this.gdetail = result.data.g_detail;
@@ -225,9 +214,6 @@
 	            } else if (this.gsale == "") {
 	                this.$refs.gsale.focus();
 	                return;
-	            } else if (this.gstock == "") {
-	                this.$refs.gstock.focus();
-	                return;
 	            } else if (this.gimage == "") {
                     this.$refs.gimage.focus();
                     return;
@@ -252,7 +238,6 @@
 	            form.append('g_brand', this.gbrand);
 	            form.append('g_price', this.gprice);
 	            form.append('g_sale', this.gsale);
-	            form.append('g_stock', this.gstock);
 	            form.append('g_status', this.gstatus);
 	            form.append('eid', this.eid.join(","));
 	            
