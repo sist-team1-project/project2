@@ -28,7 +28,6 @@
 					<table class="table">
 						<thead>
 							<tr class="table_head">
-								<th class="text-center">번호</th>
 								<th class="text-center">유형</th>
 								<th class="text-center">제목</th>
 								<th class="text-center">이름</th>
@@ -38,12 +37,11 @@
 						</thead>
 
 						<tbody>
-							<c:set var="count" value="${count }" />
+
 							<c:forEach var="vo" items="${list }">
 
 								<c:if test="${vo.a_group_step==0 }">
 									<tr class="table_row fs-13 p-t-20-admin-td">
-										<td class=" text-center">${count }</td>
 										<td class=" text-center">${vo.a_type }</td>
 										<td class="">
 											<a href="../support/ask_detail.do?no=${vo.a_id }">${vo.a_title }</a>
@@ -59,7 +57,6 @@
 
 								<c:if test="${vo.a_group_step==1 }">
 									<tr class="table_row fs-13 p-t-20-admin-td">
-										<td class=" text-center"></td>
 										<td class=" text-center">${vo.a_type }</td>
 										<td class="">
 											&nbsp;&nbsp;&nbsp; ㄴ
@@ -70,7 +67,6 @@
 									</tr>
 								</c:if>
 
-								<c:set var="count" value="${count-1 }" />
 							</c:forEach>
 						</tbody>
 
@@ -99,8 +95,6 @@
 			</c:if>
 		</ul>
 	</div>
-
-
 
 	<script>
 		$(function() {

@@ -54,7 +54,7 @@
 			<div class="col-lg-12 m-lr-auto m-b-50">
 				<div class="wrap-table js-pscroll">
 
-					<table class="table-checkout">
+					<table class="table-checkout-admin">
 						<thead>
 							<tr class="table_head font-center">
 								<th></th>
@@ -108,7 +108,7 @@
 			</div>
 		</div>
 		<div>
-
+	<!-- ------ 페이징  ----- --->
 			<div class="text-center">
 				<ul class="pagination">
 					<li class="page-item" v-bind:class="{'disabled':startPage==1}">
@@ -194,15 +194,16 @@
                     }
                 }).then(res => {
                     this.goodsList = res.data;
-                    this.curpage = res.data.curpage;
-                    this.totalpage = res.data.totalpage;
-                    this.startPage = res.data.startPage;
-                    this.endPage = res.data.endPage;
-                    this.count = res.data.count;
+                    this.curpage = res.data[0].curpage;
+                    this.totalpage = res.data[0].totalpage;
+                    this.startPage = res.data[0].startPage;
+                    this.endPage = res.data[0].endPage;
+                    this.count = res.data[0].count;
                     this.pages = [];
                     for (i = this.startPage; i <= this.endPage; i++) {
                         this.pages.push(i);
                     }
+                    console.log(res.data);
                 })
             },
             paging: function(event) {
@@ -220,10 +221,12 @@
                 }
                 this.dataSend();
             },
+            /* 사이드 상세보기 오픈  */
             goods_detail: function(detailId) {
                 this.gdetail = detailId.split(';');
                 $('.js-panel-admin').addClass('show-header-admin');
             },
+            /* 사이드 상세보기창 닫기 */
             goods_detail_close: function() {
                 $('.js-panel-admin').removeClass('show-header-admin');
             },
