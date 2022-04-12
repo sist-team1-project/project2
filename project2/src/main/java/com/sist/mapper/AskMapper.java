@@ -45,11 +45,6 @@ public interface AskMapper {
 			+"#{a_group_id},#{a_group_step},#{a_group_tab})")
 	public void askReplyInsert(AskVO vo);
 
-	@Update("UPDATE ask_1 SET "
-			+"u_id=#{u_id},a_type=#{a_type},a_a_content=#{a_content} "
-			+"WHERE a_id=#{a_id}")
-	public void askUpdate(AskVO vo);
-
 	@Delete("DELETE FROM ask_1 "
 			+"WHERE a_group_id=#{a_group_id}")
 	public void askDelete1(int a_group_id);
@@ -58,7 +53,6 @@ public interface AskMapper {
 			+"WHERE a_id=#{a_id}")
 	public void askDelete2(int no);
 	
-	/* -- 관리자 문의 관리 리스트  -- */
 	@Select("SELECT a_id, u_id, a_type, a_title, TO_CHAR(a_regdate,'YYYY-MM-DD') as a_regdate, "
 			 +"a_group_tab,num "
 			 +"FROM (SELECT a_id,u_id,a_type,a_title,a_regdate,a_group_tab,rownum as num "
@@ -68,22 +62,9 @@ public interface AskMapper {
 			 + "AND num BETWEEN #{start} AND #{end}")
 	public List<AskVO> askListData_admin(Map map);
 	
-	/*   --- 질문 그룹탭 +1 --- */
 	@Update("UPDATE ask_1 SET a_group_tab = #{a_group_tab}+1 "
 			+ "WHERE a_id = #{a_id} ")
 	public void asktabReply(AskVO vo);
-	
-	/*   --- 질문에 대한 그룹아이디 확인  --- */
-	@Select("SELECT a_group_id FROM ask_1 WHERE a_id = #{a_id}")
-	public int agid(int a_id);
-
-	/*   --- 답변 정보  --- */
-	@Select("SELECT a_id, u_id, a_type, a_title, TO_CHAR(a_regdate,'YYYY-MM-DD') as a_regdate, a_group_id, a_group_step, a_group_tab num "
-			 +"FROM (SELECT a_id,u_id,a_type,a_title,a_regdate,a_group_id,a_group_step,a_group_tab, rownum as num "
-			 +"FROM (SELECT a_id,u_id,a_type,a_title,a_regdate,a_group_id,a_group_step,a_group_tab "
-			 +"FROM ask_1 ORDER BY a_group_id DESC, a_group_step ASC)) "
-			 +"WHERE a_group_step = 1 AND a_group_id = #{a_group_id}")
-	public AskVO replyData(int a_group_id);
 	
 }
 

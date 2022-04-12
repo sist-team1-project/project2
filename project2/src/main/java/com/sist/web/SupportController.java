@@ -73,15 +73,6 @@ public class SupportController {
 		map.put("end", end);
 
 		List<AskVO> list = adao.askListData(map);
-//		int agroupid = 0;
-//		AskVO rvo = null;
-//		for (AskVO vo : list) {
-//			int a_id = vo.getA_id();
-//			agroupid = adao.agid(a_id);
-//			rvo = adao.replyData(agroupid);
-//			int a_group_id = rvo.getA_group_id();
-//			model.addAttribute("ra_group_id", a_group_id);
-//		}
 
 		int totalpage = adao.askTotalPage();
 
