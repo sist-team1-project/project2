@@ -24,7 +24,7 @@ public interface AskMapper {
 	public void askInsert(AskVO vo);
 
 	@Select("SELECT a_id,a_type,a_title,a_content,"
-			+"TO_CHAR(a_regdate,'YYYY-MM-DD') as a_regdate,a_group_id,a_group_step "
+			+"TO_CHAR(a_regdate,'YYYY-MM-DD') as a_regdate,a_group_id,a_group_step,a_group_tab "
 			+"FROM ask_1 "
 			+"WHERE a_id=#{a_id}")
 	public AskVO askDetailData(int no);
