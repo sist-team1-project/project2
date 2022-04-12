@@ -8,6 +8,9 @@
   <link rel="stylesheet" type="text/css" href="../css/like.css">
 </head>
 <body>
+  <div class="row">
+    <div class="col-sm-12 p-l-30 p-t-50 p-b-20"><h4><i class="fa fa-star" aria-hidden="true"></i>&nbsp;즐겨찾기</h4></div>
+  </div>
   <div id="likePage">
     <div class="wrap-table js-pscroll">
       <table class="table-like">

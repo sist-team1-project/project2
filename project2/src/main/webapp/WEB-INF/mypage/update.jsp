@@ -47,7 +47,7 @@
             <input type="text" class="bor10 p-lr-5 p-tb-3 cl3 fs-13 dis-inline-block" ref="post" v-model="form.u_post" readonly style="background-color:#eeeee6">
             &nbsp;&nbsp;<input type="button" style="background-color:#dbd0be" class="cl0 btn-pro-color2 fs-13 p-lr-5 p-tb-4 trans-04 pointer dis-inline-block" value="우편번호 찾기" @click="postFind">
             <div>주소</div>
-            <input type="text" class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" ref="address1" v-model="form.u_address1" readonly>
+            <input type="text" class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" style="background-color:#eeeee6" ref="address1" v-model="form.u_address1" readonly>
             <div>상세주소</div>
             <input class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" type="text" v-model="form.u_address2">
           </div class="p-tb-10">
