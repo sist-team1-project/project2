@@ -22,10 +22,10 @@ public class AdminRestController2 {
 
 	@Autowired
 	private GoodsDAO gdao;
-	
+
 	@Autowired
 	private EventDAO edao;
-	
+
 	@Autowired
 	private CategoryDAO cdao;
 
@@ -35,7 +35,7 @@ public class AdminRestController2 {
 			page = "1";
 		}
 		int curpage = Integer.parseInt(page);
-		
+
 		Map map = new HashMap();
 
 		int rowSize = 10;
@@ -49,49 +49,49 @@ public class AdminRestController2 {
 		map.put("ss", ss);
 		map.put("order", order);
 		map.put("status", status);
-		
-		List<Map<String,Object>> list = gdao.adminGoodsFind(map);
+
+		List<Map<String, Object>> list = gdao.adminGoodsFind(map);
 		int totalpage = gdao.adminGoodsTotalPage(map);
 		int count = gdao.adminGoodsCount();
-		
+
 		final int BLOCK = 10;
 		int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
 		int endPage = ((curpage - 1) / BLOCK * BLOCK) + BLOCK;
 		if (endPage > totalpage) {
 			endPage = totalpage;
 		}
-		
+
 		int i = 0;
 		JSONArray arr = new JSONArray();
-		for (Map<String,Object> j : list) {
+		for (Map<String, Object> j : list) {
 			JSONObject obj = new JSONObject();
 			obj.put("g_id", j.get("G_ID"));
 			obj.put("c_title", j.get("C_TITLE"));
 			String g_name = (String) j.get("G_NAME");
-            if (g_name.length() > 18) {
-                g_name = g_name.substring(0, 18) + "...";
-            }
+			if (g_name.length() > 18) {
+				g_name = g_name.substring(0, 18) + "...";
+			}
 			obj.put("g_name", g_name);
 			obj.put("g_brand", j.get("G_BRAND"));
 			obj.put("g_price", j.get("G_PRICE"));
 			obj.put("g_sale", j.get("G_SALE"));
-            String images = (String) j.get("G_IMAGE");
-            if (images == null) {
-                images = "";
-            }
-            String[] image = images.split(";");
-            obj.put("g_image", image[0]);
-            obj.put("g_detail", j.get("G_DETAIL"));
-            obj.put("g_sold", j.get("G_SOLD"));
-            obj.put("g_status", j.get("G_STATUS"));
-            obj.put("g_regdate", j.get("G_REGDATE"));
-            
+			String images = (String) j.get("G_IMAGE");
+			if (images == null) {
+				images = "";
+			}
+			String[] image = images.split(";");
+			obj.put("g_image", image[0]);
+			obj.put("g_detail", j.get("G_DETAIL"));
+			obj.put("g_sold", j.get("G_SOLD"));
+			obj.put("g_status", j.get("G_STATUS"));
+			obj.put("g_regdate", j.get("G_REGDATE"));
+
 			if (i == 0) {
-                obj.put("curpage", curpage);
-                obj.put("startPage", startPage);
-                obj.put("endPage", endPage);
-                obj.put("totalpage", totalpage);
-                obj.put("count", count);
+				obj.put("curpage", curpage);
+				obj.put("startPage", startPage);
+				obj.put("endPage", endPage);
+				obj.put("totalpage", totalpage);
+				obj.put("count", count);
 			}
 			arr.add(obj);
 			i++;
@@ -104,99 +104,134 @@ public class AdminRestController2 {
 		gdao.goodsUpdate(vo, eid);
 		return "ok";
 	}
-	
+
 	@GetMapping(value = "event_list.do", produces = "text/plain;charset=utf-8")
-    public String admin_event_list() {
-	    List<EventVO> list = new ArrayList<EventVO>();
-	    list = edao.eventList();
-	    
-	    JSONArray arr = new JSONArray();
-	    for (EventVO vo : list) {
-            JSONObject obj = new JSONObject();
-            obj.put("eid", vo.getE_id());
-            obj.put("etitle", vo.getE_title());
-            
-            arr.add(obj);
-        }
-        return arr.toJSONString();
-    }
-	
-    @PostMapping("goods_add_ok.do")
-    public String goods_add_vue_ok(@ModelAttribute GoodsVO vo, @RequestParam String eid, HttpServletRequest request) {
-        try {
-            // 이미지 확장자(jpg,png)를 위해 이미지의 기존 이름 가져오기
-            String gimageName = vo.getFile_gimage().getOriginalFilename();
-            String gdetailName = vo.getFile_gimage().getOriginalFilename();
-            
-            // 새로운 이미지 파일 이름을 등록 날짜&시간으로 설정
-            SimpleDateFormat fmt = new SimpleDateFormat ( "YYYYMMDDHHMMSS");
-            Calendar cal = Calendar.getInstance();
-            
-            // 저장 경로 만들기
-            String path = request.getSession().getServletContext().getRealPath("/") + "images\\goods\\";
-            path = path.replace("\\", File.separator);
-            String newImageName = "image" + fmt.format(cal.getTime()) + gimageName.substring(gimageName.lastIndexOf("."));
-            String newDetailName = "detail" + fmt.format(cal.getTime()) + gdetailName.substring(gdetailName.lastIndexOf("."));
-            String gimagePath = path + newImageName;
-            String gdetailPath = path + newDetailName;
-            
-            // 경로에 새 파일만들기
-            File gimage = new File(gimagePath);
-            File gdetail = new File(gdetailPath);
-            
-            // 파일 옮기기
-            try {
-                vo.getFile_gimage().transferTo(gimage);
-                vo.getFile_gdetail().transferTo(gdetail);
-            } catch(Exception ex){}
-            
-            // 데이터베이스에 경로 저장
-            String imgPath = "..\\images\\goods\\";
-            imgPath = imgPath.replace("\\", File.separator);
-            if(vo.getG_image().equals("")) { // 만약 직접 작성된 대표 이미지 경로가 없다면
-                vo.setG_image(imgPath + newImageName);   // 첨부된 대표 이미지를 넣기
-            } else {
-                vo.setG_image(vo.getG_image() + ";" + imgPath + newImageName); // 작성된 대표 이미지 경로가 있다면 구분자로 추가                
-            }
-            
-            if (vo.getG_detail().equals("")) { // 만약 직접 작성된 상세 이미지 경로가 없다면
-                vo.setG_detail(imgPath + newDetailName);   // 첨부된 상세 이미지를 넣기
-            } else {
-                vo.setG_detail(vo.getG_detail() + ";" + imgPath + newDetailName); // 작성된 상세 이미지 경로가 있다면 구분자로 추가 
-            }
-            
-        } catch (Exception ex) {
-        }
-        
-        gdao.goodsInsert(vo, eid);
-        return "ok";
-    }
-    
-    @GetMapping(value = "goodsdetaildata.do", produces = "text/plain;charset=utf-8")
-    public String adminGoodsDetail(int g_id) {
-    	GoodsVO vo = gdao.adminGoodsDetail(g_id);
-    	List<EventGoodsVO> list = gdao.goodsEidData(g_id);
-    	
-    	JSONObject obj = new JSONObject();
-    	obj.put("g_id", vo.getG_id());
-        obj.put("c_id", vo.getC_id());
-        String c_id1 = vo.getC_id().substring(0,3);
-       	obj.put("cid1", c_id1);
-       	obj.put("g_name", vo.getG_name());
-       	obj.put("g_brand", vo.getG_brand());
-        obj.put("g_price", vo.getG_price());
-        obj.put("g_sale", vo.getG_sale());
-        String images = vo.getG_image();
-        String[] image = images.split(";");
-        obj.put("g_image", image[0]);
-        obj.put("g_detail", vo.getG_detail());
-        obj.put("g_status", vo.getG_status());
-        JSONArray arr = new JSONArray();
-        for(EventGoodsVO i : list) {
-            arr.add(i.getE_id());
-        }
+	public String admin_event_list() {
+		List<EventVO> list = new ArrayList<EventVO>();
+		list = edao.eventList();
+
+		JSONArray arr = new JSONArray();
+		for (EventVO vo : list) {
+			JSONObject obj = new JSONObject();
+			obj.put("eid", vo.getE_id());
+			obj.put("etitle", vo.getE_title());
+
+			arr.add(obj);
+		}
+		return arr.toJSONString();
+	}
+
+	@PostMapping("goods_add_ok.do")
+	public String goods_add_vue_ok(@ModelAttribute GoodsVO vo, @RequestParam String eid, HttpServletRequest request) {
+		try {
+			// 이미지 확장자(jpg,png)를 위해 이미지의 기존 이름 가져오기
+			String gimageName = vo.getFile_gimage().getOriginalFilename();
+			String gdetailName = vo.getFile_gimage().getOriginalFilename();
+
+			// 새로운 이미지 파일 이름을 등록 날짜&시간으로 설정
+			SimpleDateFormat fmt = new SimpleDateFormat("YYYYMMDDHHMMSS");
+			Calendar cal = Calendar.getInstance();
+
+			// 저장 경로 만들기
+			String path = request.getSession().getServletContext().getRealPath("/") + "images\\goods\\";
+			path = path.replace("\\", File.separator);
+			String newImageName = "image" + fmt.format(cal.getTime()) + gimageName.substring(gimageName.lastIndexOf("."));
+			String newDetailName = "detail" + fmt.format(cal.getTime()) + gdetailName.substring(gdetailName.lastIndexOf("."));
+			String gimagePath = path + newImageName;
+			String gdetailPath = path + newDetailName;
+
+			// 경로에 새 파일만들기
+			File gimage = new File(gimagePath);
+			File gdetail = new File(gdetailPath);
+
+			// 파일 옮기기
+			try {
+				vo.getFile_gimage().transferTo(gimage);
+				vo.getFile_gdetail().transferTo(gdetail);
+			} catch (Exception ex) {
+			}
+
+			// 데이터베이스에 경로 저장
+			String imgPath = "..\\images\\goods\\";
+			imgPath = imgPath.replace("\\", File.separator);
+			if (vo.getG_image().equals("")) { // 만약 직접 작성된 대표 이미지 경로가 없다면
+				vo.setG_image(imgPath + newImageName); // 첨부된 대표 이미지를 넣기
+			} else {
+				vo.setG_image(vo.getG_image() + ";" + imgPath + newImageName); // 작성된 대표 이미지 경로가 있다면 구분자로 추가                
+			}
+
+			if (vo.getG_detail().equals("")) { // 만약 직접 작성된 상세 이미지 경로가 없다면
+				vo.setG_detail(imgPath + newDetailName); // 첨부된 상세 이미지를 넣기
+			} else {
+				vo.setG_detail(vo.getG_detail() + ";" + imgPath + newDetailName); // 작성된 상세 이미지 경로가 있다면 구분자로 추가 
+			}
+
+		} catch (Exception ex) {
+		}
+
+		gdao.goodsInsert(vo, eid);
+		return "ok";
+	}
+
+	@GetMapping(value = "goodsdetaildata.do", produces = "text/plain;charset=utf-8")
+	public String adminGoodsDetail(int g_id) {
+		GoodsVO vo = gdao.adminGoodsDetail(g_id);
+		List<EventGoodsVO> list = gdao.goodsEidData(g_id);
+
+		JSONObject obj = new JSONObject();
+		obj.put("g_id", vo.getG_id());
+		obj.put("c_id", vo.getC_id());
+		String c_id1 = vo.getC_id().substring(0, 3);
+		obj.put("cid1", c_id1);
+		obj.put("g_name", vo.getG_name());
+		obj.put("g_brand", vo.getG_brand());
+		obj.put("g_price", vo.getG_price());
+		obj.put("g_sale", vo.getG_sale());
+		String images = vo.getG_image();
+		String[] image = images.split(";");
+		obj.put("g_image", image[0]);
+		obj.put("g_detail", vo.getG_detail());
+		obj.put("g_status", vo.getG_status());
+		JSONArray arr = new JSONArray();
+		for (EventGoodsVO i : list) {
+			arr.add(i.getE_id());
+		}
 		obj.put("eid", arr);
-    	return obj.toJSONString();
-    }
-    
+		return obj.toJSONString();
+	}
+
+	/*  -- 카테고리 추가  --  */
+	@PostMapping("category_add_ok.do")
+	public String category_add_vue_ok(String c_id1, String c1_title, String c_id2, String c2_title) {
+		CategoryVO vo = new CategoryVO();
+		vo.setC_id(c_id1);
+		vo.setC_title(c1_title);
+		cdao.category_insert(vo);
+
+		CategoryVO vo2 = new CategoryVO();
+		vo2.setC_id(c_id2);
+		vo2.setC_title(c2_title);
+		cdao.category_insert(vo2);
+
+		System.out.println("cid : " + vo.getC_id());
+		System.out.println("title : " + vo.getC_title());
+		System.out.println("cid2 : " + c_id2);
+		System.out.println("title2 : " + c2_title);
+
+		return "ok";
+	}
+
+	/*  -- 이벤트 추가  --  */
+	@PostMapping("event_add_ok.do")
+	public String event_add_vue_ok(String e_title) {
+		EventVO vo = new EventVO();
+
+		vo.setE_title(e_title);
+
+		System.out.println("etitle : " + e_title);
+
+		edao.insertEvent(vo);
+		return "ok";
+	}
+
 }

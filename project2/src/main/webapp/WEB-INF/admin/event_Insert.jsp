@@ -19,8 +19,8 @@
 					<div class="bor10 p-lr-40 p-t-30 p-b-40 p-lr-0-sm">
 
 
-						<form @submit.prevent="submitForm">
 
+						<form @submit.prevent="submitCateForm">
 							<div class="flex-w flex-t bor12 p-b-20">
 								<div class="size-208 w-full-ssm">
 									<span class="stext-110 cl2"> 카테고리 </span>
@@ -61,19 +61,21 @@
 									<input type=button class="btn flex-c-m stext-101 cl0 bg1 bor14 hov-btn3 trans-04 pointer btn-pro-color2 dis-inline-block" value="삭제">
 								</div>
 							</div>
-
+						</form>
+						<form @submit.prevent="submitEveForm">
+							<!--   -------  이벤트 --------  -->
 							<div class="flex-w flex-t bor12 p-t-20 p-b-20">
 								<div class="size-208 w-full-ssm">
-									<span class="stext-110 cl2"> 이벤트 여부 </span>
+									<span class="stext-110 cl2"> 이벤트</span>
 								</div>
 								<div class="row size-209 p-b-20">
-									<span v-for="e in events" class="dis-inline-block"><input type="checkbox" class="bor10 dis-inline-block" :value="e.eid" v-model="eid"> &nbsp;{{e.etitle}} &nbsp;&nbsp;</span>
+									<span v-for="e in events" class="dis-inline-block">{{e.eid}}&nbsp;{{e.etitle}} &nbsp;&nbsp;</span>
 								</div>
 
 								<!--   -------  이벤트 이름  --------  -->
 								<div class="size-208 w-full-ssm">이벤트 이름</div>
 								<div class="p-b-20 p-lr-10">
-									<input ref="category2" type=text class="bor10 cl3 p-tb-3 p-lr-5  dis-inline-block" v-model="category2">
+									<input ref="eidname" type=text class="bor10 cl3 p-tb-3 p-lr-5  dis-inline-block" v-model="eidname">
 								</div>
 
 								<!--   -------  버튼 --------  -->
@@ -107,7 +109,12 @@
             category1: '',
             category2: '',
             catitle1: '',
-            catitle2: ''
+            catitle2: '',
+            eidname:'',
+            c_id1:'',
+            c1_title:'',
+            c_id2:'',
+            c2_title:''
         },
         mounted: function() {
             this.cate1();
@@ -136,20 +143,36 @@
                 this.cindex = event.target.selectedIndex;
                 this.cid2 = this.categories2[this.cindex][0].cid;
             },
-            submitForm:function(){
-                if (this.eid == null) {
-                    this.eid.push(0);
-                }
+            submitCateForm:function(){
                 
-                let form = new FormData();
-                form.append('c_id', this.cid2);
-                form.append('eid', this.eid.join(","));
+               	console.log("category1 : "+ this.category1);
+               	console.log("cat1 title : "+ this.catitle1);
+               	console.log("category2 : "+ this.category2);
+               	console.log("cat2 title : "+ this.catitle2);
                 
-                axios.post('http://localhost:8080/web/admin/goods_add_ok.do', form, {
-                }) .then((response) => {
-                    location.href="../admin/adlist.do"
+               	let form = new FormData();
+               	form.append('c_id1',this.category1);
+               	form.append('c_id2',this.category2);
+               	form.append('c1_title',this.catitle1);
+               	form.append('c2_title',this.catitle2);
+               	
+                axios.post('http://localhost:8080/web/admin/category_add_ok.do', form, {
+                }).then((response) => {
+                    location.href="../admin/event_Insert.do"
                 })
-            }
+            },
+            submitEveForm:function(){
+            
+            let form = new FormData();
+            form.append('e_title', this.eidname);
+            
+           	console.log("event name : "+ this.eidname);
+            
+            axios.post('http://localhost:8080/web/admin/event_add_ok.do', form, {
+            }) .then((response) => {
+                location.href="../admin/event_Insert.do"
+            })
+        	}
         }
     })
   </script>

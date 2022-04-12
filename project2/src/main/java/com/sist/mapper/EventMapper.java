@@ -8,9 +8,9 @@ import com.sist.vo.*;
 
 public interface EventMapper {
 
-    @Select("select * from event_1")
+    @Select("select * from event_1 ORDER BY e_id")
     public List<EventVO> eventList();
     
-    @Insert("INSERT INTO event_1 VALUES(#{e_id}, #{e_title}")
+    @Insert("INSERT INTO event_1 VALUES(event_id_seq_1.nextval, #{e_title})")
     public void insertEvent(EventVO vo);
 }
