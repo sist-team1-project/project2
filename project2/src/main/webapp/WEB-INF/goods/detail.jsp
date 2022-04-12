@@ -34,7 +34,7 @@
         <div class="col-md-6 col-lg-5 p-b-30">
           <div class="p-r-50 p-t-5 p-lr-0-lg">
             <h4 class="cl2 js-name-detail p-b-14">{{goods.name}}</h4>
-            <span class="fs-14 cl2 p-t-20 p-b-10 dis-block"><b>가격</b>&emsp;{{goods.price|currency}}<br></span>
+            <span class="fs-14 cl2 p-t-20 p-b-10 dis-block"><b>가격&emsp;</b>&emsp;{{goods.price|currency}}원<br></span>
             <span class="fs-14 cl2 p-tb-10 dis-block"><b>브랜드</b>&emsp;{{goods.brand }}<br></span>
             <span class="fs-14 cl2 p-tb-10 dis-block"><b>배송비</b>&emsp;5,000원<br></span>
             <span class="fs-14 cl2 p-tb-10 dis-block"><b>할인율</b>&emsp;{{goods.sale }} %</span>
