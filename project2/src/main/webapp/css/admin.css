@@ -157,6 +157,18 @@
 	padding-top: 20px;
 }
 
+.table-checkout-admin {
+  border-collapse: collapse;
+  font-size: 14px;
+  width: 100%;
+  min-width: 800px;
+}
+
+.table-checkout-admin tr {
+  border-top: 1px solid #e6e6e6;
+  border-bottom: 1px solid #e6e6e6;
+}
+
 .table_row_admin td {
   padding: 15px 0px;
 }
