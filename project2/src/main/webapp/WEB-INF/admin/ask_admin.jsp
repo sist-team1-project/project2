@@ -25,15 +25,15 @@
 			<div class="col-lg-12 m-lr-auto m-b-50" id="askAdmin">
 				<div class="wrap-table js-pscroll">
 
-					<table class="table-checkout">
+					<table class="table">
 						<thead>
 							<tr class="table_head">
-								<th width=10% class="text-center">번호</th>
-								<th width=15% class="text-center">유형</th>
-								<th width=40% class="text-center">제목</th>
-								<th width=10% class="text-center">이름</th>
-								<th width=20% class="text-center">작성일</th>
-								<th width=10% class="text-center">상태</th>
+								<th class="text-center">번호</th>
+								<th class="text-center">유형</th>
+								<th class="text-center">제목</th>
+								<th class="text-center">이름</th>
+								<th class="text-center">작성일</th>
+								<th class="text-center">상태</th>
 							</tr>
 						</thead>
 
@@ -42,15 +42,15 @@
 							<c:forEach var="vo" items="${list }">
 
 								<c:if test="${vo.a_group_step==0 }">
-									<tr class="table_row fs-13">
-										<td class="p-t-20 text-center">${count }</td>
-										<td class="p-t-20 text-center">${vo.a_type }</td>
-										<td class="p-t-20">
+									<tr class="table_row fs-13 p-t-20-admin-td">
+										<td class=" text-center">${count }</td>
+										<td class=" text-center">${vo.a_type }</td>
+										<td class="">
 											<a href="../support/ask_detail.do?no=${vo.a_id }">${vo.a_title }</a>
 										</td>
-										<td class="p-t-20 text-center">${vo.u_id }</td>
-										<td class="p-t-20 text-center">${vo.a_regdate }</td>
-										<td class="p-t-20 text-center">
+										<td class=" text-center">${vo.u_id }</td>
+										<td class=" text-center">${vo.a_regdate }</td>
+										<td class=" text-center">
 											<c:if test="${vo.a_group_tab==1 }">답변완료</c:if>
 											<c:if test="${vo.a_group_tab==0 }">미답변</c:if>
 										</td>
@@ -58,15 +58,15 @@
 								</c:if>
 
 								<c:if test="${vo.a_group_step==1 }">
-									<tr class="table_row fs-13">
-										<td class="p-t-20 text-center"></td>
-										<td class="p-t-20 text-center">${vo.a_type }</td>
-										<td class="p-t-20">
+									<tr class="table_row fs-13 p-t-20-admin-td">
+										<td class=" text-center"></td>
+										<td class=" text-center">${vo.a_type }</td>
+										<td class="">
 											&nbsp;&nbsp;&nbsp; ㄴ
 											<a href="../support/ask_detail.do?no=${vo.a_id }">${vo.a_title }</a>
 										</td>
-										<td class="p-t-20 text-center"></td>
-										<td class="p-t-20 text-center">${vo.a_regdate }</td>
+										<td class=" text-center"></td>
+										<td class=" text-center">${vo.a_regdate }</td>
 									</tr>
 								</c:if>
 
