@@ -66,7 +66,7 @@ public interface GoodsMapper {
 	@Select("SELECT g_status FROM goods_1 WHERE g_id=#{gid}")
     public int goodsStatus(int gid);
 	
-	@Select("SELECT NVL(l.l_id,0) AS l_id,g.g_id,g.g_name,g.g_brand,g.g_sale,g.g_image,g.g_detail,g.g_sold,g.g_status "
+	@Select("SELECT NVL(l.l_id,0) AS l_id,g.g_id,g.g_name,g.g_brand,g.g_sale,g.g_image,g.g_detail,g.g_sold,g.g_status,g.g_price "
 	        + "FROM (SELECT * FROM goods_1 WHERE g_id=#{gid}) g, "
 	        + "(SELECT l_id,g_id FROM like_1 WHERE u_id=#{uid}) l "
 	        + "WHERE g.g_id=l.g_id(+)")
