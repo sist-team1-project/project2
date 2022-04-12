@@ -174,7 +174,7 @@ public interface GoodsMapper {
 	/******************************************************************************/
     /* -------------------------------- 주문창 제품 정보 ----------------------------  */
     @Select("<script>"
-            + "SELECT g_id,g_name,g_brand,g_price,g_sale,g_image,g_stock,g_sold,g_status "
+            + "SELECT g_id,g_name,g_brand,g_price,g_sale,g_image,g_sold,g_status "
             + "FROM goods_1 "
             + "<if test=\"gids.size!=0\">"
             + "WHERE g_id IN "
