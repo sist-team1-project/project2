@@ -33,7 +33,8 @@ public class MypageController {
 	}
 
 	@GetMapping("mypage/delete.do")
-	public String mypage_delete() {
+	public String mypage_delete(Model model, HttpSession session) {
+		model.addAttribute(session.getAttribute("id"));
 		return "mypage/delete";
 	}
 	
@@ -47,4 +48,18 @@ public class MypageController {
     public String mypage_like() {
         return "mypage/like";
     }
+	
+	@GetMapping("mypage/delete_ok.do")
+	public String mypage_delete_ok(String pwd, HttpSession session) {
+	    String id = (String) session.getAttribute("id");
+		String result = "";
+		boolean bCheck = dao.userDelete(id, pwd);
+		if (bCheck == true) {
+			result = "YES";
+		} else {
+			result = "NO";
+		}
+		System.out.println(result+"정상 비번입력시에도 result -> NO로 출력");
+		return result;
+	}
 }

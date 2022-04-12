@@ -80,18 +80,6 @@ public class MypageRestController {
 		return result;
 	}
 
-	@PostMapping(value = "mypage/delete_ok.do", produces = "text/plain;charset=utf-8")
-	public String mypage_delete_ok(@RequestBody HashMap<String, Object> map, HttpSession session) {
-	    String uid = (String) session.getAttribute("id");
-		String result = "";
-		boolean bCheck = dao.userDelete(map);
-		if (bCheck == true) {
-			result = "YES";
-		} else {
-			result = "NO";
-		}
-		return result;
-	}
 	/* 유저 주문정보 */
 	@GetMapping(value = "mypage/orderInfoList_vue.do", produces = "text/plain;charset=utf-8")
     public String orderInfoList(int page, HttpSession session) {

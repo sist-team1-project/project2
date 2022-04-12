@@ -19,11 +19,8 @@
           <div class="bor10 fs-15 m-b-10">
             <input type="text" name="password" id="password" placeholder="비밀번호를 입력하세요" ref="password" v-model="form.password">
           </div>
-          <div class="bor10 fs-15 m-b-8">
-            <input type="text" name="password2" id="password2" placeholder="비밀번호를 재입력하세요" ref="password2" v-model="form.password2">
-          </div>
           <div class="flex-c p-t-20">
-            <input type="button" id="submit-btn" class="flex-c-m stext-101 cl0 btn-sm btn-pro-color2 bor1 hov-btn1 p-lr-15 trans-04 fs-13" style="background-color:#dbd0be" value="제출">
+            <input type="submit" id="submit-btn" class="flex-c-m stext-101 cl0 btn-sm btn-pro-color2 bor1 hov-btn1 p-lr-15 trans-04 fs-13" style="background-color:#dbd0be" value="제출">
           </div>
         </div>
       </div>
@@ -50,7 +47,7 @@ new Vue({
             }
  			// 서버실행 전 확인
  			
- 			axios.post("http://localhost:8080/web/mypage/delete_ok.do", this.form, {
+ 			axios.get("http://localhost:8080/web/mypage/delete_ok.do", {
  	        }).then(res => {
  	        	
  	        	if(res.data=="YES") {
@@ -61,6 +58,7 @@ new Vue({
                 }
  	        })
  		}
+	   	    
  	}
 })
   </script>

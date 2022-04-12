@@ -130,6 +130,7 @@ public class UserDAO {
 		} else {
 			bCheck = false;
 		}
+		System.out.println(bCheck+"정상 비번입력시에도 bCheck -> fasle로 출력");
 		return bCheck;
 	}
 

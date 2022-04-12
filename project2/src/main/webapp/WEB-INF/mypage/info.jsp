@@ -65,8 +65,7 @@
 	 	},
 	 	mounted:function(){
 	 		axios.get("http://localhost:8080/web/mypage/info_vue.do",{
-                params:{
-                    
+                params:{    
                 }
             }).then(res=>{
                 this.info=res.data;
