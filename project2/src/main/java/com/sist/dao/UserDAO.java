@@ -120,7 +120,7 @@ public class UserDAO {
 		return bCheck;
 	}
 
-	// 계정 삭제 - 아이디에 따른 비번이 서버 비번과 일치시 삭제
+	// 계정 삭제
 	public boolean userDelete(String id, String pwd) {
 		boolean bCheck = false;
 		String db_pwd = mapper.userGetPassword(id);
@@ -130,22 +130,9 @@ public class UserDAO {
 		} else {
 			bCheck = false;
 		}
-		System.out.println(bCheck+"정상 비번입력시에도 bCheck -> fasle로 출력");
 		return bCheck;
 	}
-	/*	public boolean userDelete(Map map) {
-		boolean bCheck = false;
-		String db_pwd = mapper.userGetPassword((String) map.get("id"));
-		if (db_pwd.equals((String) map.get("password"))) {
-			bCheck = true;
-			mapper.userDelete((String) map.get("id"));
-		} else {
-			bCheck = false;
-		}
-		System.out.println(bCheck+"정상 비번입력시에도 bCheck -> fasle로 출력");
-		return bCheck;
-	}
-*/	
+		
 
 	// 유저정보 수정
 	public boolean userUpdate(UserVO vo) {

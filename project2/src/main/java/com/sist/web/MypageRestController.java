@@ -26,6 +26,7 @@ public class MypageRestController {
 	@Autowired
     private LikeDAO ldao;
 	
+	// 회원정보 상세
 	@GetMapping(value = "mypage/info_vue.do", produces = "text/plain;charset=utf-8")
 	public String mypage_info_vue(HttpSession session) {
 		String uid = (String) session.getAttribute("id");
@@ -46,7 +47,7 @@ public class MypageRestController {
 		return obj.toJSONString();
 	}
 
-	// 
+	// 회원정보 수정
 	@PostMapping(value = "mypage/update_ok.do", produces = "text/plain;charset=utf-8")
 	public String mypage_update_ok(@RequestBody UserVO vo, HttpSession session) {
 	    String uid = (String) session.getAttribute("id");
@@ -65,6 +66,7 @@ public class MypageRestController {
 		return result;
 	}
 
+	// 비밀번호 변경
 	@PostMapping(value = "mypage/update_pwd_ok.do", produces = "text/plain;charset=utf-8")
 	public String mypage_update_pwd_ok(@RequestBody HashMap<String, Object> map, HttpSession session) {
 	    String uid = (String) session.getAttribute("id");
@@ -80,6 +82,7 @@ public class MypageRestController {
 		return result;
 	}
 	
+	// 유저 계정삭제
 	@RequestMapping(value = "mypage/delete_ok.do", produces = "text/plain;charset=utf-8")
 	public String mypage_delete_ok(String password, HttpSession session) {
 	    String id = (String) session.getAttribute("id");
@@ -87,14 +90,12 @@ public class MypageRestController {
 		boolean bCheck = dao.userDelete(id, password);
 		if (bCheck == true) {
 			result = "YES";
+			session.invalidate();
 		} else {
 			result = "NO";
 		}
-		System.out.println(result+"정상 비번입력시에도 result -> NO로 출력");
 		return result;
 	}
-	
-	
 
 	/* 유저 주문정보 */
 	@GetMapping(value = "mypage/orderInfoList_vue.do", produces = "text/plain;charset=utf-8")

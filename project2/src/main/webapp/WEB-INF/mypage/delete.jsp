@@ -47,7 +47,6 @@ new Vue({
                 return;
             }
  			// 서버실행 전 확인
- 			
  			axios.get("http://localhost:8080/web/mypage/delete_ok.do", {
  				params:{
  				id:this.id,
@@ -56,10 +55,11 @@ new Vue({
  	        }).then(res => {
  	        	//console.log(res)
  	        	if(res.data=="YES") {
-                    alert("회원탈퇴 완료");
+                    alert("회원탈퇴가 완료되었습니다.");
+                    location.href = "../main/main.do"
                 } else {
-                	
-                	alert("잘못된 비밀번호");
+                	alert("잘못된 비밀번호를 입력했습니다.");
+                	this.$refs.password=="";
                 }
  	        })
  		}
