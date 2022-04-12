@@ -16,4 +16,7 @@ public interface CategoryMapper {
     
     @Select("SELECT c_title FROM category_1 WHERE c_id=#{cid}")
     public String categoryName(String cid);
+    
+    @Insert("INSERT INTO category_1 VALUES(#{c_id}, #{c_title}")
+    public void category_insert(CategoryVO vo);
 }

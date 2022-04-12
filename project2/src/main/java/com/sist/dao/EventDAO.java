@@ -10,11 +10,15 @@ import com.sist.mapper.*;
 
 @Repository
 public class EventDAO {
-    
-    @Autowired
-    private EventMapper mapper;
-    
-    public List<EventVO> eventList(){
-        return mapper.eventList();
-    }
+
+	@Autowired
+	private EventMapper mapper;
+
+	public List<EventVO> eventList() {
+		return mapper.eventList();
+	}
+
+	public void insertEvent(EventVO vo) {
+		mapper.insertEvent(vo);
+	}
 }

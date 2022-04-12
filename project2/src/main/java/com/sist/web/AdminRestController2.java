@@ -25,6 +25,9 @@ public class AdminRestController2 {
 	
 	@Autowired
 	private EventDAO edao;
+	
+	@Autowired
+	private CategoryDAO cdao;
 
 	@GetMapping(value = "adlist_vue.do", produces = "text/plain;charset=utf-8")
 	public String adlist_vue(String page, String fs, String ss, String order, String status) {

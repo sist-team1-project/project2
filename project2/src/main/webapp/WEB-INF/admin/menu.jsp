@@ -41,6 +41,12 @@
         유저관리
       </a>
     </li>
+    
+    <li class="bor18">
+      <a href="../admin/event_Insert.do" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-14 p-lr-4">
+        카테고리&이벤트 등록
+      </a>
+    </li>
   </ul>
 
 

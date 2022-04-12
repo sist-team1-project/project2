@@ -25,7 +25,7 @@ public class AdminController2 {
 	public String admin_user(String page, Model model) {
 		return "admin/goods_admin";
 	}
-	
+
 	/* ---- 상품 추가 페이지 이동 ---- */
 	@GetMapping("goods_add.do")
 	public String goods_add_vue() {
@@ -74,6 +74,12 @@ public class AdminController2 {
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("count", count);
 		return "admin/ask_admin";
+	}
+	
+	/* ---- 카테고리&이벤트 추가 페이지 ---- */
+	@GetMapping("event_Insert.do")
+	public String evca_Insert() {
+		return "admin/event_Insert";
 	}
 
 }

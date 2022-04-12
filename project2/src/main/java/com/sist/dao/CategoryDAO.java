@@ -11,19 +11,23 @@ import com.sist.mapper.*;
 
 @Repository
 public class CategoryDAO {
-    
-    @Autowired
-    private CategoryMapper mapper;
-    
-    public List<CategoryVO> categoryList_1(){
-        return mapper.categoryList_1();
-    }
-    
-    public List<CategoryVO> categoryList_2(){
-        return mapper.categoryList_2();
-    }
-    
-    public String categoryName(String cid) {
-        return mapper.categoryName(cid);
-    }
+
+	@Autowired
+	private CategoryMapper mapper;
+
+	public List<CategoryVO> categoryList_1() {
+		return mapper.categoryList_1();
+	}
+
+	public List<CategoryVO> categoryList_2() {
+		return mapper.categoryList_2();
+	}
+
+	public String categoryName(String cid) {
+		return mapper.categoryName(cid);
+	}
+
+	public void category_insert(CategoryVO vo) {
+		mapper.category_insert(vo);
+	}
 }
