@@ -37,9 +37,9 @@ public class CheckoutRestController {
         
         
         JSONArray arr = new JSONArray();
-/*        g_id,g_name,g_brand,g_price,g_sale,g_image,g_stock,g_sold,g_status*/
         for (GoodsVO vo : list) {
             JSONObject obj = new JSONObject();
+            obj.put("gid", vo.getG_id());
             obj.put("gname", vo.getG_name());
             obj.put("gbrand", vo.getG_brand());
             obj.put("gprice", vo.getG_price());
@@ -50,7 +50,6 @@ public class CheckoutRestController {
             }
             String[] image = images.split(";");
             obj.put("gimage", image[0]);
-            obj.put("gstock", vo.getG_stock());
             obj.put("gsold", vo.getG_sold());
             obj.put("gsold", vo.getG_status());
             

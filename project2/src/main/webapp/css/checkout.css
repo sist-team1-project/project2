@@ -4,7 +4,7 @@
   border-collapse: collapse;
   font-size: 14px;
   width: 100%;
-  min-width: 800px;
+  min-width: 900px;
 }
 
 .table-checkout tr {
@@ -50,16 +50,15 @@
 }
 
 .table-checkout .column-6 {
-  width: 70px;
+  width: 100px;
   text-align: right;
 }
 
 .table-checkout .column-7 {
-  width: 70px;
+  width: 130px;
   text-align: right;
   padding-right: 20px;
 }
-
 
 .table-checkout .table_head th {    
   font-size: 13px;
@@ -70,8 +69,6 @@
   padding-bottom: 15px;
 }
 
-
-
 .item {
   width: 60px;
   position: relative;
@@ -81,8 +78,6 @@
 .item img {
   width: 100%;
 }
-
-
 
 .link,
 .link:link,

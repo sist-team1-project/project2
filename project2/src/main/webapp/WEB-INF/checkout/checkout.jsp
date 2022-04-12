@@ -26,14 +26,14 @@
                   <th class="column-6">할인가격</th>
                   <th class="column-7">총가격</th>
                 </tr>
-                <tr class="table_row" v-for="g in goodsList">
-                  <td class="column-1"><div class="item"><img src="g.gimage"></div></td>
-                  <td class="column-2" >{{g.gname}}</td>
-                  <td class="column-3"><!-- {{g.gquantity}} --></td>
-                  <td class="column-4"><!-- {{cart.gprice | currency }}원  --></td>
-                  <td class="column-5"><!-- {{cart.gsale }} --></td>
-                  <td class="column-6"><!-- {{cart.gprice - (cart.gprice * cart.gsale / 100) | currency }} -->원 </td>
-                  <td class="column-7"><!-- {{(cart.gprice - (cart.gprice * cart.gsale / 100)) * cart.gquantity | currency }} -->원</td>
+                <tr class="table_row" v-for="(g,index) in goodsList">
+                  <td class="column-1"><div class="item"><img :src="g.gimage"></div></td>
+                  <td class="column-2" ><a class="link" :href="'../goods/detail.do?gid=' + g.gid">{{g.gname}}</a></td>
+                  <td class="column-3">{{quantList[index]}}</td>
+                  <td class="column-4">{{g.gprice | currency }}원</td>
+                  <td class="column-5">{{g.gsale }}</td>
+                  <td class="column-6">{{g.gprice - (g.gprice * g.gsale / 100) | currency }} 원 </td>
+                  <td class="column-7">{{(g.gprice - (g.gprice * g.gsale / 100)) * quantList[index] | currency }} 원</td>
                 </tr>
               </table>
             </div>
@@ -81,7 +81,7 @@
   
               <div class="flex-w flex-t bor12 p-b-13">
                 <div class="size-208"><span class="cl2"> 금액: </span></div>
-                <div class="size-209"><span class="cl2"> $79.65 </span></div>
+                <div class="size-209"><span class="cl2"> {{totalPrice() | currency}} </span></div>
               </div>
   
               <div class="flex-w flex-t bor12 p-t-15 p-b-30">
@@ -106,7 +106,8 @@
         el:'#checkout',
         data:{
             goodsList: [],
-            goodsIdList: ${gid }
+            gidList: ${glist },
+            quantList: ${qlist }
         },
         filters:{
             currency: function(value){
@@ -121,17 +122,16 @@
             gList:function(){
                 axios.get("http://localhost:8080/web/checkout/checkout_list_vue.do",{
                     params:{
-                        gid: this.goodsIdList.join(",")
+                        gid: this.gidList.join(",")
                     }
                 }).then(result=>{
                     this.goodsList = result.data;
-                    console.log(this.goodsList)
                 })
             },
-            totalPrice:function(list){
-              let totalsum = 0;
-              list.forEach(i=>{totalsum += (i.gprice - (i.gprice * i.gsale / 100)) * i.gquantity})
-              return totalsum;
+            totalPrice:function(){
+                let totalsum = 0;
+                this.goodsList.forEach((i,index)=>{totalsum += (i.gprice - (i.gprice * i.gsale / 100)) * this.quantList[index]})
+                return totalsum;
             }
         }
     })
