@@ -201,7 +201,6 @@
                     for (i = this.startPage; i <= this.endPage; i++) {
                         this.pages.push(i);
                     }
-                    console.log(res.data);
                 })
             },
             paging: function(event) {

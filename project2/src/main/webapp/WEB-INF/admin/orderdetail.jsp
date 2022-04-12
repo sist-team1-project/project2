@@ -92,10 +92,10 @@
               <th class="adt-light">총 주문금액</th>
             </tr> 
             <tr>
-              <td class="tcenter" >{{sumPrice(orderDetailList) | currency}}원</td>
+              <td class="tcenter" >{{sumPrice() | currency}}원</td>
               <td class="tcenter">5,000원</td>
-              <td class="tcenter">- {{salePrice(orderDetailList) | currency }}원</td>
-              <th class="tcenter">{{totalPrice(orderDetailList) + 5000 | currency}}원 </th>
+              <td class="tcenter">- {{salePrice() | currency }}원</td>
+              <th class="tcenter">{{totalPrice() + 5000 | currency}}원 </th>
             </tr>
           </table>
         </div>
@@ -144,22 +144,22 @@
                 })
             },
             // 합계금액
-            sumPrice:function(list) {
+            sumPrice:function() {
                 let sum = 0;
-                list.forEach(i=>{sum += i.price * i.quantity})
+                this.orderDetailList.forEach(i=>{sum += i.price * i.quantity})
                 return sum;
             },
             // 할인금액
-            salePrice:function(list) {
+            salePrice:function() {
                 let salesum = 0;
-                list.forEach(i=>{salesum += i.price * (i.sale/100) })
+                this.orderDetailList.forEach(i=>{salesum += i.price * (i.sale/100) })
                 //od.price * (od.sale/100)
                 return salesum;
             },
             // 총 주문금액
-            totalPrice:function(list) {
+            totalPrice:function() {
                 let totalsum = 0;
-                list.forEach(i=>{totalsum += (i.price*i.quantity) - (i.price * (i.sale/100)) })
+                this.orderDetailList.forEach(i=>{totalsum += (i.price*i.quantity) - (i.price * (i.sale/100)) })
                 return totalsum;
             }
         }

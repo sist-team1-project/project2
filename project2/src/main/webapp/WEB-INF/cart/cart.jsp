@@ -30,7 +30,7 @@
                   <td class="column-1"><input type="checkbox" name="gid" v-model="selectedGoods" :value="cart.gid" @change="clickCheck"></td>
                   <td class="column-2"><div class="item"><img :src="cart.gimage"></div></td>
                   <td class="column-3"><a class="link" :href="'../goods/detail.do?gid=' + cart.gid">{{cart.gname }}</a></td>
-                  <td class="column-4">{{cart.gquantity }}</td>
+                  <td class="column-4">{{cart.gquantity }}<input type=hidden name="quantity" :value="cart.gquantity" v-if="selectedGoods.indexOf(cart.gid) > -1"></td>
                   <td class="column-5">{{cart.gprice | currency }}원 </td>
                   <td class="column-6">{{cart.gsale }}</td>
                   <td class="column-7">{{cart.gprice - (cart.gprice * cart.gsale / 100) | currency }}원 </td>

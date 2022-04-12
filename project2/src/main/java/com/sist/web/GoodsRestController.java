@@ -39,8 +39,7 @@ public class GoodsRestController {
         obj.put("sale", vo.get("G_SALE"));
         obj.put("image", vo.get("G_IMAGE"));
         obj.put("detail", vo.get("G_DETAIL"));
-        obj.put("status", vo.get("G_STATUS"));   
-        obj.put("stock", vo.get("G_STOCK"));
+        obj.put("status", vo.get("G_STATUS"));
         return obj.toJSONString();
     }
     

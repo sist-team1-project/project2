@@ -79,7 +79,6 @@ public class AdminRestController2 {
             String[] image = images.split(";");
             obj.put("g_image", image[0]);
             obj.put("g_detail", j.get("G_DETAIL"));
-            obj.put("g_stock", j.get("G_STOCK"));
             obj.put("g_sold", j.get("G_SOLD"));
             obj.put("g_status", j.get("G_STATUS"));
             obj.put("g_regdate", j.get("G_REGDATE"));
@@ -188,7 +187,6 @@ public class AdminRestController2 {
         String[] image = images.split(";");
         obj.put("g_image", image[0]);
         obj.put("g_detail", vo.getG_detail());
-        obj.put("g_stock", vo.getG_stock());
         obj.put("g_status", vo.getG_status());
         JSONArray arr = new JSONArray();
         for(EventGoodsVO i : list) {

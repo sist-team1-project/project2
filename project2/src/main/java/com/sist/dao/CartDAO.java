@@ -19,29 +19,11 @@ public class CartDAO {
 	@Autowired
 	private GoodsMapper gmapper;
 	
-	public String cartInsert(CartVO vo) {
-	    String result = "";
-	    int stock = gmapper.countGoodsStock(vo.getG_id());
-	    int quantity = vo.getG_quantity();
-	    System.out.println("수량: " + quantity);
-	    if(quantity <= stock) {
-	        int count = mapper.checkCart(vo);
-	        if(count == 0) {
-	            mapper.cartInsert(vo);
-	            result = "YES";
-	        } else {
-	            if ((count + quantity) > stock) {
-	                vo.setG_quantity(stock - count);
-	                result = Integer.toString(stock - count);
-	                mapper.cartUpdate(vo);
-	            } else {
-	                result = "YES";
-	                mapper.cartUpdate(vo);
-	            }
-	        }
-	    }
-	    System.out.println(result);
-	    return result;
+	public void cartInsert(CartVO vo) {
+	    int stock = gmapper.checkCart(vo.getG_id());
+	    
+	    if(stock == 0) mapper.cartInsert(vo);
+	    else mapper.cartUpdate(vo);
 	}
 	
 	public void cartDelete(int cid) {

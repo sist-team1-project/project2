@@ -43,11 +43,11 @@
               <c:if test="${sessionScope.id!=null }">
                 <div class="flex-w flex-c-m p-b-10">
                   <div class="wrap-num-product flex-w m-r-20 m-tb-10">
-                    <div v-on:click="qDown()" class="btn-num-product-down cl8 hov-btn1 trans-04 flex-c-m"><i class="fs-16 zmdi zmdi-minus"></i></div>
+                    <div @click="qDown()" class="btn-num-product-down cl8 hov-btn1 trans-04 flex-c-m"><i class="fs-16 zmdi zmdi-minus"></i></div>
                     <input v-model="quantity" class="mtext-104 cl3 text-center num-product" type="number" name="num-product">
-                    <div v-on:click="qUp()" class="btn-num-product-up cl8 hov-btn1 trans-04 flex-c-m"><i class="fs-16 zmdi zmdi-plus"></i></div>
+                    <div class="btn-num-product-up cl8 hov-btn1 trans-04 flex-c-m"><i class="fs-16 zmdi zmdi-plus"></i></div>
                   </div>
-                  <button v-on:click="insertCart()" class="stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-10 trans-04 js-addcart-detail">장바구니</button>
+                  <button @click="insertCart()" class="stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-10 trans-04 js-addcart-detail">장바구니</button>
                 </div>  
               </c:if>
             </div>
@@ -193,22 +193,7 @@
         	   		    g_id:this.gid,
         	   		    g_quantity:this.quantity
         	   		}
-        	    }).then(res=>{
-        	   		if (res.data == 'YES') {
-        	   		    alert("장바구니에 추가되었습니다");
-        	   		} else {
-        	   		    alert("장바구니에 " + res.data + "개가 추가 되었습니다. 최대 재고 개수에 도달하였습니다.");
-        	   		}
         	    })
-            },
-            qUp:function(){
-            	if(this.quantity<this.goods.stock){
-            		this.quantity=this.quantity+1;
-            	}
-            	else{
-            		alert("최대 재고는 " + this.goods.stock + "개 입니다.")
-            	}
-            		
             },
             qDown:function(){
             	if(this.quantity>1){
@@ -240,9 +225,7 @@
                 axios.post("http://localhost:8080/web/goods/like_delete_ok.do",null,{params:{lid: lid}})
             }
         }
-        
     })
-    
     
    <!-- 사진 크게보여주는 팝업 -->
     $('.gallery-lb').each(function() {

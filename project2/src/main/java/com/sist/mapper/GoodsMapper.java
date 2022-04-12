@@ -66,7 +66,7 @@ public interface GoodsMapper {
 	@Select("SELECT g_status FROM goods_1 WHERE g_id=#{gid}")
     public int goodsStatus(int gid);
 	
-	@Select("SELECT NVL(l.l_id,0) AS l_id,g.g_id,g.g_name,g.g_brand,g.g_sale,g.g_image,g.g_detail,g.g_stock,g.g_sold,g.g_status "
+	@Select("SELECT NVL(l.l_id,0) AS l_id,g.g_id,g.g_name,g.g_brand,g.g_sale,g.g_image,g.g_detail,g.g_sold,g.g_status "
 	        + "FROM (SELECT * FROM goods_1 WHERE g_id=#{gid}) g, "
 	        + "(SELECT l_id,g_id FROM like_1 WHERE u_id=#{uid}) l "
 	        + "WHERE g.g_id=l.g_id(+)")
@@ -76,11 +76,11 @@ public interface GoodsMapper {
 	/********************************* 관리자 ****************************************/
     /* ---------------------- 관리자 상품 검색  ----------------------------  */
     @Select("<script>"
-            + "SELECT g_id, c_title, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status, g_regdate "
-            + "FROM (SELECT g_id, c_title, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status, g_regdate, rownum AS num "
-            + "FROM (SELECT g_id, c_title, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status, g_regdate "
-            + "FROM (SELECT g.g_id, c.c_title, g.g_name, g.g_brand, g.g_price, g.g_sale, g.g_image, g.g_detail, g.g_stock, g.g_sold, g.g_status, g.g_regdate "
-            + "FROM (SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status, TO_CHAR(g_regdate,'YYYY-MM-DD HH24:MI:SS') AS g_regdate FROM goods_1) g, category_1 c "
+            + "SELECT g_id, c_title, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_sold, g_status, g_regdate "
+            + "FROM (SELECT g_id, c_title, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_sold, g_status, g_regdate, rownum AS num "
+            + "FROM (SELECT g_id, c_title, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_sold, g_status, g_regdate "
+            + "FROM (SELECT g.g_id, c.c_title, g.g_name, g.g_brand, g.g_price, g.g_sale, g.g_image, g.g_detail, g.g_sold, g.g_status, g.g_regdate "
+            + "FROM (SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_sold, g_status, TO_CHAR(g_regdate,'YYYY-MM-DD HH24:MI:SS') AS g_regdate FROM goods_1) g, category_1 c "
             + "WHERE g.c_id=c.c_id) WHERE g_status=#{status} AND ("
             + "<trim prefixOverrides='OR'>"
             + "<foreach collection='fsArr' item='fd'>"
@@ -118,9 +118,9 @@ public interface GoodsMapper {
 	/* ---------------------- 관리자 상품 검색 페이징  ----------------------------  */
     @Select("<script>"
             + "SELECT CEIL(COUNT(*) / 10.0) "
-            + "FROM (SELECT g_id, c_title, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status "
-            + "FROM (SELECT g.g_id, c.c_title, g.g_name, g.g_brand, g.g_price, g.g_sale, g.g_image, g.g_detail, g.g_stock, g.g_sold, g.g_status "
-            + "FROM (SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_stock, g_sold, g_status FROM goods_1) g, category_1 c "
+            + "FROM (SELECT g_id, c_title, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_sold, g_status "
+            + "FROM (SELECT g.g_id, c.c_title, g.g_name, g.g_brand, g.g_price, g.g_sale, g.g_image, g.g_detail, g.g_sold, g.g_status "
+            + "FROM (SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_sold, g_status FROM goods_1) g, category_1 c "
             + "WHERE g.c_id=c.c_id) WHERE g_status=#{status} AND ("
             + "<trim prefixOverrides='OR'>"
             + "<foreach collection='fsArr' item='fd'>"
@@ -151,14 +151,13 @@ public interface GoodsMapper {
 	public int adminGoodsCount();
 
 	/* ---------------------- 관리자 상세 정보 ----------------------------  */
-	@Select("SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_status, g_stock FROM Goods_1 "
+	@Select("SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_status FROM Goods_1 "
 	         +"WHERE g_id=#{gid}")
 	public GoodsVO adminGoodsDetail(int gid);
 	
 	/*  --------------------- 상품 등록 페이지 -----------------------------  */
-	@Insert("INSERT INTO goods_1 VALUES(#{g_id}, #{c_id}, #{g_name}, #{g_brand}, #{g_price}, #{g_sale}, #{g_image}, #{g_detail}, #{g_stock}, 0, #{g_status}, SYSDATE)")
+	@Insert("INSERT INTO goods_1 VALUES(#{g_id}, #{c_id}, #{g_name}, #{g_brand}, #{g_price}, #{g_sale}, #{g_image}, #{g_detail}, 0, #{g_status}, SYSDATE)")
     @SelectKey(statement="SELECT goods_id_seq_1.NEXTVAL FROM DUAL", keyProperty="g_id", before=true, resultType=int.class)
-	@Options(useGeneratedKeys=true, keyProperty="g_id", keyColumn="g_id")
 	public int goodsInsert(GoodsVO vo);
 	
 	/* ---------------------- 관리자  이벤트 정보 ----------------------------  */
@@ -167,19 +166,16 @@ public interface GoodsMapper {
 	   
 	/* ---------------------- 관리자 상품 수정  ----------------------------  */
 	@Update("UPDATE goods_1 SET "
-			+ "c_id=#{c_id}, g_name=#{g_name}, g_brand = #{g_brand}, g_price = #{g_price}, g_sale = #{g_sale}, g_image = #{g_image}, g_detail = #{g_detail}, g_stock = #{g_stock}, g_status = #{g_status} "
+			+ "c_id=#{c_id}, g_name=#{g_name}, g_brand = #{g_brand}, g_price = #{g_price}, g_sale = #{g_sale}, g_image = #{g_image}, g_detail = #{g_detail}, g_status = #{g_status} "
 			+ "WHERE g_id = #{g_id}")
 	public void goodsupdate(GoodsVO vo);
 	/******************************************************************************/
 	
-	/********************************* 재고 채크 ************************************/
-	/* ---------------------- 장바구니 추가 시 확인  ----------------------------  */
-	@Select("SELECT g_stock FROM goods_1 WHERE g_id=#{gid}")
-	public int countGoodsStock(int gid);
+	/********************************* 장바구니 존재 여부 확인 ************************************/
+	@Select("SELECT count(*) FROM goods_1 WHERE g_id=#{gid}")
+    public int checkCart(int gid);
 	/******************************************************************************/
-	
-	/********************************* 재고 채크 ************************************/
-    /* ---------------------- 장바구니 추가 시 확인  ----------------------------  */
+    /* -------------------------------- 주문창 제품 정보 ----------------------------  */
     @Select("<script>"
             + "SELECT g_id,g_name,g_brand,g_price,g_sale,g_image,g_stock,g_sold,g_status "
             + "FROM goods_1 "
