@@ -8,10 +8,11 @@
   <meta charset="UTF-8">
   <title>Insert title here</title>
   <link rel="stylesheet" type="text/css" href="../css/checkout.css">
+  <script type="text/javascript" src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
   <div class="container" id="checkout">
-    <form method="post" action="../cart/checkout_ok.do" id="frm">
+    <form method="post" action="../checkout/checkout_ok_vue.do" @submit="checkForm">
       <div class="container bg0 p-t-150 p-b-30">
         <div class="row">
           <div class="col-lg-12 m-lr-auto m-b-50">
@@ -27,13 +28,18 @@
                   <th class="column-7">총가격</th>
                 </tr>
                 <tr class="table_row" v-for="(g,index) in goodsList">
-                  <td class="column-1"><div class="item"><img :src="g.gimage"></div></td>
-                  <td class="column-2" ><a class="link" :href="'../goods/detail.do?gid=' + g.gid">{{g.gname}}</a></td>
-                  <td class="column-3">{{quantList[index]}}</td>
-                  <td class="column-4">{{g.gprice | currency }}원</td>
-                  <td class="column-5">{{g.gsale }}</td>
-                  <td class="column-6">{{g.gprice - (g.gprice * g.gsale / 100) | currency }} 원 </td>
-                  <td class="column-7">{{(g.gprice - (g.gprice * g.gsale / 100)) * quantList[index] | currency }} 원</td>
+                  <td class="column-1"><div class="item"><img :src="g.image" onerror="this.src='../images/image_ready.jpg'"></div></td>
+                  <td class="column-2"><a class="link" :href="'../goods/detail.do?gid=' + g.id">{{g.name}}</a></td>
+                  <td class="column-3">{{g.quantity}}</td>
+                  <td class="column-4">{{g.price | currency }}원</td>
+                  <td class="column-5">{{g.sale }}</td>
+                  <td class="column-6">{{g.price - (g.price * g.sale / 100) | currency }} 원 </td>
+                  <td class="column-7">{{(g.price - (g.price * g.sale / 100)) * g.quantity | currency }} 원</td>
+                  <input type=hidden :name="'orderDetailVOList[' + index + '].g_id'" :value="g.id">
+                  <input type=hidden :name="'orderDetailVOList[' + index + '].g_name'" :value="g.name">
+                  <input type=hidden :name="'orderDetailVOList[' + index + '].g_price'" :value="g.price">
+                  <input type=hidden :name="'orderDetailVOList[' + index + '].g_sale'" :value="g.sale">
+                  <input type=hidden :name="'orderDetailVOList[' + index + '].g_quantity'" :value="g.quantity">
                 </tr>
               </table>
             </div>
@@ -45,30 +51,28 @@
               <div class="flex-w flex-t">
                 <div class="w-full">
                   <div class="stext-111 p-tb-10">수령인</div>
-                  <input class="stext-111 bor8 bg0 cl8 plh3 size-111-2 p-lr-15 m-b-12" type="text" name="name" placeholder="이름">
+                  <input class="stext-111 bor8 bg0 cl8 plh3 size-111-2 p-lr-15 m-b-12" type="text" v-model="receiver" name="o_receiver" placeholder="이름">
                   
                   <div class="stext-111 p-tb-10">연락처</div>
                   <div class="m-b-12">
-                    <input class="stext-111 bor8 bg0 cl8 plh3 size-111-4 p-lr-15 dis-inline-block" type="tel" name="phone1"> -
-                    <input class="stext-111 bor8 bg0 cl8 plh3 size-111-4 p-lr-15 dis-inline-block" type="tel" name="phone2"> -
-                    <input class="stext-111 bor8 bg0 cl8 plh3 size-111-4 p-lr-15 dis-inline-block" type="tel" name="phone3">
+                    <input class="stext-111 bor8 bg0 cl8 plh3 size-111-2 p-lr-15 m-b-12 dis-inline-block" type="tel" v-model="phone" name="o_phone" placeholder="연락처">
                   </div>
                   
                   <div class="stext-111 p-tb-10">주소</div>
                   <div class="bor8-2 m-b-12 size-111-2 of-hidden pos-relative">
-                    <input class="stext-111 cl8 bg0 plh3 size-111-2 p-lr-15" type="text" name="state" placeholder="우편번호" readonly>
-                    <button class="stext-111 cl1 bg3 size-111-3 ab-t-r hov-btn3 flex-c-m">우편번호 찾기</button>
+                    <input class="stext-111 cl8 bg0 plh3 size-111-2 p-lr-15" type="text" v-model="post" name="o_post" placeholder="우편번호" readonly>
+                    <button type=button @click="postFind" class="stext-111 cl1 bg3 size-111-3 ab-t-r hov-btn3 flex-c-m">우편번호 찾기</button>
                   </div>
                   <div class="bor8 bg0 m-b-12">
-                    <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="address1" placeholder="주소" readonly>
+                    <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" v-model="address1" name="o_address1" placeholder="주소" readonly>
                   </div>
                   <div class="bor8 bg0 m-b-12">
-                    <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="address2" placeholder="상세 주소">
+                    <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" v-model="address2" name="o_address2" placeholder="상세 주소">
                   </div>
                   
                   <div class="stext-111 p-tb-10">요청사항</div>
                   <div class="bor8 bg0 m-b-12">
-                    <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="address2" placeholder="요청사항">
+                    <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" v-model="request" name="o_request" placeholder="요청사항">
                   </div>
                 </div>
               </div>
@@ -81,20 +85,20 @@
   
               <div class="flex-w flex-t bor12 p-b-13">
                 <div class="size-208"><span class="cl2"> 금액: </span></div>
-                <div class="size-209"><span class="cl2"> {{totalPrice() | currency}} </span></div>
+                <div class="size-209"><span class="cl2"> {{totalPrice() | currency}} 원 </span></div>
               </div>
   
               <div class="flex-w flex-t bor12 p-t-15 p-b-30">
                 <div class="size-208 w-full-ssm"><span class="l2"> 배송비: </span></div>
-                <div class="size-209"><span class="cl2"> $10 </span></div>
+                <div class="size-209"><span class="cl2"> 5,000 원 </span></div>
               </div>
   
               <div class="flex-w flex-t p-t-27 p-b-33">
                 <div class="size-208"><span class="cl2"> 총 금액: </span></div>
-                <div class="size-209 p-t-1"><span class="cl2"> $89.65 </span></div>
+                <div class="size-209 p-t-1"><span class="cl2"> {{totalPrice() + 5000 | currency}} 원 </span></div>
               </div>
-  
-              <button type=button class="flex-c-m stext-101 cl1 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer"> 결제하기</button>
+        
+              <button type=submit class="flex-c-m stext-101 cl1 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer"> 결제하기</button>
             </div>
           </div>
         </div>
@@ -105,9 +109,14 @@
     new Vue({
         el:'#checkout',
         data:{
+            gidList:${glist },
             goodsList: [],
-            gidList: ${glist },
-            quantList: ${qlist }
+            receiver: '',
+            phone: '',
+            post: '',
+            address1: '',
+            address2: '',
+            request: ''
         },
         filters:{
             currency: function(value){
@@ -116,6 +125,16 @@
             }
         },
         mounted:function(){
+            // 유저 정보
+            axios.get("http://localhost:8080/web/checkout/checkout_user_vue.do",{
+            }).then(result=>{
+                this.receiver = result.data.name;
+                this.phone = result.data.phone;
+                this.post = result.data.post;
+                this.address1 = result.data.address1;
+                this.address2 = result.data.address2;
+            })
+            
             this.gList();
         },
         methods:{
@@ -130,8 +149,25 @@
             },
             totalPrice:function(){
                 let totalsum = 0;
-                this.goodsList.forEach((i,index)=>{totalsum += (i.gprice - (i.gprice * i.gsale / 100)) * this.quantList[index]})
+                this.goodsList.forEach((i,index)=>{totalsum += (i.price - (i.price * i.sale / 100)) * i.quantity })
                 return totalsum;
+            },
+            postFind:function() {
+                this_ = this;
+                new daum.Postcode({
+                    oncomplete:function(data) {
+                        this_.post = data.zonecode;
+                        this_.address1 = data.address;
+                    }
+                }).open()
+            },
+            checkForm:function(e) {
+                if(this.receiver && this.phone && this.post && this.address1) {
+                    return true;
+                } else {
+                    alert("입력칸을 채워주세요");
+                }
+                e.preventDefault();
             }
         }
     })

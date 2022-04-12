@@ -115,7 +115,7 @@ public class GoodsDAO {
     }
     
     /* ---------------------- 결제 페이지  ----------------------------  */
-    public List<GoodsVO> checkOutGoodsDetail(Map map) {
+    public List<Map<String,Object>> checkOutGoodsDetail(Map map) {
         return mapper.checkOutGoodsDetail(map);
     }
 }

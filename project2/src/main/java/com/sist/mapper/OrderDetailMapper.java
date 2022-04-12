@@ -33,4 +33,6 @@ public interface OrderDetailMapper {
     		+"WHERE o_id=#{oid}")
     public List<OrderDetailVO> orderDetail(String oid);
     
+    @Insert("INSERT INTO order_detail_1 VALUES(order_detail_id_seq_1.NEXTVAL,#{o_id},#{g_id},#{g_name},#{g_price},#{g_sale},#{g_quantity})")
+    public void orderDetailInsert(OrderDetailVO vo);
 } 

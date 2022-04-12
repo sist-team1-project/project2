@@ -56,14 +56,14 @@ public interface OrderMapper {
             + "</script>")
     public int orderCount(Map map);
 
-	 /* 주문상세에서 사용 */ 
-	 @Select("SELECT /*+ INDEX_ASC(order_1 order_o_id_pk_1)*/* " 
+	/* 주문상세에서 사용 */ 
+	@Select("SELECT /*+ INDEX_ASC(order_1 order_o_id_pk_1)*/* " 
 			+ "FROM order_1 "
 			+ "WHERE o_id=#{oid}")
-	 public OrderVO order(String oid);
+	public OrderVO order(String oid);
 	 
-	 /* 판매관리목록 */
-	 @Select("<script>"
+	/* 판매관리목록 */
+	@Select("<script>"
 	        + "SELECT oid, regdate, shipping, state, usid, name, price, quantity "
 	        + "FROM (SELECT oid, regdate, shipping, state, usid, name, price, quantity, rownum as num "
 	        + "FROM (SELECT o_id as oid, TO_CHAR(o_regdate,'YYYY-MM-DD HH24:MI:SS') as regdate, o_shipping as shipping, o_state as state, u_id as usid, "
@@ -95,31 +95,36 @@ public interface OrderMapper {
 			+ "ORDER BY o_id desc)) "
 			+ "WHERE num BETWEEN #{start} AND #{end}"
 			+ "</script>")
-	 public List<Map<String,Object>> orderFullList(Map map);
+	public List<Map<String,Object>> orderFullList(Map map);
+	
+	/* 주문상태 변경 */
+	@Update("UPDATE order_1 SET o_state=#{state} WHERE o_id=#{oid}")
+	public int stateupdate(Map map);
 	 
-	 /* 주문상태 변경 */
-	 @Update("UPDATE order_1 SET o_state=#{state} WHERE o_id=#{oid}")
-	 public int stateupdate(Map map);
+	/********************************************************************/
 	 
-	 /********************************************************************/
-	 
-	 /* 유저  - 마이페이지 주문 정보 */
-	 @Select("SELECT o_id, u_id, o_regdate, o_state, num "
-	 		 +"FROM (SELECT o_id, u_id, TO_CHAR(o_regdate,'YYYY-MM-DD HH24:MI:SS')as o_regdate, o_state, rownum as num "
-	 		 +"FROM (SELECT o_id, u_id, o_regdate, o_state "
-			 +"FROM order_1 ORDER BY o_regdate DESC)) "
-			 +"WHERE u_id=#{uid} ")
-	 public List<OrderVO> orderInfoList(Map map);
-	 
-	 /* 유저  - 주문정보 페이징*/
-	 @Select("SELECT CEIL(COUNT(*) / 10.0) " + "FROM order_1 ")
+	/* 유저  - 마이페이지 주문 정보 */
+	@Select("SELECT o_id, u_id, o_regdate, o_state, num "
+			+"FROM (SELECT o_id, u_id, TO_CHAR(o_regdate,'YYYY-MM-DD HH24:MI:SS')as o_regdate, o_state, rownum as num "
+	 		+"FROM (SELECT o_id, u_id, o_regdate, o_state "
+			+"FROM order_1 ORDER BY o_regdate DESC)) "
+			+"WHERE u_id=#{uid} ")
+	public List<OrderVO> orderInfoList(Map map);
+	
+	/* 유저  - 주문정보 페이징*/
+	@Select("SELECT CEIL(COUNT(*) / 10.0) " + "FROM order_1 ")
 		public int userOrderTotalPage(Map map);
 	 
-	 /* 유저  - 주문정보 페이징 */
-	 @Select("SELECT COUNT(*) FROM order_1")
+	/* 유저  - 주문정보 페이징 */
+	@Select("SELECT COUNT(*) FROM order_1")
 	    public int userOrderCount();
 	 
-	 /* 유저  - 주문상태 변경 */
-	 @Update("UPDATE order_1 SET o_state=#{state} WHERE o_id=#{oid}")
-	 public int userOrderCancel(Map map);
+	/* 유저  - 주문상태 변경 */
+	@Update("UPDATE order_1 SET o_state=#{state} WHERE o_id=#{oid}")
+	public int userOrderCancel(Map map);
+	
+	/**************************** 주문 **************************/
+	@Insert("INSERT INTO order_1 VALUES (#{o_id},#{u_id},#{o_receiver},#{o_phone},#{o_post},#{o_address1},#{o_address2},#{o_request},SYSDATE,5000,0)")
+	@SelectKey(statement="SELECT CONCAT(TO_CHAR(SYSDATE,'YYMMDDHH24MI'),LPAD(order_id_seq_1.NEXTVAL,4,0)) AS o_id FROM DUAL", keyProperty="o_id", before=true, resultType=String.class)
+	public void orderInsert(OrderVO vo);
 }

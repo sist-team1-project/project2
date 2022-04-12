@@ -174,8 +174,10 @@ public interface GoodsMapper {
 	/******************************************************************************/
     /* -------------------------------- 주문창 제품 정보 ----------------------------  */
     @Select("<script>"
-            + "SELECT g_id,g_name,g_brand,g_price,g_sale,g_image,g_sold,g_status "
-            + "FROM goods_1 "
+            + "SELECT g_id,g_name,g_brand,g_price,g_sale,g_image,g_sold,g_quantity "
+            + "FROM (SELECT g.g_id,g.g_name,g.g_brand,g.g_price,g.g_sale,g.g_image,g.g_sold,c.g_quantity "
+            + "FROM (SELECT g_id,g_name,g_brand,g_price,g_sale,g_image,g_sold FROM goods_1 WHERE g_status=1) g, (SELECT g_id,g_quantity FROM cart_1 WHERE u_id=#{uid}) c "
+            + "WHERE g.g_id=c.g_id) "
             + "<if test=\"gids.size!=0\">"
             + "WHERE g_id IN "
             + "<foreach collection='gids' item='gid' index='index' open='(' close=')' separator=','>" 
@@ -183,6 +185,6 @@ public interface GoodsMapper {
             + "</foreach>"
             + "</if>"
             + "</script>")
-    public List<GoodsVO> checkOutGoodsDetail(Map map);
+    public List<Map<String,Object>> checkOutGoodsDetail(Map map);
     /******************************************************************************/
 }

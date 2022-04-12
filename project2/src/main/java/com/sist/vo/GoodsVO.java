@@ -10,7 +10,6 @@ import lombok.*;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class GoodsVO {
     
     private int g_id, g_price, g_sale, g_stock, g_sold, g_status;

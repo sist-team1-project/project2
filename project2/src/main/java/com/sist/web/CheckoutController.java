@@ -13,17 +13,13 @@ import org.springframework.web.bind.annotation.*;
 public class CheckoutController {
     
     @PostMapping("checkout.do")
-    public String checkout_checkout(String gid, String quantity, HttpSession session, Model model) {
+    public String checkout_checkout(@RequestParam List<Integer> gid, HttpSession session, Model model) {
         
         if ((String) session.getAttribute("id") == null) {
             return "main";
         }
-        
-        List<String> glist = Arrays.asList(gid);
-        List<String> qlist = Arrays.asList(quantity);
-        
-        model.addAttribute("glist", glist);
-        model.addAttribute("qlist", qlist);
+                
+        model.addAttribute("glist", gid);
         return "checkout/checkout";
     }
 }

@@ -25,8 +25,7 @@ public class OrderDetailDAO {
     	return mapper.nameData(oid);
     }
     
-    public List<OrderDetailVO> orderDetail(String oid){
+    public List<OrderDetailVO> orderDetail(String oid) {
     	return mapper.orderDetail(oid);
     }
-
 }
