@@ -10,7 +10,7 @@
 <body>
   <div id="userDetail" class="container bg0 p-t-50 p-b-30">
   <div class="row">
-    <div class="col-sm-12 p-b-20 p-l-30"><h3>회원정보</h3></div>
+    <div class="col-sm-12 p-b-20 p-l-30"><h4><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;회원정보</h4></div>
   </div>
   <div class="container">
   <div class="info border p-all-60 p-r-80 col-8 stext-114 ">

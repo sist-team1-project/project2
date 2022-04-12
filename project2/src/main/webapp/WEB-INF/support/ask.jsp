@@ -22,11 +22,11 @@
 
 					<!-- ---------------    관리자     ------------------ -->
 					<c:if test="${sessionScope.grade=='0' }">
-						<c:if test="${vo.a_group_tab==0 }">
+					  <c:if test="${vo.a_group_step==0 }">
 							<tr>
 								<td class="p-t-10 text-center">
-									<c:if test="${vo.a_group_tab==1 }">답변완료</c:if>
-									<c:if test="${vo.a_group_tab==0 }">미답변</c:if>
+								<c:if test="${vo.a_group_tab==1 }">답변완료</c:if>
+							    <c:if test="${vo.a_group_tab==0 }">미답변</c:if>
 								</td>
 								<td width=15% class="text-center">${vo.a_type }</td>
 								<td width=60%>
@@ -34,12 +34,12 @@
 								</td>
 								<td width=15% class="text-center">${vo.a_regdate }</td>
 							</tr>
-						</c:if>
-					</c:if>
+				 	  </c:if>
+				 	</c:if>
 
 					<!--  ---------------    일반 사용자    ---------------    -->
 					<c:if test="${sessionScope.grade=='1' }">
-						<c:if test="${sessionScope.id==vo.u_id }">
+						<c:if test="${vo.a_group_step==0 }">
 							<%-- <c:if test="${vo.a_group_tab==0 }"> --%>
 							<tr>
 								<td class="p-t-10 text-center">
@@ -58,12 +58,13 @@
 
 					<!-- ---------------    관리자     ------------------ -->
 					<c:if test="${sessionScope.grade=='0' }">
-						<c:if test="${vo.a_group_tab!=0 }">
+						<c:if test="${vo.a_group_step==1 }">
 							<tr>
-								<th width=10% class="text-center">
+								<td class="p-t-10 text-center">
+								</td>
 								<td width=15% class="text-center">${vo.a_type }</td>
 								<td width=60%>
-									&nbsp;&nbsp;<img src="../images/demo/re_icon.png">
+									&nbsp;&nbsp;ㄴ
 									<a href="../support/ask_detail.do?no=${vo.a_id }">${vo.a_title }</a>
 								</td>
 								<td width=15% class="text-center">${vo.a_regdate }</td>
@@ -73,20 +74,19 @@
 
 					<!--  ---------------    일반 사용자    ---------------    -->
 					<c:if test="${sessionScope.grade=='1' }">
-						<%-- <c:if test="${vo.a_group_id == a_group_id}"> --%>
-						<c:if test="${vo.a_group_tab != '0'}">
+						<c:if test="${vo.a_group_step==1 }">
 							<tr>
-								<th width=10% class="text-center">
+								<td class="p-t-10 text-center">
+								</td>
 								<td width=15% class="text-center">${vo.a_type }</td>
 								<td width=60%>
-									&nbsp;&nbsp;<img src="../images/demo/re_icon.png">
+									&nbsp;&nbsp;ㄴ
 									<a href="../support/ask_detail.do?no=${vo.a_id }">${vo.a_title }</a>
 								</td>
 								<td width=15% class="text-center">${vo.a_regdate }</td>
 							</tr>
-						</c:if>
-					</c:if>
-
+				    	  </c:if>
+				      </c:if>
 
 				</c:forEach>
 			</table>

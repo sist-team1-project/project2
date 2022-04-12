@@ -29,16 +29,26 @@
         <tr>
           <td colspan="4" class="text-right">
             <c:if test="${sessionScope.grade=='0'}">
-            <c:if test="${vo.a_group_tab==0 }">
+            <c:if test="${vo.a_group_step=0 }">
                 <a href="../support/ask_reply.do?no=${vo.a_id }" class="btn btn-xs" style="background-color: #eeeee6">답변</a>
-            </c:if>
                 <a href="../support/ask_delete.do?no=${vo.a_id }" class="btn btn-xs" style="background-color: #eeeee6">삭제</a>
                 <a href="../admin/ask_admin.do" class="btn btn-xs" style="background-color: #dbd0be">목록</a>
             </c:if>
+            <c:if test="${vo.a_group_step==1 }">
+           	    <a href="../support/ask_delete.do?no=${vo.a_id }" class="btn btn-xs" style="background-color: #eeeee6">삭제</a>
+                <a href="../admin/ask_admin.do" class="btn btn-xs" style="background-color: #dbd0be">목록</a>
+            </c:if>   
+            </c:if>
+            
             <c:if test="${sessionScope.grade=='1'}">
-                <a href="../support/ask_delete.do?no=${vo.a_id }" class="btn btn-xs" style="background-color: #eeeee6">삭제</a>
+             <c:if test="${vo.a_group_step==0 }">
+            	 <a href="../support/ask_delete.do?no=${vo.a_id }" class="btn btn-xs" style="background-color: #eeeee6">삭제</a>
+             	<a href="../support/ask.do" class="btn btn-xs" style="background-color: #dbd0be">목록</a>
+            </c:if>    
+             <c:if test="${vo.a_group_step==1 }">
                 <a href="../support/ask.do" class="btn btn-xs" style="background-color: #dbd0be">목록</a>
             </c:if>    
+            </c:if>
           </td>
         </tr>
       </table>
