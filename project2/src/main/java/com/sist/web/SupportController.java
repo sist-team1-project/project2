@@ -71,17 +71,18 @@ public class SupportController {
 		int end = rowSize * curpage;
 		map.put("start", start);
 		map.put("end", end);
-		
+
 		List<AskVO> list = adao.askListData(map);
-		/*int agroupid = 0;
-		AskVO rvo = null;
-		for (AskVO vo : list) {
-			int a_id = vo.getA_id();
-			agroupid = adao.agid(a_id);
-			rvo = adao.replyData(agroupid);
-		}
-		int a_group_id = rvo.getA_group_id();*/
-		
+//		int agroupid = 0;
+//		AskVO rvo = null;
+//		for (AskVO vo : list) {
+//			int a_id = vo.getA_id();
+//			agroupid = adao.agid(a_id);
+//			rvo = adao.replyData(agroupid);
+//			int a_group_id = rvo.getA_group_id();
+//			model.addAttribute("ra_group_id", a_group_id);
+//		}
+
 		int totalpage = adao.askTotalPage();
 
 		int count = adao.askRowCount();
@@ -92,8 +93,7 @@ public class SupportController {
 
 		if (endPage > totalpage)
 			endPage = totalpage;
-		
-		//model.addAttribute("ra_group_id", a_group_id);
+
 		model.addAttribute("list", list);
 		model.addAttribute("curpage", curpage);
 		model.addAttribute("totalpage", totalpage);
@@ -131,9 +131,9 @@ public class SupportController {
 
 	@PostMapping("ask_reply_ok.do")
 	public String askReplyInsert(int pno, AskVO vo) {
-		AskVO pvo=adao.askParentInfoData(pno);
+		AskVO pvo = adao.askParentInfoData(pno);
 		AskVO detailvo = adao.askDetailData(pno);
-		
+
 		vo.setA_group_id(pvo.getA_group_id());
 		vo.setA_group_step(pvo.getA_group_step() + 1);
 		vo.setA_group_tab(pvo.getA_group_tab() + 1);

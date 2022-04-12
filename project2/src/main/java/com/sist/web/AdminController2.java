@@ -45,18 +45,20 @@ public class AdminController2 {
 		
 		int curpage = Integer.parseInt(page);
 		Map map = new HashMap();
-		int rowSize = 10;
+		int rowSize = 5;
 		int start = (rowSize * curpage) - (rowSize - 1);
 		int end = rowSize * curpage;
 		map.put("start", start);
 		map.put("end", end);
 		
-		List<AskVO> list = adao.askListData_admin(map);
+		//List<AskVO> list = adao.askListData_admin(map);
+		List<AskVO> list = adao.askListData(map);
+		
 		int totalpage = adao.askTotalPage();
 
 		int count = adao.askRowCount();
 		count = count - ((curpage * rowSize) - rowSize);
-		final int BLOCK = 3;
+		final int BLOCK = 5;
 		int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
 		int endPage = ((curpage - 1) / BLOCK * BLOCK) + BLOCK;
 

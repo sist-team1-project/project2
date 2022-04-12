@@ -22,25 +22,7 @@
 
 					<!-- ---------------    관리자     ------------------ -->
 					<c:if test="${sessionScope.grade=='0' }">
-					  <c:if test="${vo.a_group_step==0 }">
-							<tr>
-								<td class="p-t-10 text-center">
-								<c:if test="${vo.a_group_tab==1 }">답변완료</c:if>
-							    <c:if test="${vo.a_group_tab==0 }">미답변</c:if>
-								</td>
-								<td width=15% class="text-center">${vo.a_type }</td>
-								<td width=60%>
-									<a href="../support/ask_detail.do?no=${vo.a_id }">${vo.a_title }</a>
-								</td>
-								<td width=15% class="text-center">${vo.a_regdate }</td>
-							</tr>
-				 	  </c:if>
-				 	</c:if>
-
-					<!--  ---------------    일반 사용자    ---------------    -->
-					<c:if test="${sessionScope.grade=='1' }">
 						<c:if test="${vo.a_group_step==0 }">
-							<%-- <c:if test="${vo.a_group_tab==0 }"> --%>
 							<tr>
 								<td class="p-t-10 text-center">
 									<c:if test="${vo.a_group_tab==1 }">답변완료</c:if>
@@ -52,16 +34,59 @@
 								</td>
 								<td width=15% class="text-center">${vo.a_regdate }</td>
 							</tr>
-							<%-- </c:if> --%>
 						</c:if>
+					</c:if>
+
+					<!--  ---------------    일반 사용자    ---------------    -->
+					<c:if test="${sessionScope.grade==1 }">
+						<c:if test="${vo.a_group_step==0 }">
+							<c:set var="count" value="${vo.a_id }" />
+							<tr>
+								<td class="p-t-10 text-center">
+									<c:if test="${vo.a_group_tab==1 }">답변완료</c:if>
+									<c:if test="${vo.a_group_tab==0 }">미답변</c:if>
+								</td>
+								<td width=15% class="text-center">${vo.a_type }</td>
+								<td width=60%>
+									<c:choose>
+										<c:when test="${sessionScope.id==vo.u_id }">
+											<a href="../support/ask_detail.do?no=${vo.a_id }">${vo.a_title }</a>
+										</c:when>
+										<c:when test="${sessionScope.id!=vo.u_id }">
+										${vo.a_title }
+									</c:when>
+									</c:choose>
+								</td>
+								<td width=15% class="text-center">${vo.a_regdate }</td>
+							</tr>
+						</c:if>
+
+						<c:set var="recnt" value="i=0" />
+						<c:if test="${vo.a_group_step==1 }">
+							<tr>
+								<td class="p-t-10 text-center"></td>
+								<td width=15% class="text-center">${vo.a_type }</td>
+								<td width=60%>
+									&nbsp;&nbsp;ㄴ
+									<c:if test="${count+1 == vo.a_id  }">
+										<a href="../support/ask_detail.do?no=${vo.a_id }">${vo.a_title }</a>
+									</c:if>
+									<c:if test="${count+1 != vo.a_id }">
+										${vo.a_title }
+									</c:if>
+								</td>
+								<td width=15% class="text-center">${vo.a_regdate }</td>
+							</tr>
+						</c:if>
+						<c:set var="recnt" value="i+1" />
+
 					</c:if>
 
 					<!-- ---------------    관리자     ------------------ -->
 					<c:if test="${sessionScope.grade=='0' }">
 						<c:if test="${vo.a_group_step==1 }">
 							<tr>
-								<td class="p-t-10 text-center">
-								</td>
+								<td class="p-t-10 text-center"></td>
 								<td width=15% class="text-center">${vo.a_type }</td>
 								<td width=60%>
 									&nbsp;&nbsp;ㄴ
@@ -71,22 +96,6 @@
 							</tr>
 						</c:if>
 					</c:if>
-
-					<!--  ---------------    일반 사용자    ---------------    -->
-					<c:if test="${sessionScope.grade=='1' }">
-						<c:if test="${vo.a_group_step==1 }">
-							<tr>
-								<td class="p-t-10 text-center">
-								</td>
-								<td width=15% class="text-center">${vo.a_type }</td>
-								<td width=60%>
-									&nbsp;&nbsp;ㄴ
-									<a href="../support/ask_detail.do?no=${vo.a_id }">${vo.a_title }</a>
-								</td>
-								<td width=15% class="text-center">${vo.a_regdate }</td>
-							</tr>
-				    	  </c:if>
-				      </c:if>
 
 				</c:forEach>
 			</table>
