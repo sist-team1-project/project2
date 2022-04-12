@@ -12,22 +12,22 @@
   <div class="container p-t-100 p-b-60 flex-c-m" id="user_join">
     <div class="col-sm-5 bor10 p-lr-40 p-t-30 p-b-25 p-lr-15-sm">
       <h4>회원가입</h4>
-      <form @submit.prevent="submitForm">
+      <form method="post" action="../user/join_ok.do" @submit="submitForm">
         <div class="text-left"> 
           <div class="p-t-20 p-b-10">
             <div>아이디</div>
-            <input class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" type="text" ref="id" v-model="form.u_id" @blur="idCheck">
+            <input class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" type="text" name="u_id" ref="id" v-model="id" @blur="idCheck">
             <p class="fs-12 cl3">{{idOk}}</p>
           </div>
           
           <div class="p-tb-10">
             <div>이름</div>
-            <input class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" type="text" ref="name" v-model="form.u_name">
+            <input class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" type="text" name="u_name" ref="name" v-model="name">
           </div>
           
           <div class="p-tb-10">
             <div>비밀번호 입력</div>
-            <input class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" type="password" ref="password" v-model="form.u_password" @blur="pwdValidate" @click="form.u_password=''; password2=''">
+            <input class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" type="password" name="u_password" ref="password" v-model="password" @blur="pwdValidate" @click="password=''; password2=''">
             <p class="fs-12 cl3">{{pwdOk}}</p>
           </div>
           
@@ -39,34 +39,34 @@
         
           <div class="p-tb-10">
             <div>성별</div>
-            <input class="dis-inline-block cl3 fs-13" type="radio" value="남자" v-model="form.u_gender"> 남자
-            <input class="dis-inline-block cl3 fs-13"  type="radio" value="여자" v-model="form.u_gender"> 여자
+            <input class="dis-inline-block cl3 fs-13" type="radio" name="u_gender" value="남자" v-model="gender"> 남자
+            <input class="dis-inline-block cl3 fs-13"  type="radio" name="u_gender" value="여자" v-model="gender"> 여자
           </div>
         
           <div class="p-tb-10">
             <div>이메일</div>
-            <input class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" type="text" ref="email" v-model="form.u_email" @blur="emailCheck">
+            <input class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" type="text" name="u_email" ref="email" v-model="email" @blur="emailCheck">
             <p class="fs-12 cl3">{{emailOk}}</p>
           </div>
         
           <div class="p-tb-10">
             <div>전화번호</div>
-            <input class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" type="text" ref="phone" v-model="form.u_phone">
+            <input class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" type="text" name="u_phone" ref="phone" v-model="phone">
           </div>
         
           <div class="p-tb-10">
             <div>우편번호</div>
-            <input type="text" class="bor10 p-lr-5 p-tb-3 cl3 fs-13 dis-inline-block" ref="post" v-model="form.u_post" readonly>
+            <input type="text" class="bor10 p-lr-5 p-tb-3 cl3 fs-13 dis-inline-block" name="u_post" ref="post" v-model="post" readonly>
             <input type="button" class="cl0 bg2 fs-13 bor4 p-lr-5 p-tb-4 trans-04 pointer dis-inline-block" value="우편번호 찾기" @click="postFind">
             <div>주소</div>
-            <input type="text" class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" ref="address1" v-model="form.u_address1" readonly>
+            <input type="text" class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" name="u_address1" ref="address1" v-model="address1" readonly>
             <div>상세주소</div>
-            <input class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" type="text" v-model="form.u_address2">
+            <input class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" name="u_address2" type="text" v-model="address2">
           </div class="p-tb-10">
         
           <div class="p-tb-10">
             <div>비밀번호 찾기 질문</div>
-            <select class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" ref="question" v-model="form.u_question">
+            <select class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" name="u_question" ref="question" v-model="question">
               <option value="기억에 남는 추억의 장소는?" selected>기억에 남는 추억의 장소는?</option>
               <option value="자신의 인생 좌우명은?" >자신의 인생 좌우명은?</option>
               <option value="자신의 보물 제1호는?" >자신의 보물 제1호는?</option>
@@ -84,7 +84,7 @@
               <option value="내가 좋아하는 캐릭터는?" >내가 좋아하는 캐릭터는? </option>
             </select>
             <div>비밀번호 찾기 답변</div>
-            <input class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" type="text" ref="answer" v-model="form.u_answer">
+            <input class="bor10 p-lr-5 p-tb-3 cl3 fs-13 w-full" type="text" name="u_answer" ref="answer" v-model="answer">
           </div>
         </div>
     
@@ -100,19 +100,17 @@
     new Vue({
         el:'#user_join',
         data:{
-            form: {
-                u_id:'',
-                u_name:'',
-                u_password:'',
-                u_phone:'',
-                u_email:'',
-                u_gender:'남자',
-                u_post:'',
-                u_address1:'',
-                u_address2:'',
-                u_question:'기억에 남는 추억의 장소는?',
-                u_answer:''
-            },
+            id:'',
+            name:'',
+            password:'',
+            phone:'',
+            email:'',
+            gender:'남자',
+            post:'',
+            address1:'',
+            address2:'',
+            question:'기억에 남는 추억의 장소는?',
+            answer:'',
             password2:'',
             idOk:'',
             pwdOk:'',
@@ -123,78 +121,57 @@
               
         },
         methods:{
-            submitForm:function(){
-                if(this.form.u_id == '' || this.idOk != '') {
-                    this.$refs.id.focus();
-                    return;
+            submitForm:function(e){
+                if(this.id && this.name && this.password && this.password2 && this.email && this.phone && this.post && this.address1 && this.question && this.answer && !this.idOk && !this.pwdOk && !this.emailOk) {
+                    return true;
                 }
-                if(this.form.u_name == '') {
+                if(this.id == '' || this.idOk != '') {
+                    this.$refs.id.focus();
+                }
+                else if(this.name == '') {
                     this.$refs.name.focus();
-                    return;
                 }
-                
-                if(this.form.u_password == '') {
+                else if(this.password == '') {
                     this.$refs.password.focus();
-                    return;
                 }
-                
-                if(this.password2 == '') {
+                else if(this.password2 == '') {
                     this.$refs.password2.focus();
-                    return;
                 }
-                
-                if(this.form.u_password != this.password2) {
-                    this.form.u_password == '';
+                else if(this.password != this.password2) {
+                    this.password == '';
                     this.password2 == '';
-                    return;
                 }
-                
-                if(this.form.u_email == '') {
+                else if(this.email == '') {
                     this.$refs.email.focus();
-                    return;
                 }
-                if(this.form.u_phone == '') {
+                else if(this.phone == '') {
                     this.$refs.phone.focus();
-                    return;
                 }
-                if(this.form.u_post == '') {
+                else if(this.post == '') {
                     alert('우편번호 찾기를 해주세요');
-                    return;
                 }
-                if(this.form.u_address1 == '') {
+                else if(this.address1 == '') {
                     alert('우편번호 찾기를 해주세요');
-                    return;
                 }
-                if(this.form.u_question == '') {
+                else if(this.question == '') {
                     this.$refs.question.focus();
-                    return;
                 }
-                if(this.form.u_answer == '') {
+                else if(this.answer == '') {
                     this.$refs.answer.focus();
-                    return;
                 }
-                if(this.idOk != '') {
-                    this.$refs.id.focus();
-                    return
-                }
-                if(this.pwdOk != '') {
+                else if(this.pwdOk != '') {
                     this.$refs.password.focus();
-                    return;
-                }
-                if(this.emailOk != '') {
+                } 
+                else if(this.emailOk != '') {
                     this.$refs.email.focus();
-                    return;
                 }
-                axios.post("http://localhost:8080/web/user/join_ok.do",this.form,{
-                }).then(res=>{
-                    location.href="../user/login.do";
-                })
+                e.preventDefault();
             },
             idCheck:function() {
-                if(this.form.u_id != ''){
+                if(this.id != ''){
                     axios.get("http://localhost:8080/web/user/idcheck_ok.do",{
                         params:{
-                            id: this.form.u_id
+                            id: this.id
                         }
                     }).then(res=>{
                         if(res.data=='no'){ // 사용 불가능하면
@@ -209,10 +186,10 @@
                 }
             },
             emailCheck:function() {
-                if(this.form.u_email != ''){
+                if(this.email != ''){
                     axios.get("http://localhost:8080/web/user/emailcheck_ok.do",{
                         params:{
-                            email: this.form.u_email
+                            email: this.email
                         }
                     }).then(res=>{
                         if(res.data=='no'){ // 사용 불가능하면
@@ -245,7 +222,7 @@
                 }
             },
             pwdValidate:function() {
-                let password = this.form.u_password;
+                let password = this.password;
                 let num = password.search(/[0-9]/g);
                 let eng = password.search(/[a-z]/ig);
                 if(password == '') {
@@ -266,7 +243,7 @@
                 }
             },
             pwd2Validate:function() {
-                if(this.form.u_password != this.password2) {
+                if(this.password != this.password2) {
                     this.pwdOk2 = '재입력이 일치하지 않습니다.';
                 } else {
                     this.pwdOk2 = '';
@@ -274,7 +251,7 @@
             },
             emailValidate:function() {
                 let re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-                if(!re.test(this.form.u_email)) {
+                if(!re.test(this.email)) {
                     this.emailOk = '올바르지 않은 이메일 형식입니다';
                 } else {
                     this.emailOk = '';
@@ -284,8 +261,8 @@
                 this_ = this; // this 주소 저장
                 new daum.Postcode({
                     oncomplete:function(data) {
-                        this_.form.u_post = data.zonecode; // 이곳에선 기존 this 사용을 할 수 없음
-                        this_.form.u_address1 = data.address;
+                        this_.post = data.zonecode; // 이곳에선 기존 this 사용을 할 수 없음
+                        this_.address1 = data.address;
                     }
                 }).open()
             }

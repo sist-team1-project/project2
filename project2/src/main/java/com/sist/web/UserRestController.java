@@ -35,30 +35,12 @@ public class UserRestController {
 	}
 	
     @PostMapping("join_ok.do")
-    public void user_join(@RequestBody UserVO vo) {
+    public String user_join(UserVO vo) {
         dao.userJoin(vo);
+        String result = "<script>location.href=\"../user/login.do\";</script>";
+        return result;
     }
-
-	/*@GetMapping(value = "mypage/info_vue.do", produces = "text/plain;charset=utf-8")
-	public String mypage_info_vue(HttpSession session) {
-		String uid = (String) session.getAttribute("id");
-		UserVO vo = dao.userInfo(uid);
-		JSONObject obj = new JSONObject();
-
-		obj.put("uid", vo.getU_id());
-		obj.put("name", vo.getU_name());
-		obj.put("gender", vo.getU_gender());
-		obj.put("email", vo.getU_email());
-		obj.put("phone", vo.getU_phone());
-		obj.put("address1", vo.getU_address1());
-		obj.put("address2", vo.getU_address2());
-		obj.put("post", vo.getU_post());
-		obj.put("question", vo.getU_question());
-		obj.put("answer", vo.getU_answer());
-		obj.put("regdate", vo.getU_regdate());
-		return obj.toJSONString();
-	}*/
-	
+    
 	@GetMapping(value = "idcheck_ok.do", produces = "text/plain;charset=utf-8")
     public String user_idcheck_ok(String id) {
         String result = "";
