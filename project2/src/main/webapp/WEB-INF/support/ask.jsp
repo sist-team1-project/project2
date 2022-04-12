@@ -100,7 +100,8 @@
 	<!--  ---------------   페이지   ---------------  -->
 		<div class="text-center">
 		<ul class="pagination">
-		  		<li class="paging page-item" data-page="${startPage }">
+		    <c:if test="${startPage>1 }">
+		  		<li class="paging page-item" data-page="${startPage-1 }"></c:if>
 				<button class="page-link"><i class="fa fa-chevron-left" aria-hidden="true"></i></button></li>
 			<c:forEach var="i" begin="${startPage }" end="${endPage }">
 				<c:if test="${i==curPage }">
@@ -110,7 +111,8 @@
 					<li class="paging page-item" data-page="${i }"><button class="page-link bg-2 c-w">${i }</button></li>
 				</c:if>
 			</c:forEach>
-				<li class="paging page-item" data-page="${endPage }">
+			<c:if test="${endPage<totalpage }">
+				<li class="paging page-item" data-page="${endPage+1 }"></c:if>	
 				<button class="page-link"><i class="fa fa-chevron-right" aria-hidden="true"></i></button></li>
 		</ul>
 	</div>
