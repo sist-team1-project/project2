@@ -49,11 +49,11 @@ new Vue({
  			
  			axios.get("http://localhost:8080/web/mypage/delete_ok.do", {
  	        }).then(res => {
- 	        	
+ 	        	console.log(res)
  	        	if(res.data=="YES") {
                     alert("회원탈퇴 완료");
                 } else {
-                	console.log(res)
+                	
                 	alert("잘못된 비밀번호");
                 }
  	        })

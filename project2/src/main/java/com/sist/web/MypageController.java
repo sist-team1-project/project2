@@ -49,17 +49,4 @@ public class MypageController {
         return "mypage/like";
     }
 	
-	@GetMapping("mypage/delete_ok.do")
-	public String mypage_delete_ok(String pwd, HttpSession session) {
-	    String id = (String) session.getAttribute("id");
-		String result = "";
-		boolean bCheck = dao.userDelete(id, pwd);
-		if (bCheck == true) {
-			result = "YES";
-		} else {
-			result = "NO";
-		}
-		System.out.println(result+"정상 비번입력시에도 result -> NO로 출력");
-		return result;
-	}
 }
