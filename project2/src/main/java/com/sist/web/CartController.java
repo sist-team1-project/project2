@@ -17,9 +17,4 @@ public class CartController {
         }
         return "cart/cart";
     }
-    
-    @PostMapping("checkout.do")
-    public String cart_checkout(Model model) {
-        return "cart/checkout";
-    }
 }

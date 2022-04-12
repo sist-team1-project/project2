@@ -1727,88 +1727,6 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 
-/*//////////////////////////////////////////////////////////////////
-[ Table Shopping Cart ]*/
-
-.table-checkout tr {
-  border-top: 1px solid #e6e6e6;
-  border-bottom: 1px solid #e6e6e6;
-}
-
-.table-checkout .table_row {
-  border-collapse: collapse;
-  height: 70px;
-}
-
-.table-checkout .table_row td {
-  padding-bottom: 20px;
-}
-
-.table-checkout .table_row td.column-1 {
-  padding-bottom: 30px;
-}
-
-.table-checkout .table_head th {
-  
-  font-size: 13px;
-  color: #555;
-  text-transform: uppercase;
-  line-height: 1.6;
-  padding-top: 15px;
-  padding-bottom: 15px;
-}
-
-.table-checkout td {
-  
-  color: #555;
-  line-height: 1.6;
-}
-
-/*//////////////////////////////////////////////////////////////////
-[ Table Checkout ]*/
-
-.table-checkout {
-  border-collapse: collapse;
-  width: 100%;
-  min-width: 800px;
-}
-
-
-.table-checkout .column-1 {
-  width: 170px;
-  padding-left: 50px;
-}
-
-.table-checkout .column-2 {
-  width: 470px;
-  font-size: 15px;
-}
-
-.table-checkout .column-3 {
-  width: 120px;
-  text-align: center;
-  font-size: 16px;
-}
-
-.table-checkout .column-4 {
-  width: 120px;
-  text-align: right;
-}
-
-.table-checkout .column-5 {
-  width: 120px;
-  text-align: right;
-  font-size: 16px;
-}
-
-.table-checkout .column-6 {
-  width: 170px;
-  padding-right: 50px;
-  text-align: right;
-  font-size: 16px;
-}
-
-
 
 
 /*//////////////////////////////////////////////////////////////////
@@ -2765,48 +2683,6 @@ input.num-product::-webkit-inner-spin-button {
   left: 10px;
 }
 
-
-
-/*---------------------------------------------*/
-.how-itemcart1 {
-  width: 60px;
-  position: relative;
-  margin-right: 20px;
-  cursor: pointer;
-}
-
-.how-itemcart1 img {
-  width: 100%;
-}
-
-.how-itemcart1::after {
-  content: '\e870';
-  
-  font-size: 16px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background-color: rgba(0,0,0,0.5);
-  color: #fff;
-  transition: all 0.3s;
-  -webkit-transition: all 0.3s;
-  -o-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  opacity: 0;
-}
-
-.how-itemcart1:hover:after {
-  opacity: 1;
-}
 
 /*---------------------------------------------*/
 .how-bor2,

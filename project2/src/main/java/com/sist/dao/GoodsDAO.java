@@ -38,8 +38,12 @@ public class GoodsDAO {
     /*  --------------------------  */
     
     /*  ------- 제품 상세 -------  */
-    public GoodsVO goodsDetail(int gid) {
-        return mapper.goodsDetail(gid);
+    public int goodsStatus(int gid) {
+        return mapper.goodsStatus(gid);
+    }
+    
+    public Map<String,Object> goodsDetail(Map map) {
+        return mapper.goodsDetail(map);
     }
     /*  --------------------------  */
     
@@ -108,5 +112,10 @@ public class GoodsDAO {
 	
     public List<EventGoodsVO> goodsEidData(int g_id) {
         return mapper2.goodsEidData(g_id);
+    }
+    
+    /* ---------------------- 결제 페이지  ----------------------------  */
+    public List<GoodsVO> checkOutGoodsDetail(Map map) {
+        return mapper.checkOutGoodsDetail(map);
     }
 }

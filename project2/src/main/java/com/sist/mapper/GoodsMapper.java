@@ -63,8 +63,14 @@ public interface GoodsMapper {
 	/******************************************************************************/
 	
 	/********************************* 상품 상세 ****************************************/
-	@Select("SELECT * FROM goods_1 WHERE g_id=#{gid}")
-    public GoodsVO goodsDetail(int gid);
+	@Select("SELECT g_status FROM goods_1 WHERE g_id=#{gid}")
+    public int goodsStatus(int gid);
+	
+	@Select("SELECT NVL(l.l_id,0) AS l_id,g.g_id,g.g_name,g.g_brand,g.g_sale,g.g_image,g.g_detail,g.g_stock,g.g_sold,g.g_status "
+	        + "FROM (SELECT * FROM goods_1 WHERE g_id=#{gid}) g, "
+	        + "(SELECT l_id,g_id FROM like_1 WHERE u_id=#{uid}) l "
+	        + "WHERE g.g_id=l.g_id(+)")
+    public Map<String,Object> goodsDetail(Map map);
 	/******************************************************************************/
 	
 	/********************************* 관리자 ****************************************/
@@ -165,4 +171,25 @@ public interface GoodsMapper {
 			+ "WHERE g_id = #{g_id}")
 	public void goodsupdate(GoodsVO vo);
 	/******************************************************************************/
+	
+	/********************************* 재고 채크 ************************************/
+	/* ---------------------- 장바구니 추가 시 확인  ----------------------------  */
+	@Select("SELECT g_stock FROM goods_1 WHERE g_id=#{gid}")
+	public int countGoodsStock(int gid);
+	/******************************************************************************/
+	
+	/********************************* 재고 채크 ************************************/
+    /* ---------------------- 장바구니 추가 시 확인  ----------------------------  */
+    @Select("<script>"
+            + "SELECT g_id,g_name,g_brand,g_price,g_sale,g_image,g_stock,g_sold,g_status "
+            + "FROM goods_1 "
+            + "<if test=\"gids.size!=0\">"
+            + "WHERE g_id IN "
+            + "<foreach collection='gids' item='gid' index='index' open='(' close=')' separator=','>" 
+            + "#{gid}"
+            + "</foreach>"
+            + "</if>"
+            + "</script>")
+    public List<GoodsVO> checkOutGoodsDetail(Map map);
+    /******************************************************************************/
 }

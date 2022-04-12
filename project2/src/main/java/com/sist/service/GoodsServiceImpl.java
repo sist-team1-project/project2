@@ -18,9 +18,14 @@ public class GoodsServiceImpl implements GoodsService{
     private ReviewGoodsDAO rgdao;
     
     
+    @Override
+    public int goodsStatus(int gid) {
+        return gdao.goodsStatus(gid);
+    }
+    
 	@Override
-	public GoodsVO goodsDetail(int gid) {
-		return gdao.goodsDetail(gid);
+	public Map<String,Object> goodsDetail(Map map) {
+		return gdao.goodsDetail(map);
 	}
     
     @Override

@@ -194,7 +194,11 @@
         	   		    g_quantity:this.quantity
         	   		}
         	    }).then(res=>{
-        	   		alert("장바구니에 저장 되었습니다.")
+        	   		if (res.data == 'YES') {
+        	   		    alert("장바구니에 추가되었습니다");
+        	   		} else {
+        	   		    alert("장바구니에 " + res.data + "개가 추가 되었습니다. 최대 재고 개수에 도달하였습니다.");
+        	   		}
         	    })
             },
             qUp:function(){

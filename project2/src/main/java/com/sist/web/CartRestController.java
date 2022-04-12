@@ -24,10 +24,11 @@ public class CartRestController {
 	
 
 	@PostMapping("insert_ok.do")
-	public void cart_insert_ok(CartVO vo, HttpSession session) {
+	public String cart_insert_ok(CartVO vo, HttpSession session) {
         String id = (String) session.getAttribute("id");
         vo.setU_id(id);
-        cartdao.cartInsert(vo);
+        String result = cartdao.cartInsert(vo);
+        return result;
 	}
 	
     @PostMapping("delete_ok.do")
@@ -50,6 +51,9 @@ public class CartRestController {
             JSONObject obj = new JSONObject();
             obj.put("gname", list.get(i).get("G_NAME").toString());
             String images = list.get(i).get("G_IMAGE").toString();
+            if (images == null) {
+                images = "";
+            }
             String[] image = images.split(";");
             obj.put("gimage", image[0]);
             obj.put("gprice", list.get(i).get("G_PRICE").toString());

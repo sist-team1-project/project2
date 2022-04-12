@@ -20,20 +20,27 @@ public class GoodsRestController {
 
     @GetMapping(value = "detail_vue.do", produces = "text/plain;charset=utf-8")
     public String goods_detail(int gid, HttpSession session) {
-          
-        GoodsVO vo = service.goodsDetail(gid);
+        String uid = (String) session.getAttribute("id");
+        if (uid == null) uid = "";
+        
+        Map map = new HashMap();
+        map.put("gid", gid);
+        map.put("uid", uid);
+        
+        Map<String,Object> vo = service.goodsDetail(map);
         
         JSONObject obj = new JSONObject();
         
-        obj.put("gid", vo.getG_id());
-        obj.put("name", vo.getG_name());
-        obj.put("brand", vo.getG_brand());
-        obj.put("price", vo.getG_price());
-        obj.put("sale", vo.getG_sale());
-        obj.put("image", vo.getG_image());
-        obj.put("detail", vo.getG_detail());
-        obj.put("status", vo.getG_status());   
-        obj.put("stock", vo.getG_stock());
+        obj.put("lid", vo.get("L_ID"));
+        obj.put("gid", vo.get("G_ID"));
+        obj.put("name", vo.get("G_NAME"));
+        obj.put("brand", vo.get("G_BRAND"));
+        obj.put("price", vo.get("G_PRICE"));
+        obj.put("sale", vo.get("G_SALE"));
+        obj.put("image", vo.get("G_IMAGE"));
+        obj.put("detail", vo.get("G_DETAIL"));
+        obj.put("status", vo.get("G_STATUS"));   
+        obj.put("stock", vo.get("G_STOCK"));
         return obj.toJSONString();
     }
     

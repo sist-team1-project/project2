@@ -26,10 +26,10 @@
                   <th class="column-8">총가격</th>
                   <th class="column-9">삭제</th>
                 </tr>
-                <tr class="table_row" v-for="cart in cartList" >
-                  <td class="column-1"><input type="checkbox" name="gid" v-model="selectedGoods" :value="cart" @change="clickCheck"></td>
-                  <td class="column-2"><div class="how-itemcart1"><img :src="cart.gimage"></div></td>
-                  <td class="column-3" >{{cart.gname }}</td>
+                <tr class="table_row" v-for="(cart,index) in cartList" >
+                  <td class="column-1"><input type="checkbox" name="gid" v-model="selectedGoods" :value="cart.gid" @change="clickCheck"></td>
+                  <td class="column-2"><div class="item"><img :src="cart.gimage"></div></td>
+                  <td class="column-3"><a class="link" :href="'../goods/detail.do?gid=' + cart.gid">{{cart.gname }}</a></td>
                   <td class="column-4">{{cart.gquantity }}</td>
                   <td class="column-5">{{cart.gprice | currency }}원 </td>
                   <td class="column-6">{{cart.gsale }}</td>
@@ -47,7 +47,7 @@
   
               <div class="flex-w flex-t bor12 p-b-13">
                 <div class="size-208"><span class="cl2"> 금액: </span></div>
-                <div class="size-209"><span class="cl2"> {{totalPrice(selectedGoods) | currency}}원 </span></div>
+                <div class="size-209"><span class="cl2">{{totalPrice(selectedGoods) | currency}} 원 </span></div>
               </div>
   
               <div class="flex-w flex-t bor12 p-t-15 p-b-30">
@@ -78,7 +78,6 @@
     new Vue({
         el:'#cart',
         data:{
-            cart:0,
             cartList: [],
             checkAll: true,
             selectedGoods: []
@@ -99,29 +98,41 @@
                     }
                 }).then(result=>{
                     this.cartList = result.data;
-                    this.selectedGoods = result.data;
+                    for(i = 0; i < this.cartList.length; i++) {
+                        this.selectedGoods.push(this.cartList[i].gid);
+                    }
                 })
             },
-            totalPrice:function(list){
-          	  let totalsum = 0;
-          	  list.forEach(i=>{totalsum += (i.gprice - (i.gprice * i.gsale / 100)) * i.gquantity})
-          	  return totalsum;
-            },
-            checkAllBtn:function() {
-                if(this.checkAll == false) {
-                    this.selectedGoods = this.cartList;
-                    this.checkAll = true;
-                } else {
-                    this.selectedGoods = [];
-                    this.checkAll = false;
+            totalPrice:function(arr){
+                let list = [];
+                for (i = 0; i < arr.length; i++) {
+                    for(j = 0; j < this.cartList.length; j++) {
+                        if(this.cartList[j].gid == arr[i]) {                
+                            list.push([this.cartList[j].gprice, this.cartList[j].gsale, this.cartList[j].gquantity]);
+                        }
+                    }
                 }
+                let totalsum = 0;
+            	list.forEach(i=>{totalsum += (i[0] - (i[0] * i[1] / 100)) * i[2]})
+            	return totalsum;
             },
             cartDelete:function(event) {
                 axios.post("http://localhost:8080/web/cart/delete_ok.do",null,{
                     params:{cid: event.currentTarget.value}
                 }).then(result=>{
-                    this.cList();                    
+                    this.cList();     
                 })
+            },
+            checkAllBtn:function() {
+                if(this.checkAll == false) {
+                    for(i = 0; i < this.cartList.length; i++) {
+                        this.selectedGoods.push(this.cartList[i].gid);
+                    }
+                    this.checkAll = true;
+                } else {
+                    this.selectedGoods = [];
+                    this.checkAll = false;
+                }
             },
             clickCheck:function() {
                 if(this.selectedGoods.length == this.cartList.length) {
@@ -129,7 +140,7 @@
                 } else {
                     this.checkAll = false;
                 }
-            }
+            },
         }
     })
   </script>
