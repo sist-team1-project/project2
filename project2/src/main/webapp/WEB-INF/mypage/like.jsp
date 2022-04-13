@@ -8,10 +8,10 @@
   <link rel="stylesheet" type="text/css" href="../css/like.css">
 </head>
 <body>
-  <div class="row">
-    <div class="col-sm-12 p-l-30 p-t-50 p-b-20"><h4><i class="fa fa-star" aria-hidden="true"></i>&nbsp;즐겨찾기</h4></div>
-  </div>
-  <div id="likePage">
+  <div class="container" id="likePage">
+    <div class="row">
+      <div class="col-sm-12 p-b-20"><h4><i class="fa fa-star" aria-hidden="true"></i>&nbsp;즐겨찾기</h4></div>
+    </div>
     <div class="wrap-table js-pscroll">
       <table class="table-like">
         <tr class="table_head">
@@ -19,10 +19,9 @@
           <th class="column-2">즐겨찾기</th>
         </tr>
         <tr class="table_row" v-for="l in likeList">
-          <td class="column-1">{{l.gname}}</td>
+          <td class="column-1"><a class="link" :href="'../goods/detail.do?gid=' + l.gid">{{l.gname}}</a></td>
           <td class="column-2"><a id="del-btn" class="bg3 bor1 hov-btn3 p-tb-5 p-lr-15 trans-04 fs-13 pointer" @click="unlike(l.lid)">삭제</button></td>
         </tr>
-  
       </table>
     </div>
     <div class="p-t-30 p-b-20">

@@ -194,8 +194,10 @@
           
           <div class="w-full">
             <div class="header-cart-price w-full p-b-10">합산 금액 : {{totalPrice() | currency}} 원</div>
-            <div class="header-cart-price w-full p-b-10">배송비 : 5,000 원</div>
-            <div class="header-cart-total w-full p-b-40">총 결제 금액 : {{totalPrice() + 5000 | currency}} 원</div>
+            <div class="header-cart-price w-full p-b-10" v-if="cartList.length == 0">배송비 : 0 원</div>
+            <div class="header-cart-price w-full p-b-10" v-if="cartList.length != 0">배송비 : 5,000 원</div>
+            <div class="header-cart-total w-full p-b-40" v-if="cartList.length == 0">총 결제 금액 : 0 원</div>
+            <div class="header-cart-total w-full p-b-40" v-if="cartList.length != 0">총 결제 금액 : {{totalPrice() + 5000 | currency}} 원</div>
             <div class="header-cart-buttons flex-w w-full">
               <a href="../cart/cart.do" class="flex-c-m w-full cl1 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">장바구니</a>
             </div>

@@ -8,54 +8,52 @@
 <link rel="stylesheet" type="text/css" href="../css/join.css">
 </head>
 <body>
-  <div id="userDetail" class="container bg0 p-t-50 p-b-30">
-  <div class="row">
-    <div class="col-sm-12 p-b-20 p-l-30"><h4><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;회원정보</h4></div>
-  </div>
-  <div class="container">
-  <div class="info border p-all-60 p-r-80 col-8 stext-114 ">
-    <div class="row p-b-8 bor12">
-      <div class="col-sm-4"><b>아이디</b></div>
-      <div class="col-sm-8">{{info.uid }}</div>
+  <div id="userDetail" class="container bg0 p-b-30">
+    <div class="row p-b-20">
+      <div class="col-sm-12"><h4><i class="fa fa-user-circle" aria-hidden="true"></i> 회원정보</h4></div>
     </div>
-    <div class="row p-tb-8 p-b-4 bor12">
-      <div class="col-sm-4"><b>이름</b></div>
-      <div class="col-sm-8">{{info.name }}</div>
-    </div>
-    <div class="row p-tb-8 p-b-4 bor12">
-      <div class="col-sm-4"><b>성별</b></div>
-      <div class="col-sm-8">{{info.gender }}</div>
-    </div>
-    <div class="row p-tb-8 p-b-4 bor12">
-      <div class="col-sm-4"><b>전화번호</b></div>
-      <div class="col-sm-8">{{info.phone }}</div>
-    </div>
-    <div class="row p-tb-8 p-b-4 bor12">
-      <div class="col-sm-4"><b>주소</b></div>
-      <div class="col-sm-8">
-        <div>{{info.address1 }} {{info.address2 }} {{info.post }}</div>
+    <div class="info border p-all-60 col-md-8 stext-114">
+      <div class="row p-b-10 bor12">
+        <div class="col-sm-4">아이디</div>
+        <div class="col-sm-8">{{info.uid }}</div>
+      </div>
+      <div class="row p-tb-10 bor12">
+        <div class="col-sm-4">이름</div>
+        <div class="col-sm-8">{{info.name }}</div>
+      </div>
+      <div class="row p-tb-10 bor12">
+        <div class="col-sm-4">성별</div>
+        <div class="col-sm-8">{{info.gender }}</div>
+      </div>
+      <div class="row p-tb-10 bor12">
+        <div class="col-sm-4">전화번호</div>
+        <div class="col-sm-8">{{info.phone }}</div>
+      </div>
+      <div class="row p-tb-10 bor12">
+        <div class="col-sm-4">주소</div>
+        <div class="col-sm-8">
+          <div>{{info.address1 }} {{info.address2 }} {{info.post }}</div>
+        </div>
+      </div>
+      <div class="row p-tb-10 bor12">
+        <div class="col-sm-4">비밀번호 찾기 질문</div>
+        <div class="col-sm-8">
+          <div>{{info.question }}</div>
+        </div>
+      </div>
+      <div class="row p-tb-10 bor12">
+        <div class="col-sm-4">비밀번호 찾기 답변</div>
+        <div class="col-sm-8">
+          <div>{{info.answer }}</div>
+        </div>
+      </div>
+      <div class="row p-t-10">
+        <div class="col-sm-4">가입일</div>
+        <div class="col-sm-8">
+          <div>{{info.regdate }}</div>
+        </div>
       </div>
     </div>
-    <div class="row p-tb-8 p-b-4 bor12">
-      <div class="col-sm-4"><b>비밀번호 찾기 질문</b></div>
-      <div class="col-sm-8">
-        <div>{{info.question }}</div>
-      </div>
-    </div>
-    <div class="row p-tb-8 p-b-4 bor12">
-      <div class="col-sm-4"><b>비밀번호 찾기 답변</b></div>
-      <div class="col-sm-8">
-        <div>{{info.answer }}</div>
-      </div>
-    </div>
-    <div class="row p-t-8">
-      <div class="col-sm-4"><b>가입일</b></div>
-      <div class="col-sm-8">
-        <div>{{info.regdate }}</div>
-      </div>
-    </div>
-  </div>
-  </div>
   </div>
   <script>
   new Vue({

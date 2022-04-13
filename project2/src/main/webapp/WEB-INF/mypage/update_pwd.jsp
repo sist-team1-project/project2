@@ -7,27 +7,29 @@
   <title>Insert title here</title>
 </head>
 <body>
-  <div id="update_pwd" class="container bg0 p-t-50 p-b-30">
-  <div class="row p-b-20">
-    <div class="col-md-7"><h4><i class="fa fa-unlock-alt" aria-hidden="true"></i>&nbsp;비밀번호 변경</h4></div>
-  </div>
-  <div class="border col-md-6 p-lr-50 p-t-40 p-b-25">
-      <div class="row flex-c">
-        <div class="p-b-20">
-          <div class="p-b-8"><b>기존 비밀번호</b></div>
-          <div><input type="password" size=40% class="bor10 p-lr-5 p-tb-3 cl3 fs-15" name="password" ref="password" placeholder="비밀번호를 입력하세요" v-model="form.password"></div>
+  <div class="container" id="update_pwd" >
+    <div class="row p-b-20">
+      <div class="col-md-7"><h4><i class="fa fa-unlock-alt" aria-hidden="true"></i>&nbsp;비밀번호 변경</h4></div>
+    </div>
+    <div class="info border p-all-60 col-md-6 stext-114">
+      <form @submit="submitForm" method="post" action="../mypage/update_pwd_ok.do">
+        <div class="row flex-c">
+          <div class="p-b-20">
+            <div class="p-b-8"><b>기존 비밀번호</b></div>
+            <div><input type="password" class="text-111 bor8 bg0 cl8 size-111 p-lr-15" ref="password" placeholder="비밀번호를 입력하세요" v-model="password"></div>
+          </div>
         </div>
-      </div>
-      <div class="row flex-c">
-        <div class="p-b-10">
-          <div class="p-b-8"><b>새 비밀번호</b></div>
-          <div><input type="password" size=40% class="bor10 p-lr-5 p-tb-3 cl3 fs-15" name="newPassword" ref="newPassword" placeholder="새 비밀번호를 입력하세요" @blur="pwdValidate" v-model="form.newPassword" @click="form.newPassword=''; newPassword2=''"></div> 
-          <p class="fs-12 cl3">{{pwdOk}}</p>
-          <div class="p-t-8"><input type="password" size=40% class="bor10 p-lr-5 p-tb-3 cl3 fs-15" ref="newPassword2" placeholder="새 비밀번호를 재입력하세요" @blur="pwd2Validate" v-model="newPassword2" @click="newPassword2=''"></div>
-          <p class="fs-12 cl3 p-b-35">{{pwdOk2}}</p>
-          <div class="flex-c"><input type="button" class="flex-c-m stext-101 cl0 btn-sm btn-pro-color2 bor1 hov-btn1 p-lr-15 trans-04 fs-10" style="background-color:#dbd0be" value="제출" @click="submit()"></div>
+        <div class="row flex-c">
+          <div class="p-b-10">
+            <div class="p-b-8"><b>새 비밀번호</b></div>
+            <div><input type="password" class="text-111 bor8 bg0 cl8 size-111 p-lr-15" name="password" ref="newPassword" placeholder="새 비밀번호를 입력하세요" @blur="pwdValidate" v-model="newPassword" @click="newPassword=''; newPassword2=''"></div> 
+            <p class="fs-12 cl3">{{pwdOk}}</p>
+            <div class="p-t-8"><input type="password" class="text-111 bor8 bg0 cl8 size-111 p-lr-15" ref="newPassword2" placeholder="새 비밀번호를 재입력하세요" @blur="pwd2Validate" v-model="newPassword2" @click="newPassword2=''"></div>
+            <p class="fs-12 cl3 p-b-35">{{pwdOk2}}</p>
+            <div class="flex-c"><input type="submit" class="cl1 size-101 w-full bg3 bor1 hov-btn3 trans-04 pointer dis-inline-block" value="수정"></div>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </body>
@@ -36,51 +38,36 @@
     new Vue({
         el:'#update_pwd',
         data:{
-            form: {
-                password:'',
-                newPassword:''
-            },
+            password:'',
+            newPassword:'',
             newPassword2: '',
             pwdOk:'',
             pwdOk2:''
         },
-        mounted:function(){
-             
-        },
         methods:{
-            submit:function(){
-                if (this.form.password == '') {
+            submitForm:function(){
+                if(this.password && this.newPassword && this.newPassword2 && this.password!=this.newPassword && !this.pwdOk) {
+                    return true;
+                }
+                else if (this.password == '') {
                     this.$refs.password.focus();
-                    return;
                 }
-                if(this.form.newPassword == '') {
+                else if(this.newPassword == '') {
                     this.$refs.newPassword.focus();
-                    return;
                 }
-                if(this.newPassword2 == '') {
+                else if(this.newPassword2 == '') {
                     this.$refs.newPassword2.focus();
-                    return;
                 }
-                if(this.form.password == this.form.newPassword) {
+                else if(this.password == this.newPassword) {
                     this.pwdOk = "비밀번호가 새 비밀번호와 일치합니다";
-                    return;
                 }
-                if(this.pwdOk != '') {
+                else if(this.pwdOk != '') {
                     this.$refs.newPassword.focus();
-                    return;
                 }
-                axios.post("http://localhost:8080/web/mypage/update_pwd_ok.do",this.form,{
-                }).then(res => {
-                    if(res.data=="YES") {
-                        alert("비밀번호 변경이 완료되었습니다.");
-                    } else {
-                        console.log(res)
-                        alert("정보가 일치하지 않습니다");
-                    }
-                })
+                e.preventDefault();
             },
             pwdValidate:function() {
-                let password = this.form.newPassword;
+                let password = this.newPassword;
                 let num = password.search(/[0-9]/g);
                 let eng = password.search(/[a-z]/ig);
                 if(password == '') {
@@ -101,7 +88,7 @@
                 }
             },
             pwd2Validate:function() {
-                if(this.form.newPassword != this.newPassword2) {
+                if(this.newPassword != this.newPassword2) {
                     this.pwdOk2 = '재입력이 일치하지 않습니다.';
                 } else {
                     this.pwdOk2 = '';

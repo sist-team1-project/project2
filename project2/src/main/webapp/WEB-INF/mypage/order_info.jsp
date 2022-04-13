@@ -5,47 +5,48 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="../css/order.css">
-<link rel="stylesheet" type="text/css" href="../css/admin.css">
+<link rel="stylesheet" type="text/css" href="../css/mypage/order.css">
 </head>
 <body>
-  <div class="container bg0 p-t-70 p-b-10" id="orderinfo">
+  <div class="container" id="orderinfo">
     <div class="row" id="orderpage">
-      <div class="col-lg-12 m-lr-auto">
-        <div class="p-b-10 p-l-10">
+      <div class="col-md-12">
+        <div class="p-b-10">
           <h3><i class="fa fa-truck" aria-hidden="true"></i>&nbsp;주문 정보</h3>
         </div>
       </div>
     </div>
-    <div class="col-md-12 dis-flex flex-sb">
-      <div class="p-tb-10 flex-l">
-        <div class="fs-13">총 {{count | currency}} 건 </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="p-tb-10 flex-l">
+          <div class="fs-13">총 {{count | currency}} 건 </div>
+        </div>
       </div>
-    </div>
-      <div class="col-lg-12 m-lr-auto m-b-50">
+      <div class="col-md-12 m-b-50" id="order-min-width">
         <div class="wrap-table js-pscroll">
           <table class="table-order text-center">
             <tr class="table_head text-center">
-              <th>주문자</th>
-              <th>주문일시</th>
-              <th>주문번호</th>
-              <th>주문상태</th>
+              <th class="column-1">주문자</th>
+              <th class="column-2">주문일시</th>
+              <th class="column-3">주문번호</th>
+              <th class="column-4">주문상태</th>
             </tr>
             <tr v-for="my in orderInfoList" class="table_row_order fs-13 text-center">
-              <td> {{my.uid}} </td>
-              <td> {{my.regdate}} </td>
-              <td><a class="cl8" href="#" data-toggle="modal" @click="odetail(my.oid)">{{my.oid}}</a></td>
-              <td v-if="my.state==-1">주문취소</td>
-              <td v-if="my.state==0">대기중 <br>
+              <td class="column-1"> {{my.uid}} </td>
+              <td class="column-2"> {{my.regdate}} </td>
+              <td class="column-3"><a class="cl8 link" href="#" data-toggle="modal" @click="odetail(my.oid)">{{my.oid}}</a></td>
+              <td class="column-4" v-if="my.state==-1">주문취소</td>
+              <td class="column-4" v-if="my.state==0">대기중 <br>
                <button class="bor20 cl2 btn-pro-color2 p-tb-4 p-lr-10" value=-1 @click="cancel($event, my.oid); my.state=-1">주문취소</button>
               </td>
-              <td v-if="my.state==1">상품준비중</td>
-              <td v-if="my.state==2">배송중</td>
-              <td v-if="my.state==3">배송완료</td>
+              <td class="column-4" v-if="my.state==1">상품준비중</td>
+              <td class="column-4" v-if="my.state==2">배송중</td>
+              <td class="column-4" v-if="my.state==3">배송완료</td>
              </tr>
           </table>
         </div>
       </div>
+    </div>
     <!------------- 페이징 ------------->
     <div class="text-center">
       <ul class="pagination">
@@ -63,12 +64,12 @@
 
     <!-- 사이드 Detail -->
     <div class="wrap-header-admin js-panel-admin">
-      <div class="s-full" v-on:click="odetail_close"></div>
+      <div class="s-full" @click="odetail_close"></div>
       <div class="header-admin flex-col-l p-l-65 p-r-25">
         <div class="header-admin-title flex-w flex-sb flex-b p-b-8">
           <span class="mtext-103 cl2"> 주문 상세 정보 </span>
           <div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04">
-            <i class="zmdi zmdi-close" v-on:click="odetail_close"></i>
+            <i class="zmdi zmdi-close" @click="odetail_close"></i>
           </div>
         </div>
         <div class="header-admin-content flex-w">
@@ -101,14 +102,12 @@
                     	page: this.curpage
                     }
                 }).then(res=>{
-                	console.log(res.data);
                     this.orderInfoList = res.data;
                     this.curpage = res.data[0].curpage;
                     this.totalpage = res.data[0].totalpage;
                     this.startPage = res.data[0].startPage;
                     this.endPage = res.data[0].endPage;
                     this.count = res.data[0].count;
-                    console.log(this.count);
                     this.pages=[];
                     for(i = this.startPage; i <= this.endPage; i++) {
                         this.pages.push(i);

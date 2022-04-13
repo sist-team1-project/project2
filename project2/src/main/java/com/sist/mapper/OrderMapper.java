@@ -104,11 +104,11 @@ public interface OrderMapper {
 	/********************************************************************/
 	 
 	/* 유저  - 마이페이지 주문 정보 */
-	@Select("SELECT o_id, u_id, o_regdate, o_state, num "
+	@Select("SELECT o_id, u_id, o_regdate, o_state "
 			+"FROM (SELECT o_id, u_id, TO_CHAR(o_regdate,'YYYY-MM-DD HH24:MI:SS')as o_regdate, o_state, rownum as num "
 	 		+"FROM (SELECT o_id, u_id, o_regdate, o_state "
 			+"FROM order_1 ORDER BY o_regdate DESC)) "
-			+"WHERE u_id=#{uid} ")
+			+"WHERE u_id=#{uid} AND num BETWEEN #{start} AND #{end}")
 	public List<OrderVO> orderInfoList(Map map);
 	
 	/* 유저  - 주문정보 페이징*/

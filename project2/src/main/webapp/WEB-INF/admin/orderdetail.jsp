@@ -12,7 +12,7 @@
   <link rel="stylesheet" type="text/css" href="../fonts/linearicons-v1.0.0/icon-font.min.css">
   <link rel="stylesheet" type="text/css" href="../css/util.css">
   <link rel="stylesheet" type="text/css" href="../css/main.css">
-  <link rel="stylesheet" type="text/css" href="../css/order.css">
+  <link rel="stylesheet" type="text/css" href="../css/orderdetail.css">
   <script src="../vendor/jquery/jquery-3.2.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
   <script src="http://unpkg.com/axios/dist/axios.min.js"></script>

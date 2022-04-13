@@ -61,8 +61,8 @@
               <div class="flex-w flex-t p-t-27 p-b-33">
                 <div class="size-208"><span class="cl2"> 총 결제금액: </span></div>
                 <div class="size-209 p-t-1">
-                  <span class="cl2"  v-if="selectedGoods.length == 0">0 원</span>
-                  <span class="cl2"  v-if="selectedGoods.length != 0">{{totalPrice(selectedGoods) + 5000 | currency}} 원</span>
+                  <span class="cl2" v-if="selectedGoods.length == 0">0 원</span>
+                  <span class="cl2" v-if="selectedGoods.length != 0">{{totalPrice(selectedGoods) + 5000 | currency}} 원</span>
                 </div>
               </div>
   

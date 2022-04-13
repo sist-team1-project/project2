@@ -48,8 +48,8 @@ public class MypageRestController {
 	}
 
 	// 회원정보 수정
-	@PostMapping(value = "mypage/update_ok.do", produces = "text/plain;charset=utf-8")
-	public String mypage_update_ok(@RequestBody UserVO vo, HttpSession session) {
+	@PostMapping("mypage/update_ok.do")
+	public String mypage_update_ok(UserVO vo, HttpSession session) {
 	    String uid = (String) session.getAttribute("id");
         vo.setU_id(uid);
 		String result = "";	
@@ -59,25 +59,28 @@ public class MypageRestController {
 		}
 		boolean bCheck = dao.userUpdate(vo);
 		if (bCheck == true) {
-			result = "YES";
+			result = "<script>alert(\"변경이 완료되었습니다.\"); location.href=\"../mypage/mypage.do\"</script>";
 		} else {
-			result = "NO";
+			result = "<script>alert(\"정보가 일치하지 않습니다\"); history.back();</script>";
 		}
 		return result;
 	}
 
 	// 비밀번호 변경
-	@PostMapping(value = "mypage/update_pwd_ok.do", produces = "text/plain;charset=utf-8")
-	public String mypage_update_pwd_ok(@RequestBody HashMap<String, Object> map, HttpSession session) {
+	@PostMapping("mypage/update_pwd_ok.do")
+	public String mypage_update_pwd_ok(String password, HttpSession session) {
 	    String uid = (String) session.getAttribute("id");
-        UserVO vo = dao.userInfo(uid);
 		String result = "";
-		System.out.println(map.get("newPassword"));
+		
+		Map map = new HashMap();
+        map.put("uid", uid);
+        map.put("password", password);
+        
 		boolean bCheck = dao.userPwdUpdate(map);
 		if (bCheck == true) {
-			result = "YES";
+			result = "<script>alert(\"비밀번호 변경이 완료되었습니다.\");</script>";
 		} else {
-			result = "NO";
+			result = "<script>alert(\"정보가 일치하지 않습니다\");</script>";
 		}
 		return result;
 	}
@@ -147,7 +150,7 @@ public class MypageRestController {
         return arr.toJSONString();
     }
     /********** 유저 주문 취소 ************/
-    @PostMapping(value = "mypage/user_state_cancel_ok.do", produces = "text/plain;charset=utf-8")
+    @PostMapping("mypage/user_state_cancel_ok.do")
     public void user_state_cancel_ok(int state, String oid) {
     	// String uid = (String) session.getAttribute("id");
     	Map map = new HashMap();
