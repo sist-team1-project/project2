@@ -93,12 +93,12 @@ td {
     
     <!-- 사이드 Detail -->
     <div class="wrap-header-admin js-panel-admin">
-      <div class="s-full" v-on:click="odetail_close"></div>
+      <div class="s-full" @click="odetail_close"></div>
       <div class="header-admin flex-col-l p-l-65 p-r-25">
         <div class="header-admin-title flex-w flex-sb flex-b p-b-8">
           <span class="mtext-103 cl2"> 주문 상세 정보 </span>
           <div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04">
-            <i class="zmdi zmdi-close" v-on:click="odetail_close"></i>
+            <i class="zmdi zmdi-close" @click="odetail_close"></i>
           </div>
         </div>
         <div class="header-admin-content flex-w">

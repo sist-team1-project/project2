@@ -16,22 +16,19 @@ public interface EventGoodsMapper {
             + "WHERE l.g_id(+)=g.g_id")
     public List<Map<String,Object>> eventGoodsList(String uid);
     
-    /*   상품 등록   */
+    /*   상품 등록 / 수정   */
+    // 등록: 이벤트 목록
+    @Select("select eg_id, e_id from event_goods_1 where g_id = #{g_id}")
+    public List<EventGoodsVO> goodsEidData(int g_id);
+    
+    // 등록 & 수정: 이벤트 등록
 	@Insert("INSERT INTO event_goods_1 VALUES(event_goods_id_seq_1.NEXTVAL, #{e_id}, #{g_id})")
 	public void goodsEventInsert(EventGoodsVO vo);
-
-    /*   상품 수정   */
-	@Update("UPDATE event_goods_1 SET e_id = #{e_id}, g_id = #{g_id} WHERE eg_id = #{eg_id}")
-    public void goodsEventUpdate(EventGoodsVO vo, int eg_id);
 	
-	@Select("SELECT eg_id FROM event_goods_1 WHERE g_id = #{g_id} AND e_id = #{e_id}")
-	public int goodsEGidData(EventGoodsVO vo);
+	// 수정: 이벤트 삭제
+	@Select ("SELECT count(*) FROM event_goods_1 WHERE g_id = #{g_id}")
+	public int countEvent(int g_id);
 	
-	/* 	이벤트 E_id 리스트   */
-	@Select("select eg_id, e_id from event_goods_1 where g_id = #{g_id}")
-	public List<EventGoodsVO> goodsEidData(int g_id);
-	
-	/* 	이벤트 삭제   */
-	@Delete("DELETE FROM event_goods_1 where g_id = #{g_id} AND e_id = #{e_id}")
-	public void goodsEventDelete(EventGoodsVO vo);
+	@Delete("DELETE FROM event_goods_1 WHERE g_id = #{g_id}")
+    public void goodsEventDelete(int g_id);
 }

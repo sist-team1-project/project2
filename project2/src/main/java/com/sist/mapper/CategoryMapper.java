@@ -14,6 +14,9 @@ public interface CategoryMapper {
     @Select("SELECT * FROM category_1 WHERE LENGTH(c_id)>3 ORDER BY c_id")
     public List<CategoryVO> categoryList_2();
     
+    @Select("SELECT * FROM category_1 WHERE category_1 c_id LIKE #{cid}||'%' ORDER BY c_id")
+    public List<CategoryVO> findCategory(String cid);
+    
     @Select("SELECT c_title FROM category_1 WHERE c_id=#{cid}")
     public String categoryName(String cid);
     

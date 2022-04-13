@@ -100,9 +100,10 @@ public class AdminRestController2 {
 	}
 
 	@PostMapping("goods_update_ok.do")
-	public String goods_update_ok(@ModelAttribute GoodsVO vo, @RequestParam String eid, HttpServletRequest request) {
-		gdao.goodsUpdate(vo, eid);
-		return "ok";
+	public String goods_update_ok(GoodsVO vo, @RequestParam(required=false) List<Integer> eid, HttpServletRequest request) {
+		
+	    gdao.goodsUpdate(vo, eid);
+	    return "<Script>location.href = \"../admin/adlist.do\"</script>";
 	}
 
 	@GetMapping(value = "event_list.do", produces = "text/plain;charset=utf-8")
@@ -172,12 +173,12 @@ public class AdminRestController2 {
 		gdao.goodsInsert(vo, eid);
 		return "ok";
 	}
-
+	
 	@GetMapping(value = "goodsdetaildata.do", produces = "text/plain;charset=utf-8")
 	public String adminGoodsDetail(int g_id) {
 		GoodsVO vo = gdao.adminGoodsDetail(g_id);
 		List<EventGoodsVO> list = gdao.goodsEidData(g_id);
-
+		
 		JSONObject obj = new JSONObject();
 		obj.put("g_id", vo.getG_id());
 		obj.put("c_id", vo.getC_id());
@@ -199,7 +200,7 @@ public class AdminRestController2 {
 		obj.put("eid", arr);
 		return obj.toJSONString();
 	}
-
+	
 	/*  -- 카테고리 추가  --  */
 	@PostMapping("category_add_ok.do")
 	public String category_add_vue_ok(String c_id1, String c1_title, String c_id2, String c2_title) {
