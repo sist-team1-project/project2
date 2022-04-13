@@ -80,7 +80,15 @@ public class SupportRestController {
 		}
 		return arr.toJSONString();
 	}
+	
 
+    @GetMapping("notice_insert_ok.do")
+    public String notice_insert_ok(NoticeVO vo, HttpSession session) {
+        session.setAttribute("u_id", vo.getN_id());
+        ndao.noticeInsertData(vo);
+        return "ok";
+    }
+	   
 	@GetMapping(value = "comment_vue.do", produces = "text/plain;charset=utf-8")
 	public String comment_vue(int page, HttpSession session) {
 		String uid = (String) session.getAttribute("id");
@@ -133,7 +141,15 @@ public class SupportRestController {
 		}
 		return arr.toJSONString();
 	}
-
+	
+	@PostMapping("ask_insert_ok.do")
+    public String askInsertOk(AskVO vo, HttpSession session) {
+	    String uid = (String) session.getAttribute("id");
+	    vo.setU_id(uid);
+	    adao.askInsert(vo);
+        return "<script>alert(\"게시물이 작성되었습니다\"); location.href=\"../support/ask.do\";</script>";
+    }
+	
 	@GetMapping(value = "notice_update_vue.do", produces = "text/plain;charset=utf-8")
 	public String notice_update_vue(int no) {
 		String result = "";

@@ -61,7 +61,7 @@ public interface UserMapper {
 	public String userGetPassword(String id);
 
 	// 비밀번호 변경
-	@Update("UPDATE user_1 SET u_password=#{newPassword} WHERE u_id=#{id}")
+	@Update("UPDATE user_1 SET u_password=#{newPassword} WHERE u_id=#{uid}")
 	public void userPwdUpdate(Map map);
 
 	// 계정 삭제

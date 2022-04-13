@@ -68,19 +68,20 @@ public class MypageRestController {
 
 	// 비밀번호 변경
 	@PostMapping("mypage/update_pwd_ok.do")
-	public String mypage_update_pwd_ok(String password, HttpSession session) {
+	public String mypage_update_pwd_ok(String password, String newPassword, HttpSession session) {
 	    String uid = (String) session.getAttribute("id");
 		String result = "";
 		
 		Map map = new HashMap();
         map.put("uid", uid);
         map.put("password", password);
+        map.put("newPassword", newPassword);
         
 		boolean bCheck = dao.userPwdUpdate(map);
 		if (bCheck == true) {
-			result = "<script>alert(\"비밀번호 변경이 완료되었습니다.\");</script>";
+			result = "<script>alert(\"비밀번호 변경이 완료되었습니다.\"); location.href=\"../mypage/mypage.do\"</script>";
 		} else {
-			result = "<script>alert(\"정보가 일치하지 않습니다\");</script>";
+			result = "<script>alert(\"정보가 일치하지 않습니다\"); history.back();</script>";
 		}
 		return result;
 	}

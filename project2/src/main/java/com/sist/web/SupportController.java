@@ -30,19 +30,12 @@ public class SupportController {
 	public String notice_list() {
 		return "support/notice";
 	}
-
+	
 	@GetMapping("notice_insert.do")
-	public String notice_insert() {
-		return "support/notice_insert";
-	}
-
-	@GetMapping("notice_insert_ok.do")
-	@ResponseBody
-	public String notice_insert_ok(NoticeVO vo, HttpSession session) {
-		session.setAttribute("u_id", vo.getN_id());
-		ndao.noticeInsertData(vo);
-		return "ok";
-	}
+    public String notice_insert() {
+        return "support/notice_insert";
+    }
+	
 
 	@GetMapping("notice_detail.do")
 	public String notice_detail(int no, Model model) {
@@ -51,7 +44,7 @@ public class SupportController {
 		model.addAttribute("no", no);
 		return "support/notice_detail";
 	}
-
+	
 	@GetMapping("notice_update.do")
 	public String notice_notice_update(int no, Model model) {
 		model.addAttribute("no", no);
@@ -117,14 +110,10 @@ public class SupportController {
 	}
 
 	@GetMapping("ask_insert.do")
-	public String askInsert() {
+	public String askInsert(HttpSession session) {
+	    String uid = (String) session.getAttribute("id");
+	    if (uid == null) return "main";
 		return "support/ask_insert";
-	}
-
-	@PostMapping("ask_insert_ok.do")
-	public String askInsertOk(AskVO vo) {
-		adao.askInsert(vo);
-		return "redirect:../support/ask.do";
 	}
 
 	@GetMapping("ask_detail.do")

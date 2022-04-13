@@ -110,7 +110,7 @@ public class UserDAO {
 	// 비밀번호 변경 - 아이디에 따른 비번이 서버 비번과 일치시 변경
 	public boolean userPwdUpdate(Map map) {
 		boolean bCheck = false;
-		String db_pwd = mapper.userGetPassword((String) map.get("id"));
+		String db_pwd = mapper.userGetPassword((String) map.get("uid"));
 		if (db_pwd.equals((String) map.get("password"))) {
 			bCheck = true;
 			mapper.userPwdUpdate(map);
