@@ -147,8 +147,9 @@ public class MypageRestController {
         return arr.toJSONString();
     }
     /********** 유저 주문 취소 ************/
-    @PostMapping(value = "user_state_cancel_ok.do", produces = "text/plain;charset=utf-8")
+    @PostMapping(value = "mypage/user_state_cancel_ok.do", produces = "text/plain;charset=utf-8")
     public void user_state_cancel_ok(int state, String oid) {
+    	// String uid = (String) session.getAttribute("id");
     	Map map = new HashMap();
         map.put("state",state);
         map.put("oid",oid);

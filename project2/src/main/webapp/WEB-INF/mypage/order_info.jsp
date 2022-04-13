@@ -33,7 +33,7 @@
               <td><a class="cl8" href="#" data-toggle="modal" @click="odetail($event, my.uid)">{{my.oid}}</a></td>
               <td v-if="my.state==-1">주문취소</td>
               <td v-if="my.state==0">대기중 <br>
-               <button class="bor20 cl2 btn-pro-color2 p-tb-4 p-lr-10" value=-1 @click="cancel($event, my.oid);">주문취소</button>
+               <button class="bor20 cl2 btn-pro-color2 p-tb-4 p-lr-10" value=-1 @click="cancel($event, my.oid); my.state=-1">주문취소</button>
               </td>
               <td v-if="my.state==1">상품준비중</td>
               <td v-if="my.state==2">배송중</td>
@@ -127,12 +127,12 @@
                 $('.js-panel-admin').removeClass('show-header-admin');
             },
             /* 주문취소 */
-            cancel:function(event, uid) { 
+            cancel:function(event, oid) { 
         	    let state = event.currentTarget.value;
                 axios.post("http://localhost:8080/web/mypage/user_state_cancel_ok.do",null,{
                     params:{
                     	state: state,
-                    	uid : uid
+                    	oid : oid
                     }
                 })
             }
