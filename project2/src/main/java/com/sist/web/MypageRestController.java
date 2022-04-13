@@ -151,11 +151,12 @@ public class MypageRestController {
     }
     /********** 유저 주문 취소 ************/
     @PostMapping("mypage/user_state_cancel_ok.do")
-    public void user_state_cancel_ok(int state, String oid) {
-    	// String uid = (String) session.getAttribute("id");
+    public void user_state_cancel_ok(int state, String oid, HttpSession session) {
+    	String uid = (String) session.getAttribute("id");
     	Map map = new HashMap();
         map.put("state",state);
         map.put("oid",oid);
+        map.put("uid",uid);
         odao.userOrderCancel(map);
     }
 	
