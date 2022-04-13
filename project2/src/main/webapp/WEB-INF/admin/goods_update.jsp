@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="../css/admin.css">
 </head>
 <body>
   <div class="container bg0 p-t-70 p-b-10" id="GoodsUpdate">

@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="../css/order.css">
+<link rel="stylesheet" type="text/css" href="../css/admin/order.css">
 <style type="text/css">
 td {
     width: 150px;
@@ -32,13 +32,13 @@ td {
         </div>
         
         <!---------------- 주문상태 정렬  -------------------->
-        <div id="sort" class="p-tb-10 flex-r p-tb-3 p-lr-5">
-          <button class="cl2" :class="{'activeFilter':sort=='A'}" value="A" @click="orderstate($event)">전체</button> &nbsp;&nbsp;| &nbsp;&nbsp;
-  	      <button class="cl2" :class="{'activeFilter':sort=='B'}" value="B" @click="orderstate($event)">주문취소</button> &nbsp;&nbsp;| &nbsp;&nbsp;
-  	      <button class="cl2" :class="{'activeFilter':sort=='C'}" value="C" @click="orderstate($event)">대기중</button> &nbsp;&nbsp;| &nbsp;&nbsp;
-          <button class="cl2" :class="{'activeFilter':sort=='D'}" value="D" @click="orderstate($event)">상품준비중</button> &nbsp;&nbsp;| &nbsp;&nbsp;
-          <button class="cl2" :class="{'activeFilter':sort=='E'}" value="E" @click="orderstate($event)">배송중</button> &nbsp;&nbsp;| &nbsp;&nbsp;
-          <button class="cl2" :class="{'activeFilter':sort=='F'}" value="F" @click="orderstate($event)">배송완료</button>
+        <div id="sort" class="p-tb-10 flex-r p-tb-3 p-lr-5 cl8 fs-13">
+          <button :class="{'activeFilter':sort=='A'}" value="A" @click="orderstate($event)">전체</button> &nbsp;&nbsp;| &nbsp;&nbsp;
+  	      <button :class="{'activeFilter':sort=='B'}" value="B" @click="orderstate($event)">주문취소</button> &nbsp;&nbsp;| &nbsp;&nbsp;
+  	      <button :class="{'activeFilter':sort=='C'}" value="C" @click="orderstate($event)">대기중</button> &nbsp;&nbsp;| &nbsp;&nbsp;
+          <button :class="{'activeFilter':sort=='D'}" value="D" @click="orderstate($event)">상품준비중</button> &nbsp;&nbsp;| &nbsp;&nbsp;
+          <button :class="{'activeFilter':sort=='E'}" value="E" @click="orderstate($event)">배송중</button> &nbsp;&nbsp;| &nbsp;&nbsp;
+          <button :class="{'activeFilter':sort=='F'}" value="F" @click="orderstate($event)">배송완료</button>
         </div>
       </div>
       <!----------------------------------------------->
@@ -47,20 +47,20 @@ td {
         <div class="wrap-table js-pscroll">
           <table class="table-order text-center">
             <tr class="table_head text-center">
-              <th>주문일시</th>
-              <th>주문번호</th>
-              <th>주문자</th>
-              <th>상품명</th>
-              <th>주문금액</th>
-              <th>주문상태</th>
+              <th class="column-1">주문일시</th>
+              <th class="column-2">주문번호</th>
+              <th class="column-3">주문자</th>
+              <th class="column-4">상품명</th>
+              <th class="column-5">주문금액</th>
+              <th class="column-6">주문상태</th>
             </tr>
             <tr v-for="o in orderFullList" class="table_row_order fs-13 text-center">
-              <td>{{o.regdate}}</td>
-              <td><a class="cl8" href="#" data-toggle="modal" @click="odetail(o.oid)">{{o.oid}}</a></td>
-              <td>{{o.usid}}</td>
-              <td>{{o.name}}</td>
-              <td>{{o.price | currency }} 원</td>
-              <td id="select" class="state">
+              <td class="column-1">{{o.regdate}}</td>
+              <td class="column-2"><a class="cl8" href="#" data-toggle="modal" @click="odetail(o.oid)">{{o.oid}}</a></td>
+              <td class="column-3">{{o.usid}}</td>
+              <td class="column-4">{{o.name}}</td>
+              <td class="column-5">{{o.price | currency }} 원</td>
+              <td class="column-6" id="select" class="state">
               <select @change="selecteOrder($event, o.oid)">
                 <option :selected="o.state==-1" value="-1">주문취소</option>
                 <option :selected="o.state==0" value="0">대기중</option>
