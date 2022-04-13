@@ -55,7 +55,7 @@
               
               <div class="block2-txt-child1 flex-col-l short">
                 <a :href="'../goods/detail.do?gid=' + vo.gid" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">{{vo.name}}</a>
-                <div class="cl4">₩{{vo.price | currency}}</div>
+                <div class="cl4">{{vo.price | currency}} 원</div>
               </div>
             
               <div class="block2-txt-child2 flex-r">
@@ -121,13 +121,13 @@
                 slide: function( event, ui ) {
                     let price1 = ui.values[0].toLocaleString('ko-KR');
                     let price2 = ui.values[1].toLocaleString('ko-KR');
-                    $("#amount").text("₩" + price1 + " - ₩" + price2); // 변경되는 가격 뿌려주기
+                    $("#amount").text(price1 + " 원 - " + price2 + " 원"); // 변경되는 가격 뿌려주기
                 }
             });
             /* 가격 슬라이더 초기 설정 */
             let price1 = $('#slider-range').slider("values")[0].toLocaleString('ko-KR');
             let price2 = $('#slider-range').slider("values")[1].toLocaleString('ko-KR');
-            $("#amount").text("₩" + price1 + " - ₩" + price2); // 초기 가격 뿌려주기
+            $("#amount").text(price1 + " 원 - " + price2 + " 원"); // 초기 가격 뿌려주기
             this.list();
         },
         methods:{
