@@ -116,10 +116,10 @@
 
               <div class="row">
                 <div class="p-t-35 col-md-6">
-                  <input type=submit class="btn flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer btn-pro-color2" value="등록">
+                  <input type=submit class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer btn-pro-color2" value="등록">
                 </div>
                 <div class="p-t-35 col-md-6">
-                  <input type=button class="btn flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer btn-pro-color2" value="취소" onclick="javascript:history.back()">
+                  <input type=button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer btn-pro-color2" value="취소" onclick="javascript:history.back()">
                 </div>
               </div>
             </form>
@@ -220,7 +220,7 @@
                         'Context-Type' : 'multipart/form-data'
                     }
                 }).then(res=>{
-                    //location.href="../admin/adlist.do"
+                    location.href="../admin/adlist.do"
                 })
             },
             selectIndex: function(event) {
