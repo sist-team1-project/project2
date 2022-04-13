@@ -19,7 +19,7 @@
           <tr>
             <th class="text-right">문의유형</th>
             <td><select class="form-select" name=a_type>
-              <option selected>문의유형 선택</option>
+              <option selected disabled>문의유형 선택</option>
               <option value="교환">교환</option>
               <option value="환불">환불</option>
               <option value="취소">취소(출하 전 취소)</option>
@@ -32,18 +32,18 @@
           </tr>
           <tr>
             <th class="text-right">작성자</th>
-            <td><input name="u_id" value="${sessionScope.id }" readonly="readonly"></td>
+            <td><input name=u_id value="${sessionScope.id }" readonly="readonly"></td>
           </tr>
           <tr>
             <th class="text-right">제목</th>
-            <td><input type=text name=a_title size=55 class="input-sm"></td>
+            <td><input type=text name=a_title size=55></td>
           </tr>
           <tr>
             <th class="text-right">내용</th>
             <td><textarea rows="15" cols="110" name=a_content></textarea></td>
           </tr>
           <tr>
-        	<td colspan="2" class="text-right cols-2">
+        	<td colspan="2" class="text-right">
          	 <input type=submit value="글쓰기" class="btn btn-sm bg-1"> 
          	 <input type=button value="취소" class="btn btn-sm bg-2" onclick="javasecript:history.back()">
             </td>

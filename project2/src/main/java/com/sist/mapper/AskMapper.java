@@ -12,12 +12,30 @@ public interface AskMapper {
 			 +"FROM (SELECT a_id,u_id,a_type,a_title,a_regdate,a_group_id,a_group_tab, a_group_step, rownum as num "
 			 +"FROM (SELECT a_id,u_id,a_type,a_title,a_regdate,a_group_id,a_group_tab, a_group_step "
 			 +"FROM ask_1 ORDER BY a_group_id DESC, a_group_step ASC)) "
-			 +"WHERE num BETWEEN #{start} AND #{end}")
+			 +"WHERE u_id=#{u_id} "
+			 +"AND num BETWEEN #{start} AND #{end}")
 	public List<AskVO> askListData(Map map);
 	
 	@Select("SELECT COUNT(*) FROM ask_1")
 	public int askRowCount();
-
+	
+	@Select("SELECT CEIL(COUNT(*) / 10.0) FROM ask_1 WHERE u_id=#{u_id}")
+	public int askTotalPage(Map map);
+	
+	@Select("SELECT a_id,u_id,a_type,a_title,TO_CHAR(a_regdate,'YYYY-MM-DD') as a_regdate,"
+			+"a_group_id,a_group_tab, a_group_step, num "
+			+"FROM (SELECT a_id,u_id,a_type,a_title,a_regdate,a_group_id,a_group_tab, a_group_step, rownum as num "
+			+"FROM (SELECT a_id,u_id,a_type,a_title,a_regdate,a_group_id,a_group_tab, a_group_step "
+			+"FROM ask_1 ORDER BY a_group_id DESC, a_group_step ASC)) "
+			+"WHERE num BETWEEN #{start} AND #{end}")
+	public List<AskVO> askAdminListData(Map map);
+	
+	@Select("SELECT COUNT(*) FROM ask_1")
+	public int askAdminRowCount();
+	
+	@Select("SELECT CEIL(COUNT(*) / 10.0) FROM ask_1")
+	public int askAdminTotalPage();
+	
 	@Insert("INSERT INTO ask_1(a_id,u_id,a_type,a_title,a_content,a_group_id) "
 			+"VALUES(ask_id_seq_1.nextval,#{u_id},#{a_type},#{a_title},#{a_content},"
 			+"(SELECT NVL(MAX(a_group_id)+1,1) FROM ask_1))")

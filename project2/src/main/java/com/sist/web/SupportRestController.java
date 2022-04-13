@@ -21,6 +21,9 @@ public class SupportRestController {
 
 	@Autowired
 	private AskDAO adao;
+	
+	@Autowired
+	private CommentDAO cdao;
 
 	// 공지사항
 	@GetMapping(value = "notice_vue.do", produces = "text/plain;charset=utf-8")
@@ -32,7 +35,7 @@ public class SupportRestController {
 
 		int curpage = page;
 
-		int rowSize = 10;
+		int rowSize = 5;
 		int start = (rowSize * curpage) - (rowSize - 1);
 		int end = (rowSize * curpage);
 
@@ -78,25 +81,57 @@ public class SupportRestController {
 		return arr.toJSONString();
 	}
 
-	@GetMapping(value = "notice_detail_vue.do", produces = "text/plain;charset=utf-8")
-	public String notice_detail_vue(int no) {
-		String result = "";
-		try {
-			NoticeVO vo = ndao.noticeDetailData(no);
-			JSONObject obj = new JSONObject();
-			obj.put("n_id", vo.getN_id());
-			obj.put("n_title", vo.getN_title());
-			obj.put("u_id", vo.getU_id());
-			obj.put("n_regdate", vo.getN_regdate());
-			obj.put("n_content", vo.getN_content());
-			obj.put("n_visits", vo.getN_visits());
-
-			result = obj.toJSONString();
-			System.out.println(result);
-		} catch (Exception ex) {
+	@GetMapping(value = "comment_vue.do", produces = "text/plain;charset=utf-8")
+	public String comment_vue(int page, HttpSession session) {
+		String uid = (String) session.getAttribute("id");
+		if (uid == null) {
+			uid = "";
 		}
 
-		return result;
+		int curpage = page;
+
+		int rowSize = 10;
+		int start = (rowSize * curpage) - (rowSize - 1);
+		int end = (rowSize * curpage);
+
+		Map map = new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		List<CommentVO> list = cdao.commentListData(map);
+		int totalpage = cdao.commentTotalPage();
+
+		final int BLOCK = 5;
+		int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
+		int endPage = ((curpage - 1) / BLOCK * BLOCK) + BLOCK;
+		if (endPage > totalpage) {
+			endPage = totalpage;
+		}
+
+		JSONArray arr = new JSONArray();
+		if (list.size() == 0) {
+			JSONObject obj = new JSONObject();
+			obj.put("curpage", curpage);
+			obj.put("totalpage", totalpage);
+			obj.put("start", startPage);
+			obj.put("end", endPage);
+			arr.add(obj);
+		} else {
+			for (int i = 0; i < list.size(); i++) {
+				JSONObject obj = new JSONObject();
+				obj.put("u_id", list.get(i).getU_id());
+				obj.put("co_content", list.get(i).getCo_content());
+				obj.put("co_regdate", list.get(i).getCo_regdate());
+
+				if (i == 0) {
+					obj.put("curpage", curpage);
+					obj.put("totalpage", totalpage);
+					obj.put("start", startPage);
+					obj.put("end", endPage);
+				}
+				arr.add(obj);
+			}
+		}
+		return arr.toJSONString();
 	}
 
 	@GetMapping(value = "notice_update_vue.do", produces = "text/plain;charset=utf-8")

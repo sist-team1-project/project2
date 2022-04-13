@@ -22,6 +22,9 @@ public class SupportController {
 	@Autowired
 	private AskDAO adao;
 
+	@Autowired
+	private CommentDAO cdao;
+	
 	// 공지사항
 	@GetMapping("notice.do")
 	public String notice_list() {
@@ -43,6 +46,8 @@ public class SupportController {
 
 	@GetMapping("notice_detail.do")
 	public String notice_detail(int no, Model model) {
+		NoticeVO vo = ndao.noticeDetailData(no);
+		model.addAttribute("vo", vo);
 		model.addAttribute("no", no);
 		return "support/notice_detail";
 	}
@@ -61,7 +66,8 @@ public class SupportController {
 
 	// 1:1 문의
 	@GetMapping("ask.do")
-	public String askListData(String page, Model model) {
+	public String askListData(String page, Model model, HttpSession session) {
+		String u_id = (String) session.getAttribute("id");
 		if (page == null)
 			page = "1";
 		int curpage = Integer.parseInt(page);
@@ -71,26 +77,42 @@ public class SupportController {
 		int end = rowSize * curpage;
 		map.put("start", start);
 		map.put("end", end);
+		map.put("u_id", u_id);
 
 		List<AskVO> list = adao.askListData(map);
+		List<AskVO> alist = adao.askAdminListData(map);
 
-		int totalpage = adao.askTotalPage();
+		int totalpage = adao.askTotalPage(map);
+		int atotalpage = adao.askAdminTotalPage();
 
+		final int BLOCK = 5;
 		int count = adao.askRowCount();
 		count = count - ((curpage * rowSize) - rowSize);
-		final int BLOCK = 5;
 		int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
 		int endPage = ((curpage - 1) / BLOCK * BLOCK) + BLOCK;
+
+		int acount = adao.askAdminRowCount();
+		acount = acount - ((curpage * rowSize) - rowSize);
+		int astartPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
+		int aendPage = ((curpage - 1) / BLOCK * BLOCK) + BLOCK;
 
 		if (endPage > totalpage)
 			endPage = totalpage;
 
+		if (endPage > atotalpage)
+			endPage = atotalpage;
+
 		model.addAttribute("list", list);
+		model.addAttribute("alist", alist);
 		model.addAttribute("curpage", curpage);
 		model.addAttribute("totalpage", totalpage);
+		model.addAttribute("atotalpage", atotalpage);
 		model.addAttribute("startPage", startPage);
+		model.addAttribute("astartPage", astartPage);
 		model.addAttribute("endPage", endPage);
+		model.addAttribute("aendPage", aendPage);
 		model.addAttribute("count", count);
+		model.addAttribute("acount", acount);
 		return "support/ask";
 	}
 
@@ -139,5 +161,19 @@ public class SupportController {
 	public String askDelete(int no, Model model) {
 		model.addAttribute("no", no);
 		return "support/ask_delete";
+	}
+
+	// 댓글
+	@GetMapping("comment_insert.do")
+	public String comment_insert() {
+		return "support/notice_insert";
+	}
+
+	@GetMapping("comment_insert_ok.do")
+	@ResponseBody
+	public String comment_insert_ok(CommentVO vo, HttpSession session) {
+		session.setAttribute("u_id", vo.getN_id());
+		cdao.commentInsertData(vo);
+		return "ok";
 	}
 }

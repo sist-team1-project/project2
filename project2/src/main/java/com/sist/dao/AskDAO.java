@@ -19,15 +19,29 @@ public class AskDAO {
 	public List<AskVO> askListData(Map map) {
 		return mapper.askListData(map);
 	}
-
+	
 	/* -- 문의 총 갯수 -- */
 	public int askRowCount() {
 		return mapper.askRowCount();
 	}
 
 	/* -- 문의 총 페이지 -- */
-	public int askTotalPage() {
-		return (int) (Math.ceil(mapper.askRowCount() / 10.0));
+	public int askTotalPage(Map map) {
+		return mapper.askTotalPage(map);
+	}
+
+	public List<AskVO> askAdminListData(Map map) {
+		return mapper.askAdminListData(map);
+	}
+	
+	/* -- 관리자 문의 총 갯수 -- */
+	public int askAdminRowCount() {
+		return mapper.askAdminRowCount();
+	}
+
+	/* -- 관리자 문의 총 페이지 -- */
+	public int askAdminTotalPage() {
+		return mapper.askAdminRowCount();
 	}
 
 	/* -- 문의 등록 -- */
