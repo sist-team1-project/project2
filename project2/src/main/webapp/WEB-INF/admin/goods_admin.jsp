@@ -33,15 +33,15 @@
 			</div>
 		</div>
 		<!-- ------ 검색 순서 ------ -->
-		<div class="p-t-10 p-b-5 cl3 fs-13">
-			<button class="p-r-5" :class="{'activeFilter':order=='A'}" value="A" @click="searchByOrder($event)">신상품 순</button>|
-			<button class="p-lr-10" :class="{'activeFilter':order=='B'}" value="B" @click="searchByOrder($event)">오래된 순</button>
+		<div class="p-t-10 p-b-5 fs-13">
+			<button class="p-r-5 cl3" :class="{'activeFilter':order=='A'}" value="A" @click="searchByOrder($event)">신상품 순</button>|
+			<button class="p-lr-5 cl3" :class="{'activeFilter':order=='B'}" value="B" @click="searchByOrder($event)">오래된 순</button>
 		</div>
 		<!-- --------------------- -->
 		<!-- ------ 상품 상태 ------ -->
-		<div class="p-b-5 cl3 fs-13">
-			<button class="p-lr-10" :class="{'activeFilter':status=='1'}" value="1" @click="searchByStatus($event)">판매 중</button>|
-			<button class="p-lr-10" :class="{'activeFilter':status=='0'}" value="0" @click="searchByStatus($event)">판매 중단</button>
+		<div class="p-b-5 fs-13">
+			<button class="p-r-5 cl3" :class="{'activeFilter':status=='1'}" value="1" @click="searchByStatus($event)">판매 중</button>|
+			<button class="p-lr-5 cl3" :class="{'activeFilter':status=='0'}" value="0" @click="searchByStatus($event)">판매 중단</button>
 		</div>
 		<!-- --------------------- -->
 		<div class="row p-t-10">
