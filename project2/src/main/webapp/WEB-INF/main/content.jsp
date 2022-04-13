@@ -120,7 +120,7 @@
                     
                     <div class="block2-txt-child1 flex-col-l short">
                       <a :href="'../goods/detail.do?gid=' + eg.gid" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">{{eg.name}}</a>
-                      <div class="cl4">₩{{eg.price | currency}}</div>
+                      <div class="cl4">{{eg.price | currency}} 원</div>
                     </div>
                   
                     <div class="block2-txt-child2 flex-r">
