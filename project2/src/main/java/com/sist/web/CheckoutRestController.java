@@ -41,7 +41,6 @@ public class CheckoutRestController {
         map.put("gids", gids);
         map.put("uid", uid);
         List<Map<String, Object>> list = gdao.checkOutGoodsDetail(map);
-        //g_id,g_name,g_brand,g_price,g_sale,g_image,g_sold,g_quantity
 
         JSONArray arr = new JSONArray();
         for (Map<String, Object> vo : list) {
@@ -89,7 +88,6 @@ public class CheckoutRestController {
         ovo.setU_id(uid);
         odao.orderInsert(ovo, list);
         
-
         String result = "<script>" + "alert(\"구매가 완료되었습니다\"); location.href=\"../main/main.do\"" + "</script>";
         return result;
     }
