@@ -16,13 +16,13 @@
         <div class="row flex-c">
           <div class="p-b-20">
             <div class="p-b-8"><b>기존 비밀번호</b></div>
-            <div><input type="password" class="text-111 bor8 bg0 cl8 size-111 p-lr-15" ref="password" placeholder="비밀번호를 입력하세요" v-model="password"></div>
+            <div><input type="password" class="text-111 bor8 bg0 cl8 size-111 p-lr-15" name="password" ref="password" placeholder="비밀번호를 입력하세요" v-model="password"></div>
           </div>
         </div>
         <div class="row flex-c">
           <div class="p-b-10">
             <div class="p-b-8"><b>새 비밀번호</b></div>
-            <div><input type="password" class="text-111 bor8 bg0 cl8 size-111 p-lr-15" name="password" ref="newPassword" placeholder="새 비밀번호를 입력하세요" @blur="pwdValidate" v-model="newPassword" @click="newPassword=''; newPassword2=''"></div> 
+            <div><input type="password" class="text-111 bor8 bg0 cl8 size-111 p-lr-15" name="newPassword" ref="newPassword" placeholder="새 비밀번호를 입력하세요" @blur="pwdValidate" v-model="newPassword" @click="newPassword=''; newPassword2=''"></div> 
             <p class="fs-12 cl3">{{pwdOk}}</p>
             <div class="p-t-8"><input type="password" class="text-111 bor8 bg0 cl8 size-111 p-lr-15" ref="newPassword2" placeholder="새 비밀번호를 재입력하세요" @blur="pwd2Validate" v-model="newPassword2" @click="newPassword2=''"></div>
             <p class="fs-12 cl3 p-b-35">{{pwdOk2}}</p>
