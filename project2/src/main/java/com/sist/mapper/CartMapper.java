@@ -20,6 +20,9 @@ public interface CartMapper {
 	@Delete("DELETE FROM cart_1 WHERE cart_id=#{cid}")
 	public void cartDelete(int cid);
 	
+	@Delete("DELETE FROM cart_1 WHERE g_id=#{gid} AND u_id=#{uid}")
+    public void cartDeleteByGidAndUid(Map map);
+	
 	/* ---------- 헤더 ------------ */
 	@Select("SELECT count(*) FROM cart_1 WHERE u_id=#{uid}")
     public int countCart(String uid);

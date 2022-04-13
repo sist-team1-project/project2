@@ -112,7 +112,9 @@ public interface OrderMapper {
 	public List<OrderVO> orderInfoList(Map map);
 	
 	/* 유저  - 주문정보 페이징*/
-	@Select("SELECT CEIL(COUNT(*) / 10.0) " + "FROM order_1 ")
+	@Select("SELECT CEIL(COUNT(*) / 10.0) "
+	        + "FROM order_1 "
+	        + "WHERE u_id=#{uid}")
 		public int userOrderTotalPage(Map map);
 	 
 	/* 유저  - 주문정보 페이징 */
@@ -120,7 +122,7 @@ public interface OrderMapper {
 	    public int userOrderCount();
 	 
 	/* 유저  - 주문상태 변경 */
-	@Update("UPDATE order_1 SET o_state=#{state} WHERE o_id=#{oid}")
+	@Update("UPDATE order_1 SET o_state=#{state} WHERE o_id=#{oid} AND u_id=#{uid}")
 	public int userOrderCancel(Map map);
 	
 	/**************************** 주문 **************************/

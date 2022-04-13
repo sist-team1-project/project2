@@ -14,49 +14,55 @@ import com.sist.mapper.*;
 public class OrderDAO {
 
     @Autowired
-    private OrderMapper mapper;
+    private OrderMapper omapper;
     
     @Autowired
-    private OrderDetailMapper mapper2;
+    private OrderDetailMapper odmapper;
+    
+    @Autowired
+    private CartMapper cmapper;
     
     public int orderTotalPage(Map map) {
-    	return mapper.orderTotalPage(map);
+    	return omapper.orderTotalPage(map);
     }
     public int orderCount(Map map) {
-    	return mapper.orderCount(map);
+    	return omapper.orderCount(map);
     }
 	
 	public OrderVO order(String oid){
-		return mapper.order(oid);
+		return omapper.order(oid);
 	}
 	 
     public List<Map<String,Object>> orderFullList(Map map) {
-    	return mapper.orderFullList(map);
+    	return omapper.orderFullList(map);
     }
     
     public int stateupdate(Map map) {
-    	return mapper.stateupdate(map);
+    	return omapper.stateupdate(map);
     }
     
     /* 유저 주문정보 */
     public List<OrderVO> orderInfoList(Map map) {
-    	return mapper.orderInfoList(map);
+    	return omapper.orderInfoList(map);
     }
     
     public int userOrderTotalPage(Map map) {
-    	return mapper.orderTotalPage(map);
+    	return omapper.userOrderTotalPage(map);
     }
     
     public int userOrderCount() {
-    	return mapper.userOrderCount();
+    	return omapper.userOrderCount();
     }
     public int userOrderCancel(Map map) {
-    	return mapper.userOrderCancel(map);
+    	return omapper.userOrderCancel(map);
     }
     
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void orderInsert(OrderVO ovo, OrderDetailVO list) {
-        mapper.orderInsert(ovo);
+        omapper.orderInsert(ovo);
+        
+        Map map = new HashMap();
+        map.put("uid", ovo.getU_id());
         
         for (int i = 0; i < list.getOrderDetailVOList().size(); i++) {
             OrderDetailVO odvo = new OrderDetailVO();
@@ -66,7 +72,11 @@ public class OrderDAO {
             odvo.setG_price(list.getOrderDetailVOList().get(i).getG_price());
             odvo.setG_sale(list.getOrderDetailVOList().get(i).getG_sale());
             odvo.setG_quantity(list.getOrderDetailVOList().get(i).getG_quantity());
-            mapper2.orderDetailInsert(odvo);
+            odmapper.orderDetailInsert(odvo);
+            
+            
+            map.put("gid", list.getOrderDetailVOList().get(i).getG_id());
+            cmapper.cartDeleteByGidAndUid(map);
         }
     }
 }

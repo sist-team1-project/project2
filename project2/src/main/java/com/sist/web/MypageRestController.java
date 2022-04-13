@@ -115,6 +115,7 @@ public class MypageRestController {
         map.put("uid", uid);
         
         int totalpage = odao.userOrderTotalPage(map);
+        List<OrderVO> list = odao.orderInfoList(map);
         int count = odao.userOrderCount();
         
         final int BLOCK = 10;
@@ -124,7 +125,6 @@ public class MypageRestController {
             endPage = totalpage;
         }
         
-        List<OrderVO> list = odao.orderInfoList(map);
         
         JSONArray arr = new JSONArray();
 		int i = 0;

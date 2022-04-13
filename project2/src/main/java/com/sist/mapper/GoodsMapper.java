@@ -58,7 +58,7 @@ public interface GoodsMapper {
             + "</script>")
     public int goodsListTotalpage(Map map);
 	
-	@Select("SELECT DISTINCT g_brand FROM goods_1 WHERE c_id LIKE #{cid}||'%'")
+	@Select("SELECT DISTINCT g_brand FROM goods_1 WHERE c_id LIKE #{cid}||'%' AND g_status=1")
 	public List<String> brandList(String cid);
 	/******************************************************************************/
 	
