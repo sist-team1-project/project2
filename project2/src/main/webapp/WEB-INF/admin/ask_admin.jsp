@@ -80,18 +80,26 @@
 	<div class="text-center">
 		<ul class="pagination">
 			<c:if test="${startPage>1 }">
-				<li class="paging page-item" data-page="${startPage-1 }"><i class="fa fa-chevron-left" aria-hidden="true"></i></li>
+				<li class="page-item" data-page="${startPage-1 }">
+                    <button class="fa fa-chevron-left page-link paging" aria-hidden="true"></button>
+                </li>
 			</c:if>
 			<c:forEach var="i" begin="${startPage }" end="${endPage }">
-				<c:if test="${i==curPage }">
-					<li class="current">${i }</li>
+				<c:if test="${i==curpage }">
+					<li class="paging page-item active" data-page="${i }">
+                        <button class="page-link">${i }</button>
+                    </li>
 				</c:if>
-				<c:if test="${i!=curPage }">
-					<li class="paging page-item" data-page="${i }"><button class="page-link">${i }</button></li>
+				<c:if test="${i!=curpage }">
+					<li class="paging page-item" data-page="${i }">
+                        <button class="page-link">${i }</button>
+                    </li>
 				</c:if>
 			</c:forEach>
-			<c:if test="${endPage<totalPage }">
-				<li class="paging page-item" data-page="${endPage+1 }"><i class="fa fa-caret-right" aria-hidden="true"></i></li>
+			<c:if test="${endPage<totalpage }">
+				<li class="page-item" data-page="${endPage+1 }">
+                    <button class="fa fa-chevron-right page-link paging" aria-hidden="true"></button>
+                </li>
 			</c:if>
 		</ul>
 	</div>

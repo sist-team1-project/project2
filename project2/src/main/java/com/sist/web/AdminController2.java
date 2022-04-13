@@ -59,8 +59,8 @@ public class AdminController2 {
 		int totalpage = adao.askTotalPage();
 
 		int count = adao.askRowCount();
-		count = count - ((curpage * rowSize) - rowSize);
-		final int BLOCK = 3;
+		
+		final int BLOCK = 5;
 		int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
 		int endPage = ((curpage - 1) / BLOCK * BLOCK) + BLOCK;
 
