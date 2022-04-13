@@ -28,7 +28,7 @@
                   <select ref="select1" v-model="cid1" @change="selectIndex" class="bor10 cl3 p-tb-3 p-lr-5">
                     <option v-for="cate in categories1" :value="cate.cid">{{cate.title}}</option>
                   </select> &nbsp;&nbsp; 
-                  <select ref="good" name="c_id" v-model="cid2" class="bor10 cl3 p-tb-3 p-lr-5">
+                  <select name="c_id" ref="good" v-model="cid2" class="bor10 cl3 p-tb-3 p-lr-5">
                     <option v-for="cate2 in categories2[cindex]" :value="cate2.cid">{{cate2.title}}</option>
                   </select>
                 </div>
@@ -39,7 +39,7 @@
                   <span class="stext-110 cl2"> 상품명 </span>
                 </div>
                 <div class="size-209">
-                  <input ref="gname" type=text name="g_name" class="bor10 cl3 p-tb-3 p-lr-5 w-full" v-model="gname">
+                  <input type=text name="g_name" ref="gname" v-model="gname" class="bor10 cl3 p-tb-3 p-lr-5 w-full">
                 </div>
               </div>
 
@@ -48,7 +48,7 @@
                   <span class="stext-110 cl2"> 브랜드 </span>
                 </div>
                 <div class="size-209">
-                  <input ref="gbrand" type=text name="g_brand" class="bor10 cl3 p-tb-3 p-lr-5 w-full" v-model="gbrand">
+                  <input type=text name="g_brand" ref="gbrand" v-model="gbrand" class="bor10 cl3 p-tb-3 p-lr-5 w-full">
                 </div>
               </div>
 
@@ -57,7 +57,7 @@
                   <span class="stext-110 cl2"> 가격 (₩) </span>
                 </div>
                 <div class="size-209">
-                  <input ref="gprice" type=number min="0" name="g_price" class="bor10 cl3 p-tb-3 p-lr-5 w-full" v-model="gprice">
+                  <input type=number min="0" name="g_price" ref="gprice" v-model="gprice" class="bor10 cl3 p-tb-3 p-lr-5 w-full">
                 </div>
               </div>
 
@@ -66,7 +66,7 @@
                   <span class="stext-110 cl2"> 할인율 (%) </span>
                 </div>
                 <div class="size-209">
-                  <input ref="gsale" type=number min="0" name="g_sale" class="bor10 cl3 p-tb-3 p-lr-5 w-full" v-model="gsale">
+                  <input type=number min="0" name="g_sale" ref="gsale" v-model="gsale" class="bor10 cl3 p-tb-3 p-lr-5 w-full">
                 </div>
               </div>
 
@@ -75,7 +75,7 @@
                   <span class="stext-110 cl2"> 판매 상태 </span>
                 </div>
                 <div class="size-209">
-                  <select id="gstatus" name="g_status" class="bor10 cl3 p-tb-3 p-lr-5" v-model="gstatus">
+                  <select name="g_status" v-model="gstatus" class="bor10 cl3 p-tb-3 p-lr-5">
                     <option value=-1>판매상태</option>
                     <option value=1>판매중</option>
                     <option value=0>판매중단</option>
@@ -90,7 +90,7 @@
                 <div class="size-209">
                   <div>
                     직접 경로 작성 ( 여러 이미지일시 구분자 ; )
-                    <input ref="gimage" type=text min="0" name="g_image" class="bor10 cl3 p-tb-3 p-lr-5 w-full" v-model="gimage">
+                    <input type=text name="g_image" ref="gimage" v-model="gimage" class="bor10 cl3 p-tb-3 p-lr-5 w-full">
                   </div>
                 </div>
               </div>
@@ -102,7 +102,7 @@
                 <div class="size-209">
                   <div>
                     직접 경로 작성 ( 여러 이미지일시 구분자 ; )
-                    <input ref="gdetail" type=text min="0" name="g_detail" class="bor10 cl3 p-tb-3 p-lr-5 w-full" v-model="gdetail">
+                    <input type=text name="g_detail" ref="gdetail" v-model="gdetail" class="bor10 cl3 p-tb-3 p-lr-5 w-full">
                   </div>
                 </div>
               </div>
@@ -112,7 +112,7 @@
                   <span class="stext-110 cl2"> 이벤트 여부 </span>
                 </div>
                 <div class="row size-209">
-                  <span v-for="e in events" class="dis-inline-block"><input type="checkbox" name="eid" class="bor10 cl3 dis-inline-block" :value="e.eid" v-model="eid"> &nbsp;{{e.etitle}} &nbsp;&nbsp;</span>
+                  <span v-for="e in events" class="dis-inline-block"><input type="checkbox" name="eid" :value="e.eid" v-model="eid" class="bor10 cl3 dis-inline-block"> &nbsp;{{e.etitle}} &nbsp;&nbsp;</span>
                 </div>
               </div>
 
@@ -196,7 +196,8 @@
 	        submitForm: function(e) {
 	            if (this.gname && this.gbrand && this.gprice && this.gsale && this.gimage && this.gdetail && this.gstatus != -1) {
 	                return true;
-	            } if (this.gname == '') {
+	            }
+	            if (this.gname == '') {
 	                this.$refs.gname.focus();
 	            } else if (this.gbrand == '') {
 	                this.$refs.gbrand.focus();

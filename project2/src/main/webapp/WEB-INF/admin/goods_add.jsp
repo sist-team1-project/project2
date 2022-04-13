@@ -20,12 +20,11 @@
         <div class="col-sm-12-add col-md-12 m-lr-auto m-b-50">
           <div class="bor10 p-lr-40 p-t-30 p-b-40 p-lr-0-sm">
 
-            <form @submit.prevent="submitForm">
-
+            <form @submit.prevent="submitForm" >
               <div class="flex-w flex-t bor12 p-b-20">
                 <div class="size-208 w-full-ssm"><span class="stext-110 cl2"> 카테고리 </span></div>
                 <div class="size-209">
-                  <select ref="select1" v-model="cid1" @change="selectIndex($event)" class="bor10 cl3 p-tb-3 p-lr-5">
+                  <select ref="select1" v-model="cid1" @change="selectIndex" class="bor10 cl3 p-tb-3 p-lr-5">
                     <option v-for="cate in categories1" :value="cate.cid">{{cate.title}}</option>
                   </select> &nbsp;&nbsp;
                   <select ref="good" v-model="cid2" class="bor10 cl3 p-tb-3 p-lr-5">
@@ -37,28 +36,28 @@
               <div class="flex-w flex-t bor12 p-t-20 p-b-20">
                 <div class="size-208 w-full-ssm"><span class="stext-110 cl2"> 상품명 </span></div>
                 <div class="size-209">
-                  <input ref="gname" type=text class="bor10 cl3 p-tb-3 p-lr-5 w-full" v-model="gname">
+                  <input type=text ref="gname" v-model="gname" class="bor10 cl3 p-tb-3 p-lr-5 w-full">
                 </div>
               </div>
 
               <div class="flex-w flex-t bor12 p-t-20 p-b-20">
                 <div class="size-208 w-full-ssm"><span class="stext-110 cl2"> 브랜드 </span></div>
                 <div class="size-209">
-                  <input ref="gbrand" type=text class="bor10 cl3 p-tb-3 p-lr-5 w-full" v-model="gbrand">
+                  <input type=text ref="gbrand" v-model="gbrand" class="bor10 cl3 p-tb-3 p-lr-5 w-full">
                 </div>
               </div>
 
               <div class="flex-w flex-t bor12 p-t-20 p-b-20">
                 <div class="size-208 w-full-ssm"><span class="stext-110 cl2"> 가격 (₩) </span></div>
                 <div class="size-209">
-                  <input ref="gprice" type=number min="0" class="bor10 cl3 p-tb-3 p-lr-5 w-full" v-model="gprice">
+                  <input type=number min="0" ref="gprice" v-model="gprice" class="bor10 cl3 p-tb-3 p-lr-5 w-full">
                 </div>
               </div>
 
               <div class="flex-w flex-t bor12 p-t-20 p-b-20">
                 <div class="size-208 w-full-ssm"><span class="stext-110 cl2"> 할인율 (%) </span></div>
                 <div class="size-209">
-                  <input ref="gsale" type=number min="0" class="bor10 cl3 p-tb-3 p-lr-5 w-full" v-model="gsale">
+                  <input type=number min="0" ref="gsale" v-model="gsale" class="bor10 cl3 p-tb-3 p-lr-5 w-full">
                 </div>
               </div>
 
@@ -67,7 +66,7 @@
                   <span class="stext-110 cl2"> 판매 상태 </span>
                 </div>
                 <div class="size-209">
-                  <select id="gstatus" v-model="gstatus" class="bor10 cl3 p-tb-3 p-lr-5">
+                  <select v-model="gstatus" class="bor10 cl3 p-tb-3 p-lr-5">
                     <option value="">판매상태</option>
                     <option value="1">판매중</option>
                     <option value="0">판매중단</option>
@@ -82,11 +81,11 @@
                 <div class="size-209">
                   <div class="p-b-20">
                       첨부 파일로 추가
-                      <input v-model="gimage" ref="file1" type="file" accept="image/*" class="cl3">
+                      <input type="file" accept="image/*" ref="gimages" v-model="gimages" class="cl3" multiple>
                   </div>
                   <div>
                     직접 경로 작성 ( 여러 이미지일시 구분자 ; )
-                    <input ref="gimage2" type=text min="0" class="bor10 cl3 p-tb-3 p-lr-5 w-full" v-model="gimage2">
+                    <input type=text ref="gimage" v-model="gimage" class="bor10 cl3 p-tb-3 p-lr-5 w-full">
                   </div>
                 </div>
               </div>
@@ -98,11 +97,11 @@
                 <div class="size-209">
                   <div class="p-b-20">
                     첨부 파일로 추가
-                    <input v-model="gdetail" ref="file2" type="file" accept="image/*" class="">
+                    <input type="file" accept="image/*"  ref="gdetails" v-model="gdetails" class="cl3" multiple>
                   </div>
                   <div>
                     직접 경로 작성 ( 여러 이미지일시 구분자 ; )
-                    <input ref="gdetail2" type=text min="0" class="bor10 cl3 p-tb-3 p-lr-5 w-full" v-model="gdetail2">
+                    <input type=text min="0" ref="gdetail" v-model="gdetail" class="bor10 cl3 p-tb-3 p-lr-5 w-full">
                   </div>
                 </div>
               </div>
@@ -112,7 +111,7 @@
                   <span class="stext-110 cl2"> 이벤트 여부 </span>
                 </div>
                 <div class="row size-209">
-                  <span v-for="e in events" class="dis-inline-block"><input type="checkbox" class="bor10 dis-inline-block" :value="e.eid" v-model="eid"> &nbsp;{{e.etitle}} &nbsp;&nbsp;</span>
+                  <span v-for="e in events" class="dis-inline-block"><input type="checkbox" :value="e.eid" ref="eid" v-model="eid" class="bor10 dis-inline-block"> &nbsp;{{e.etitle}} &nbsp;&nbsp;</span>
                 </div>
               </div>
 
@@ -141,10 +140,10 @@
             gprice: '',
             gsale: '',
             gstatus: '',
+            gimages: '',
+            gdetails: '',
             gimage: '',
             gdetail: '',
-            gimage2: '',
-            gdetail2: '',
             eid: [],
             categories1: [],
             categories2: [],
@@ -174,66 +173,55 @@
                     this.events = result.data;
                 })
             },
-            submitForm:function(){
-                if (this.gname == "") {
+            submitForm:function(e){
+                if (this.gname == '') {
                     this.$refs.gname.focus();
-                    return;
-                } else if (this.gbrand == "") {
+                    return false;
+                } else if (this.gbrand == '') {
                     this.$refs.gbrand.focus();
-                    return;
-                } else if (this.gprice == "") {
+                    return false;
+                } else if (this.gprice == '') {
                     this.$refs.gprice.focus();
-                    return;
-                } else if (this.gsale == "") {
+                    return false;
+                } else if (this.gsale == '') {
                     this.$refs.gsale.focus();
-                    return;
-                } else if (this.gstatus == "") {
-                    alert("상태 확인 필요");
-                    return;
-                } 
-                
-                if (this.eid == null) {
-                    this.eid.push(0);
-                }
-                
-                let file1 = '';
-                let file2 = '';
-                if (this.gimage == "") {
-                    if (this.gimage2 == "") {
-                        alert("제품 이미지를 첨부해주세요");
-                        return;
-                    }
-                    file1 = new File(['empty'], 'empty', {type: 'text/plain', lastModified: new Date()}); // 파일 추가를 하지 않으면 컨트롤러에서 오류가 나므로 빈 객체를 만듬
-                } else {
-                    file1 = this.$refs.file1.files[0];
-                }
-                
-                if (this.gdetail == "") {
-                    if (this.gimage2 == "") {
-                        alert("제품 상세 이미지를 첨부해주세요");
-                        return;
-                    }
-                    file2 = new File(['empty.txt'], 'empty.txt', {type: 'text/plain', lastModified: new Date()}); // 파일 추가를 하지 않으면 컨트롤러에서 오류가 나므로 빈 객체를 만듬
-                } else {
-                    file2 = this.$refs.file2.files[0];
+                    return false;
+                } else if (this.gstatus == '') {
+                    alert("상태를 확인해주세요");
+                    return false;
+                } else if (this.$refs.gimages.files.length == 0 && this.gimage == '') {
+                    alert("제품 이미지를 첨부해주세요");
+                    return false;
+                } else if (this.$refs.gdetails.files.length == 0 && this.gdetail == '') {
+                    alert("제품 상세 이미지를 첨부해주세요");
+                    return false;
                 }
                 
                 let form = new FormData();
-                form.append('file_gimage', file1);
-                form.append('file_gdetail', file2);
-                form.append('g_image', this.gimage2);
-                form.append('g_detail', this.gdetail2);
+                
                 form.append('c_id', this.cid2);
                 form.append('g_name', this.gname);
                 form.append('g_brand', this.gbrand);
                 form.append('g_price', this.gprice);
                 form.append('g_sale', this.gsale);
                 form.append('g_status', this.gstatus);
+                form.append('g_image', this.gimage);
+                form.append('g_detail', this.gdetail);
                 form.append('eid', this.eid.join(","));
                 
-                axios.post('http://localhost:8080/web/admin/goods_add_ok.do', form, {
-                }) .then((response) => {
-                    location.href="../admin/adlist.do"
+                for (i = 0; i < this.$refs.gimages.files.length; i++) {
+                    form.append("g_images[" + i + "]", this.$refs.gimages.files[i]);
+                }
+                for (i = 0; i < this.$refs.gdetails.files.length; i++) {
+                    form.append("g_details[" + i + "]", this.$refs.gdetails.files[i]);
+                }
+                
+                axios.post("http://localhost:8080/web/admin/goods_add_ok.do", form, {
+                    header: {
+                        'Context-Type' : 'multipart/form-data'
+                    }
+                }).then(res=>{
+                    //location.href="../admin/adlist.do"
                 })
             },
             selectIndex: function(event) {

@@ -123,53 +123,89 @@ public class AdminRestController2 {
 	}
 
 	@PostMapping("goods_add_ok.do")
-	public String goods_add_vue_ok(@ModelAttribute GoodsVO vo, @RequestParam String eid, HttpServletRequest request) {
+	public String goods_add_ok(@ModelAttribute GoodsVO vo, @RequestParam String eid, HttpServletRequest request) {
 		try {
-			// 이미지 확장자(jpg,png)를 위해 이미지의 기존 이름 가져오기
-			String gimageName = vo.getFile_gimage().getOriginalFilename();
-			String gdetailName = vo.getFile_gimage().getOriginalFilename();
-
-			// 새로운 이미지 파일 이름을 등록 날짜&시간으로 설정
-			SimpleDateFormat fmt = new SimpleDateFormat("YYYYMMDDHHMMSS");
-			Calendar cal = Calendar.getInstance();
-
-			// 저장 경로 만들기
-			String path = request.getSession().getServletContext().getRealPath("/") + "images\\goods\\";
-			path = path.replace("\\", File.separator);
-			String newImageName = "image" + fmt.format(cal.getTime()) + gimageName.substring(gimageName.lastIndexOf("."));
-			String newDetailName = "detail" + fmt.format(cal.getTime()) + gdetailName.substring(gdetailName.lastIndexOf("."));
-			String gimagePath = path + newImageName;
-			String gdetailPath = path + newDetailName;
-
-			// 경로에 새 파일만들기
-			File gimage = new File(gimagePath);
-			File gdetail = new File(gdetailPath);
-
-			// 파일 옮기기
-			try {
-				vo.getFile_gimage().transferTo(gimage);
-				vo.getFile_gdetail().transferTo(gdetail);
-			} catch (Exception ex) {
-			}
-
-			// 데이터베이스에 경로 저장
-			String imgPath = "..\\images\\goods\\";
-			imgPath = imgPath.replace("\\", File.separator);
-			if (vo.getG_image().equals("")) { // 만약 직접 작성된 대표 이미지 경로가 없다면
-				vo.setG_image(imgPath + newImageName); // 첨부된 대표 이미지를 넣기
-			} else {
-				vo.setG_image(vo.getG_image() + ";" + imgPath + newImageName); // 작성된 대표 이미지 경로가 있다면 구분자로 추가                
-			}
-
-			if (vo.getG_detail().equals("")) { // 만약 직접 작성된 상세 이미지 경로가 없다면
-				vo.setG_detail(imgPath + newDetailName); // 첨부된 상세 이미지를 넣기
-			} else {
-				vo.setG_detail(vo.getG_detail() + ";" + imgPath + newDetailName); // 작성된 상세 이미지 경로가 있다면 구분자로 추가 
-			}
-
+		    // 서버에 저장될 경로
+		    String path = request.getSession().getServletContext().getRealPath("/") + "images\\goods\\";
+            path = path.replace("\\", File.separator);
+            // 데이터베이스에 저장될 경로
+            String imgPath = "..\\images\\goods\\";
+            imgPath = imgPath.replace("\\", File.separator);
+            
+            // 새로운 이미지 파일 이름을 등록 날짜&시간으로 설정
+            SimpleDateFormat fmt = new SimpleDateFormat("YYYYMMDDHHMMSS");
+            Calendar cal = Calendar.getInstance();
+            
+            int i = 0;
+            String tempImg = "";
+            List<MultipartFile> list = vo.getG_images();
+		    for (MultipartFile mf : list) {
+		        String gimageName = mf.getOriginalFilename();
+	            	            
+	            // 저장 경로 만들기
+	            String newImageName = "image" + fmt.format(cal.getTime()) + i + gimageName.substring(gimageName.lastIndexOf("."));
+	            
+	            // 경로에 새 파일만들기
+	            File gimage = new File(path + newImageName);
+	            
+	            tempImg += imgPath + newImageName + ";";
+	            
+	            // 파일 옮기기
+	            try {
+	                mf.transferTo(gimage);
+	            } catch (Exception ex) {
+	            }
+	            i++;
+		    }
+		    
+		    i = 0;
+		    String tempDetail = "";
+		    List<MultipartFile> list2 = vo.getG_details();
+		    for (MultipartFile mf : list2) {
+                String gdetailName = mf.getOriginalFilename();
+                
+                // 저장 경로 만들기
+                String newDetailName = "detail" + fmt.format(cal.getTime()) + i + gdetailName.substring(gdetailName.lastIndexOf("."));
+                
+                // 경로에 새 파일만들기
+                File gdetail = new File(path + newDetailName);
+                
+                // 데이터베이스에 저장될 경로
+                tempDetail += imgPath + newDetailName + ";";
+                
+                // 파일 옮기기
+                try {
+                    mf.transferTo(gdetail);
+                } catch (Exception ex) {
+                }
+                i++;
+            }
+		    
+		    if (vo.getG_image().equals("")) { // 만약 직접 작성된 대표 이미지 경로가 없다면
+                vo.setG_image(tempImg); // 첨부된 대표 이미지를 넣기
+            } else {
+                vo.setG_image(vo.getG_image() + ";" + tempImg); // 작성된 대표 이미지 경로가 있다면 구분자로 추가                
+            }
+            
+            if (vo.getG_detail().equals("")) { // 만약 직접 작성된 상세 이미지 경로가 없다면
+                vo.setG_detail(tempDetail); // 첨부된 상세 이미지를 넣기
+            } else {
+                vo.setG_detail(vo.getG_detail() + ";" + tempDetail); // 작성된 상세 이미지 경로가 있다면 구분자로 추가 
+            }
+            
 		} catch (Exception ex) {
+		
 		}
-
+		
+		String img = vo.getG_image();
+		if (img.charAt(img.length() - 1) == ';') {
+		    vo.setG_image(img.substring(0, img.length()-1));
+		}
+		String detail = vo.getG_detail();
+        if (detail.charAt(detail.length() - 1) == ';') {
+            vo.setG_detail(detail.substring(0, detail.length()-1));
+        }
+        
 		gdao.goodsInsert(vo, eid);
 		return "ok";
 	}

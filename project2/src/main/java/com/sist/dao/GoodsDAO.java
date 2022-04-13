@@ -74,33 +74,32 @@ public class GoodsDAO {
 		int gid = vo.getG_id();
 		
 		if (eid != "") {
-			StringTokenizer st = new StringTokenizer(eid, ",");
-			while (st.hasMoreTokens()) {
-				EventGoodsVO evo = new EventGoodsVO();
-				evo.setE_id(Integer.parseInt(st.nextToken()));
-				evo.setG_id(gid);
-				
-				mapper2.goodsEventInsert(evo);
-			}
-		}
+            StringTokenizer st = new StringTokenizer(eid, ",");
+            while (st.hasMoreTokens()) {
+                EventGoodsVO evo = new EventGoodsVO();
+                evo.setE_id(Integer.parseInt(st.nextToken()));
+                evo.setG_id(gid);
+                
+                mapper2.goodsEventInsert(evo);
+            }
+        }
 	}
 
 	/* ---------------------- 관리자 상품 수정  ----------------------------  */
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void goodsUpdate(GoodsVO vo, List<Integer> eid) {
 		mapper.goodsupdate(vo);
-        int g_id = vo.getG_id();
+        int gid = vo.getG_id();
         
-        if (mapper2.countEvent(g_id) > 0) {
-            mapper2.goodsEventDelete(g_id);
+        if (mapper2.countEvent(gid) > 0) {
+            mapper2.goodsEventDelete(gid);
         }
         
         if (eid != null) {
-            
         	for(int i : eid) {
         	    EventGoodsVO evo = new EventGoodsVO();
                 evo.setE_id(i);
-                evo.setG_id(g_id);
+                evo.setG_id(gid);
                 
                 mapper2.goodsEventInsert(evo);
         	}
