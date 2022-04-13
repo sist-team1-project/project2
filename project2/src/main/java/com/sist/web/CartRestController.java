@@ -35,6 +35,20 @@ public class CartRestController {
     public void cart_delete_ok(int cid) {
         cartdao.cartDelete(cid);
     }
+
+    @GetMapping(value = "count_cart_vue.do", produces = "text/plain;charset=utf-8")
+    public String main_count_cart_vue(HttpSession session) {
+        String uid = (String) session.getAttribute("id");
+        JSONObject obj = new JSONObject();
+        
+        if(uid == null) {
+            obj.put("count", 0);
+            return obj.toJSONString();
+        }
+        int count = cartdao.countCart(uid);
+        obj.put("count", count);
+        return obj.toJSONString();
+    }
     
     @GetMapping(value = "cart_list_vue.do", produces = "text/plain;charset=utf-8")
     public String cart_cart_list_vue(HttpSession session) {
