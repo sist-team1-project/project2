@@ -12,7 +12,7 @@
     <div class="row">
       <div class="col-lg-12 m-lr-auto">
         <div class="p-b-20">
-          <h3>상품 등록</h3>
+          <h3><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp; 상품 등록</h3>
         </div>
       </div>
       <div class="col-lg-12-add flex-m">

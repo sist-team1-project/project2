@@ -13,7 +13,7 @@
 		<div class="row">
 			<div class="col-lg-12 m-lr-auto">
 				<div class="p-b-20">
-					<h3>상품 목록</h3>
+					<h3><i class="fa fa-file-text" aria-hidden="true"></i>&nbsp; 상품 목록</h3>
 				</div>
 			</div>
 			<div class="col-lg-12 flex-m">

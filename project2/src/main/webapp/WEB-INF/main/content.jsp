@@ -110,7 +110,7 @@
         <div class="bg0 p-t-23 p-b-140">
           <div class="p-tb-20"><h3 class="ltext-103 cl5">Product Overview</h3></div>
           <div v-for="e in events">
-            <div class="p-t-40 p-b-10"><h4>{{e.title}}</h4></div>
+            <div class="p-t-40 p-b-10"><h4><i class="fa fa-rocket" aria-hidden="true"></i>&nbsp; {{e.title}}</h4></div>
             <div class="row">
               <!--    상 품    -->
               <div v-for="(eg,index) in event_goods" v-if="eg.eid == e.eid" class="col-sm-6 col-md-4 col-lg-3 p-b-35">
