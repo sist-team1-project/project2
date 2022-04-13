@@ -13,4 +13,7 @@ public interface EventMapper {
     
     @Insert("INSERT INTO event_1 VALUES(event_id_seq_1.nextval, #{e_title})")
     public void insertEvent(EventVO vo);
+    
+    @Delete("DELETE FROM event_1 WHERE e_title = #{e_title}")
+    public void deleteEvent(EventVO vo);
 }

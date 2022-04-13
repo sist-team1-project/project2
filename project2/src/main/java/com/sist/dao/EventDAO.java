@@ -21,4 +21,8 @@ public class EventDAO {
 	public void insertEvent(EventVO vo) {
 		mapper.insertEvent(vo);
 	}
+
+	public void deleteEvent(EventVO vo) {
+		mapper.deleteEvent(vo);
+	}
 }

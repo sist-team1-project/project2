@@ -83,7 +83,7 @@
 									<input type=submit class="btn flex-c-m stext-101 cl0 bg1 bor14 hov-btn3 trans-04 pointer btn-pro-color2 dis-inline-block" value="등록">
 								</div>
 								<div class="p-lr-10">
-									<input type=button class="btn flex-c-m stext-101 cl0 bg1 bor14 hov-btn3 trans-04 pointer btn-pro-color2 dis-inline-block" value="식제">
+									<input type=button class="btn flex-c-m stext-101 cl0 bg1 bor14 hov-btn3 trans-04 pointer btn-pro-color2 dis-inline-block" v-on:click="event_delete()" value="식제">
 								</div>
 							</div>
 
@@ -190,7 +190,24 @@
                	}).then((response) => {
                			location.href="../admin/event_Insert.do";
                	})
-	        	}
+	        	},
+	        	event_delete:function(){
+	        		if (this.eidname == "" ) {
+								this.$refs.eidname.focus();
+								alert("삭제할 이벤트 이름을 입력해주세요");
+								return;
+	        		}
+    				
+           	console.log("event title : " + this.eidname);
+               	
+           	let form = new FormData();
+          	form.append('e_title', this.eidname);
+            	
+           	axios.post('http://localhost:8080/web/admin/event_delete_ok.do', form, {
+           	}).then((response) => {
+           			location.href="../admin/event_Insert.do";
+           	})
+        	}
         }
     })
   </script>
