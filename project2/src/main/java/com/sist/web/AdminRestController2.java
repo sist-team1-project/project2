@@ -233,5 +233,25 @@ public class AdminRestController2 {
 		edao.insertEvent(vo);
 		return "ok";
 	}
+	
+	/*  -- 카테고리 삭제 --  */
+	@PostMapping("category_delete_ok.do")
+	public String category_delete_vue_ok(CategoryVO vo) {
+
+		System.out.println("cid : " + vo.getC_id());
+		
+//		String name = cdao.categoryName(vo.getC_id());
+//		String title = vo.getC_title();
+//		
+//		if ( name != title ) {
+//				return "false";
+//		}
+		
+		System.out.println("title : " + vo.getC_title());
+		
+		cdao.category_delete(vo);
+
+		return "ok";
+	}
 
 }

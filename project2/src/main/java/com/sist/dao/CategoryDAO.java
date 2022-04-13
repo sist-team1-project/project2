@@ -30,4 +30,8 @@ public class CategoryDAO {
 	public void category_insert(CategoryVO vo) {
 		mapper.category_insert(vo);
 	}
+
+	public void category_delete(CategoryVO vo) {
+		mapper.category_delete(vo);
+	}
 }

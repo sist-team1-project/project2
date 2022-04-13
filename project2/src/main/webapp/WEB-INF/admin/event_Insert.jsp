@@ -58,7 +58,7 @@
 									<input type=submit class="btn flex-c-m stext-101 cl0 bg1 bor14 hov-btn3 trans-04 pointer btn-pro-color2 dis-inline-block" value="등록">
 								</div>
 								<div class="p-lr-10">
-									<input type=button class="btn flex-c-m stext-101 cl0 bg1 bor14 hov-btn3 trans-04 pointer btn-pro-color2 dis-inline-block" value="삭제">
+									<input type=button class="btn flex-c-m stext-101 cl0 bg1 bor14 hov-btn3 trans-04 pointer btn-pro-color2 dis-inline-block" v-on:click="cate_delete" value="삭제">
 								</div>
 							</div>
 						</form>
@@ -163,16 +163,34 @@
             },
             submitEveForm:function(){
             
-            let form = new FormData();
-            form.append('e_title', this.eidname);
-            
-           	console.log("event name : "+ this.eidname);
-            
-            axios.post('http://localhost:8080/web/admin/event_add_ok.do', form, {
-            }) .then((response) => {
-                location.href="../admin/event_Insert.do"
-            })
-        	}
+		            let form = new FormData();
+		            form.append('e_title', this.eidname);
+		            
+		           	console.log("event name : "+ this.eidname);
+		            
+		            axios.post('http://localhost:8080/web/admin/event_add_ok.do', form, {
+		            	}) .then((response) => {
+		                location.href="../admin/event_Insert.do"
+		            	})
+        		},
+	        	cate_delete:function(){
+		        		if (this.category2 == "" || this.catitle2=="") {
+									this.$refs.category2.focus();
+									alert("삭제할 카테고리번호와 이름을 입력해주세요");
+									return;
+		        		}
+        				console.log("category2 : " + this.category2);
+               	console.log("cat2 title : " + this.catitle2);
+	               	
+               	let form = new FormData();
+              	form.append('c_id', this.category2);
+            		form.append('c_title', this.catitle2);
+	            	
+               	axios.post('http://localhost:8080/web/admin/category_delete_ok.do', form, {
+               	}).then((response) => {
+               			location.href="../admin/event_Insert.do";
+               	})
+	        	}
         }
     })
   </script>

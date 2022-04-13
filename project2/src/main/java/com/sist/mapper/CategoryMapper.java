@@ -19,4 +19,7 @@ public interface CategoryMapper {
     
     @Insert("INSERT INTO category_1 VALUES(#{c_id}, #{c_title})")
     public void category_insert(CategoryVO vo);
+    
+    @Delete("DELETE FROM category_1 WHERE c_id = #{c_id} AND c_title = #{c_title}")
+    public void category_delete(CategoryVO vo);
 }
