@@ -11,7 +11,7 @@
 		<div class="row">
 			<div class="col-lg-12 m-lr-auto">
 				<div class="p-b-20">
-					<h3>카테고리&이벤트 등록</h3>
+					<h3>카테고리&이벤트 관리</h3>
 				</div>
 			</div>
 			<div class="col-lg-12-add flex-m">
@@ -83,7 +83,7 @@
 									<input type=submit class="btn flex-c-m stext-101 cl0 bg1 bor14 hov-btn3 trans-04 pointer btn-pro-color2 dis-inline-block" value="등록">
 								</div>
 								<div class="p-lr-10">
-									<input type=button class="btn flex-c-m stext-101 cl0 bg1 bor14 hov-btn3 trans-04 pointer btn-pro-color2 dis-inline-block" v-on:click="event_delete()" value="식제">
+									<input type=button class="btn flex-c-m stext-101 cl0 bg1 bor14 hov-btn3 trans-04 pointer btn-pro-color2 dis-inline-block" v-on:click="event_delete()" value="삭제">
 								</div>
 							</div>
 
