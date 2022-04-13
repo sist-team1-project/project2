@@ -1,0 +1,277 @@
+@charset "UTF-8";
+
+
+
+.font-center>th {
+	text-align: center;
+}
+
+.font-center>td {
+	text-align: center;
+}
+
+.btn-size-t {
+	width: 60px;
+	height: 40px;
+}
+
+.table-goods {
+  border-collapse: collapse;
+  font-size: 14px;
+  width: 100%;
+  min-width: 940px;
+}
+
+.table-goods tr {
+  border-top: 1px solid #e6e6e6;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.table-goods .table_row {
+  border-collapse: collapse;
+  height: 70px;
+  min-height: 70px;
+}
+
+.table-goods .table_row td {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 13px;
+}
+
+.table-goods .column-1 {
+  width: 50px;
+  padding-left: 15px;
+}
+
+.table-goods .column-2 {
+  width: 50px;
+  text-align: center;
+}
+
+.table-goods .column-3 {
+  width: 130px;
+  text-align: center;
+}
+
+.table-goods .column-4 {
+  width: 200px;
+  text-align: center;
+}
+
+.table-goods .column-5 {
+  width: 90px;
+  text-align: center;
+}
+
+.table-goods .column-6 {
+  width: 80px;
+  text-align: right;
+}
+
+.table-goods .column-7 {
+  width: 50px;
+  text-align: right;
+}
+
+.table-goods .column-8 {
+  width: 50px;
+  text-align: right;
+}
+
+.table-goods .column-9 {
+  width: 70px;
+  text-align: center;
+}
+
+.table-goods .column-10 {
+  width: 70px;
+  text-align: right;
+}
+
+.table-goods .column-11 {
+  width: 50px;
+  text-align: right;
+}
+
+.table-goods .column-12 {
+  width: 70px;
+  padding-right: 15px;
+  text-align: right;
+}
+
+
+.table-goods .table_head th {    
+  font-size: 13px;
+  color: #555;
+  text-transform: uppercase;
+  line-height: 1.6;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+/*=============================================
+[ 사이드 사진 ]*/
+.wrap-header-admin {
+	position: fixed;
+	z-index: 1100;
+	width: 100%;
+	height: 100vh;
+	top: 0;
+	right: 0;
+	background-color: rgba(0, 0, 0, 0.0);
+	visibility: hidden;
+	-webkit-transition: all 0.4s;
+	-o-transition: all 0.4s;
+	-moz-transition: all 0.4s;
+	transition: all 0.4s;
+}
+
+.header-admin {
+	position: fixed;
+	z-index: 1100;
+	width: 590px;
+	max-width: calc(100% - 30px);
+	height: 100vh;
+	top: 0;
+	right: -400px;
+	background-color: #fff;
+	-webkit-transition: all 0.4s;
+	-o-transition: all 0.4s;
+	-moz-transition: all 0.34;
+	transition: all 0.4s;
+	box-shadow: 0 3px 6px 0px rgba(0, 0, 0, 0.18);
+	-moz-box-shadow: 0 3px 6px 0px rgba(0, 0, 0, 0.18);
+	-webkit-box-shadow: 0 3px 6px 0px rgba(0, 0, 0, 0.18);
+	-o-box-shadow: 0 3px 6px 0px rgba(0, 0, 0, 0.18);
+	-ms-box-shadow: 0 3px 6px 0px rgba(0, 0, 0, 0.18);
+}
+
+.header-admin::after {
+	content: "";
+	display: block;
+	width: 100%;
+	height: 9%;
+	min-height: 30px;
+}
+
+.show-header-admin {
+	visibility: visible;
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+.show-header-admin .header-admin {
+	right: 0;
+}
+
+/*---------------------------------------------*/
+.header-admin-title {
+	width: 100%;
+	max-width: 100%;
+	height: 16.5%;
+	min-height: 85px;
+}
+
+.header-admin-content {
+	flex-grow: 1;
+	overflow: auto;
+	align-content: space-between;
+}
+
+.header-admin-wrapitem {
+	flex-grow: 1;
+}
+
+/*---------------------------------------------*/
+.header-admin-item-img {
+	width: 100%;
+	position: relative;
+	margin-right: 20px;
+	cursor: pointer;
+}
+
+.header-admin-item-img img {
+	width: 100%;
+}
+
+/*---------------------------------------------*/
+.header-admin-item-txt {
+	width: calc(100% - 80px);
+}
+
+.header-admin-item-name {
+	display: block;
+	font-size: 14px;
+	color: #555;
+	line-height: 1.3;
+}
+
+.header-admin-item-info {
+	display: block;
+	font-size: 14px;
+	color: #888;
+	line-height: 1.5;
+}
+
+.header-admin-total {
+	font-size: 18px;
+	color: #222;
+	line-height: 1.3;
+}
+
+.wrap-search-admin {
+	border: 2px solid #e6e6e6;
+	background: #fff;
+}
+
+.w-2full {
+	width: 200%;
+}
+
+.col-sm-12-add, col-lg-12-add {
+	position: relative;
+	width: 100%;
+	min-height: 1px;
+}
+
+.col-lg-12-add {
+	-ms-flex: 0 0 100%;
+	flex: 0 0 100%;
+	max-width: 100%;
+}
+
+.p-t-20-admin-td td{
+	padding-top: 20px;
+}
+
+.table-checkout-admin {
+  border-collapse: collapse;
+  font-size: 14px;
+  width: 100%;
+  min-width: 800px;
+}
+
+.table-checkout-admin tr {
+  border-top: 1px solid #e6e6e6;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.table_row_admin td {
+  padding: 15px 0px;
+}
+
+.button1 {
+  background-color: #dbd0be;
+  color: black;
+  border: 2px solid #dbd0be; 
+}
+
+
+
+.link,
+.link:link,
+.link:visited,
+.link:hover,
+.link:active {
+  color : rgb(102, 102, 102);
+}

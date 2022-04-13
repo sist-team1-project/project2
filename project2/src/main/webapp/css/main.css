@@ -3048,3 +3048,16 @@ input.num-product::-webkit-inner-spin-button {
 .activeFilter {
   font-weight: bold;
 }
+
+
+/*///////////////////////////////////////////////////////////////////////
+[버튼 색상]*/
+.btn-pro-color2 {
+    background-color: #dbd0be;
+    border-color: #dbd0be;
+}
+
+.btn-pro-color1 {
+    background-color: #eeeee6;
+    border-color: #eeeee6;
+}

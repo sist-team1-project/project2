@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="../css/admin.css">
+<link rel="stylesheet" type="text/css" href="../css/admin/goods.css">
 </head>
 <body>
 	<div class="container bg0 p-t-70 p-b-10" id="adminGoods">
@@ -33,17 +33,15 @@
 			</div>
 		</div>
 		<!-- ------ 검색 순서 ------ -->
-		<div id="order" class="m-tb-10 cl2 p-tb-10">
-			<button class="cl2" :class="{'activeFilter':order=='A'}" value="A" @click="searchByOrder($event)">신상품 순</button>
-			&nbsp;&nbsp;| &nbsp;&nbsp;
-			<button class="cl2" :class="{'activeFilter':order=='B'}" value="B" @click="searchByOrder($event)">오래된 순</button>
+		<div id="order" class="cl2 p-tb-10">
+			<button class="cl2 p-r-5" :class="{'activeFilter':order=='A'}" value="A" @click="searchByOrder($event)">신상품 순</button>|
+			<button class="cl2 p-lr-10" :class="{'activeFilter':order=='B'}" value="B" @click="searchByOrder($event)">오래된 순</button>
 		</div>
 		<!-- --------------------- -->
 		<!-- ------ 상품 상태 ------ -->
-		<div id="order" class="m-tb-10 cl2 p-tb-10">
-			<button class="cl2" :class="{'activeFilter':status=='1'}" value="1" @click="searchByStatus($event)">판매 중</button>
-			&nbsp;&nbsp;| &nbsp;&nbsp;
-			<button class="cl2" :class="{'activeFilter':status=='0'}" value="0" @click="searchByStatus($event)">판매 중단</button>
+		<div id="order" class="cl2 p-b-10">
+			<button class="cl2 p-lr-10" :class="{'activeFilter':status=='1'}" value="1" @click="searchByStatus($event)">판매 중</button>|
+			<button class="cl2 p-lr-10" :class="{'activeFilter':status=='0'}" value="0" @click="searchByStatus($event)">판매 중단</button>
 		</div>
 		<!-- --------------------- -->
 		<div class="row p-t-10">
@@ -54,50 +52,41 @@
 			<div class="col-lg-12 m-lr-auto m-b-50">
 				<div class="wrap-table js-pscroll">
 
-					<table class="table-checkout-admin">
+					<table class="table-goods">
 						<thead>
 							<tr class="table_head font-center">
-								<th></th>
-								<th>상품번호</th>
-								<th>카테고리</th>
-								<th>제품명</th>
-								<th>브랜드</th>
-								<th>가격</th>
-								<th>할인율</th>
-								<th>판매량</th>
-								<th>판매상태</th>
-								<th>제품 등록일</th>
-								<th>상세</th>
-								<th></th>
+								<th class="column-1"></th>
+								<th class="column-2">상품번호</th>
+								<th class="column-3">카테고리</th>
+								<th class="column-4">제품명</th>
+								<th class="column-5">브랜드</th>
+								<th class="column-6">가격</th>
+								<th class="column-7">할인</th>
+								<th class="column-8">판매량</th>
+								<th class="column-9">상태</th>
+								<th class="column-10">제품 등록일</th>
+								<th class="column-11">상세</th>
+								<th class="column-12"></th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr v-for="(goods, index) in goodsList" class="table_row_admin fs-13 font-center p-t-20-admin-td p-b-20">
-								<td>
-									<div>
-										<img :src="goods.g_image" onerror="this.src='../images/image_ready.jpg'" class="size-109">
-									</div>
+								<td class="column-1"><div><img :src="goods.g_image" onerror="this.src='../images/image_ready.jpg'" class="size-109"></div></td>
+								<td class="column-2">{{goods.g_id}}</td>
+								<td class="column-3">{{goods.c_title}}</td>
+								<td class="column-4"><a class="link" :href="'../goods/detail.do?gid=' + goods.g_id">{{goods.g_name}}</a></td>
+								<td class="column-5">{{goods.g_brand}}</td>
+								<td class="column-6">{{goods.g_price | currency}}</td>
+								<td class="column-7">{{goods.g_sale }}%</td>
+								<td class="column-8">{{goods.g_sold }}</td>
+								<td class="column-9" v-if="goods.g_status==0">판매중지</td>
+								<td class="column-9" v-if="goods.g_status==1">판매중</td>
+								<td class="column-10">{{goods.g_regdate }}</td>
+								<td class="column-11">
+									<div class="icon-header-item cl2 hov-cl1 trans-04"><i class="fa fa-search" @click="goods_detail(goods.g_detail)" aria-hidden="true"></i></div>
 								</td>
-								<td>{{goods.g_id}}</td>
-								<td>{{goods.c_title}}</td>
-								<td>
-									<a :href="'../goods/detail.do?gid=' + goods.g_id">{{goods.g_name}}</a>
-								</td>
-								<td>{{goods.g_brand}}</td>
-								<td>{{goods.g_price | currency}}</td>
-								<td>{{goods.g_sale }}</td>
-								<td>{{goods.g_sold }}</td>
-								<td>{{goods.g_status }}</td>
-								<td>{{goods.g_regdate }}</td>
-								<td>
-									<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 ">
-										<i class="fa fa-search" v-on:click="goods_detail(goods.g_detail)" aria-hidden="true"></i>
-									</div>
-								</td>
-								<td>
-									<a :href="'../admin/goods_update.do?g_id='+goods.g_id" value="{{goods.g_id}}">
-										<button class="flex-c-m stext-101 cl0 btn-sm btn-pro-color2 bor1 hov-btn1 p-lr-15 trans-04  fs-10">수정</button>
-									</a>
+								<td class="column-12">
+									<a :href="'../admin/goods_update.do?g_id='+goods.g_id" value="{{goods.g_id}}"><button class="cl0 btn-sm btn-pro-color2 bor1 hov-btn1 trans-04">수정</button></a>
 								</td>
 							</tr>
 						</tbody>
