@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="../css/admin/goods.css">
 </head>
 <body>
-	<div class="container bg0 p-t-70 p-b-10" id="adminGoods">
+	<div class="container p-b-10" id="adminGoods">
 		<div class="row">
 			<div class="col-lg-12 m-lr-auto">
 				<div class="p-b-20">
@@ -33,15 +33,15 @@
 			</div>
 		</div>
 		<!-- ------ 검색 순서 ------ -->
-		<div id="order" class="cl2 p-tb-10">
-			<button class="cl2 p-r-5" :class="{'activeFilter':order=='A'}" value="A" @click="searchByOrder($event)">신상품 순</button>|
-			<button class="cl2 p-lr-10" :class="{'activeFilter':order=='B'}" value="B" @click="searchByOrder($event)">오래된 순</button>
+		<div class="p-t-10 p-b-5 cl3 fs-13">
+			<button class="p-r-5" :class="{'activeFilter':order=='A'}" value="A" @click="searchByOrder($event)">신상품 순</button>|
+			<button class="p-lr-10" :class="{'activeFilter':order=='B'}" value="B" @click="searchByOrder($event)">오래된 순</button>
 		</div>
 		<!-- --------------------- -->
 		<!-- ------ 상품 상태 ------ -->
-		<div id="order" class="cl2 p-b-10">
-			<button class="cl2 p-lr-10" :class="{'activeFilter':status=='1'}" value="1" @click="searchByStatus($event)">판매 중</button>|
-			<button class="cl2 p-lr-10" :class="{'activeFilter':status=='0'}" value="0" @click="searchByStatus($event)">판매 중단</button>
+		<div class="p-b-5 cl3 fs-13">
+			<button class="p-lr-10" :class="{'activeFilter':status=='1'}" value="1" @click="searchByStatus($event)">판매 중</button>|
+			<button class="p-lr-10" :class="{'activeFilter':status=='0'}" value="0" @click="searchByStatus($event)">판매 중단</button>
 		</div>
 		<!-- --------------------- -->
 		<div class="row p-t-10">

@@ -7,15 +7,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="../css/admin/order.css">
-<style type="text/css">
-td {
-    width: 150px;
-    margin: 0px auto;
-}
-</style>
 </head>
 <body>
-  <div class="container bg0 p-t-70 p-b-10" id="adorder">
+  <div class="container bg0 p-b-10" id="adorder">
     <div class="row" id="orderpage">
       <div class="col-lg-12 m-lr-auto">
         <div class="p-b-10">
@@ -56,7 +50,7 @@ td {
             </tr>
             <tr v-for="o in orderFullList" class="table_row_order fs-13 text-center">
               <td class="column-1">{{o.regdate}}</td>
-              <td class="column-2"><a class="cl8" href="#" data-toggle="modal" @click="odetail(o.oid)">{{o.oid}}</a></td>
+              <td class="column-2"><a class="cl8 link" href="#" data-toggle="modal" @click="odetail(o.oid)">{{o.oid}}</a></td>
               <td class="column-3">{{o.usid}}</td>
               <td class="column-4">{{o.name}}</td>
               <td class="column-5">{{o.price | currency }} 원</td>
