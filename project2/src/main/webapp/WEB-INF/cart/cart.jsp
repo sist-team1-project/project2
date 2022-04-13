@@ -18,12 +18,12 @@
                 <tr class="table_head">
                   <th class="column-1"><input type="checkbox" value="" v-model="checkAll" @click="checkAllBtn"></th>
                   <th class="column-2"></th>
-                  <th class="column-3">제품</th>
+                  <th class="column-3">상품명</th>
                   <th class="column-4">수량</th>
-                  <th class="column-5">가격</th>
+                  <th class="column-5">상품단가</th>
                   <th class="column-6">할인율</th>
-                  <th class="column-7">할인가격</th>
-                  <th class="column-8">총가격</th>
+                  <th class="column-7">할인금액</th>
+                  <th class="column-8">총 금액</th>
                   <th class="column-9">삭제</th>
                 </tr>
                 <tr class="table_row" v-for="(cart,index) in cartList" >
@@ -32,8 +32,8 @@
                   <td class="column-3"><a class="link" :href="'../goods/detail.do?gid=' + cart.gid">{{cart.gname }}</a></td>
                   <td class="column-4">{{cart.gquantity}}</td>
                   <td class="column-5">{{cart.gprice | currency }}원 </td>
-                  <td class="column-6">{{cart.gsale }}</td>
-                  <td class="column-7">{{cart.gprice - (cart.gprice * cart.gsale / 100) | currency }}원 </td>
+                  <td class="column-6">{{cart.gsale }} %</td>
+                  <td class="column-7">{{(cart.gprice * cart.gsale / 100) * cart.gquantity | currency }}원 </td>
     			  <td class="column-8">{{(cart.gprice - (cart.gprice * cart.gsale / 100)) * cart.gquantity | currency }}원</td>
     			  <td class="column-9">
     			  <button type=button @click="cartDelete($event)" :value="cart.cid">삭제</button></td>
@@ -46,7 +46,7 @@
               <h4 class="mtext-109 cl2 p-b-30">Cart Totals</h4>
   
               <div class="flex-w flex-t bor12 p-b-13">
-                <div class="size-208"><span class="cl2"> 금액: </span></div>
+                <div class="size-208"><span class="cl2"> 상품합산금액: </span></div>
                 <div class="size-209"><span class="cl2">{{totalPrice(selectedGoods) | currency}} 원 </span></div>
               </div>
   
@@ -59,7 +59,7 @@
               </div>
   
               <div class="flex-w flex-t p-t-27 p-b-33">
-                <div class="size-208"><span class="cl2"> 총 금액: </span></div>
+                <div class="size-208"><span class="cl2"> 총 결제금액: </span></div>
                 <div class="size-209 p-t-1">
                   <span class="cl2"  v-if="selectedGoods.length == 0">0 원</span>
                   <span class="cl2"  v-if="selectedGoods.length != 0">{{totalPrice(selectedGoods) + 5000 | currency}} 원</span>
