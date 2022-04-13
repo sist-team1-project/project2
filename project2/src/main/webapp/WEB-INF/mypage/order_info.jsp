@@ -30,7 +30,7 @@
             <tr v-for="my in orderInfoList" class="table_row_order fs-13 text-center">
               <td> {{my.uid}} </td>
               <td> {{my.regdate}} </td>
-              <td><a class="cl8" href="#" data-toggle="modal" @click="odetail($event, my.uid)">{{my.oid}}</a></td>
+              <td><a class="cl8" href="#" data-toggle="modal" @click="odetail($event, my.oid)">{{my.oid}}</a></td>
               <td v-if="my.state==-1">주문취소</td>
               <td v-if="my.state==0">대기중 <br>
                <button class="bor20 cl2 btn-pro-color2 p-tb-4 p-lr-10" value=-1 @click="cancel($event, my.oid); my.state=-1">주문취소</button>
