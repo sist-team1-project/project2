@@ -117,9 +117,10 @@ public interface OrderMapper {
 	        + "WHERE u_id=#{uid}")
 		public int userOrderTotalPage(Map map);
 	 
-	/* 유저  - 주문정보 페이징 */
-	@Select("SELECT COUNT(*) FROM order_1")
-	    public int userOrderCount();
+	/* 유저  - 주문정보 갯수 */
+	@Select("SELECT COUNT(*) FROM order_1 "
+			+ "WHERE u_id=#{uid}")
+	    public int userOrderCount(Map map);
 	 
 	/* 유저  - 주문상태 변경 */
 	@Update("UPDATE order_1 SET o_state=#{state} WHERE o_id=#{oid} AND u_id=#{uid}")

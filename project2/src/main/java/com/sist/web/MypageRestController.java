@@ -116,7 +116,7 @@ public class MypageRestController {
         
         int totalpage = odao.userOrderTotalPage(map);
         List<OrderVO> list = odao.orderInfoList(map);
-        int count = odao.userOrderCount();
+        int count = odao.userOrderCount(map);
         
         final int BLOCK = 10;
         int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;

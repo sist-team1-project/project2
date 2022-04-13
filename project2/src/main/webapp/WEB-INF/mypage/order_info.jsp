@@ -12,12 +12,16 @@
   <div class="container bg0 p-t-70 p-b-10" id="orderinfo">
     <div class="row" id="orderpage">
       <div class="col-lg-12 m-lr-auto">
-        <div class="p-b-10">
+        <div class="p-b-10 p-l-10">
           <h3><i class="fa fa-truck" aria-hidden="true"></i>&nbsp;주문 정보</h3>
         </div>
       </div>
     </div>
-    <div class="row p-t-10">
+    <div class="col-md-12 dis-flex flex-sb">
+      <div class="p-tb-10 flex-l">
+        <div class="fs-13">총 {{count | currency}} 건 </div>
+      </div>
+    </div>
       <div class="col-lg-12 m-lr-auto m-b-50">
         <div class="wrap-table js-pscroll">
           <table class="table-order text-center">
@@ -30,7 +34,7 @@
             <tr v-for="my in orderInfoList" class="table_row_order fs-13 text-center">
               <td> {{my.uid}} </td>
               <td> {{my.regdate}} </td>
-              <td><a class="cl8" href="#" data-toggle="modal" @click="odetail($event, my.oid)">{{my.oid}}</a></td>
+              <td><a class="cl8" href="#" data-toggle="modal" @click="odetail(my.oid)">{{my.oid}}</a></td>
               <td v-if="my.state==-1">주문취소</td>
               <td v-if="my.state==0">대기중 <br>
                <button class="bor20 cl2 btn-pro-color2 p-tb-4 p-lr-10" value=-1 @click="cancel($event, my.oid); my.state=-1">주문취소</button>
@@ -42,8 +46,6 @@
           </table>
         </div>
       </div>
-    </div>
-    
     <!------------- 페이징 ------------->
     <div class="text-center">
       <ul class="pagination">

@@ -50,8 +50,8 @@ public class OrderDAO {
     	return omapper.userOrderTotalPage(map);
     }
     
-    public int userOrderCount() {
-    	return omapper.userOrderCount();
+    public int userOrderCount(Map map) {
+    	return omapper.userOrderCount(map);
     }
     public int userOrderCancel(Map map) {
     	return omapper.userOrderCancel(map);
