@@ -36,7 +36,7 @@
   <tiles:insertAttribute name="title"/>
   
   <!-- 컨텐츠 -->
-  <section class="p-t-110 p-b-60">
+  <section class="p-tb-60">
     <div class="container">
       <div class="row"> 
         <div class="col-md-4 col-lg-2 p-b-80">
