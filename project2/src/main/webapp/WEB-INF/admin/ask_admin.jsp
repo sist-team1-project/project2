@@ -13,7 +13,7 @@
     <div class="row">
       <div class="col-lg-12 m-lr-auto">
         <div class="p-b-20">
-          <h3>문의 관리</h3>
+          <h3><i class="fa fa-whatsapp" aria-hidden="true"></i>&nbsp; 문의 관리</h3>
         </div>
       </div>
       <div class="col-lg-12 flex-m"></div>
