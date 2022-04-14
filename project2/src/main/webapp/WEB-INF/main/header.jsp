@@ -74,9 +74,16 @@
               <i class="zmdi zmdi-shopping-cart"></i>
             </div>
             </c:if>
-            <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-15 p-r-8 icon-header-noti" data-notify="0">
-              <i class="zmdi zmdi-favorite-outline"></i>
-            </a>
+        	<c:if test="${sessionScope.grade=='1' || sessionScope.grade=='0' }">
+          	  <a href="../mypage/like.do" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-15 p-r-8">
+                <i class="zmdi zmdi-favorite-outline"></i>
+              </a>
+        	</c:if>
+        	<c:if test="${sessionScope.id==null }">
+          	  <div class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10" @click="if(confirm('로그인창으로 이동하시겠습니까?')) return location.href='../user/login.do'">
+                <i class="zmdi zmdi-favorite-outline"></i>
+              </div>
+        	</c:if> 
           </div>
         </nav>
       </div>
@@ -104,9 +111,16 @@
             <i class="zmdi zmdi-shopping-cart"></i>
           </div>
         </c:if>
-        <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
-          <i class="zmdi zmdi-favorite-outline"></i>
-        </a>
+        <c:if test="${sessionScope.grade=='1' || sessionScope.grade=='0' }">
+          <a href="../mypage/like.do" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-15 p-r-8 icon-header-noti">
+             <i class="zmdi zmdi-favorite-outline"></i>
+           </a>
+        </c:if>        
+        <c:if test="${sessionScope.id==null }">
+          <div class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10" @click="if(confirm('로그인창으로 이동하시겠습니까?')) return location.href='../user/login.do'">
+            <i class="zmdi zmdi-favorite-outline"></i>
+          </div>
+        </c:if>        
       </div>
 
       <!-- 메뉴 보여주기 버튼 -->
