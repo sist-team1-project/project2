@@ -12,7 +12,7 @@
 <body>
 	<div class="container bg0">
 	  <h3 class="text-center p-b-20">공지사항</h3>
-		 <div class="row">
+	    <div class="row">
 				<table class="table">
 					<tr>
 						<th class="text-center">번호</th>
@@ -31,39 +31,18 @@
 						<td colspan="3">${vo.n_title }</td>
 					</tr>
 					<tr>
-						<td colspan="4" class="text-left hg-400">${vo.n_content }</td>
+						<td colspan="4" class="col-sm-12 p-lr-15 p-tb-20 cl3 fs-13" style="height: 400px;"><pre>${vo.n_content }</pre></td>
 					</tr>
 					<tr>
 						<td colspan="4" class="text-right">
 					 	  <c:if test="${sessionScope.grade=='0' }">
-						    <button class="btn btn-sm bg-1"> 수정</button>
-						    <button class="btn btn-sm bg-1">삭제</button>
+						    <a href="../support/notice_update.do?no=${vo.n_id }"><button class="cl1 bg2 bor2 hov-btn3 p-lr-15 size-126">수정</button></a>
+						    <a href="../support/notice_delete.do?no=${vo.n_id }"><button class="cl1 bg2 bor2 hov-btn3 p-lr-15 size-126">삭제</button></a>
 						  </c:if>
-						    <button class="btn btn-sm bg-2">목록</button>
+						    <a href="../support/notice.do"><button class="cl1 bg3 bor2 hov-btn3 p-lr-15 size-126">목록</button></a>
 					    </td>
 					</tr>
 				</table>
-
-        <div class="text-left" id="comment">
-		  <h4 class="text-center p-b-20">댓글</h4>
-          {{vo.co_content}}
-            <c:if test="${sessionScope.id!=null }">
-            <div class="row">
-            <form id="review-form">
-              <input type="hidden" name="u_id" value="${sessionScope.id }">
-              <input type="hidden" name="n_id" value="{{vo.n_id}}">
-          
-            <div class="col-md-12 roomy-10">
-              <textarea id="co_content" rows="6" name=co_content></textarea>
-              <input type="button" value="댓글" id="review-insert-btn">
-            </div>
-          </form>
-          </div>
-      </c:if>
-      </div>
-          		
-          		
-          		  
 			</div>
 		</div>
 	
