@@ -69,7 +69,7 @@
 								<th class="column-12"></th>
 							</tr>
 						</thead>
-						<tbody v-if="empty==false">
+						<tbody>
 							<tr v-for="(goods, index) in goodsList" class="table_row_admin fs-13 font-center p-t-20-admin-td p-b-20">
 								<td class="column-1"><div><img :src="goods.g_image" onerror="this.src='../images/image_ready.jpg'" class="size-109"></div></td>
 								<td class="column-2">{{goods.g_id}}</td>
@@ -112,31 +112,30 @@
                 </li>
             </ul>
         </div>
-
+    	<!-- 사이드 Detail -->
+    	<div class="wrap-header-admin js-panel-admin">
+    		<div class="s-full" @click="goods_detail_close"></div>
+    		<div class="header-admin flex-col-l p-l-65 p-r-25">
+    			<div class="header-admin-title flex-w flex-sb-m p-b-8">
+    				<span class="mtext-103 cl2"> Detail </span>
+    				<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04">
+    					<i class="zmdi zmdi-close" v-on:click="goods_detail_close"></i>
+    				</div>
+    			</div>
+    			<div class="header-admin-content flex-w js-pscroll">
+    				<ul class="header-admin-wrapitem w-2full">
+    					<li class="header-admin-item flex-w flex-t m-b-12">
+    						<div class="header-admin-item-img">
+    							<img v-for="d in gdetail" :src="d" onerror="this.src='../images/image_ready.jpg'">
+    						</div>
+    					</li>
+    				</ul>
+    			</div>
+    		</div>
+    	</div>
 	</div>
 
-		<!-- 사이드 Detail -->
-		<div class="wrap-header-admin js-panel-admin">
-			<div class="s-full" @click="goods_detail_close"></div>
-			<div class="header-admin flex-col-l p-l-65 p-r-25">
-				<div class="header-admin-title flex-w flex-sb-m p-b-8">
-					<span class="mtext-103 cl2"> Detail </span>
-					<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04">
-						<i class="zmdi zmdi-close" v-on:click="goods_detail_close"></i>
-					</div>
-				</div>
-				<div class="header-admin-content flex-w js-pscroll">
-					<ul class="header-admin-wrapitem w-2full">
-						<li class="header-admin-item flex-w flex-t m-b-12">
-							<div class="header-admin-item-img">
-								<img v-for="d in gdetail" :src="d" onerror="this.src='../images/image_ready.jpg'">
-							</div>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
+
 
 	<script>
     new Vue({
@@ -157,8 +156,7 @@
             fs: ["N", "S", "C", "D"],
             ss: '',
             order: 'A',
-            status: 1,
-            empty: false
+            status: 1
         },
         filters: {
             currency: function(value) {
@@ -186,12 +184,6 @@
                     this.startPage = res.data[0].startPage;
                     this.endPage = res.data[0].endPage;
                     this.count = res.data[0].count;
-                    
-                    if(res.data[0].g_name == null) {
-                        this.empty = true;
-                    } else {
-                        this.empty = false;
-                    }
                     
                     this.pages = [];
                     for (i = this.startPage; i <= this.endPage; i++) {
