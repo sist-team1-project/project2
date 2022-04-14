@@ -49,15 +49,15 @@
           <!--   -------  이벤트 이름  --------  -->
           <div class="p-tb-20 flex-c-m">
             <form id="submitEvent" method=post action="../admin/event_add_ok.do">  
-              <input id="e_title" name=e_title type=text class="bor10 cl3 p-tb-3 p-lr-5 dis-inline-block" placeholder="이벤트 이름을 입력해주세요">
-              <input type=button id="eventAddBtn" class="cl1 bg3 bor2 hov-btn3 p-lr-15 size-126 pointer dis-inline-block" value="등록">
+              <input id="e_title" name=e_title type=text class="bor10 cl3 p-all-5 dis-inline-block" placeholder="추가할 이벤트 이름을 입력">
+              <input type=button id="eventAddBtn" class="cl1 bg3 bor20 hov-btn3 p-lr-10 p-tb-5 size-126 pointer dis-inline-block" value="등록">
             </form>
           </div>
   
           <div class="p-b-20 flex-c-m">
             <form id="deleteEvent" method=post action="../admin/event_delete_ok.do">    
-              <input id="e_id" name=e_id type=text class="bor10 cl3 p-tb-3 p-lr-5 dis-inline-block" placeholder="이벤트 번호를 입력해주세요">
-              <input type=button id="eventDelBtn" class="cl0 bg2 bor2 hov-btn3 p-lr-15 size-126 pointer dis-inline-block" value="삭제">
+              <input id="e_id" name=e_id type=text class="bor10 cl3 p-all-5 dis-inline-block" placeholder="삭제할 이벤트 번호를 입력">
+              <input type=button id="eventDelBtn" class="cl0 bg2 bor20 hov-btn3 p-lr-10 p-tb-5 size-126 pointer dis-inline-block" value="삭제">
             </form>
           </div>
         </div>
