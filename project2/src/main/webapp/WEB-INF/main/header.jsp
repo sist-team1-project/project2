@@ -141,7 +141,15 @@
     <!-- 모바일 메뉴 -->
     <div class="menu-mobile">
       <ul class="topbar-mobile">
-        <li><div class="left-top-bar">3만원 이상 구매시 무료배송</div></li>
+        <li>
+          <div class="left-top-bar">
+            <div class="notice">
+              <ul class="rolling">
+                <li v-for="n in notice"><a :href="'../support/notice_detail.do?nid=' + n.nid">{{n.title}}</a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
 
         <li>
           <c:if test="${sessionScope.id==null }">
