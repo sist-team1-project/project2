@@ -45,8 +45,8 @@ public class AskDAO {
 	}
 
 	/* -- 댓글 작성 시 질문 tab 증가 -- */
-	public AskVO askDetailData(int no) {
-		return mapper.askDetailData(no);
+	public AskVO askDetailData(int aid) {
+		return mapper.askDetailData(aid);
 	}
 
 	/* -- 문의 번호 -- */
@@ -55,8 +55,8 @@ public class AskDAO {
 	}
 
 	/* -- 문의 정보 -- */
-	public AskVO askParentInfoData(int no) {
-		return mapper.askParentInfoData(no);
+	public AskVO askParentInfoData(int aid) {
+		return mapper.askParentInfoData(aid);
 	}
 
 	/* -- 답변 등록 -- */
@@ -65,13 +65,13 @@ public class AskDAO {
 	}
 
 	/* -- 문의 삭제 시 답변과 함께 삭제 -- */
-	public void askDelete1(int no, int group_id) {
+	public void askDelete1(int group_id) {
 		mapper.askDelete1(group_id);
 	}
 
 	/* -- 답변 삭제 -- */
-	public void askDelete2(int no) {
-		mapper.askDelete2(no);
+	public void askDelete2(int aid) {
+		mapper.askDelete2(aid);
 	}
 
 	/* -- 답변 작성 시 문의 tab 증가 -- */

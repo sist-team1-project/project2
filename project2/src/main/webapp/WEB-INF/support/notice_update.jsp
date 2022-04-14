@@ -5,100 +5,48 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="../css/support.css">
+<link rel="stylesheet" type="text/css" href="../css/support/notice.css">
 </head>
 <body>
-	<div class="container bg0" id="notice_update">
-	  <h3 class="text-center p-b-20">수정하기</h3>
-		<div class="row">
-		  <table class="table">
-			<tr>
-		   	  <th class="text-right">작성자</th>
-			  <td><input type=text id="u_id" size=15 v-model="u_id" :value="u_id"></td>
-			</tr>
-			<tr>
-			  <th class="text-right">제목</th>
-			  <td><input type=text id="n_title" size=50 v-model="n_title" :value="n_title"></td>
-			</tr>
-			<tr>
-			  <th class="text-right">내용</th>
-			  <td><textarea rows="15" cols="110" id="n_content" v-model="n_content" :value="n_content"></textarea></td>
-			</tr>
-			<tr>
-			  <td colspan="3" class="text-right">
-		 	   <button class="btn btn-sm bg-1" v-on:click="write()">수정</button>
-		 	   <button class="btn btn-sm bg-2" v-on:click="cancel()">취소</button>
-			  </td>
-			</tr>
-		  </table>
-		</div>
-	</div>
-	
-	
-	<script>
-    new Vue({
-    	el:'#notice_update',
-    	data:{
-    		u_id:'',
-    		n_title:'',
-    		n_content:'',
-    		no:${no},
-    		vo:{}
-    	},
-    	mounted:function(){
-    		axios.get('http://localhost:8080/web/support/notice_update_vue.do',{
-    			params:{
-    				no:this.no
-    			}
-    		}).then(res=>{
-    			console.log(res.data);
-    			this.vo=res.data;
-    			this.u_id=this.vo.u_id;
-    			this.n_title=this.vo.n_title;
-    			this.n_content=this.vo.n_content;
-    		})
-    	},
-    	methods:{
-    		write:function(){
-    			if(this.u_id=='')
-    			{
-    				let n=document.getElementById("u_id");
-    				n.focus();
-    				return;
-    			}
-    			if(this.n_title=='')
-    			{
-    				let n=document.getElementById("n_title");
-    				n.focus();
-    				return;
-    			}
-    			if(this.n_content=='')
-    			{
-    				let n=document.getElementById("n_content");
-    				n.focus();
-    				return;
-    			}
-    			
-    			axios.get('http://localhost:8080/web/support/notice_update_ok_vue.do',{
-    				params:{
-    					no:this.no,
-    					u_id:this.u_id,
-    					n_title:this.n_title,
-    					n_content:this.n_content
-    				}
-    			}).then(res=>{
-    				if(res.data=="YES")
-    				{
-    			 		location.href="../support/notice_detail.do?no="+this.no
-    				}
-    			})
-    		},
-    		cancel:function(){
-    			history.back();
-    		}
-    	}
+  <script type="text/javascript">
+    $(function() {
+        $('#insertBtn').click(function() {
+            let title = $('#title').val();
+            if (title.trim() == "") {
+                $('#title').focus();
+                return;
+            }
+    
+            let content = $('#content').val();
+            if (content.trim() == "") {
+                $('#content').focus();
+                return;
+            }
+            $('#noticeUpdateForm').submit();
+        })
     })
-   </script>
+  </script>
+  <div class="container">
+    <div class="row" id="notice">
+      <div class="col-lg-12"><h3 class="text-center p-b-20">공지 수정</h3></div>
+      <div class="col-lg-12">
+        <form id="noticeUpdateForm" method=post action="../support/notice_update_ok.do">
+          <input type=hidden name=n_id value="${vo.n_id }">
+          <div>
+            <div class="p-t-20 p-b-10">제목</div>
+            <div><input id="title" type=text name="n_title" value="${vo.n_title }" class="fs-13 bor8 bg0 cl8 w-full p-lr-15 p-tb-5"></div>
+          </div>
+          <div>
+            <div class="p-t-20 p-b-10">내용</div>
+            <div><textarea id="content" rows=20 name="n_content" class="fs-13 bor8 bg0 cl8 w-full p-all-15">${vo.n_content }</textarea></div>
+          </div>
+          <div class="flex-r p-tb-10">
+            <input id="insertBtn" type=button value="글쓰기" class="cl1 size-126 bg3 bor1 hov-btn3 trans-04 pointer dis-inline-block"> 
+            <input type=button value="취소" onclick="if(confirm('수정을 취소하시겠습니까?')) {return history.back();}" class="cl0 size-126 bg2 bor1 hov-btn3 trans-04 pointer dis-inline-block">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
-

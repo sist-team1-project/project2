@@ -1,4 +1,21 @@
 @charset "UTF-8";
+
+#ask textarea {
+  resize: none;
+  min-height: 400px;
+}
+
+#ask-content {
+  min-height: 400px;
+}
+
+#ask pre {
+  line-height: 2.5;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 13px;
+  color: #666666;
+}
+
 .table-ask {
   border-collapse: collapse;
   font-size: 14px;
@@ -19,12 +36,19 @@
 
 .table-ask .column-1 {
   width: 70px;
-  padding-left: 20px;
-  text-align: center;
+  padding-left: 40px;
+  text-align: left;
 }
 
 .table-ask .column-2 {
   width: 200px;
+}
+
+.table-ask th.column-2 {
+  text-align: center;
+}
+
+.table-ask td.column-2 {
   text-align: left;
 }
 

@@ -39,7 +39,7 @@
                 <c:if test="${vo.a_group_step==0 }">
                   <tr class="table_row fs-13">
                     <td class="column-1">${vo.a_type }</td>
-                    <td class="column-2 text-left"><a class="link" href="../admin/ask_detail.do?no=${vo.a_id }">${vo.a_title }</a>
+                    <td class="column-2"><a class="link" href="../admin/ask_detail.do?aid=${vo.a_id }">${vo.a_title }</a>
                     </td>
                     <td class="column-3">${vo.u_id }</td>
                     <td class="column-4">${vo.a_regdate }</td>
@@ -51,10 +51,10 @@
                 <c:if test="${vo.a_group_step==1 }">
                   <tr class="table_row fs-13">
                     <td class="column-1"></td>
-                    <td class="column-2 text-left">&nbsp;&nbsp;<i class="fa fa-reply fa-rotate-180" aria-hidden="true"></i>&nbsp;&nbsp;<a class="link" href="../admin/ask_detail.do?no=${vo.a_id }">${vo.a_title }</a></td>
-                    <td class="column-3 text-center">${vo.u_id }</td>
-                    <td class="column-4 text-center">${vo.a_regdate }</td>
-                    <td class="column-5 text-center"></td>
+                    <td class="column-2">&nbsp;&nbsp;<i class="fa fa-reply fa-rotate-180" aria-hidden="true"></i>&nbsp;&nbsp;<a class="link" href="../admin/ask_detail.do?aid=${vo.a_id }">${vo.a_title }</a></td>
+                    <td class="column-3">${vo.u_id }</td>
+                    <td class="column-4">${vo.a_regdate }</td>
+                    <td class="column-5"></td>
                   </tr>
                 </c:if>
               </c:forEach>

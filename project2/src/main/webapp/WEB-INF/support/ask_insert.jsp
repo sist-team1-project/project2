@@ -12,7 +12,7 @@
 <body>
   <script type="text/javascript">
     $(function() {
-        $('#insert-btn').click(function() {
+        $('#insertAskBtn').click(function() {
             let category = $('#category').val();
             if (category.trim() == "-1") {
                 alert("문의 유형을 선택해주세요")
@@ -31,16 +31,6 @@
                 return;
             }
             $('#askForm').submit();
-        })
-        
-                
-        $('#cancel-btn').click(function() {
-            var result = confirm('작성을 취소하시겠습니까?');
-            if (result) {
-                history.back();
-            } else {
-  
-            }
         })
     })
   </script>
@@ -72,8 +62,8 @@
             <div><textarea id="content" rows=20 name=a_content class="fs-13 bor8 bg0 cl8 w-full p-all-15"></textarea></div>
           </div>
           <div class="flex-r p-tb-10">
-         	<input id="insert-btn" type=button value="글쓰기" class="cl1 size-126 bg3 bor1 hov-btn3 trans-04 pointer dis-inline-block"> 
-            <input id="cancel-btn" type=button value="취소" class="cl0 size-126 bg2 bor1 hov-btn3 trans-04 pointer dis-inline-block">
+         	<input id="insertAskBtn" type=button value="글쓰기" class="cl1 size-126 bg3 bor1 hov-btn3 trans-04 pointer dis-inline-block"> 
+            <input type=button value="취소" onclick="if(confirm('작성을 취소하시겠습니까?')) {return history.back();}" class="cl0 size-126 bg2 bor1 hov-btn3 trans-04 pointer dis-inline-block">
           </div>
         </form>
       </div>

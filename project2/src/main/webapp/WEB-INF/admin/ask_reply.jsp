@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="../css/support.css">
+<link rel="stylesheet" type="text/css" href="../css/admin/ask.css">
 </head>
 <body>
   <script type="text/javascript">
@@ -26,16 +26,6 @@
             }
             $('#askReplyForm').submit();
         })
-        
-                
-        $('#cancel-btn').click(function() {
-            var result = confirm('작성을 취소하시겠습니까?');
-            if (result) {
-                history.back();
-            } else {
-  
-            }
-        })
     })
   </script>
   <div class="container">
@@ -43,7 +33,7 @@
       <div class="col-lg-12"><h3 class="text-center p-b-10">답변하기</h3></div>
       <div class="col-lg-12">
         <form id="askReplyForm" method=post action="../admin/ask_reply_ok.do">
-          <input type="hidden" name=no value="${no }">
+          <input type="hidden" name="a_id" value="${aid }">
           <div>
             <div class="p-tb-10">제목</div>
             <div><input id="title" type=text name=a_title class="fs-13 bor8 bg0 cl8 w-full p-lr-15 p-tb-5"></div>
@@ -54,7 +44,7 @@
           </div>
           <div class="flex-r p-tb-10">
             <input id="reply-btn" type=button value="답변" class="cl1 size-126 bg3 bor1 hov-btn3 trans-04 pointer dis-inline-block"> 
-            <input id="cancel-btn" type=button value="취소" class="cl0 size-126 bg2 bor1 hov-btn3 trans-04 pointer dis-inline-block">
+            <input type=button value="취소" onclick="if(confirm('작성을 취소하시겠습니까?')) {return history.back();}" class="cl0 size-126 bg2 bor1 hov-btn3 trans-04 pointer dis-inline-block">
           </div>
         </form>
       </div>

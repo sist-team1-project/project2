@@ -48,7 +48,7 @@ public interface AskMapper {
 			+"TO_CHAR(a_regdate,'YYYY-MM-DD') as a_regdate,a_group_id,a_group_step,a_group_tab "
 			+"FROM ask_1 "
 			+"WHERE a_id=#{a_id}")
-	public AskVO askDetailData(int no);
+	public AskVO askDetailData(int aid);
 
 	@Select("SELECT COUNT(*) FROM ask_1 "
 			+"WHERE a_group_id=#{a_group_id} AND a_group_step=1")
@@ -57,7 +57,7 @@ public interface AskMapper {
 	@Select("SELECT a_group_id,a_group_step,a_group_tab "
 			+"FROM ask_1 "
 			+"WHERE a_id=#{a_id}")
-	public AskVO askParentInfoData(int no);
+	public AskVO askParentInfoData(int aid);
 
 	@Insert("INSERT INTO ask_1(a_id,u_id,a_type,a_title,a_content,"
 			+"a_group_id,a_group_step,a_group_tab) "
@@ -72,7 +72,7 @@ public interface AskMapper {
 	
 	@Delete("DELETE FROM ask_1 "
 			+"WHERE a_id=#{a_id}")
-	public void askDelete2(int no);
+	public void askDelete2(int aid);
 	
 	@Update("UPDATE ask_1 SET a_group_tab = #{a_group_tab}+1 "
 			+ "WHERE a_id = #{a_id} ")

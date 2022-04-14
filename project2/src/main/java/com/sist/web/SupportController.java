@@ -38,37 +38,26 @@ public class SupportController {
 	
 
 	@GetMapping("notice_detail.do")
-	public String notice_detail(int no, Model model) {
-		NoticeVO vo = ndao.noticeDetailData(no);
+	public String notice_detail(int nid, Model model) {
+		NoticeVO vo = ndao.noticeDetailData(nid);
 		model.addAttribute("vo", vo);
-		model.addAttribute("no", no);
+		model.addAttribute("nid", nid);
 		return "support/notice_detail";
 	}
 	
 	@GetMapping("notice_update.do")
-	public String notice_notice_update(int no, Model model) {
-		model.addAttribute("no", no);
+	public String notice_notice_update(int nid, Model model) {
+	    NoticeVO vo = ndao.noticeUpdateData(nid);
+		model.addAttribute("vo", vo);
 		return "support/notice_update";
 	}
 
 	@GetMapping("notice_delete.do")
-	public String food_board_delete(int no, Model model) {
-		model.addAttribute("no", no);
+	public String food_board_delete(int nid, Model model) {
+		model.addAttribute("nid", nid);
 		return "support/notice_delete";
 	}
 	
-	// 댓글
-    @GetMapping("comment_insert.do")
-    public String comment_insert() {
-        return "support/notice_insert";
-    }
-
-    @GetMapping("comment_insert_ok.do")
-    public String comment_insert_ok(CommentVO vo, HttpSession session) {
-        session.setAttribute("u_id", vo.getN_id());
-        cdao.commentInsertData(vo);
-        return "ok";
-    }
     /************************************************/
     
 	/******************* 1:1 문의 *******************/
@@ -124,11 +113,11 @@ public class SupportController {
 	}
 
 	@GetMapping("ask_detail.do")
-	public String askDetailData(int no, Model model, HttpSession session) {
+	public String askDetailData(int aid, Model model, HttpSession session) {
 	    String u_id = (String) session.getAttribute("id");
         if(u_id == null) return "redirect:../main/main.do";
         
-		AskVO vo = adao.askDetailData(no);
+		AskVO vo = adao.askDetailData(aid);
 		int count = adao.askCount(vo.getA_group_id());
 		model.addAttribute("vo", vo);
 		model.addAttribute("count", count);
@@ -136,23 +125,22 @@ public class SupportController {
 	}
 	
     @GetMapping("ask_delete.do")
-    public String askDelete(int no, Model model, HttpSession session) {
+    public String askDelete(int aid, Model model, HttpSession session) {
         String u_id = (String) session.getAttribute("id");
         String grade = (String) session.getAttribute("grade");
-        if(u_id == null || (!(adao.checkUser(no, u_id)) && !grade.equals("0"))) return "redirect:../main/main.do";
+        if(u_id == null || !(adao.checkUser(aid, u_id) && grade.equals("0"))) return "redirect:../main/main.do";
         
-        model.addAttribute("no", no);
+        model.addAttribute("aid", aid);
         return "support/ask_delete";
     }    
     
     @GetMapping("ask_reply.do")
-    public String askReply(int no, Model model, HttpSession session) {
+    public String askReply(int aid, Model model, HttpSession session) {
         String grade = ((String)session.getAttribute("grade"));
         if( grade == null || !grade.equals("0")) return "redirect:../main/main.do";
         
-        model.addAttribute("no", no);
+        model.addAttribute("aid", aid);
         return "support/ask_reply";
     }
     /************************************************/
-	
 }

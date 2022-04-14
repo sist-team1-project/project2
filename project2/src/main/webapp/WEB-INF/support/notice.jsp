@@ -23,7 +23,7 @@
               <th class="column-4">조회수</th>
             </tr>
             <tr class="table_row" v-for="vo in notice_list">
-              <td class="column-1"><a class="link" :href="'notice_detail.do?no=' + vo.n_id">{{vo.n_title}}</a></td>
+              <td class="column-1"><a class="link" :href="'notice_detail.do?nid=' + vo.n_id">{{vo.n_title}}</a></td>
               <td class="column-2">{{vo.u_id}}</td>
               <td class="column-3">{{vo.n_regdate}}</td>
               <td class="column-4">{{vo.n_visits}}</td>
@@ -32,7 +32,7 @@
         </div>
         <c:if test="${sessionScope.grade=='0'}">
         <div class="flex-r p-t-20">
-          <button class="flex-c-m cl1 bg3 bor2 hov-btn3 p-lr-15 size-126" v-on:click="insert()">글쓰기</button>
+          <button class="flex-c-m cl1 bg3 bor2 hov-btn3 p-lr-15 size-126" @click="location.href='../support/notice_insert.do'">글쓰기</button>
         </div>
         </c:if>
         <div class="text-center p-t-20 p-b-20">
@@ -69,31 +69,22 @@
                     page:this.curpage
                   }
               }).then(result=>{
-                  console.log(result.data);
-                  this.notice_list=result.data;
-                  this.curpage = result.data[0].curpage;
-                        this.totalpage = result.data[0].totalpage;
-                        this.start = result.data[0].start;
-                        this.end = result.data[0].end;
-                        
-                        if(result.data[0].name == null) {
-                            this.empty = true;
-                        } else {
-                            this.empty = false;
-                        }
-                        this.pages = [];
-                        for(i = this.start; i <= this.end; i++) {
-                            this.pages.push(i);
-                        }
+                    this.notice_list=result.data;
+                    this.curpage = result.data[0].curpage;
+                    this.totalpage = result.data[0].totalpage;
+                    this.start = result.data[0].start;
+                    this.end = result.data[0].end;
+                    
+                    this.pages = [];
+                    for(i = this.start; i <= this.end; i++) {
+                        this.pages.push(i);
+                    }
                 })
             },
             paging:function(event) {
-                    this.curpage = event.currentTarget.value;
-                    this.dataSend();
-                },
-            insert:function(){
-              location.href="../support/notice_insert.do";
-            }
+                this.curpage = event.currentTarget.value;
+                this.dataSend();
+            },
         }
     })
   </script>

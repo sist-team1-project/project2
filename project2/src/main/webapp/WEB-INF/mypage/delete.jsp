@@ -17,7 +17,7 @@
         <div class="p-b-25">
           <div class="fs-16 flex-c p-b-15"><b>비밀번호 확인</b></div>
           <div class="bor10 fs-15 m-b-10">
-            <input type="text" name="password" id="password" placeholder="비밀번호를 입력하세요" ref="password" v-model="form.password">
+            <input type="password" name="password" id="password" placeholder="비밀번호를 입력하세요" ref="password" v-model="form.password">
           </div>
           <div class="flex-c p-t-20">
             <input type="submit" id="submit-btn" class="flex-c-m stext-101 cl0 btn-sm btn-pro-color2 bor1 hov-btn1 p-lr-15 trans-04 fs-13" style="background-color:#dbd0be" value="제출">
@@ -34,9 +34,7 @@ new Vue({
  	el:'#delete',
  	data:{
  		id:'',
- 		form: {
- 			password:''
- 		}
+ 		password:''
  	},
  	mounted:function(){
     },
@@ -50,10 +48,9 @@ new Vue({
  			axios.get("http://localhost:8080/web/mypage/delete_ok.do", {
  				params:{
  				id:this.id,
- 				password:this.form.password
+ 				password:this.password
  				}
  	        }).then(res => {
- 	        	//console.log(res)
  	        	if(res.data=="YES") {
                     alert("회원탈퇴가 완료되었습니다.");
                     location.href = "../main/main.do"

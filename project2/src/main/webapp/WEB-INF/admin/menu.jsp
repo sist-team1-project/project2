@@ -43,8 +43,8 @@
     </li>
     
     <li class="bor18">
-      <a href="../admin/event_Insert.do" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-14 p-lr-4">
-        카테고리&이벤트 관리
+      <a href="../admin/event_insert.do" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-14 p-lr-4">
+        이벤트관리
       </a>
     </li>
   </ul>

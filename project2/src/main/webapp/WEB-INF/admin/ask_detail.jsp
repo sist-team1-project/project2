@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="../css/support/ask.css">
+<link rel="stylesheet" type="text/css" href="../css/admin/ask.css">
 </head>
 <body>
   <div id="ask" class="container">
@@ -17,12 +17,12 @@
     <div class="row">
       <div class="col-sm-12 dis-flex flex-r p-t-20">
         <c:if test="${vo.a_group_step==0 }">
-          <a href="../admin/ask_reply.do?no=${vo.a_id }" class="flex-c-m cl1 bg3 bor2 hov-btn3 p-lr-15 size-126">답변</a>
-          <a href="../admin/ask_delete.do?no=${vo.a_id }" class="flex-c-m cl0 bg2 bor2 hov-btn3 p-lr-15 size-126">삭제</a>
+          <a href="../admin/ask_reply.do?aid=${vo.a_id }" class="flex-c-m cl1 bg3 bor2 hov-btn3 p-lr-15 size-126">답변</a>
+          <a href="../admin/ask_delete.do?aid=${vo.a_id }" class="flex-c-m cl0 bg2 bor2 hov-btn3 p-lr-15 size-126">삭제</a>
           <a href="../admin/ask.do" class="flex-c-m cl0 bg2 bor2 hov-btn3 p-lr-15 size-126">목록</a>
         </c:if>
         <c:if test="${vo.a_group_step==1 }">
-          <a href="../admin/ask_delete.do?no=${vo.a_id }" class="flex-c-m cl0 bg2 bor2 hov-btn3 p-lr-15 size-126">삭제</a>
+          <a href="../admin/ask_delete.do?aid=${vo.a_id }" class="flex-c-m cl0 bg2 bor2 hov-btn3 p-lr-15 size-126">삭제</a>
           <a href="../admin/ask.do" class="flex-c-m cl0 bg2 bor2 hov-btn3 p-lr-15 size-126">목록</a>
         </c:if>
       </div>

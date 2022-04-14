@@ -24,13 +24,13 @@
         </div>
         
         <!---------------- 주문상태 정렬  -------------------->
-        <div id="sort" class="p-tb-10 flex-r p-tb-3 p-lr-5 cl8 fs-13">
-          <button :class="{'activeFilter':sort=='A'}" value="A" @click="orderstate($event)">전체</button> &nbsp;&nbsp;| &nbsp;&nbsp;
-  	      <button :class="{'activeFilter':sort=='B'}" value="B" @click="orderstate($event)">주문취소</button> &nbsp;&nbsp;| &nbsp;&nbsp;
-  	      <button :class="{'activeFilter':sort=='C'}" value="C" @click="orderstate($event)">대기중</button> &nbsp;&nbsp;| &nbsp;&nbsp;
-          <button :class="{'activeFilter':sort=='D'}" value="D" @click="orderstate($event)">상품준비중</button> &nbsp;&nbsp;| &nbsp;&nbsp;
-          <button :class="{'activeFilter':sort=='E'}" value="E" @click="orderstate($event)">배송중</button> &nbsp;&nbsp;| &nbsp;&nbsp;
-          <button :class="{'activeFilter':sort=='F'}" value="F" @click="orderstate($event)">배송완료</button>
+        <div id="sort" class="p-tb-10 flex-r p-tb-3 p-lr-5 fs-13">
+          <button class="cl8" :class="{'activeFilter':sort=='A'}" value="A" @click="orderstate($event)">전체</button> &nbsp;&nbsp;| &nbsp;&nbsp;
+  	      <button class="cl8" :class="{'activeFilter':sort=='B'}" value="B" @click="orderstate($event)">주문취소</button> &nbsp;&nbsp;| &nbsp;&nbsp;
+  	      <button class="cl8" :class="{'activeFilter':sort=='C'}" value="C" @click="orderstate($event)">대기중</button> &nbsp;&nbsp;| &nbsp;&nbsp;
+          <button class="cl8" :class="{'activeFilter':sort=='D'}" value="D" @click="orderstate($event)">상품준비중</button> &nbsp;&nbsp;| &nbsp;&nbsp;
+          <button class="cl8" :class="{'activeFilter':sort=='E'}" value="E" @click="orderstate($event)">배송중</button> &nbsp;&nbsp;| &nbsp;&nbsp;
+          <button class="cl8" :class="{'activeFilter':sort=='F'}" value="F" @click="orderstate($event)">배송완료</button>
         </div>
       </div>
       <!----------------------------------------------->
@@ -53,7 +53,7 @@
               <td class="column-4">{{o.name}}</td>
               <td class="column-5">{{o.price | currency }} 원</td>
               <td class="column-6" id="select" class="state">
-              <select @change="selecteOrder($event, o.oid)">
+              <select class="cl8 bor19 p-all-5" @change="selecteOrder($event, o.oid)">
                 <option :selected="o.state==-1" value="-1">주문취소</option>
                 <option :selected="o.state==0" value="0">대기중</option>
                 <option :selected="o.state==1" value="1">상품준비중</option>

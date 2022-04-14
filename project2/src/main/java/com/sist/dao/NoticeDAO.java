@@ -12,48 +12,36 @@ import com.sist.mapper.*;
 
 @Repository
 public class NoticeDAO {
-    
+
     @Autowired
     private NoticeMapper mapper;
-    
-    public List<NoticeVO> noticeListData(Map map)
-    {
- 	   return mapper.noticeListData(map);
+
+    public List<NoticeVO> noticeListData(Map map) {
+        return mapper.noticeListData(map);
     }
     
-    public int noticeRowCount()
-    {
-    	return mapper.noticeRowCount();
+    public int noticeTotalPage() {
+        return mapper.noticeTotalPage();
     }
-    
-    public int noticeTotalPage()
-    {
- 	    return mapper.noticeTotalPage();
+
+    public void noticeInsertData(NoticeVO vo) {
+        mapper.noticeInsertData(vo);
     }
-    
-    public void noticeInsertData(NoticeVO vo)
-    {
- 	    mapper.noticeInsertData(vo);
+
+    public NoticeVO noticeDetailData(int nid) {
+        mapper.noticeVisitIncrement(nid);
+        return mapper.noticeDetailData(nid);
     }
-    
-    public NoticeVO noticeDetailData(int no)
-    {
- 	    mapper.noticeVisitIncrement(no);
- 	    return mapper.noticeDetailData(no);
+
+    public NoticeVO noticeUpdateData(int nid) {
+        return mapper.noticeDetailData(nid);
     }
-    
-    public NoticeVO noticeUpdateData(int no)
-    {
- 	    return mapper.noticeDetailData(no);
+
+    public void noticeUpdate(NoticeVO vo) {
+        mapper.noticeUpdate(vo);
     }
-    
-    public void noticeUpdate(NoticeVO vo)
-    {
- 		mapper.noticeUpdate(vo);
-    }
-    
-    public void noticeDelete(int no)
-    {
- 		mapper.noticeDelete(no);
+
+    public void noticeDelete(int nid) {
+        mapper.noticeDelete(nid);
     }
 }

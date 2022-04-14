@@ -31,7 +31,7 @@
                   <c:if test="${vo.a_group_step==0 }"> 
                     <tr class="table_row fs-13">
                       <td class="column-1">${vo.a_type }</td>
-                      <td class="column-2"><a class="link" href="../support/ask_detail.do?no=${vo.a_id }">${vo.a_title }</a></td>
+                      <td class="column-2"><a class="link" href="../support/ask_detail.do?aid=${vo.a_id }">${vo.a_title }</a></td>
                       <td class="column-3">${vo.a_regdate }</td>
                       <td class="column-4">
                         <c:if test="${vo.a_group_tab==1 }">답변완료</c:if> 
@@ -44,7 +44,7 @@
                   <c:if test="${vo.a_group_step==1 }">
                     <tr class="table_row fs-13">
                       <td class="column-1">${vo.a_type }</td>
-                      <td class="column-2">&nbsp;&nbsp;<i class="fa fa-reply fa-rotate-180" aria-hidden="true"></i>&nbsp;&nbsp;<a class="link" href="../support/ask_detail.do?no=${vo.a_id }">${vo.a_title }</a></td>
+                      <td class="column-2">&nbsp;&nbsp;<i class="fa fa-reply fa-rotate-180" aria-hidden="true"></i>&nbsp;&nbsp;<a class="link" href="../support/ask_detail.do?aid=${vo.a_id }">${vo.a_title }</a></td>
                       <td class="column-3">${vo.a_regdate }</td>
                       <td class="column-4"></td>
                     </tr>

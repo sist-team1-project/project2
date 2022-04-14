@@ -254,23 +254,23 @@ public class AdminRestController2 {
 	
 	/*  -- 문의 --  */
 	@PostMapping("ask_delete_ok.do")
-    public String askDeleteOk(int no) {
+    public String askDeleteOk(int aid) {
         String result = "";
-        AskVO vo = adao.askDetailData(no);
+        AskVO vo = adao.askDetailData(aid);
         if (vo.getA_group_step() == 0) {
-            adao.askDelete1(no, vo.getA_group_id());
+            adao.askDelete1(vo.getA_group_id());
         } else {
-            adao.askDelete2(no);
+            adao.askDelete2(aid);
         }
         return "<script>alert(\"게시물이 삭제되었습니다\"); location.href=\"../admin/ask.do\";</script>";
     }
 
     @PostMapping("ask_reply_ok.do")
-    public String askReplyInsert(int no, AskVO vo, HttpSession session) {
+    public String askReplyInsert(AskVO vo, HttpSession session) {
         String uid = (String) session.getAttribute("id");
         
-        AskVO pvo = adao.askParentInfoData(no);
-        AskVO detailvo = adao.askDetailData(no);
+        AskVO pvo = adao.askParentInfoData(vo.getA_id());
+        AskVO detailvo = adao.askDetailData(vo.getA_id());
         
         vo.setU_id(uid);
         vo.setA_type("답변");
@@ -283,62 +283,4 @@ public class AdminRestController2 {
         
         return "<script>alert(\"답변이 작성되었습니다\"); location.href=\"../admin/ask.do\";</script>";
     }
-    
-	/*  -- 카테고리 추가  --  */
-	@PostMapping("category_add_ok.do")
-	public String category_add_vue_ok(String c_id1, String c1_title, String c_id2, String c2_title) {
-		CategoryVO vo = new CategoryVO();
-		vo.setC_id(c_id1);
-		vo.setC_title(c1_title);
-		cdao.category_insert(vo);
-
-		CategoryVO vo2 = new CategoryVO();
-		vo2.setC_id(c_id2);
-		vo2.setC_title(c2_title);
-		cdao.category_insert(vo2);
-
-		System.out.println("cid : " + vo.getC_id());
-		System.out.println("title : " + vo.getC_title());
-		System.out.println("cid2 : " + c_id2);
-		System.out.println("title2 : " + c2_title);
-
-		return "ok";
-	}
-
-	/*  -- 이벤트 추가  --  */
-	@PostMapping("event_add_ok.do")
-	public String event_add_vue_ok(String e_title) {
-		EventVO vo = new EventVO();
-
-		vo.setE_title(e_title);
-
-		System.out.println("etitle : " + e_title);
-
-		edao.insertEvent(vo);
-		return "ok";
-	}
-
-	/*  -- 카테고리 삭제 --  */
-	@PostMapping("category_delete_ok.do")
-	public String category_delete_vue_ok(CategoryVO vo) {
-
-		System.out.println("cid : " + vo.getC_id());
-
-		System.out.println("title : " + vo.getC_title());
-
-		cdao.category_delete(vo);
-
-		return "ok";
-	}
-
-	/*  -- 이벤트 삭제 --  */
-	@PostMapping("event_delete_ok.do")
-	public String event_delete_vue_ok(EventVO vo) {
-
-		System.out.println("etitle : " + vo.getE_title());
-		edao.deleteEvent(vo);
-
-		return "ok";
-	}
-
 }

@@ -21,6 +21,9 @@ public class AdminController2 {
 	@Autowired
 	private AskDAO adao;
 	
+	@Autowired
+    private EventDAO edao;
+	
 	/************** 상품 관리 페이지 이동 ***************/
 	@GetMapping("adlist.do")
 	public String admin_user(Model model, HttpSession session) {
@@ -94,11 +97,11 @@ public class AdminController2 {
 	}
 	
     @GetMapping("ask_detail.do")
-    public String askDetailData(int no, Model model, HttpSession session) {
+    public String askDetailData(int aid, Model model, HttpSession session) {
         String grade = ((String)session.getAttribute("grade"));
         if( grade == null || !grade.equals("0")) return "redirect:../main/main.do";
         
-        AskVO vo = adao.askDetailData(no);
+        AskVO vo = adao.askDetailData(aid);
         int count = adao.askCount(vo.getA_group_id());
         model.addAttribute("vo", vo);
         model.addAttribute("count", count);
@@ -106,31 +109,53 @@ public class AdminController2 {
     }
     
     @GetMapping("ask_delete.do")
-    public String askDelete(int no, Model model, HttpSession session) {
+    public String askDelete(int aid, Model model, HttpSession session) {
         String grade = ((String)session.getAttribute("grade"));
         if( grade == null || !grade.equals("0")) return "redirect:../main/main.do";
         
-        model.addAttribute("no", no);
+        model.addAttribute("aid", aid);
         return "admin/ask_delete";
     }    
     
     @GetMapping("ask_reply.do")
-    public String askReply(int no, Model model, HttpSession session) {
+    public String askReply(int aid, Model model, HttpSession session) {
         String grade = ((String)session.getAttribute("grade"));
         if( grade == null || !grade.equals("0")) return "redirect:../main/main.do";
         
-        model.addAttribute("no", no);
+        model.addAttribute("aid", aid);
         return "admin/ask_reply";
     }
     /************************************************/
 	
     /************* 카테고리&이벤트 추가 페이지 *************/
-	@GetMapping("event_Insert.do")
-	public String evca_Insert(HttpSession session) {
+	@GetMapping("event_insert.do")
+	public String evca_Insert(Model model, HttpSession session) {
+	    List<EventVO> events = edao.eventList();
 	    String grade = ((String)session.getAttribute("grade"));
         if( grade == null || !grade.equals("0")) return "redirect:../main/main.do";
         
-		return "admin/event_Insert";
+        model.addAttribute("events", events);
+		return "admin/event_insert";
 	}
+	
+    
+    /*  -- 이벤트 추가  --  */
+    @PostMapping("event_add_ok.do")
+    public String event_add_vue_ok(String e_title) {
+        EventVO vo = new EventVO();
+        
+        vo.setE_title(e_title);
+        edao.insertEvent(vo);
+        return "redirect:../admin/event_insert.do";
+    }
+
+    /*  -- 이벤트 삭제 --  */
+    @PostMapping("event_delete_ok.do")
+    public String event_delete_vue_ok(EventVO vo) {
+        
+        edao.deleteEvent(vo);
+        
+        return "redirect:../admin/event_insert.do";
+    }
 	/************************************************/
 }
