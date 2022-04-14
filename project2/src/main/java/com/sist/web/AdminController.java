@@ -43,8 +43,6 @@ public class AdminController {
 	/* 주문상세 */
 	@GetMapping("orderdetail.do")
 	public String adorder_detail(String oid, Model model, HttpSession session) {
-	    String grade = ((String)session.getAttribute("grade"));
-        if( grade == null || !grade.equals("0")) return "redirect:../main/main.do";
         
 		model.addAttribute("oid",oid);
 		return "admin/orderdetail/vue";
