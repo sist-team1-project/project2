@@ -33,4 +33,8 @@ public interface CartMapper {
 	        + "WHERE g.g_id = c.g_id")
     public List<Map<String,Object>> cartList(String uid);
 	/* --------------------------- */
+	
+	
+	@Update("UPDATE cart_1 SET g_quantity=g_quantity+#{num} WHERE g_id=#{gid}")
+	public void cartNumUpdate(Map map);
 }

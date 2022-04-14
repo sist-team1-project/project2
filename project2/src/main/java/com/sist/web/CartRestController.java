@@ -79,4 +79,14 @@ public class CartRestController {
         }
         return arr.toJSONString();
     }
+    
+    @PostMapping("cart_num_update.do")
+    public void cart_num_update(int num, int gid) {
+        
+        Map map = new HashMap();
+        map.put("num", num);
+        map.put("gid", gid);
+        
+        cartdao.cartNumUpdate(map);
+    }
 }

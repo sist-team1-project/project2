@@ -41,6 +41,10 @@ public class CartDAO {
 	    return mapper.countCart(uid);
 	}
 	
+	public void cartNumUpdate(Map map) {
+        mapper.cartNumUpdate(map);
+    }
+	
 	public List<Map<String,Object>> cartList(String uid) {
 	    return mapper.cartList(uid);
 	}

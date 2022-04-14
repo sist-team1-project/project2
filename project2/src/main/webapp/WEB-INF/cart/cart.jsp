@@ -30,7 +30,15 @@
                   <td class="column-1"><input type="checkbox" name="gid" v-model="selectedGoods" :value="cart.gid" @change="clickCheck"></td>
                   <td class="column-2"><div class="item"><img :src="cart.gimage"></div></td>
                   <td class="column-3"><a class="link" :href="'../goods/detail.do?gid=' + cart.gid">{{cart.gname }}</a></td>
-                  <td class="column-4">{{cart.gquantity}}</td>
+                  
+                  <td class="column-4">
+                    <div class="wrap-num-product flex-w m-lr-20 m-tb-10">
+                      <div @click="numDown(index);" class="btn-num-product-down cl8 hov-btn1 trans-04 flex-c-m"><i class="fs-16 zmdi zmdi-minus"></i></div>
+                      <input :value="cart.gquantity" class="mtext-104 cl3 text-center num-product" type="number" name="num-product">
+                      <div @click="numUp(index);" class="btn-num-product-up cl8 hov-btn1 trans-04 flex-c-m"><i class="fs-16 zmdi zmdi-plus"></i></div>
+                    </div>
+                  </td>
+                  
                   <td class="column-5">{{cart.gprice | currency }}원 </td>
                   <td class="column-6">{{cart.gsale }} %</td>
                   <td class="column-7">{{(cart.gprice * cart.gsale / 100) * cart.gquantity | currency }}원 </td>
@@ -122,6 +130,22 @@
                 }).then(result=>{
                     this.cList();     
                 })
+            },
+            numUp:function(index) {
+                this_ = this.cartList[index];
+                this_.gquantity = parseInt(this_.gquantity) + 1;
+                axios.post("http://localhost:8080/web/cart/cart_num_update.do",null,{
+                    params:{num: 1, gid:this_.gid}
+                })
+            },
+            numDown:function(index) {
+                this_ = this.cartList[index];
+                if(this_.gquantity > 1){
+                    this_.gquantity = parseInt(this_.gquantity) - 1;
+                    axios.post("http://localhost:8080/web/cart/cart_num_update.do",null,{
+                        params:{num: -1, gid:this_.gid}
+                    })
+                }
             },
             checkAllBtn:function() {
                 if(this.checkAll == false) {
