@@ -7,60 +7,44 @@
 <title>Insert title here</title>
 </head>
 <body>
-  <div id="delete" class="container bg0 p-t-50 p-b-30">
-  <div class="row p-b-20">
-    <div class="col-md-7"><h4>&nbsp;&nbsp;<i class="fa fa-user-times" aria-hidden="true"></i>&nbsp;회원탈퇴 </h4></div>
-  </div>
-  <form @submit.prevent="submitForm">
-    <div class="border col-md-6 p-lr-50 p-t-40 p-b-25">
-      <div class="row flex-c">
-        <div class="p-b-25">
-          <div class="fs-16 flex-c p-b-15"><b>비밀번호 확인</b></div>
-          <div class="bor10 fs-15 m-b-10">
-            <input type="password" name="password" id="password" placeholder="비밀번호를 입력하세요" ref="password" v-model="form.password">
-          </div>
-          <div class="flex-c p-t-20">
-            <input type="submit" id="submit-btn" class="flex-c-m stext-101 cl0 btn-sm btn-pro-color2 bor1 hov-btn1 p-lr-15 trans-04 fs-13" style="background-color:#dbd0be" value="제출">
+  <div id="update_pwd" class="container p-b-30">
+    <div class="row p-b-20">
+      <div class="col-md-12"><h4>&nbsp;&nbsp;<i class="fa fa-user-times" aria-hidden="true"></i>&nbsp;회원탈퇴 </h4></div>
+    </div>
+    <form @submit="submitForm" method="post" action="../mypage/delete_ok.do">
+      <div class="border col-md-12 col-lg-6 p-lr-50 p-t-40 p-b-25">
+        <div class="row flex-c">
+          <div class="p-b-25">
+            <div class="fs-16 flex-c p-b-15"><b>회원 탈퇴</b></div>
+            <div>
+              <input class="text-111 bor8 bg0 cl8 size-111 p-lr-15" type="password" name="password" ref="password" v-model="password" placeholder="비밀번호를 입력하세요" >
+            </div>
+            <div class="flex-c p-t-20">
+              <input type="submit" id="submit-btn" class="cl1 size-101 w-full bg3 bor1 hov-btn3 trans-04 pointer dis-inline-block" value="제출">
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </form>
+    </form>
   </div>
+  <script>
+    new Vue({
+        el:'#update_pwd',
+        data:{
+            password:''
+        },
+        methods:{
+            submitForm:function(){
+                if(this.password) {
+                    return true;
+                }
+                else if (this.password == '') {
+                    this.$refs.password.focus();
+                }
+                e.preventDefault();
+            }
+        }
+    })
+  </script>
 </body>
 </html>
-  <script>
-new Vue({
- 	el:'#delete',
- 	data:{
- 		id:'',
- 		password:''
- 	},
- 	mounted:function(){
-    },
- 	methods:{
- 		submitForm:function(){
- 			if(this.form.password == '') {
- 				this.$refs.password.focus();
-                return;
-            }
- 			// 서버실행 전 확인
- 			axios.get("http://localhost:8080/web/mypage/delete_ok.do", {
- 				params:{
- 				id:this.id,
- 				password:this.password
- 				}
- 	        }).then(res => {
- 	        	if(res.data=="YES") {
-                    alert("회원탈퇴가 완료되었습니다.");
-                    location.href = "../main/main.do"
-                } else {
-                	alert("잘못된 비밀번호를 입력했습니다.");
-                	this.$refs.password=="";
-                }
- 	        })
- 		}
-	   	    
- 	}
-})
-  </script>

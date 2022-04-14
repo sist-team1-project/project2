@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="../css/join.css">
 </head>
 <body>
-  <div id="userDetail" class="container bg0 p-b-30">
+  <div id="userDetail" class="container p-b-30">
     <div class="row p-b-20">
       <div class="col-sm-12"><h4><i class="fa fa-user-circle" aria-hidden="true"></i> 회원정보</h4></div>
     </div>

@@ -87,16 +87,16 @@ public class MypageRestController {
 	}
 	
 	// 유저 계정삭제
-	@RequestMapping(value = "mypage/delete_ok.do", produces = "text/plain;charset=utf-8")
+	@PostMapping("mypage/delete_ok.do")
 	public String mypage_delete_ok(String password, HttpSession session) {
 	    String id = (String) session.getAttribute("id");
 		String result = "";
 		boolean bCheck = dao.userDelete(id, password);
 		if (bCheck == true) {
-			result = "YES";
+			result = "<script>alert(\"계정이 사망하셨습니다.\"); location.href=\"../main/main.do\"</script>";
 			session.invalidate();
 		} else {
-			result = "NO";
+			result = "<script>alert(\"비밀번호가 일치하지 않습니다.\"); history.back();</script>";
 		}
 		return result;
 	}

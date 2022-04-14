@@ -86,13 +86,14 @@
             <input class="text-111 bor8 bg0 cl8 size-111 p-lr-15" type="text" name="u_answer" ref="answer" v-model="u_answer">
           </div>
         </div>
-    
+        
         <div class="row p-t-15">
           <div class="col-sm-12">
             <input type="submit" class="cl1 size-101 w-full bg3 bor1 hov-btn3 trans-04 pointer dis-inline-block" value="수정">
           </div>
         </div>
-    </form>
+      </form>
+    </div>
   </div>
   <script>
  
