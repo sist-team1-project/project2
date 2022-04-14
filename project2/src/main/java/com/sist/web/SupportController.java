@@ -75,47 +75,44 @@ public class SupportController {
 	@GetMapping("ask.do")
 	public String askListData(String page, Model model, HttpSession session) {
 		String u_id = (String) session.getAttribute("id");
+		String grade = (String) session.getAttribute("grade");
 		if(u_id == null) return "main";
 		
 		if (page == null)
 			page = "1";
 		int curpage = Integer.parseInt(page);
-		Map map = new HashMap();
 		int rowSize = 10;
 		int start = (rowSize * curpage) - (rowSize - 1);
 		int end = rowSize * curpage;
+
+		Map map = new HashMap();
 		map.put("start", start);
 		map.put("end", end);
 		map.put("u_id", u_id);
-
-		List<AskVO> list = adao.askListData(map);
-		List<AskVO> alist = adao.askAdminListData(map);
-
-		int totalpage = adao.askTotalPage(map);
-		int atotalpage = adao.askAdminTotalPage();
-
+		
+		
+		List<AskVO> list = new ArrayList<AskVO>();
+		int totalpage = 0;
+		if (grade.equals("0")) {
+		    list = adao.askAdminListData(map);
+		    totalpage = adao.askAdminTotalPage();
+		} else {
+		    list = adao.askListData(map);		    
+		    totalpage = adao.askTotalPage(map);
+		}
+		
 		final int BLOCK = 5;
 		int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
 		int endPage = ((curpage - 1) / BLOCK * BLOCK) + BLOCK;
 		
-		int astartPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
-		int aendPage = ((curpage - 1) / BLOCK * BLOCK) + BLOCK;
-
 		if (endPage > totalpage)
 			endPage = totalpage;
-
-		if (aendPage > atotalpage)
-			aendPage = atotalpage;
-
+		
 		model.addAttribute("list", list);
-		model.addAttribute("alist", alist);
 		model.addAttribute("curpage", curpage);
 		model.addAttribute("totalpage", totalpage);
-		model.addAttribute("atotalpage", atotalpage);
 		model.addAttribute("startPage", startPage);
-		model.addAttribute("astartPage", astartPage);
 		model.addAttribute("endPage", endPage);
-		model.addAttribute("aendPage", aendPage);
 		return "support/ask";
 	}
 

@@ -9,19 +9,19 @@ import com.sist.vo.*;
 public interface AskMapper {
     
     /****************** 고객센터 ******************/
-	@Select("SELECT a_id,u_id,a_type,a_title,TO_CHAR(a_regdate,'YYYY-MM-DD') as a_regdate,"
-			 +"a_group_id,a_group_tab, a_group_step, num "
-			 +"FROM (SELECT a_id,u_id,a_type,a_title,a_regdate,a_group_id,a_group_tab, a_group_step, rownum as num "
-			 +"FROM (SELECT a_id,u_id,a_type,a_title,a_regdate,a_group_id,a_group_tab, a_group_step "
-			 +"FROM ask_1 ORDER BY a_group_id DESC, a_group_step ASC)) "
-			 +"WHERE u_id=#{u_id} "
-			 +"AND num BETWEEN #{start} AND #{end}")
+	@Select("SELECT a_id,u_id,a_type,a_title,a_regdate,a_group_id,a_group_tab,a_group_step "
+	        + "FROM (SELECT a_id,u_id,a_type,a_title,a_regdate,a_group_id,a_group_tab,a_group_step,rownum as num "
+	        + "FROM (SELECT a_id,u_id,a_type,a_title,TO_CHAR(a_regdate,'YYYY-MM-DD') as a_regdate,a_group_id,a_group_tab,a_group_step "
+	        + "FROM ask_1 "
+	        + "WHERE a_group_id IN (SELECT a_group_id FROM ask_1 WHERE u_id=#{u_id}) "
+	        + "ORDER BY a_group_id DESC, a_group_step ASC)) "
+	        + "WHERE num BETWEEN #{start} AND #{end}")
 	public List<AskVO> askListData(Map map);
 	
 	@Select("SELECT COUNT(*) FROM ask_1")
 	public int askRowCount();
 	
-	@Select("SELECT CEIL(COUNT(*) / 10.0) FROM ask_1 WHERE u_id=#{u_id}")
+	@Select("SELECT CEIL(COUNT(*) / 10.0) FROM ask_1 WHERE a_group_id IN (SELECT a_group_id FROM ask_1 WHERE u_id=#{u_id})")
 	public int askTotalPage(Map map);
 	
 	
