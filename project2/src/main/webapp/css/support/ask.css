@@ -17,7 +17,7 @@
   border-collapse: collapse;
   font-size: 14px;
   width: 100%;
-  min-width: 1000px;
+  min-width: 900px;
 }
 
 .table-ask tr {
@@ -31,12 +31,6 @@
   min-height: 50px;
 }
 
-.table-ask .table_row td {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  font-size: 13px;
-}
-
 .table-ask .column-1 {
   width: 70px;
   padding-left: 20px;
@@ -44,7 +38,7 @@
 }
 
 .table-ask .column-2 {
-  width: 300px;
+  width: 200px;
   text-align: left;
 }
 
@@ -71,6 +65,21 @@
   line-height: 1.6;
   padding-top: 15px;
   padding-bottom: 15px;
+}
+
+.table-ask tr {
+    height: 35px;
+}
+
+.table_row_order td {
+  padding: 15px 0px;
+}
+
+
+.table-ask .table_row td {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 13px;
 }
 
 

@@ -4,64 +4,54 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="../css/order.css">
-<link rel="stylesheet" type="text/css" href="../css/admin.css">
-<style type="text/css">
-td {
-    width: 150px;
-    margin: 0px auto;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="../css/admin/user.css">
 </head>
 <body>
-  <div class="container bg0 p-t-70 p-b-10" id="usermg">
+  <div class="container p-b-10" id="usermg">
     <div class="row" id="orderpage">
       <div class="col-lg-12 m-lr-auto">
-        <div class="p-b-20">
-          <h3><i class="fa fa-users" aria-hidden="true"></i>&nbsp; 유저관리</h3>
-        </div>
+        <div><h3><i class="fa fa-users" aria-hidden="true"></i>&nbsp; 유저관리</h3></div>
       </div>
-
     </div>
     <div class="row p-t-10">
-      <div class="col-lg-12 m-lr-auto p-tb-10 dis-flex flex-sb flex-m">
+      <div class="col-lg-12 p-tb-10">
         <div class="fs-13">
             총 {{count | currency}} 명
         </div>
       </div>
-    </div>
-    <div class="col-lg-12 m-lr-auto m-b-50">
-      <div class="wrap-table js-pscroll">
-        <table class="table-checkout text-center">
-          <tr class="table_head text-center">
-            <th>아이디</th>
-            <th>이름</th>
-            <th>성별</th>
-            <th>전화번호</th>
-            <th>이메일</th>
-            <th>가입일</th>
-            <th>등급</th>
-            <th>차단</th>
-          </tr>
-          <tr v-for="(u,index) in userlist" class="table_row_admin fs-13">
-            <td>{{u.uid}}</td>
-            <td>{{u.name}}</td>
-            <td>{{u.gender}}</td>
-            <td>{{u.phone}}</td>
-            <td>{{u.email}}</td>
-            <td>{{u.regdate}}</td>
-            <td v-if="u.grade==-1">차단유저</td>
-            <td v-if="u.grade==0">관리자</td>
-            <td v-if="u.grade==1">일반유저</td>
-            <td>
-       		  <button v-if="u.grade==1" class="bor20 cl2 btn-pro-color2 p-tb-4 p-lr-10" value="-1" v-on:click="xclick($event, u.uid); u.grade=-1">차단</button>
-       		  <button v-if="u.grade==-1" class="bor20 cl2 bg2 cl2 p-tb-4 p-lr-10" value="1" v-on:click="xclick($event, u.uid); u.grade=1">취소</button>
-            </td>
-           </tr>
-        </table>
+    
+      <div class="col-lg-12 m-b-50">
+        <div class="wrap-table js-pscroll">
+          <table class="table-user">
+            <tr class="table_head">
+              <th class="column-1">아이디</th>
+              <th class="column-2">이름</th>
+              <th class="column-3">성별</th>
+              <th class="column-4">전화번호</th>
+              <th class="column-5">이메일</th>
+              <th class="column-6">가입일</th>
+              <th class="column-7">등급</th>
+              <th class="column-8">차단</th>
+            </tr>
+            <tr v-for="(u,index) in userlist" class="table_row fs-13">
+              <td class="column-1">{{u.uid}}</td>
+              <td class="column-2">{{u.name}}</td>
+              <td class="column-3">{{u.gender}}</td>
+              <td class="column-4">{{u.phone}}</td>
+              <td class="column-5">{{u.email}}</td>
+              <td class="column-6">{{u.regdate}}</td>
+              <td class="column-7" v-if="u.grade==-1">차단유저</td>
+              <td class="column-7" v-if="u.grade==0">관리자</td>
+              <td class="column-7" v-if="u.grade==1">일반유저</td>
+              <td class="column-8">
+         		  <button v-if="u.grade==1" class="bor20 cl2 btn-pro-color2 p-tb-4 p-lr-10" value="-1" v-on:click="xclick($event, u.uid); u.grade=-1">차단</button>
+         		  <button v-if="u.grade==-1" class="bor20 cl2 bg2 cl2 p-tb-4 p-lr-10" value="1" v-on:click="xclick($event, u.uid); u.grade=1">취소</button>
+              </td>
+             </tr>
+          </table>
+        </div>
       </div>
     </div>
-    
     <!---------- 페이징 --------------->
     <div class="text-center">
       <ul class="pagination">

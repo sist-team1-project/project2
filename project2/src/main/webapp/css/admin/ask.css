@@ -3,7 +3,7 @@
   border-collapse: collapse;
   font-size: 14px;
   width: 100%;
-  min-width: 1000px;
+  min-width: 900px;
 }
 
 .table-ask tr {
@@ -17,12 +17,6 @@
   min-height: 50px;
 }
 
-.table-ask .table_row td {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  font-size: 13px;
-}
-
 .table-ask .column-1 {
   width: 70px;
   padding-left: 20px;
@@ -30,7 +24,7 @@
 }
 
 .table-ask .column-2 {
-  width: 300px;
+  width: 200px;
   text-align: left;
 }
 
@@ -59,31 +53,19 @@
   padding-bottom: 15px;
 }
 
-
-.adt-light {
-	background-color: #eeeee6;
-	text-align: center;
-}
-
-.shortsp {
-	display:block;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-}
-.adtable {
-	background-color: #dbd0be;
-	color: black;
-	text-align: center;
-}
-
 .table-ask tr {
 	height: 35px;
-	text-align: center;
 }
 
 .table_row_order td {
   padding: 15px 0px;
+}
+
+
+.table-ask .table_row td {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 13px;
 }
 
 .link,

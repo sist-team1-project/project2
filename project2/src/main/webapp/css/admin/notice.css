@@ -1,66 +1,63 @@
 @charset "UTF-8";
-.table-order {
+#notice {
+  min-height: 500px;
+}
+.table-notice {
   border-collapse: collapse;
   font-size: 14px;
   width: 100%;
   min-width: 800px;
 }
 
-.table-order tr {
+.table-notice tr {
   border-top: 1px solid #e6e6e6;
   border-bottom: 1px solid #e6e6e6;
 }
 
-.table-order .table_row {
+.table-notice .table_row {
   border-collapse: collapse;
-  height: 70px;
-  min-height: 70px;
+  height: 50px;
+  min-height: 50px;
 }
 
-.table-order .column-1 {
-  width: 100px;
+.table-notice .column-1 {
+  width: 400px;
+  text-align: center;
   padding-left: 20px;
 }
 
-.table-order .column-2 {
+.table-notice .column-2 {
   width: 50px;
+  text-align: center;
 }
 
-.table-order .column-3 {
-  width: 80px;
+.table-notice .column-3 {
+  width: 50px;
+  text-align: center;
 }
 
-.table-order .column-4 {
-  width: 200px;
-}
-
-.table-order .column-5 {
-  width: 80px;
-}
-
-.table-order .column-6 {
+.table-notice .column-4 {
   width: 50px;
   padding-right: 20px;
+  text-align: right;
 }
 
-.table-order .table_head th {    
+.table-notice .table_head th {    
   font-size: 13px;
   color: #555;
   text-transform: uppercase;
   line-height: 1.6;
   padding-top: 15px;
   padding-bottom: 15px;
-  text-align: center;
 }
 
-.table-order .table_row td {
+.table-notice .table_row td {
   padding-top: 10px;
   padding-bottom: 10px;
   font-size: 13px;
-  text-align: center;
 }
 
-.table-order tr {
+.table-notice tr {
 	height: 35px;
 }
 

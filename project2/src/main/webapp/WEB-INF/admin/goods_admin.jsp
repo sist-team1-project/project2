@@ -11,10 +11,8 @@
 <body>
 	<div class="container p-b-10" id="adminGoods">
 		<div class="row">
-			<div class="col-lg-12 m-lr-auto">
-				<div class="p-b-20">
-					<h3><i class="fa fa-file-text" aria-hidden="true"></i>&nbsp; 상품 목록</h3>
-				</div>
+			<div class="col-lg-12 m-lr-auto p-b-10">
+				<h3><i class="fa fa-file-text" aria-hidden="true"></i>&nbsp; 상품 목록</h3>
 			</div>
 			<div class="col-lg-12 flex-m">
 				<input type="checkbox" v-model="fs" value="N">

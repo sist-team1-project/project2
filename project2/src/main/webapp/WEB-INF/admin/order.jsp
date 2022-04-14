@@ -9,12 +9,10 @@
 <link rel="stylesheet" type="text/css" href="../css/admin/order.css">
 </head>
 <body>
-  <div class="container bg0 p-b-10" id="adorder">
+  <div class="container p-b-10" id="adorder">
     <div class="row" id="orderpage">
       <div class="col-lg-12 m-lr-auto">
-        <div class="p-b-10">
-          <h3><i class="fa fa-file-text" aria-hidden="true"></i>&nbsp;주문 목록</h3>
-        </div>
+        <h3><i class="fa fa-file-text" aria-hidden="true"></i>&nbsp;주문 목록</h3>
       </div>
     </div>
     <div class="row p-t-10">
@@ -48,7 +46,7 @@
               <th class="column-5">주문금액</th>
               <th class="column-6">주문상태</th>
             </tr>
-            <tr v-for="o in orderFullList" class="table_row_order fs-13 text-center">
+            <tr v-for="o in orderFullList" class="table_row fs-13 text-center">
               <td class="column-1">{{o.regdate}}</td>
               <td class="column-2"><a class="cl8 link" href="#" data-toggle="modal" @click="odetail(o.oid)">{{o.oid}}</a></td>
               <td class="column-3">{{o.usid}}</td>
