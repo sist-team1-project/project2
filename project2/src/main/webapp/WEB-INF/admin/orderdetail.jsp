@@ -16,7 +16,6 @@
   <script src="../vendor/jquery/jquery-3.2.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
   <script src="http://unpkg.com/axios/dist/axios.min.js"></script>
-</style>
 </head>
 <body>
   <div class="container bg0" id="adorderdetail">
