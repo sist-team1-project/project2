@@ -38,7 +38,7 @@
             <span class="fs-14 cl2 p-tb-10 dis-block"><b>브랜드</b>&emsp;{{goods.brand }}<br></span>
             <span class="fs-14 cl2 p-tb-10 dis-block"><b>배송비</b>&emsp;5,000원<br></span>
             <span class="fs-14 cl2 p-tb-10 dis-block"><b>할인율</b>&emsp;{{goods.sale }} %</span>
-            <!--  -->
+            <!--수량 및 장바구니-->
             <div class="p-t-20">
               <c:if test="${sessionScope.id!=null }">
                 <div class="flex-w flex-c-m p-b-10">
@@ -48,22 +48,21 @@
                     <div @click="qUp()" class="btn-num-product-up cl8 hov-btn1 trans-04 flex-c-m"><i class="fs-16 zmdi zmdi-plus"></i></div>
                   </div>
                   <button @click="insertCart()" class="stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-10 trans-04 js-addcart-detail">장바구니</button>
+                   <a v-if="goods.lid==0" href="#" class="fs-20 cl3 hov-cl1 trans-04 lh-10 p-lr-15 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist" @click="like(goods.gid); alert('즐겨찾기에 등록되었습니다')"><i class="zmdi zmdi-favorite-outline"></i></a>
+                   <a v-if="goods.lid>0" href="#" class="fs-20 cl3 hov-cl1 trans-04 lh-10 p-lr-15 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist" @click="unlike(goods.lid); goods.lid=0; alert('즐겨찾기가 해제되었습니다')"><i class="zmdi zmdi-favorite"></i></a>
                 </div>  
               </c:if>
-            </div>
-            <!--  -->
-            <div class="flex-w flex-c-m p-t-10">
-              <div class="flex-m bor9 p-r-10 m-r-11">
-              <c:if test="${sessionScope.id!=null }">
-                <a v-if="goods.lid==0" href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist" @click="like(goods.gid); alert('즐겨찾기에 등록되었습니다')"><i class="zmdi zmdi-favorite-outline"></i></a>
-                <a v-if="goods.lid>0" href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist" @click="unlike(goods.lid); goods.lid=0; alert('즐겨찾기가 해제되었습니다')"><i class="zmdi zmdi-favorite"></i></a>
-              </c:if>
               <c:if test="${sessionScope.id==null }">
-                <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist" @click="if(confirm('로그인창으로 이동하시겠습니까?')) return location.href='../user/login.do'"><i class="zmdi zmdi-favorite-outline"></i></a>
+                <div class="flex-w flex-c-m p-b-10">
+                  <div class="wrap-num-product flex-w m-r-20 m-tb-10">
+                    <div @click="qDown()" class="btn-num-product-down cl8 hov-btn1 trans-04 flex-c-m"><i class="fs-16 zmdi zmdi-minus"></i></div>
+                    <input v-model="quantity" class="mtext-104 cl3 text-center num-product" type="number" name="num-product">
+                    <div @click="qUp()" class="btn-num-product-up cl8 hov-btn1 trans-04 flex-c-m"><i class="fs-16 zmdi zmdi-plus"></i></div>
+                  </div>
+                  <button @click="if(confirm('로그인창으로 이동하시겠습니까?')) return location.href='../user/login.do'" class="stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-10 trans-04 js-addcart-detail">장바구니</button>
+                  <a href="#" class="fs-20 cl3 hov-cl1 trans-04 lh-10 p-lr-15 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist" @click="if(confirm('로그인창으로 이동하시겠습니까?')) return location.href='../user/login.do'"><i class="zmdi zmdi-favorite-outline"></i></a>
+                </div>  
               </c:if>
-              </div>
-              <a href="https://www.facebook.com/" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook"><i class="fa fa-facebook"></i></a>
-              <a href="https://www.twitter.com/" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter"><i class="fa fa-twitter"></i></a>
             </div>
           </div>
         </div>

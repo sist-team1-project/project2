@@ -16,7 +16,7 @@
       <!-- 상단 바 -->
       <div class="top-bar">
         <div class="content-topbar flex-sb-m h-full container">
-          <div class="left-top-bar">3만원 이상 구매시 무료배송</div>
+          <div class="left-top-bar">Healing Camp에 방문해주신 고객분들 감사합니다.</div>
           
           <c:if test="${sessionScope.id==null }">
             <div class="right-top-bar flex-w h-full">
