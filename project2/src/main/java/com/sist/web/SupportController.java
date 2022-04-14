@@ -129,8 +129,7 @@ public class SupportController {
 	@GetMapping("ask_detail.do")
 	public String askDetailData(int no, Model model, HttpSession session) {
 	    String u_id = (String) session.getAttribute("id");
-	    String grade = (String) session.getAttribute("grade");
-        if(u_id == null || (!(adao.checkUser(no, u_id)) && !grade.equals("0"))) return "redirect:../main/main.do";
+        if(u_id == null) return "redirect:../main/main.do";
         
 		AskVO vo = adao.askDetailData(no);
 		int count = adao.askCount(vo.getA_group_id());
