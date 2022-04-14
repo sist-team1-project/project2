@@ -326,7 +326,7 @@ public class AdminRestController2 {
 
 		System.out.println("title : " + vo.getC_title());
 
-		//cdao.category_delete(vo);
+		cdao.category_delete(vo);
 
 		return "ok";
 	}
