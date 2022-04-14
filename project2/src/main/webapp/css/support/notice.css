@@ -2,6 +2,20 @@
 #notice {
   min-height: 500px;
 }
+
+#notice textarea {
+  resize: none;
+  min-height: 400px;
+}
+
+#notice-content {
+  min-height: 400px;
+}
+
+#notice pre {
+  line-height: 2.5;
+}
+
 .table-notice {
   border-collapse: collapse;
   font-size: 14px;
@@ -21,9 +35,16 @@
 }
 
 .table-notice .column-1 {
-  width: 400px;
+  width: 350px;
+  padding-left: 40px;
+}
+
+.table-notice th.column-1  {
   text-align: center;
-  padding-left: 20px;
+}
+
+.table-notice td.column-1 {
+  text-align: left;
 }
 
 .table-notice .column-2 {
@@ -38,7 +59,7 @@
 
 .table-notice .column-4 {
   width: 50px;
-  padding-right: 20px;
+  padding-right: 40px;
   text-align: right;
 }
 

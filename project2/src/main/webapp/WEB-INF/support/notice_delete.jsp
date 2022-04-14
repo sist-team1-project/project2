@@ -3,45 +3,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Insert title here</title>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 </head>
 <body>
-  <div class="container bg0" id="notice_delete">
-    <h3 class="text-center p-b-20">삭제하기</h3>
-    <div class="text-center p-t-10">
-      <button class="btn btn-sm" style="background-color: #eeeee6" v-on:click="del()">삭제</button>
-      <button class="btn btn-sm" style="background-color: #dbd0be" v-on:click="cancel()">취소</button>
+  <div class="container">
+    <div class="text-center p-tb-70">
+      <h3 class="text-center p-tb-20">삭제하시겠습니까?</h3>
+      <form method=post action="../support/notice_delete_ok.do">
+        <input type=hidden name=no value="${no }">
+        <div class="flex-c-m">
+          <input type=submit value="삭제" class="flex-c-m cl1 bg3 bor2 hov-btn3 p-lr-15 size-126 fs-13 pointer"> 
+          <input type=button value="취소" class="flex-c-m cl0 bg2 bor2 hov-btn3 p-lr-15 size-126 fs-13 pointer" onclick="javascript:history.back()">
+        </div>
+      </form>
     </div>
   </div>
-  <script>
-    new Vue({
-        el:'#notice_delete',
-        data:{
-            no:${no},
-            msg:''
-        },
-        methods:{
-            cancel:function(){
-                history.back();
-            },
-            del:function(){
-                let _this=this;
-                axios.get('http://localhost:8080/web/support/notice_delete_ok.do',{
-                    params:{
-                        no:this.no,
-                    }
-                }).then(function(res){
-                    console.log(res.data);
-                    _this.msg=res.data
-                    if(_this.msg=="YES")
-                    {
-                        location.href="../support/notice.do";
-                    }
-                })
-            }
-        }
-    })
-  </script>
 </body>
-</html>
+</html> 

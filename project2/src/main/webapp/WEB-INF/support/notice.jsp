@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="../css/admin/notice.css">
+<link rel="stylesheet" type="text/css" href="../css/support/notice.css">
 </head>
 <body>
   <div class="container bg0" id="notice">
