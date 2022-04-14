@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.*;
 
@@ -28,7 +29,10 @@ public class AdminRestController2 {
 
 	@Autowired
 	private CategoryDAO cdao;
-
+	
+	@Autowired
+    private AskDAO adao;
+	
 	@GetMapping(value = "adlist_vue.do", produces = "text/plain;charset=utf-8")
 	public String adlist_vue(String page, String fs, String ss, String order, String status) {
 		if (page == null) {
@@ -248,6 +252,38 @@ public class AdminRestController2 {
 		return obj.toJSONString();
 	}
 	
+	/*  -- 문의 --  */
+	@PostMapping("ask_delete_ok.do")
+    public String askDeleteOk(int no) {
+        String result = "";
+        AskVO vo = adao.askDetailData(no);
+        if (vo.getA_group_step() == 0) {
+            adao.askDelete1(no, vo.getA_group_id());
+        } else {
+            adao.askDelete2(no);
+        }
+        return "<script>alert(\"게시물이 삭제되었습니다\"); location.href=\"../admin/ask.do\";</script>";
+    }
+
+    @PostMapping("ask_reply_ok.do")
+    public String askReplyInsert(int no, AskVO vo, HttpSession session) {
+        String uid = (String) session.getAttribute("id");
+        
+        AskVO pvo = adao.askParentInfoData(no);
+        AskVO detailvo = adao.askDetailData(no);
+        
+        vo.setU_id(uid);
+        vo.setA_type("답변");
+        vo.setA_group_id(pvo.getA_group_id());
+        vo.setA_group_step(pvo.getA_group_step() + 1);
+        vo.setA_group_tab(pvo.getA_group_tab() + 1);
+        
+        adao.askReplyInsert(vo);
+        adao.asktabReply(detailvo);
+        
+        return "<script>alert(\"답변이 작성되었습니다\"); location.href=\"../admin/ask.do\";</script>";
+    }
+    
 	/*  -- 카테고리 추가  --  */
 	@PostMapping("category_add_ok.do")
 	public String category_add_vue_ok(String c_id1, String c1_title, String c_id2, String c2_title) {

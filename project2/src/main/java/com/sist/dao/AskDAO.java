@@ -33,11 +33,6 @@ public class AskDAO {
 	public List<AskVO> askAdminListData(Map map) {
 		return mapper.askAdminListData(map);
 	}
-	
-	/* -- 관리자 문의 총 갯수 -- */
-	public int askAdminRowCount() {
-		return mapper.askAdminRowCount();
-	}
 
 	/* -- 관리자 문의 총 페이지 -- */
 	public int askAdminTotalPage() {
@@ -78,15 +73,16 @@ public class AskDAO {
 	public void askDelete2(int no) {
 		mapper.askDelete2(no);
 	}
-    
-	/* -- 관리자 리스트 데이터 -- */
-	public List<AskVO> askListData_admin(Map map) {
-		return mapper.askListData_admin(map);
-	}
 
 	/* -- 답변 작성 시 문의 tab 증가 -- */
 	public void asktabReply(AskVO vo) {
 		mapper.asktabReply(vo);
 	}
-
+	
+	public boolean checkUser(int a_id, String u_id) {
+	    boolean check = false;
+	    if(mapper.checkUser(a_id) == u_id) check = true;
+	    else check = false;
+	    return check;
+	}
 }

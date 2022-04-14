@@ -149,7 +149,39 @@ public class SupportRestController {
 	    adao.askInsert(vo);
         return "<script>alert(\"게시물이 작성되었습니다\"); location.href=\"../support/ask.do\";</script>";
     }
-	
+
+    @PostMapping("ask_delete_ok.do")
+    public String askDeleteOk(int no) {
+        String result = "";
+        AskVO vo = adao.askDetailData(no);
+        if (vo.getA_group_step() == 0) {
+            adao.askDelete1(no, vo.getA_group_id());
+        } else {
+            adao.askDelete2(no);
+        }
+        return "<script>alert(\"게시물이 삭제되었습니다\"); location.href=\"../support/ask.do\";</script>";
+    }
+    
+    @PostMapping("ask_reply_ok.do")
+    public String askReplyInsert(int no, AskVO vo, HttpSession session) {
+        String uid = (String) session.getAttribute("id");
+        
+        AskVO pvo = adao.askParentInfoData(no);
+        AskVO detailvo = adao.askDetailData(no);
+        
+        vo.setU_id(uid);
+        vo.setA_type("답변");
+        vo.setA_group_id(pvo.getA_group_id());
+        vo.setA_group_step(pvo.getA_group_step() + 1);
+        vo.setA_group_tab(pvo.getA_group_tab() + 1);
+        
+        adao.askReplyInsert(vo);
+        adao.asktabReply(detailvo);
+        
+        return "<script>alert(\"답변이 작성되었습니다\"); location.href=\"../support/ask.do\";</script>";
+    }
+    
+    
 	@GetMapping(value = "notice_update_vue.do", produces = "text/plain;charset=utf-8")
 	public String notice_update_vue(int no) {
 		String result = "";
@@ -183,15 +215,4 @@ public class SupportRestController {
 	}
 	
 
-    @PostMapping("ask_delete_ok.do")
-    public String askDeleteOk(int no) {
-        String result = "";
-        AskVO vo = adao.askDetailData(no);
-        if (vo.getA_group_step() == 0) {
-            adao.askDelete1(no, vo.getA_group_id());
-        } else {
-            adao.askDelete2(no);
-        }
-        return "<script>alert(\"게시물이 삭제되었습니다\"); location.href=\"../support/ask.do\";</script>";
-    }
 }

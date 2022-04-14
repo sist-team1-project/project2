@@ -72,8 +72,8 @@
             <div><textarea id="content" rows=20 name=a_content class="fs-13 bor8 bg0 cl8 w-full p-all-15"></textarea></div>
           </div>
           <div class="flex-r p-tb-10">
-         	<input id="insert-btn" type=button value="글쓰기" class="cl1 size-102 bg3 bor1 hov-btn3 trans-04 pointer dis-inline-block"> 
-            <input id="cancel-btn" type=button value="취소" class="cl0 size-102 bg2 bor1 hov-btn3 trans-04 pointer dis-inline-block">
+         	<input id="insert-btn" type=button value="글쓰기" class="cl1 size-126 bg3 bor1 hov-btn3 trans-04 pointer dis-inline-block"> 
+            <input id="cancel-btn" type=button value="취소" class="cl0 size-126 bg2 bor1 hov-btn3 trans-04 pointer dis-inline-block">
           </div>
         </form>
       </div>

@@ -15,7 +15,7 @@
           <h3><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp; 상품 등록</h3>
         </div>
       </div>
-      <div class="col-md-8 m-b-50">
+      <div class="col-md-12 col-lg-8 m-b-50">
         <div class="bor10 p-lr-40 p-t-30 p-b-40 p-lr-0-sm">
 
           <form @submit.prevent="submitForm" >

@@ -25,7 +25,7 @@ public class SupportController {
 	@Autowired
 	private CommentDAO cdao;
 	
-	// 공지사항
+	/******************* 공지사항 *******************/
 	@GetMapping("notice.do")
 	public String notice_list() {
 		return "support/notice";
@@ -56,11 +56,27 @@ public class SupportController {
 		model.addAttribute("no", no);
 		return "support/notice_delete";
 	}
+	
+	// 댓글
+    @GetMapping("comment_insert.do")
+    public String comment_insert() {
+        return "support/notice_insert";
+    }
 
-	// 1:1 문의
+    @GetMapping("comment_insert_ok.do")
+    public String comment_insert_ok(CommentVO vo, HttpSession session) {
+        session.setAttribute("u_id", vo.getN_id());
+        cdao.commentInsertData(vo);
+        return "ok";
+    }
+    /************************************************/
+    
+	/******************* 1:1 문의 *******************/
 	@GetMapping("ask.do")
 	public String askListData(String page, Model model, HttpSession session) {
 		String u_id = (String) session.getAttribute("id");
+		if(u_id == null) return "main";
+		
 		if (page == null)
 			page = "1";
 		int curpage = Integer.parseInt(page);
@@ -79,21 +95,17 @@ public class SupportController {
 		int atotalpage = adao.askAdminTotalPage();
 
 		final int BLOCK = 5;
-		int count = adao.askRowCount();
-		count = count - ((curpage * rowSize) - rowSize);
 		int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
 		int endPage = ((curpage - 1) / BLOCK * BLOCK) + BLOCK;
-
-		int acount = adao.askAdminRowCount();
-		acount = acount - ((curpage * rowSize) - rowSize);
+		
 		int astartPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
 		int aendPage = ((curpage - 1) / BLOCK * BLOCK) + BLOCK;
 
 		if (endPage > totalpage)
 			endPage = totalpage;
 
-		if (endPage > atotalpage)
-			endPage = atotalpage;
+		if (aendPage > atotalpage)
+			aendPage = atotalpage;
 
 		model.addAttribute("list", list);
 		model.addAttribute("alist", alist);
@@ -104,8 +116,6 @@ public class SupportController {
 		model.addAttribute("astartPage", astartPage);
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("aendPage", aendPage);
-		model.addAttribute("count", count);
-		model.addAttribute("acount", acount);
 		return "support/ask";
 	}
 
@@ -117,7 +127,10 @@ public class SupportController {
 	}
 
 	@GetMapping("ask_detail.do")
-	public String askDetailData(int no, Model model) {
+	public String askDetailData(int no, Model model, HttpSession session) {
+	    String u_id = (String) session.getAttribute("id");
+        if(u_id == null || (!(adao.checkUser(no, u_id)) && !((String)session.getAttribute("grade")).equals("0"))) return "main";
+        
 		AskVO vo = adao.askDetailData(no);
 		int count = adao.askCount(vo.getA_group_id());
 		model.addAttribute("vo", vo);
@@ -126,48 +139,22 @@ public class SupportController {
 	}
 	
     @GetMapping("ask_delete.do")
-    public String askDelete(int no, Model model) {
+    public String askDelete(int no, Model model, HttpSession session) {
+        String u_id = (String) session.getAttribute("id");
+        if(u_id == null || (!(adao.checkUser(no, u_id)) && !((String)session.getAttribute("grade")).equals("0"))) return "main";
+        
         model.addAttribute("no", no);
         return "support/ask_delete";
-    }
+    }    
     
-	@GetMapping("ask_reply.do")
-	public String askReply(int no, Model model) {
-		model.addAttribute("no", no);
-		return "support/ask_reply";
-	}
-
-	@PostMapping("ask_reply_ok.do")
-	public String askReplyInsert(int no, AskVO vo, HttpSession session) {
-	    String uid = (String) session.getAttribute("id");
-	    
-		AskVO pvo = adao.askParentInfoData(no);
-		AskVO detailvo = adao.askDetailData(no);
-		
-		vo.setU_id(uid);
-		vo.setA_type("답변");
-		vo.setA_group_id(pvo.getA_group_id());
-		vo.setA_group_step(pvo.getA_group_step() + 1);
-		vo.setA_group_tab(pvo.getA_group_tab() + 1);
-		
-        adao.askReplyInsert(vo);
-        adao.asktabReply(detailvo);
+    @GetMapping("ask_reply.do")
+    public String askReply(int no, Model model, HttpSession session) {
+        String grade = ((String)session.getAttribute("grade"));
+        if( grade == null || !grade.equals("0")) return "main";
         
-		return "redirect:../admin/ask_admin.do";
-	}
-
-	// 댓글
-	@GetMapping("comment_insert.do")
-	public String comment_insert() {
-		return "support/notice_insert";
-	}
-
-	@GetMapping("comment_insert_ok.do")
-	public String comment_insert_ok(CommentVO vo, HttpSession session) {
-		session.setAttribute("u_id", vo.getN_id());
-		cdao.commentInsertData(vo);
-		return "ok";
-	}
-	
+        model.addAttribute("no", no);
+        return "support/ask_reply";
+    }
+    /************************************************/
 	
 }

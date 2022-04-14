@@ -20,31 +20,44 @@ public class AdminController2 {
 
 	@Autowired
 	private AskDAO adao;
-
-	/* ---- 상품 관리 페이지 이동 ---- */
+	
+	/************** 상품 관리 페이지 이동 ***************/
 	@GetMapping("adlist.do")
-	public String admin_user(String page, Model model) {
+	public String admin_user(Model model, HttpSession session) {
+	    String grade = ((String)session.getAttribute("grade"));
+	    if( grade == null || !grade.equals("0")) return "redirect:../main/main.do";
 		return "admin/goods_admin";
 	}
-
+	/************************************************/
+	
+	/*************** 상품 추가 페이지 이동 ***************/
 	/* ---- 상품 추가 페이지 이동 ---- */
 	@GetMapping("goods_add.do")
-	public String goods_add_vue() {
+	public String goods_add_vue(HttpSession session) {
+	    String grade = ((String)session.getAttribute("grade"));
+        if( grade == null || !grade.equals("0")) return "redirect:../main/main.do";
+	    
 		return "admin/goods_add";
 	}
-
-	/* ---- 상품 수정 페이지 ---- */
+	/************************************************/
+	
+	/**************** 상품 수정 페이지 *****************/
 	@GetMapping("goods_update.do")
-	public String goods_update(String g_id, Model model) {
+	public String goods_update(String g_id, Model model, HttpSession session) {
+	    String grade = ((String)session.getAttribute("grade"));
+        if( grade == null || !grade.equals("0")) return "redirect:../main/main.do";
+        
 		model.addAttribute("gid", g_id);
 		return "admin/goods_update";
 	}
-
-	/* ---- 문의관리 페이지 ---- */
-	@GetMapping("ask_admin.do")
-	public String ask_admin(String page, Model model, HttpSession session) {
-	    String uid = (String) session.getAttribute("id");
-	    
+	/************************************************/
+	
+	/******************** 문의 관리 ********************/
+	@GetMapping("ask.do")
+	public String admin_ask(String page, Model model, HttpSession session) {
+	    String grade = ((String)session.getAttribute("grade"));
+        if( grade == null || !grade.equals("0")) return "redirect:../main/main.do";
+        
 		if (page == null) {
 			page = "1";
 		}
@@ -80,10 +93,44 @@ public class AdminController2 {
 		return "admin/ask_admin";
 	}
 	
-	/* ---- 카테고리&이벤트 추가 페이지 ---- */
+    @GetMapping("ask_detail.do")
+    public String askDetailData(int no, Model model, HttpSession session) {
+        String grade = ((String)session.getAttribute("grade"));
+        if( grade == null || !grade.equals("0")) return "redirect:../main/main.do";
+        
+        AskVO vo = adao.askDetailData(no);
+        int count = adao.askCount(vo.getA_group_id());
+        model.addAttribute("vo", vo);
+        model.addAttribute("count", count);
+        return "admin/ask_detail";
+    }
+    
+    @GetMapping("ask_delete.do")
+    public String askDelete(int no, Model model, HttpSession session) {
+        String grade = ((String)session.getAttribute("grade"));
+        if( grade == null || !grade.equals("0")) return "redirect:../main/main.do";
+        
+        model.addAttribute("no", no);
+        return "admin/ask_delete";
+    }    
+    
+    @GetMapping("ask_reply.do")
+    public String askReply(int no, Model model, HttpSession session) {
+        String grade = ((String)session.getAttribute("grade"));
+        if( grade == null || !grade.equals("0")) return "redirect:../main/main.do";
+        
+        model.addAttribute("no", no);
+        return "admin/ask_reply";
+    }
+    /************************************************/
+	
+    /************* 카테고리&이벤트 추가 페이지 *************/
 	@GetMapping("event_Insert.do")
-	public String evca_Insert() {
+	public String evca_Insert(HttpSession session) {
+	    String grade = ((String)session.getAttribute("grade"));
+        if( grade == null || !grade.equals("0")) return "redirect:../main/main.do";
+        
 		return "admin/event_Insert";
 	}
-
+	/************************************************/
 }

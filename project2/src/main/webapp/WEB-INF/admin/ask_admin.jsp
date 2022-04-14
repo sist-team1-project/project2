@@ -39,9 +39,9 @@
             <tbody>
               <c:forEach var="vo" items="${list }">
                 <c:if test="${vo.a_group_step==0 }">
-                  <tr class="table_row fs-13 p-t-20-admin-td">
+                  <tr class="table_row fs-13">
                     <td class="column-1">${vo.a_type }</td>
-                    <td class="column-2 text-left"><a class="link" href="../support/ask_detail.do?no=${vo.a_id }">${vo.a_title }</a>
+                    <td class="column-2 text-left"><a class="link" href="../admin/ask_detail.do?no=${vo.a_id }">${vo.a_title }</a>
                     </td>
                     <td class="column-3">${vo.u_id }</td>
                     <td class="column-4">${vo.a_regdate }</td>
@@ -51,9 +51,9 @@
                 </c:if>
 
                 <c:if test="${vo.a_group_step==1 }">
-                  <tr class="table_row fs-13 p-t-20-admin-td">
+                  <tr class="table_row fs-13">
                     <td class="column-1"></td>
-                    <td class="column-2 text-left">&nbsp;&nbsp; <i class="fa fa-arrow-right" aria-hidden="true" style="color:red"></i>&nbsp;<a class="link" href="../support/ask_detail.do?no=${vo.a_id }">${vo.a_title }</a></td>
+                    <td class="column-2 text-left">&nbsp;&nbsp;<i class="fa fa-reply fa-rotate-180" aria-hidden="true"></i>&nbsp;&nbsp;<a class="link" href="../admin/ask_detail.do?no=${vo.a_id }">${vo.a_title }</a></td>
                     <td class="column-3 text-center">${vo.u_id }</td>
                     <td class="column-4 text-center">${vo.a_regdate }</td>
                     <td class="column-5 text-center"></td>
@@ -89,24 +89,20 @@
       </c:forEach>
       <c:if test="${endPage<totalpage }">
         <li class="page-item" data-page="${endPage+1 }">
-          <button class="fa fa-chevron-right page-link paging"
-            aria-hidden="true"></button>
+          <button class="fa fa-chevron-right page-link paging" aria-hidden="true"></button>
         </li>
       </c:if>
     </ul>
   </div>
 
   <script>
-            $(function() {
-                $('.paging').css("cursor", "pointer");
-                $('.paging').click(function() {
-                    let page = $(this).attr('data-page');
-
-                    location.href = '../admin/ask_admin.do?page=' + page;
-
-                })
-            })
-        </script>
-
+    $(function() {
+        $('.paging').css("cursor", "pointer");
+        $('.paging').click(function() {
+            let page = $(this).attr('data-page');
+            location.href = '../admin/ask.do?page=' + page;
+        })
+    })
+  </script>
 </body>
 </html>

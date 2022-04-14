@@ -16,25 +16,18 @@
     </div>
     <div class="row">
       <div class="col-sm-12 dis-flex flex-r p-t-20">
-        <c:if test="${sessionScope.grade=='0'}">
-          <c:if test="${vo.a_group_step==0 }">
+        <c:if test="${vo.a_group_step==0 }">
+          <c:if test="${sessionScope.grade=='0'}">
             <a href="../support/ask_reply.do?no=${vo.a_id }" class="flex-c-m cl1 bg3 bor2 hov-btn3 p-lr-15 size-126">답변</a>
+          </c:if>
+          <a id="deleteBtn" href="../support/ask_delete.do?no=${vo.a_id }" class="flex-c-m cl1 bg3 bor2 hov-btn3 p-lr-15 size-126">삭제</a>
+          <a href="../support/ask.do" class="flex-c-m cl1 bg3 bor2 hov-btn3 p-lr-15 size-126">목록</a>
+        </c:if>    
+        <c:if test="${vo.a_group_step==1 }">
+          <c:if test="${sessionScope.grade=='0'}">
             <a href="../support/ask_delete.do?no=${vo.a_id }" class="flex-c-m cl0 bg2 bor2 hov-btn3 p-lr-15 size-126">삭제</a>
-            <a href="../admin/ask_admin.do" class="flex-c-m cl0 bg2 bor2 hov-btn3 p-lr-15 size-126 dis-inline-block">목록</a>
           </c:if>
-          <c:if test="${vo.a_group_step==1 }">
-            <a href="../support/ask_delete.do?no=${vo.a_id }" class="flex-c-m cl0 bg2 bor2 hov-btn3 p-lr-15 size-126">삭제</a>
-            <a href="../admin/ask_admin.do" class="flex-c-m cl1 bg3 bor2 hov-btn3 p-lr-15 size-126">목록</a>
-          </c:if>
-        </c:if>
-        <c:if test="${sessionScope.grade=='1'}">
-          <c:if test="${vo.a_group_step==0 }">
-            <a id="deleteBtn" href="../support/ask_delete.do?no=${vo.a_id }" class="flex-c-m cl1 bg3 bor2 hov-btn3 p-lr-15 size-126">삭제</a>
-            <a href="../support/ask.do" class="flex-c-m cl1 bg3 bor2 hov-btn3 p-lr-15 size-126">목록</a>
-          </c:if>    
-          <c:if test="${vo.a_group_step==1 }">
-            <a href="../support/ask.do" class="flex-c-m cl1 bg3 bor2 hov-btn3 p-lr-15 size-126">목록</a>
-          </c:if>
+          <a href="../support/ask.do" class="flex-c-m cl1 bg3 bor2 hov-btn3 p-lr-15 size-126">목록</a>
         </c:if>
       </div>
     </div>
