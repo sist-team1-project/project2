@@ -40,10 +40,10 @@
       <!-- --------------------- -->
       <!-- ------ 검색 순서 ------ -->
       <div id="order" class="bor8 m-tb-10 cl2 p-tb-10 p-lr-40 p-lr-15-sm">
-        <button class="cl2" :class="{'activeFilter':order=='A'}" value="A" @click="searchByOrder($event)">신상품 순</button> &nbsp;&nbsp;| &nbsp;&nbsp;
-        <button class="cl2" :class="{'activeFilter':order=='B'}" value="B" @click="searchByOrder($event)">판매량 순</button> &nbsp;&nbsp;| &nbsp;&nbsp;
-        <button class="cl2" :class="{'activeFilter':order=='C'}" value="C" @click="searchByOrder($event)">낮은가격 순</button> &nbsp;&nbsp;| &nbsp;&nbsp;
-        <button class="cl2" :class="{'activeFilter':order=='D'}" value="D" @click="searchByOrder($event)">높은가격 순</button>
+        <button class="cl3" :class="{'activeFilter':order=='A'}" value="A" @click="searchByOrder($event)">신상품 순</button> &nbsp;&nbsp;| &nbsp;&nbsp;
+        <button class="cl3" :class="{'activeFilter':order=='B'}" value="B" @click="searchByOrder($event)">판매량 순</button> &nbsp;&nbsp;| &nbsp;&nbsp;
+        <button class="cl3" :class="{'activeFilter':order=='C'}" value="C" @click="searchByOrder($event)">낮은가격 순</button> &nbsp;&nbsp;| &nbsp;&nbsp;
+        <button class="cl3" :class="{'activeFilter':order=='D'}" value="D" @click="searchByOrder($event)">높은가격 순</button>
       </div>
       <!-- --------------------- -->
       <div class="row" v-if="empty==false"> <!-- 상품이 하나도 없으면 아예 출력을하지 않는다 -->
