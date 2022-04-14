@@ -129,7 +129,8 @@ public class SupportController {
 	@GetMapping("ask_detail.do")
 	public String askDetailData(int no, Model model, HttpSession session) {
 	    String u_id = (String) session.getAttribute("id");
-        if(u_id == null || (!(adao.checkUser(no, u_id)) && !((String)session.getAttribute("grade")).equals("0"))) return "main";
+	    String grade = (String) session.getAttribute("grade");
+        if(u_id == null || (!(adao.checkUser(no, u_id)) && !grade.equals("0"))) return "redirect:../main/main.do";
         
 		AskVO vo = adao.askDetailData(no);
 		int count = adao.askCount(vo.getA_group_id());
@@ -141,7 +142,8 @@ public class SupportController {
     @GetMapping("ask_delete.do")
     public String askDelete(int no, Model model, HttpSession session) {
         String u_id = (String) session.getAttribute("id");
-        if(u_id == null || (!(adao.checkUser(no, u_id)) && !((String)session.getAttribute("grade")).equals("0"))) return "main";
+        String grade = (String) session.getAttribute("grade");
+        if(u_id == null || (!(adao.checkUser(no, u_id)) && !grade.equals("0"))) return "redirect:../main/main.do";
         
         model.addAttribute("no", no);
         return "support/ask_delete";
@@ -150,7 +152,7 @@ public class SupportController {
     @GetMapping("ask_reply.do")
     public String askReply(int no, Model model, HttpSession session) {
         String grade = ((String)session.getAttribute("grade"));
-        if( grade == null || !grade.equals("0")) return "main";
+        if( grade == null || !grade.equals("0")) return "redirect:../main/main.do";
         
         model.addAttribute("no", no);
         return "support/ask_reply";
