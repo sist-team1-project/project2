@@ -83,7 +83,6 @@ public class AdminRestController {
     /**************** 주문상세 1 ********************/
     @GetMapping(value = "orderdetail_vue.do", produces = "text/plain;charset=utf-8")
     public String orderdetail_vue(String oid) {
-        System.out.println(oid);
         JSONArray arr = new JSONArray();
 
         List<OrderDetailVO> list = oddao.orderDetail(oid);
@@ -105,20 +104,19 @@ public class AdminRestController {
     /*** 주문 상세2 ***/
     @GetMapping(value = "order.do", produces = "text/plain;charset=utf-8")
     public String order(String oid) {
-
         OrderVO ovo = odao.order(oid);
-            JSONObject obj = new JSONObject();
-            obj.put("oid", ovo.getO_id());
-            obj.put("uid", ovo.getU_id());
-            obj.put("receiver", ovo.getO_receiver());
-            obj.put("phone", ovo.getO_phone());
-            obj.put("post", ovo.getO_post());
-            obj.put("addr1", ovo.getO_address1());
-            obj.put("addr2", ovo.getO_address2());
-            obj.put("request", ovo.getO_request());
-            obj.put("regdate", ovo.getO_regdate());
-            obj.put("shipping", ovo.getO_shipping());
-            obj.put("state", ovo.getO_state());
+        JSONObject obj = new JSONObject();
+        obj.put("oid", ovo.getO_id());
+        obj.put("uid", ovo.getU_id());
+        obj.put("receiver", ovo.getO_receiver());
+        obj.put("phone", ovo.getO_phone());
+        obj.put("post", ovo.getO_post());
+        obj.put("addr1", ovo.getO_address1());
+        obj.put("addr2", ovo.getO_address2());
+        obj.put("request", ovo.getO_request());
+        obj.put("regdate", ovo.getO_regdate());
+        obj.put("shipping", ovo.getO_shipping());
+        obj.put("state", ovo.getO_state());
             
         return obj.toJSONString();
     }

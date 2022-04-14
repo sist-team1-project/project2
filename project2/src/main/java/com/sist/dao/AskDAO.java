@@ -81,7 +81,7 @@ public class AskDAO {
 	
 	public boolean checkUser(int a_id, String u_id) {
 	    boolean check = false;
-	    if(mapper.checkUser(a_id) == u_id) check = true;
+	    if(mapper.checkUser(a_id).equals(u_id)) check = true;
 	    else check = false;
 	    return check;
 	}
