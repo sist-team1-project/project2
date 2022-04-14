@@ -9,9 +9,9 @@
 <body>
   <div class="container" id="update_pwd" >
     <div class="row p-b-20">
-      <div class="col-md-7"><h4><i class="fa fa-unlock-alt" aria-hidden="true"></i>&nbsp;비밀번호 변경</h4></div>
+      <div class="col-md-12 col-lg-6"><h4><i class="fa fa-unlock-alt" aria-hidden="true"></i>&nbsp;비밀번호 변경</h4></div>
     </div>
-    <div class="info border p-all-60 col-md-6 stext-114">
+    <div class="info border col-md-12 col-lg-6 stext-114 p-tb-20">
       <form @submit="submitForm" method="post" action="../mypage/update_pwd_ok.do">
         <div class="row flex-c">
           <div class="p-b-20">
