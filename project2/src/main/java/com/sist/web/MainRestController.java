@@ -28,6 +28,9 @@ public class MainRestController {
     @Autowired
     private CartDAO cartdao;
     
+    @Autowired
+    private NoticeDAO ndao;
+    
     @GetMapping(value = "event_list.do", produces = "text/plain;charset=utf-8")
     public String event_goods(HttpSession session) {
         String uid = (String) session.getAttribute("id");
@@ -106,6 +109,22 @@ public class MainRestController {
                 }
             }
             arr.add(arr2); 
+        }
+        return arr.toJSONString();
+    }
+    
+    @GetMapping(value = "header_notice.do", produces = "text/plain;charset=utf-8")
+    public String headerNotice() {
+        
+        List<NoticeVO> list = ndao.headerNotice();
+        
+        JSONArray arr = new JSONArray();
+        for(NoticeVO vo : list) {
+            JSONObject obj = new JSONObject();
+            obj.put("nid", vo.getN_id());
+            obj.put("title", vo.getN_title());
+            arr.add(obj);
+        
         }
         return arr.toJSONString();
     }

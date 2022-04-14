@@ -3082,3 +3082,13 @@ input.num-product::-webkit-inner-spin-button {
     background-color: #eeeee6;
     border-color: #eeeee6;
 }
+
+
+/*///////////////////////////////////////////////////////////////////////
+[헤더 상단]*/
+.notice{width:100%; height:40px; overflow:hidden;}
+.rolling{position:relative; width:100%; height:auto;}
+.rolling li{width:100%; height:40px; line-height:40px;}
+.rolling_stop{display:block; width:100px; height:20px; background-color:#000; color:#fff; text-align:center;}
+.rolling_start{display:block; width:100px; height:20px; background-color:#000; color:#0f0; text-align:center;}
+.notice a {color:#fff;}

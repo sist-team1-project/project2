@@ -16,8 +16,14 @@
       <!-- 상단 바 -->
       <div class="top-bar">
         <div class="content-topbar flex-sb-m h-full container">
-          <div class="left-top-bar">Healing Camp에 방문해주신 고객분들 감사합니다.</div>
-          
+          <div class="left-top-bar">
+            <div class="notice">
+              <ul class="rolling">
+                  <li v-for="n in notice"><a :href="'../support/notice_detail.do?nid=' + n.nid">{{n.title}}</a></li>
+              </ul>
+            </div>
+          </div>
+            
           <c:if test="${sessionScope.id==null }">
             <div class="right-top-bar flex-w h-full">
               <a href="../support/notice.do" class="flex-c-m trans-04 p-lr-25">고객센터</a>
@@ -229,7 +235,8 @@
             categories2: [],
             cart: 0,
             cartList: [],
-            total: 0
+            total: 0,
+            notice: []
         },
         filters:{
             currency: function(value){
@@ -241,6 +248,7 @@
             this.cate1();
             this.cate2();
             this.countCart();
+            this.getNotice();
         },
         methods:{
             cate1:function(){
@@ -282,6 +290,12 @@
                 this.cartList.forEach((i,index)=>{totalsum += (i.gprice - (i.gprice * i.gsale / 100)) * i.gquantity })
                 return totalsum;
             },
+            getNotice:function(){
+                axios.get("http://localhost:8080/web/main/header_notice.do",{
+                }).then(result=>{
+                    this.notice = result.data;
+                })
+            },
         }
     })
   </script>
@@ -302,6 +316,31 @@
         })
     });
   </script>
- 
+ <script>
+    $(document).ready(function(){
+        var height =  $(".notice").height();
+        var num = $(".rolling li").length;
+        var max = height * num;
+        var move = 0;
+        function noticeRolling(){
+            move += height;
+            $(".rolling").animate({"top":-move},2000,function(){
+                if( move >= max ){
+                    $(this).css("top",0);
+                    move = 0;
+                };
+            });
+        };
+        noticeRollingOff = setInterval(noticeRolling,2400);
+        $(".rolling").append($(".rolling li").first().clone());
+    
+        $(".rolling_stop").click(function(){
+            clearInterval(noticeRollingOff);
+        });
+        $(".rolling_start").click(function(){
+            noticeRollingOff = setInterval(noticeRolling,2400);
+        });
+    });
+  </script>
 </body>
 </html>

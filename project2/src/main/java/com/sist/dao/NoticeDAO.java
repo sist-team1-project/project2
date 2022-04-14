@@ -44,4 +44,8 @@ public class NoticeDAO {
     public void noticeDelete(int nid) {
         mapper.noticeDelete(nid);
     }
+    
+    public List<NoticeVO> headerNotice() {
+        return mapper.headerNotice();
+    }
 }

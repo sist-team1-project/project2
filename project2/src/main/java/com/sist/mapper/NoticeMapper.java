@@ -44,4 +44,10 @@ public interface NoticeMapper {
     @Delete("DELETE FROM notice_1 "
   		    + "WHERE n_id=#{nid}")
     public void noticeDelete(int nid);
+    
+    @Select("SELECT n_id,n_title "
+            + "FROM (SELECT n_id,n_title,rownum as num "
+            + "FROM (SELECT /*+ INDEX_DESC(notice_1 notice_n_id_pk_1)*/n_id,n_title FROM notice_1)) "
+            + "WHERE num BETWEEN 1 AND 3")
+    public List<NoticeVO> headerNotice();
 }

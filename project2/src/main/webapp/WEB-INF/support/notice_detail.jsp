@@ -10,7 +10,7 @@
 <link rel="stylesheet" type="text/css" href="../css/support/notice.css">
 </head>
 <body>
-  <div class="container bg0">
+  <div class="container" id="notice">
     <h3 class="text-center p-b-20">공지사항</h3>
     <div id="notice-content" class="container">
       <div class="row bor10 p-all-30">
@@ -31,7 +31,3 @@
   </div>
 </body>
 </html>
-
-
-
-
