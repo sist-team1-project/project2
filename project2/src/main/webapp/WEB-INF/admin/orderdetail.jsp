@@ -92,9 +92,9 @@
               <th class="adt-light">총 주문금액</th>
             </tr> 
             <tr>
-              <td class="tcenter" >{{sumPrice() | currency}}원</td>
-              <td class="tcenter">5,000원</td>
-              <td class="tcenter">- {{salePrice() | currency }}원</td>
+              <td>{{sumPrice() | currency}}원</td>
+              <td>5,000원</td>
+              <td>- {{salePrice() | currency }}원</td>
               <th class="tcenter">{{totalPrice() + 5000 | currency}}원 </th>
             </tr>
           </table>
