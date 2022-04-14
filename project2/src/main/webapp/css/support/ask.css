@@ -2,4 +2,13 @@
 
 #ask textarea {
   resize: none;
+  min-height: 400px;
+}
+
+#ask-content {
+  min-height: 400px;
+}
+
+#ask pre {
+  line-height: 2.5;
 }

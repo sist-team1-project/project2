@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-  <div class="containerp-b-10" id="GoodsUpdate">
+  <div class="container p-b-10" id="GoodsUpdate">
     <div class="row">
       <div class="col-lg-12 m-lr-auto">
         <div class="p-b-20">

@@ -9,6 +9,7 @@ import com.sist.vo.*;
 import java.util.*;
 
 import javax.mail.Session;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("admin/")
@@ -41,7 +42,9 @@ public class AdminController2 {
 
 	/* ---- 문의관리 페이지 ---- */
 	@GetMapping("ask_admin.do")
-	public String ask_admin(String page, Model model) {
+	public String ask_admin(String page, Model model, HttpSession session) {
+	    String uid = (String) session.getAttribute("id");
+	    
 		if (page == null) {
 			page = "1";
 		}
@@ -51,12 +54,13 @@ public class AdminController2 {
 		int rowSize = 10;
 		int start = (rowSize * curpage) - (rowSize - 1);
 		int end = rowSize * curpage;
+		
 		map.put("start", start);
 		map.put("end", end);
 
-		List<AskVO> list = adao.askListData(map);
+		List<AskVO> list = adao.askAdminListData(map);
 
-		int totalpage = adao.askTotalPage();
+		int totalpage = adao.askAdminTotalPage();
 
 		int count = adao.askRowCount();
 		

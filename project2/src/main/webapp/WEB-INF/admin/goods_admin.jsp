@@ -25,11 +25,11 @@
 				&nbsp; 제품명&nbsp; &nbsp;
 				<input type="checkbox" v-model="fs" value="D">
 				&nbsp; 브랜드&nbsp; &nbsp;
-				<input type=text size=15 @keyup.enter="gfind()" class="input-sm wrap-search-admin" v-model="ss" ref="goodsfind">
+				<input type=text @keyup.enter="gfind()" class="text-111 bor8 bg0 cl8 size-127 p-lr-10" v-model="ss" ref="goodsfind">
 				&nbsp; &nbsp;
-				<button class="flex-c-m stext-101 cl0 btn-sm btn-pro-color2 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail fs-10" v-on:click="gfind()">검색</button>
-				&nbsp; &nbsp;
-				<button class="flex-c-m stext-101 cl0 btn-sm btn-pro-color2 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail fs-10" @click="reset">초기화</button>
+				<button class="flex-c-m cl1 bg3 bor2 hov-btn3 p-lr-15 size-126" v-on:click="gfind()">검색</button>
+				&nbsp;
+				<button class="flex-c-m cl0 btn-sm btn-pro-color2 bor2 hov-btn3 p-lr-15 size-126" @click="reset">초기화</button>
 			</div>
 		</div>
 		<!-- ------ 검색 순서 ------ -->
@@ -47,9 +47,9 @@
 		<div class="row p-t-10">
 			<div class="col-lg-12 m-lr-auto p-tb-10 dis-flex flex-sb flex-m">
 				<div class="fs-13">총 {{count | currency}} 개</div>
-				<button class="flex-c-m stext-101 cl0 btn-sm btn-pro-color2 bor1 hov-btn1 p-lr-15 trans-04  fs-10" onclick="location.href='../admin/goods_add.do'">상품 등록</button>
+				<button class="flex-c-m cl1 bg3 bor2 hov-btn3 p-lr-15 size-126" onclick="location.href='../admin/goods_add.do'">상품 등록</button>
 			</div>
-			<div class="col-lg-12 m-lr-auto m-b-50">
+			<div class="col-lg-12 m-lr-auto m-b-50" id="goodsAdmin">
 				<div class="wrap-table js-pscroll">
 
 					<table class="table-goods">
@@ -69,7 +69,7 @@
 								<th class="column-12"></th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody v-if="empty==false">
 							<tr v-for="(goods, index) in goodsList" class="table_row_admin fs-13 font-center p-t-20-admin-td p-b-20">
 								<td class="column-1"><div><img :src="goods.g_image" onerror="this.src='../images/image_ready.jpg'" class="size-109"></div></td>
 								<td class="column-2">{{goods.g_id}}</td>
@@ -94,27 +94,26 @@
 				</div>
 			</div>
 		</div>
-		<div>
-	<!-- ------ 페이징  ----- --->
-			<div class="text-center">
-				<ul class="pagination">
-					<li class="page-item" v-bind:class="{'disabled':startPage==1}">
-						<button class="page-link" :value="startPage-1" v-on:click="paging($event)">
-							<i class="fa fa-chevron-left" aria-hidden="true"></i>
-						</button>
-					</li>
-					<li class="page-item" v-for="i in pages" v-bind:class="{'active':i==curpage}">
-						<button class="page-link" :value="i" v-on:click="paging($event)">{{i}}</button>
-					</li>
-					<li class="page-item" v-bind:class="{'disabled':endPage==totalpage}">
-						<button class="page-link" :value="endPage+1" v-on:click="paging($event)">
-							<i class="fa fa-chevron-right" aria-hidden="true"></i>
-						</button>
-					</li>
-				</ul>
-			</div>
+		<!-- ------ 페이징  ----- --->
+        <div class="text-center">
+            <ul class="pagination">
+                <li class="page-item" v-bind:class="{'disabled':startPage==1}">
+                    <button class="page-link" :value="startPage-1" v-on:click="paging($event)">
+                        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                    </button>
+                </li>
+                <li class="page-item" v-for="i in pages" v-bind:class="{'active':i==curpage}">
+                    <button class="page-link" :value="i" v-on:click="paging($event)">{{i}}</button>
+                </li>
+                <li class="page-item" v-bind:class="{'disabled':endPage==totalpage}">
+                    <button class="page-link" :value="endPage+1" v-on:click="paging($event)">
+                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </div>
 
-		</div>
+	</div>
 
 		<!-- 사이드 Detail -->
 		<div class="wrap-header-admin js-panel-admin">
@@ -158,7 +157,8 @@
             fs: ["N", "S", "C", "D"],
             ss: '',
             order: 'A',
-            status: 1
+            status: 1,
+            empty: false
         },
         filters: {
             currency: function(value) {
@@ -186,6 +186,13 @@
                     this.startPage = res.data[0].startPage;
                     this.endPage = res.data[0].endPage;
                     this.count = res.data[0].count;
+                    
+                    if(res.data[0].g_name == null) {
+                        this.empty = true;
+                    } else {
+                        this.empty = false;
+                    }
+                    
                     this.pages = [];
                     for (i = this.startPage; i <= this.endPage; i++) {
                         this.pages.push(i);

@@ -8,122 +8,120 @@
 <title>Insert title here</title>
 </head>
 <body>
-  <div class="container bg0 p-b-10" id="GoodsAdd">
+  <div class="container p-b-10" id="GoodsAdd">
     <div class="row">
       <div class="col-lg-12 m-lr-auto">
         <div class="p-b-20">
           <h3><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp; 상품 등록</h3>
         </div>
       </div>
-      <div class="col-lg-12-add flex-m">
-        <div class="col-sm-12-add col-md-12 m-lr-auto m-b-50">
-          <div class="bor10 p-lr-40 p-t-30 p-b-40 p-lr-0-sm">
+      <div class="col-md-8 m-b-50">
+        <div class="bor10 p-lr-40 p-t-30 p-b-40 p-lr-0-sm">
 
-            <form @submit.prevent="submitForm" >
-              <div class="flex-w flex-t bor12 p-b-20">
-                <div class="size-208 w-full-ssm"><span class="stext-110 cl2"> 카테고리 </span></div>
-                <div class="size-209">
-                  <select ref="select1" v-model="cid1" @change="selectIndex" class="bor10 cl3 p-tb-3 p-lr-5">
-                    <option v-for="cate in categories1" :value="cate.cid">{{cate.title}}</option>
-                  </select> &nbsp;&nbsp;
-                  <select ref="good" v-model="cid2" class="bor10 cl3 p-tb-3 p-lr-5">
-                    <option v-for="cate2 in categories2[cindex]" :value="cate2.cid">{{cate2.title}}</option>
-                  </select>
-                </div>
+          <form @submit.prevent="submitForm" >
+            <div class="flex-w flex-t bor12 p-b-20">
+              <div class="size-208 w-full-ssm"><span class="stext-110 cl2"> 카테고리 </span></div>
+              <div class="size-209">
+                <select ref="select1" v-model="cid1" @change="selectIndex" class="bor10 cl3 p-tb-3 p-lr-5">
+                  <option v-for="cate in categories1" :value="cate.cid">{{cate.title}}</option>
+                </select> &nbsp;&nbsp;
+                <select ref="good" v-model="cid2" class="bor10 cl3 p-tb-3 p-lr-5">
+                  <option v-for="cate2 in categories2[cindex]" :value="cate2.cid">{{cate2.title}}</option>
+                </select>
               </div>
+            </div>
 
-              <div class="flex-w flex-t bor12 p-t-20 p-b-20">
-                <div class="size-208 w-full-ssm"><span class="stext-110 cl2"> 상품명 </span></div>
-                <div class="size-209">
-                  <input type=text ref="gname" v-model="gname" class="bor10 cl3 p-tb-3 p-lr-5 w-full">
-                </div>
+            <div class="flex-w flex-t bor12 p-t-20 p-b-20">
+              <div class="size-208 w-full-ssm"><span class="stext-110 cl2"> 상품명 </span></div>
+              <div class="size-209">
+                <input type=text ref="gname" v-model="gname" class="bor10 cl3 p-tb-3 p-lr-5 w-full">
               </div>
+            </div>
 
-              <div class="flex-w flex-t bor12 p-t-20 p-b-20">
-                <div class="size-208 w-full-ssm"><span class="stext-110 cl2"> 브랜드 </span></div>
-                <div class="size-209">
-                  <input type=text ref="gbrand" v-model="gbrand" class="bor10 cl3 p-tb-3 p-lr-5 w-full">
-                </div>
+            <div class="flex-w flex-t bor12 p-t-20 p-b-20">
+              <div class="size-208 w-full-ssm"><span class="stext-110 cl2"> 브랜드 </span></div>
+              <div class="size-209">
+                <input type=text ref="gbrand" v-model="gbrand" class="bor10 cl3 p-tb-3 p-lr-5 w-full">
               </div>
+            </div>
 
-              <div class="flex-w flex-t bor12 p-t-20 p-b-20">
-                <div class="size-208 w-full-ssm"><span class="stext-110 cl2"> 가격 (₩) </span></div>
-                <div class="size-209">
-                  <input type=number min="0" ref="gprice" v-model="gprice" class="bor10 cl3 p-tb-3 p-lr-5 w-full">
-                </div>
+            <div class="flex-w flex-t bor12 p-t-20 p-b-20">
+              <div class="size-208 w-full-ssm"><span class="stext-110 cl2"> 가격 (₩) </span></div>
+              <div class="size-209">
+                <input type=number min="0" ref="gprice" v-model="gprice" class="bor10 cl3 p-tb-3 p-lr-5 w-full">
               </div>
+            </div>
 
-              <div class="flex-w flex-t bor12 p-t-20 p-b-20">
-                <div class="size-208 w-full-ssm"><span class="stext-110 cl2"> 할인율 (%) </span></div>
-                <div class="size-209">
-                  <input type=number min="0" ref="gsale" v-model="gsale" class="bor10 cl3 p-tb-3 p-lr-5 w-full">
-                </div>
+            <div class="flex-w flex-t bor12 p-t-20 p-b-20">
+              <div class="size-208 w-full-ssm"><span class="stext-110 cl2"> 할인율 (%) </span></div>
+              <div class="size-209">
+                <input type=number min="0" ref="gsale" v-model="gsale" class="bor10 cl3 p-tb-3 p-lr-5 w-full">
               </div>
+            </div>
 
-              <div class="flex-w flex-t bor12 p-t-20 p-b-20">
-                <div class="size-208 w-full-ssm">
-                  <span class="stext-110 cl2"> 판매 상태 </span>
-                </div>
-                <div class="size-209">
-                  <select v-model="gstatus" class="bor10 cl3 p-tb-3 p-lr-5">
-                    <option value="">판매상태</option>
-                    <option value="1">판매중</option>
-                    <option value="0">판매중단</option>
-                  </select>
-                </div>
+            <div class="flex-w flex-t bor12 p-t-20 p-b-20">
+              <div class="size-208 w-full-ssm">
+                <span class="stext-110 cl2"> 판매 상태 </span>
               </div>
-
-              <div class="flex-w flex-t bor12 p-t-20 p-b-20">
-                <div class="size-208">
-                  <span class="stext-110 cl2"> 대표이미지 첨부 </span>
-                </div>
-                <div class="size-209">
-                  <div class="p-b-20">
-                      첨부 파일로 추가
-                      <input type="file" accept="image/*" ref="gimages" v-model="gimages" class="cl3" multiple>
-                  </div>
-                  <div>
-                    직접 경로 작성 ( 여러 이미지일시 구분자 ; )
-                    <input type=text ref="gimage" v-model="gimage" class="bor10 cl3 p-tb-3 p-lr-5 w-full">
-                  </div>
-                </div>
+              <div class="size-209">
+                <select v-model="gstatus" class="bor10 cl3 p-tb-3 p-lr-5">
+                  <option value="">판매상태</option>
+                  <option value="1">판매중</option>
+                  <option value="0">판매중단</option>
+                </select>
               </div>
+            </div>
 
-              <div class="flex-w flex-t bor12 p-t-20 p-b-20">
-                <div class="size-208 w-full-ssm">
-                  <span class="stext-110 cl2"> 상세정보 </span>
-                </div>
-                <div class="size-209">
-                  <div class="p-b-20">
+            <div class="flex-w flex-t bor12 p-t-20 p-b-20">
+              <div class="size-208">
+                <span class="stext-110 cl2"> 대표이미지 첨부 </span>
+              </div>
+              <div class="size-209">
+                <div class="p-b-20">
                     첨부 파일로 추가
-                    <input type="file" accept="image/*"  ref="gdetails" v-model="gdetails" class="cl3" multiple>
-                  </div>
-                  <div>
-                    직접 경로 작성 ( 여러 이미지일시 구분자 ; )
-                    <input type=text min="0" ref="gdetail" v-model="gdetail" class="bor10 cl3 p-tb-3 p-lr-5 w-full">
-                  </div>
+                    <input type="file" accept="image/*" ref="gimages" v-model="gimages" class="cl3" multiple>
+                </div>
+                <div>
+                  직접 경로 작성 ( 여러 이미지일시 구분자 ; )
+                  <input type=text ref="gimage" v-model="gimage" class="bor10 cl3 p-tb-3 p-lr-5 w-full">
                 </div>
               </div>
+            </div>
 
-              <div class="flex-w flex-t bor12 p-t-20 p-b-20">
-                <div class="size-208 w-full-ssm">
-                  <span class="stext-110 cl2"> 이벤트 여부 </span>
+            <div class="flex-w flex-t bor12 p-t-20 p-b-20">
+              <div class="size-208 w-full-ssm">
+                <span class="stext-110 cl2"> 상세정보 </span>
+              </div>
+              <div class="size-209">
+                <div class="p-b-20">
+                  첨부 파일로 추가
+                  <input type="file" accept="image/*"  ref="gdetails" v-model="gdetails" class="cl3" multiple>
                 </div>
-                <div class="row size-209">
-                  <span v-for="e in events" class="dis-inline-block"><input type="checkbox" :value="e.eid" ref="eid" v-model="eid" class="bor10 dis-inline-block"> &nbsp;{{e.etitle}} &nbsp;&nbsp;</span>
+                <div>
+                  직접 경로 작성 ( 여러 이미지일시 구분자 ; )
+                  <input type=text min="0" ref="gdetail" v-model="gdetail" class="bor10 cl3 p-tb-3 p-lr-5 w-full">
                 </div>
               </div>
+            </div>
 
-              <div class="row">
-                <div class="p-t-35 col-md-6">
-                  <input type=submit class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer btn-pro-color2" value="등록">
-                </div>
-                <div class="p-t-35 col-md-6">
-                  <input type=button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer btn-pro-color2" value="취소" onclick="javascript:history.back()">
-                </div>
+            <div class="flex-w flex-t bor12 p-t-20 p-b-20">
+              <div class="size-208 w-full-ssm">
+                <span class="stext-110 cl2"> 이벤트 여부 </span>
               </div>
-            </form>
-          </div>
+              <div class="row size-209">
+                <span v-for="e in events" class="dis-inline-block"><input type="checkbox" :value="e.eid" ref="eid" v-model="eid" class="bor10 dis-inline-block"> &nbsp;{{e.etitle}} &nbsp;&nbsp;</span>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="p-t-35 col-md-6">
+                <input type=submit class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer btn-pro-color2" value="등록">
+              </div>
+              <div class="p-t-35 col-md-6">
+                <input type=button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer btn-pro-color2" value="취소" onclick="javascript:history.back()">
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>

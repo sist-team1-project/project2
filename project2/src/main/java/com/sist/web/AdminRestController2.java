@@ -63,39 +63,50 @@ public class AdminRestController2 {
 
 		int i = 0;
 		JSONArray arr = new JSONArray();
-		for (Map<String, Object> j : list) {
-			JSONObject obj = new JSONObject();
-			obj.put("g_id", j.get("G_ID"));
-			obj.put("c_title", j.get("C_TITLE"));
-			String g_name = (String) j.get("G_NAME");
-			if (g_name.length() > 18) {
-				g_name = g_name.substring(0, 18) + "...";
-			}
-			obj.put("g_name", g_name);
-			obj.put("g_brand", j.get("G_BRAND"));
-			obj.put("g_price", j.get("G_PRICE"));
-			obj.put("g_sale", j.get("G_SALE"));
-			String images = (String) j.get("G_IMAGE");
-			if (images == null) {
-				images = "";
-			}
-			String[] image = images.split(";");
-			obj.put("g_image", image[0]);
-			obj.put("g_detail", j.get("G_DETAIL"));
-			obj.put("g_sold", j.get("G_SOLD"));
-			obj.put("g_status", j.get("G_STATUS"));
-			obj.put("g_regdate", j.get("G_REGDATE"));
-
-			if (i == 0) {
-				obj.put("curpage", curpage);
-				obj.put("startPage", startPage);
-				obj.put("endPage", endPage);
-				obj.put("totalpage", totalpage);
-				obj.put("count", count);
-			}
-			arr.add(obj);
-			i++;
-		}
+		
+		if(list.size() == 0) {
+            JSONObject obj = new JSONObject();
+            obj.put("curpage", curpage);
+            obj.put("startPage", startPage);
+            obj.put("endPage", endPage);
+            obj.put("totalpage", totalpage);
+            obj.put("count", count);
+            arr.add(obj);
+        } else {
+    		for (Map<String, Object> j : list) {
+    			JSONObject obj = new JSONObject();
+    			obj.put("g_id", j.get("G_ID"));
+    			obj.put("c_title", j.get("C_TITLE"));
+    			String g_name = (String) j.get("G_NAME");
+    			if (g_name.length() > 18) {
+    				g_name = g_name.substring(0, 18) + "...";
+    			}
+    			obj.put("g_name", g_name);
+    			obj.put("g_brand", j.get("G_BRAND"));
+    			obj.put("g_price", j.get("G_PRICE"));
+    			obj.put("g_sale", j.get("G_SALE"));
+    			String images = (String) j.get("G_IMAGE");
+    			if (images == null) {
+    				images = "";
+    			}
+    			String[] image = images.split(";");
+    			obj.put("g_image", image[0]);
+    			obj.put("g_detail", j.get("G_DETAIL"));
+    			obj.put("g_sold", j.get("G_SOLD"));
+    			obj.put("g_status", j.get("G_STATUS"));
+    			obj.put("g_regdate", j.get("G_REGDATE"));
+    
+    			if (i == 0) {
+    				obj.put("curpage", curpage);
+    				obj.put("startPage", startPage);
+    				obj.put("endPage", endPage);
+    				obj.put("totalpage", totalpage);
+    				obj.put("count", count);
+    			}
+    			arr.add(obj);
+    			i++;
+    		}
+        }
 		return arr.toJSONString();
 	}
 
@@ -279,7 +290,7 @@ public class AdminRestController2 {
 
 		System.out.println("title : " + vo.getC_title());
 
-		cdao.category_delete(vo);
+		//cdao.category_delete(vo);
 
 		return "ok";
 	}

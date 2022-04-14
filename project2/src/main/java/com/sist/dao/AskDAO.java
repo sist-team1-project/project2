@@ -29,7 +29,7 @@ public class AskDAO {
 	public int askTotalPage(Map map) {
 		return mapper.askTotalPage(map);
 	}
-
+	
 	public List<AskVO> askAdminListData(Map map) {
 		return mapper.askAdminListData(map);
 	}
@@ -41,7 +41,7 @@ public class AskDAO {
 
 	/* -- 관리자 문의 총 페이지 -- */
 	public int askAdminTotalPage() {
-		return mapper.askAdminRowCount();
+		return mapper.askAdminTotalPage();
 	}
 
 	/* -- 문의 등록 -- */

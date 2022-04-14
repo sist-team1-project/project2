@@ -124,7 +124,13 @@ public class SupportController {
 		model.addAttribute("count", count);
 		return "support/ask_detail";
 	}
-
+	
+    @GetMapping("ask_delete.do")
+    public String askDelete(int no, Model model) {
+        model.addAttribute("no", no);
+        return "support/ask_delete";
+    }
+    
 	@GetMapping("ask_reply.do")
 	public String askReply(int no, Model model) {
 		model.addAttribute("no", no);
@@ -132,24 +138,22 @@ public class SupportController {
 	}
 
 	@PostMapping("ask_reply_ok.do")
-	public String askReplyInsert(int pno, AskVO vo) {
-		AskVO pvo = adao.askParentInfoData(pno);
-		AskVO detailvo = adao.askDetailData(pno);
-
+	public String askReplyInsert(int no, AskVO vo, HttpSession session) {
+	    String uid = (String) session.getAttribute("id");
+	    
+		AskVO pvo = adao.askParentInfoData(no);
+		AskVO detailvo = adao.askDetailData(no);
+		
+		vo.setU_id(uid);
+		vo.setA_type("답변");
 		vo.setA_group_id(pvo.getA_group_id());
 		vo.setA_group_step(pvo.getA_group_step() + 1);
 		vo.setA_group_tab(pvo.getA_group_tab() + 1);
-
-		adao.askReplyInsert(vo);
-		adao.asktabReply(detailvo);
-
+		
+        adao.askReplyInsert(vo);
+        adao.asktabReply(detailvo);
+        
 		return "redirect:../admin/ask_admin.do";
-	}
-
-	@GetMapping("ask_delete.do")
-	public String askDelete(int no, Model model) {
-		model.addAttribute("no", no);
-		return "support/ask_delete";
 	}
 
 	// 댓글
@@ -159,10 +163,11 @@ public class SupportController {
 	}
 
 	@GetMapping("comment_insert_ok.do")
-	@ResponseBody
 	public String comment_insert_ok(CommentVO vo, HttpSession session) {
 		session.setAttribute("u_id", vo.getN_id());
 		cdao.commentInsertData(vo);
 		return "ok";
 	}
+	
+	
 }

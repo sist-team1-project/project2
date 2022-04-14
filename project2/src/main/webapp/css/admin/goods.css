@@ -1,18 +1,13 @@
 @charset "UTF-8";
 
 
-
-.font-center>th {
-	text-align: center;
-}
-
-.font-center>td {
-	text-align: center;
-}
-
 .btn-size-t {
 	width: 60px;
 	height: 40px;
+}
+
+#goodsAdmin {
+  min-height: 400px;
 }
 
 .table-goods {

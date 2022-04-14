@@ -181,18 +181,17 @@ public class SupportRestController {
 		result = "YES";
 		return result;
 	}
+	
 
-	// 1:1 문의
-	@PostMapping("ask_delete_ok.do")
-	public String askDeleteOk(int no) {
-		String result = "";
-		AskVO vo = adao.askDetailData(no);
-		if (vo.getA_group_step() == 0) {
-			adao.askDelete1(no, vo.getA_group_id());
-		} else {
-			adao.askDelete2(no);
-		}
-		result = "<script>location.href=\"../support/ask.do\";</script>";
-		return result;
-	}
+    @PostMapping("ask_delete_ok.do")
+    public String askDeleteOk(int no) {
+        String result = "";
+        AskVO vo = adao.askDetailData(no);
+        if (vo.getA_group_step() == 0) {
+            adao.askDelete1(no, vo.getA_group_id());
+        } else {
+            adao.askDelete2(no);
+        }
+        return "<script>alert(\"게시물이 삭제되었습니다\"); location.href=\"../support/ask.do\";</script>";
+    }
 }
