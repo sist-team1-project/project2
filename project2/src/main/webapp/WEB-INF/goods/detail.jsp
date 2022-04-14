@@ -62,8 +62,6 @@
                 <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist" @click="if(confirm('로그인창으로 이동하시겠습니까?')) return location.href='../user/login.do'"><i class="zmdi zmdi-favorite-outline"></i></a>
               </c:if>
               </div>
-              <a href="https://www.facebook.com/" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook"><i class="fa fa-facebook"></i></a>
-              <a href="https://www.twitter.com/" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter"><i class="fa fa-twitter"></i></a>
             </div>
           </div>
         </div>
