@@ -99,8 +99,8 @@ public class UserDAO {
 			String newPassword = sender.resetPwdMailSend(user);
 
 			Map map2 = new HashMap();
-			map2.put("id", (String) map.get("id"));
-			map2.put("password", newPassword);
+			map2.put("uid", (String) map.get("id"));
+			map2.put("newPassword", newPassword);
 			mapper.userPwdUpdate(map2);
 
 		}
