@@ -106,6 +106,7 @@
                     }
                 }).then(result=>{
                     this.cartList = result.data;
+                    this.selectedGoods = [];
                     for(i = 0; i < this.cartList.length; i++) {
                         this.selectedGoods.push(this.cartList[i].gid);
                     }
