@@ -21,7 +21,7 @@ public class SupportRestController {
 
 	@Autowired
 	private AskDAO adao;
-	
+
 	@Autowired
 	private CommentDAO cdao;
 
@@ -81,60 +81,62 @@ public class SupportRestController {
 		return arr.toJSONString();
 	}
 
-    @PostMapping("notice_insert_ok.do")
-    public String notice_insert_ok(NoticeVO vo, HttpSession session) {
-        vo.setU_id((String) session.getAttribute("id"));
-        ndao.noticeInsertData(vo);
-        return "<script>alert(\"게시물이 작성되었습니다\"); location.href=\"../support/notice.do\";</script>";
-    }
-    
-    @PostMapping("notice_update_ok.do")
+	/*  공지사항 입력  */
+	@PostMapping("notice_insert_ok.do")
+	public String notice_insert_ok(NoticeVO vo, HttpSession session) {
+		vo.setU_id((String) session.getAttribute("id"));
+		ndao.noticeInsertData(vo);
+		return "<script>alert(\"게시물이 작성되었습니다\"); location.href=\"../support/notice.do\";</script>";
+	}
+
+	/*  공지사항 수정  */
+	@PostMapping("notice_update_ok.do")
 	public String notice_update(NoticeVO vo) {
 		ndao.noticeUpdate(vo);
 		return "<script>alert(\"게시물이 업데이트되었습니다\"); location.href=\"../support/notice.do\";</script>";
 	}
-
-    @PostMapping("notice_delete_ok.do")
+	/*  공지사항 삭제  */
+	@PostMapping("notice_delete_ok.do")
 	public String notice_delete(int nid) {
 		ndao.noticeDelete(nid);
 		return "<script>alert(\"게시물이 삭제되었습니다\"); location.href=\"../support/notice.do\";</script>";
 	}
-	   
-    @PostMapping("ask_insert_ok.do")
-    public String askInsertOk(AskVO vo, HttpSession session) {
-        String uid = (String) session.getAttribute("id");
-        vo.setU_id(uid);
-        adao.askInsert(vo);
-        return "<script>alert(\"게시물이 작성되었습니다\"); location.href=\"../support/ask.do\";</script>";
-    }
+	/*  1:1문의 입력  */
+	@PostMapping("ask_insert_ok.do")
+	public String askInsertOk(AskVO vo, HttpSession session) {
+		String uid = (String) session.getAttribute("id");
+		vo.setU_id(uid);
+		adao.askInsert(vo);
+		return "<script>alert(\"게시물이 작성되었습니다\"); location.href=\"../support/ask.do\";</script>";
+	}
+	/*  1:1문의 삭제  */
+	@PostMapping("ask_delete_ok.do")
+	public String askDeleteOk(int aid) {
+		AskVO vo = adao.askDetailData(aid);
+		if (vo.getA_group_step() == 0) {
+			adao.askDelete1(vo.getA_group_id());
+		} else {
+			adao.askDelete2(aid);
+		}
+		return "<script>alert(\"게시물이 삭제되었습니다\"); location.href=\"../support/ask.do\";</script>";
+	}
+	/*  1:1문의 답글추가  */
+	@PostMapping("ask_reply_ok.do")
+	public String askReplyInsert(AskVO vo, HttpSession session) {
+		String uid = (String) session.getAttribute("id");
 
-    @PostMapping("ask_delete_ok.do")
-    public String askDeleteOk(int aid) {
-        AskVO vo = adao.askDetailData(aid);
-        if (vo.getA_group_step() == 0) {
-            adao.askDelete1(vo.getA_group_id());
-        } else {
-            adao.askDelete2(aid);
-        }
-        return "<script>alert(\"게시물이 삭제되었습니다\"); location.href=\"../support/ask.do\";</script>";
-    }
-    
-    @PostMapping("ask_reply_ok.do")
-    public String askReplyInsert(AskVO vo, HttpSession session) {
-        String uid = (String) session.getAttribute("id");
-        
-        AskVO pvo = adao.askParentInfoData(vo.getA_id());
-        AskVO detailvo = adao.askDetailData(vo.getA_id());
-        
-        vo.setU_id(uid);
-        vo.setA_type("답변");
-        vo.setA_group_id(pvo.getA_group_id());
-        vo.setA_group_step(pvo.getA_group_step() + 1);
-        vo.setA_group_tab(pvo.getA_group_tab() + 1);
-        
-        adao.askReplyInsert(vo);
-        adao.asktabReply(detailvo);
-        
-        return "<script>alert(\"답변이 작성되었습니다\"); location.href=\"../support/ask.do\";</script>";
-    }
+		AskVO pvo = adao.askParentInfoData(vo.getA_id());
+		AskVO detailvo = adao.askDetailData(vo.getA_id());
+
+		vo.setU_id(uid);
+		vo.setA_type("답변");
+		vo.setA_group_id(pvo.getA_group_id());
+		vo.setA_group_step(pvo.getA_group_step() + 1);
+		vo.setA_group_tab(pvo.getA_group_tab() + 1);
+
+		adao.askReplyInsert(vo);
+		adao.asktabReply(detailvo);
+
+		return "<script>alert(\"답변이 작성되었습니다\"); location.href=\"../support/ask.do\";</script>";
+	}
 }

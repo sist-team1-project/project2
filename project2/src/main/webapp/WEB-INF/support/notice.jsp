@@ -30,6 +30,7 @@
             </tr>
           </table>
         </div>
+        <!-- 	관리자등급에게만 공지사항 글쓰기 버튼 표시	 -->
         <c:if test="${sessionScope.grade=='0'}">
         <div class="flex-r p-t-20">
           <button class="flex-c-m cl1 bg3 bor2 hov-btn3 p-lr-15 size-126" @click="location.href='../support/notice_insert.do'">글쓰기</button>
@@ -46,6 +47,7 @@
     </div>
   </div>
   <script>
+  /* 	공지사항 풀력용 Vue 필터		*/
     new Vue({
         el:'#notice',
         data:{
@@ -63,6 +65,7 @@
         },
         
         methods:{
+        	/*  공지사항 첫화면 출력  */
             dataSend:function(){
               axios.get("http://localhost:8080/web/support/notice_vue.do",{
                   params:{
@@ -81,10 +84,11 @@
                     }
                 })
             },
+            /*  페이지 전환  */
             paging:function(event) {
                 this.curpage = event.currentTarget.value;
                 this.dataSend();
-            },
+            }
         }
     })
   </script>
