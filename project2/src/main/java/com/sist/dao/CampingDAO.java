@@ -12,10 +12,4 @@ import com.sist.mapper.*;
 @Repository
 public class CampingDAO {
     
-    @Autowired
-    private CampingMapper mapper;
-    
-    public List<Map<String, Object>> campingRecommend(Map map) {
-    	return mapper.campingRecommend(map);
-    }
 }

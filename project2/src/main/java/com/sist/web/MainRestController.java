@@ -1,6 +1,8 @@
 package com.sist.web;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.sist.dao.*;
+import com.sist.manager.*;
 import com.sist.vo.*;
 
 @RestController
@@ -30,6 +33,15 @@ public class MainRestController {
     
     @Autowired
     private NoticeDAO ndao;
+    
+    @Autowired
+    private CampingDAO campdao;
+    
+    @Autowired
+    private RecommendManager rm;
+    
+    @Autowired
+    private UserDAO udao;
     
     @GetMapping(value = "event_list.do", produces = "text/plain;charset=utf-8")
     public String event_goods(HttpSession session) {
@@ -114,7 +126,7 @@ public class MainRestController {
     }
     
     @GetMapping(value = "header_notice.do", produces = "text/plain;charset=utf-8")
-    public String headerNotice() {
+    public String header_notice() {
         
         List<NoticeVO> list = ndao.headerNotice();
         
@@ -127,5 +139,28 @@ public class MainRestController {
         
         }
         return arr.toJSONString();
+    }
+    
+    @GetMapping(value = "camping_list.do", produces = "text/plain;charset=utf-8")
+    public String camping_list(HttpSession session) {
+        String u_id = (String) session.getAttribute("id");
+        
+        if(u_id != null) {
+            String fd = udao.getUserAddress(u_id);
+            String[] temp = fd.split(" ");
+            fd = temp[1];
+            List<Map<String,String>> rList = rm.recommandData(fd);
+            JSONArray arr = new JSONArray();
+            for(Map<String,String> vo : rList) {
+                JSONObject obj = new JSONObject();
+                obj.put("title", vo.get("title"));
+                obj.put("category", vo.get("category"));
+                obj.put("address", vo.get("address"));
+                arr.add(obj);
+            }
+            return arr.toJSONString();
+        } else {
+            return "EMPTY";
+        }
     }
 }

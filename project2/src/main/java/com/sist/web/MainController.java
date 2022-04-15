@@ -11,12 +11,21 @@ import org.springframework.web.bind.annotation.*;
 import com.sist.dao.CartDAO;
 
 @Controller
+@RequestMapping("main/")
 public class MainController {
+    
     @Autowired
     private CartDAO cartdao;
-    @GetMapping("main/main.do")
+    @GetMapping("main.do")
     public String main_main(HttpSession session, Model model) {
         
         return "main";
+    }
+    
+    @GetMapping("map.do")
+    public String map(String address, String title, Model model) {
+        model.addAttribute("address", address);
+        model.addAttribute("title", title);
+        return "main/map/vue";
     }
 }

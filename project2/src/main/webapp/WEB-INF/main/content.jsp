@@ -46,8 +46,8 @@
   </section>
 
   
-  <div class="sec-banner bg0 p-t-80 p-b-50">
-    <div id="event" class="container">
+  <div id="event" class="sec-banner bg0 p-t-80 p-b-50">
+    <div class="container">
       <!-- 배너 -->
       <section>
         <div class="row">
@@ -107,7 +107,7 @@
       
       <!-- 이벤트 타이틀 -->
       <section>
-        <div class="bg0 p-t-23 p-b-140">
+        <div class="bg0 p-t-23 p-b-30">
           <div class="p-tb-20"><h3 class="ltext-103 cl5">Product Overview</h3></div>
           <div v-for="e in events">
             <div class="p-t-40 p-b-10"><h4><i class="fa fa-rocket" aria-hidden="true"></i>&nbsp; {{e.title}}</h4></div>
@@ -143,14 +143,49 @@
         </div>
       </section>
       <!-- -------- -->
+      <c:if test="${sessionScope.id!=null }">
+        <section>
+          <div class="p-t-23 p-b-140">
+            <div class="row">
+              <div class="col-md-12 p-tb-30"><h4>${sessionScope.id } 님 근처의 추천 캠핑장</h4></div>
+              <div class="col-md-3" v-for="(c,index) in campingList">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-text">{{c.title}}</h4>
+                    <p class="card-text">{{c.address}}</p>
+                    <div><button type="button" class="bg3 cl1 bor20 hov-btn1 p-tb-10 size-115 p-lr-15 dis-inline-block" data-toggle="modal" data-target="#iframeModal" @click="open(c.address,c.title,event)">지도 보기</button></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </c:if>
     </div>
+    
+    <div id="iframeModal" class="modal fade" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="iframeModalLable" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" @click="close">&times;</button>
+            <div>
+              <iframe ref="iframe" width="480px" height="300px" :src="iframe"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
   </div>
+  
   <script>
     new Vue({
         el:'#event',
         data:{
             events:[],
-            event_goods:[]
+            event_goods:[],
+            campingList:[],
+            iframe: ''
         },
         filters:{ // 금액 3자리 수 마다 따옴표 필터
             currency: function(value){
@@ -164,6 +199,7 @@
             }).then(result=>{
                 this.events=result.data[0];
                 this.event_goods=result.data[1];
+                this.getCampingList();
             })
         },
         methods:{
@@ -176,6 +212,18 @@
             },
             unlike:function(lid) { // 싫어요
                 axios.post("http://localhost:8080/web/goods/like_delete_ok.do",null,{params:{lid: lid}})
+            }, 
+            getCampingList:function() {
+                axios.get("http://localhost:8080/web/main/camping_list.do",{}).then(result=>{
+                    this.campingList = result.data
+                })
+            },
+            open:function(address, title, $event) {
+                this.iframe = "../main/map.do?address=" + address + "&title=" + title;
+                console.log(this.iframe)
+            },
+            close:function() {
+                this.iframe = '';
             }
         }
     })

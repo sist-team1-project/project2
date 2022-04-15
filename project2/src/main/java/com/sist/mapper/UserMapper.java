@@ -86,5 +86,8 @@ public interface UserMapper {
 	/* 유저등급 변경 */
 	@Update("UPDATE user_1 SET u_grade=#{grade} WHERE u_id=#{uid}")
 	public int gradeupdate(Map map);
-
+	
+	
+	@Select("SELECT u_address1 FROM user_1 WHERE u_id=#{u_id}")
+	public String getUserAddress(String u_id);
 }

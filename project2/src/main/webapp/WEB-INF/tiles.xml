@@ -55,4 +55,5 @@
     <definition name="user/pwdfind3/vue" template="/WEB-INF/user/pwdfind3.jsp"></definition>
     <definition name="user/idcheck/vue" template="/WEB-INF/user/idcheck.jsp"></definition>
     <definition name="admin/orderdetail/vue" template="/WEB-INF/admin/orderdetail.jsp"></definition>
+    <definition name="main/map/vue" template="/WEB-INF/main/map.jsp"></definition>
 </tiles-definitions> 

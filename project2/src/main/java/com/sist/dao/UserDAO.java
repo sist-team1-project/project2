@@ -161,4 +161,8 @@ public class UserDAO {
 	public int gradeupdate(Map map) {
 		return mapper.gradeupdate(map);
 	}
+	
+	public String getUserAddress(String u_id) {
+	    return mapper.getUserAddress(u_id);
+	}
 }
