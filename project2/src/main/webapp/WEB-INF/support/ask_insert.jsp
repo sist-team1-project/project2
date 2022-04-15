@@ -12,6 +12,7 @@
 <body>
   <script type="text/javascript">
     $(function() {
+    	/*  글쓰기 버튼 클릭 이벤트 (submit)  */
         $('#insertAskBtn').click(function() {
             let category = $('#category').val();
             if (category.trim() == "-1") {

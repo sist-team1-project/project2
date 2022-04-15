@@ -12,13 +12,13 @@
   <script type="text/javascript">
     $(function() {
         $('#reply-btn').click(function() {
-                
+            /*  답변 제목이 공란일 경우  */    
             let title = $('#title').val();
             if (title.trim() == "") {
                 $('#title').focus();
                 return;
             }
-    
+            /*  답변 내용이 공란일 경우  */
             let content = $('#content').val();
             if (content.trim() == "") {
                 $('#content').focus();
