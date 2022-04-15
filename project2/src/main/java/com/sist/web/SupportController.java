@@ -26,16 +26,19 @@ public class SupportController {
 	private CommentDAO cdao;
 
 	/******************* 공지사항 *******************/
+	/* 공지사항 목록 */
 	@GetMapping("notice.do")
 	public String notice_list() {
 		return "support/notice";
 	}
 
+	/* 공지사항 추가 */
 	@GetMapping("notice_insert.do")
 	public String notice_insert() {
 		return "support/notice_insert";
 	}
-
+	
+	/* 공지사항 상세 */
 	@GetMapping("notice_detail.do")
 	public String notice_detail(int nid, Model model) {
 		NoticeVO vo = ndao.noticeDetailData(nid);
@@ -44,6 +47,7 @@ public class SupportController {
 		return "support/notice_detail";
 	}
 
+	/* 공지사항 수정 */
 	@GetMapping("notice_update.do")
 	public String notice_notice_update(int nid, Model model) {
 		NoticeVO vo = ndao.noticeUpdateData(nid);
@@ -51,6 +55,7 @@ public class SupportController {
 		return "support/notice_update";
 	}
 
+	/* 공지사항 삭제 */
 	@GetMapping("notice_delete.do")
 	public String food_board_delete(int nid, Model model) {
 		model.addAttribute("nid", nid);
@@ -103,7 +108,8 @@ public class SupportController {
 		model.addAttribute("endPage", endPage);
 		return "support/ask";
 	}
-
+	
+	/* 문의사항 추가 */
 	@GetMapping("ask_insert.do")
 	public String askInsert(HttpSession session) {
 		String uid = (String) session.getAttribute("id");
@@ -112,6 +118,7 @@ public class SupportController {
 		return "support/ask_insert";
 	}
 
+	/* 문의사항 상세 */
 	@GetMapping("ask_detail.do")
 	public String askDetailData(int aid, Model model, HttpSession session) {
 		String u_id = (String) session.getAttribute("id");
@@ -125,6 +132,7 @@ public class SupportController {
 		return "support/ask_detail";
 	}
 	
+	/* 문의사항 삭제 */
 	@GetMapping("ask_delete.do")
 	public String askDelete(int aid, Model model, HttpSession session) {
 		String u_id = (String) session.getAttribute("id");
