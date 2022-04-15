@@ -135,11 +135,6 @@ public class SupportController {
 	/* 문의사항 삭제 */
 	@GetMapping("ask_delete.do")
 	public String askDelete(int aid, Model model, HttpSession session) {
-		String u_id = (String) session.getAttribute("id");
-		String grade = (String) session.getAttribute("grade");
-		if (u_id == null || !(adao.checkUser(aid, u_id) && grade.equals("0")))
-			return "redirect:../main/main.do";
-
 		model.addAttribute("aid", aid);
 		return "support/ask_delete";
 	}
