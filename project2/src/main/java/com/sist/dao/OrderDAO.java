@@ -22,6 +22,9 @@ public class OrderDAO {
     @Autowired
     private CartMapper cmapper;
     
+    @Autowired
+    private GoodsMapper gmapper;
+    
     public int orderTotalPage(Map map) {
     	return omapper.orderTotalPage(map);
     }
@@ -37,8 +40,33 @@ public class OrderDAO {
     	return omapper.orderFullList(map);
     }
     
-    public int stateupdate(Map map) {
-    	return omapper.stateupdate(map);
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public void stateupdate(int state, String oid) {
+        
+        int dbState = omapper.getDBOrderState(oid);
+        
+        // 상태가 -1이면 판매량 감소, 취소에서 복구됐으면 판매량 다시 증가
+        if(state == -1) {
+            List<Map<String,Object>> list = odmapper.getGidsFromOrder(oid);
+            for(Map<String,Object> i : list) {
+                Map map2 = new HashMap();
+                map2.put("g_id", i.get("G_ID"));
+                map2.put("g_quantity", i.get("G_QUANTITY"));
+                gmapper.decreaseSold(map2);
+            }
+        } else if (dbState == -1) {
+            List<Map<String,Object>> list = odmapper.getGidsFromOrder(oid);
+            for(Map<String,Object> i : list) {
+                Map map2 = new HashMap();
+                map2.put("g_id", i.get("G_ID"));
+                map2.put("g_quantity", i.get("G_QUANTITY"));
+                gmapper.increaseSold(map2);
+            }
+        }
+        Map map = new HashMap();
+        map.put("state",state);
+        map.put("oid",oid);
+        omapper.stateupdate(map);
     }
     
     /* 유저 주문정보 */
@@ -53,8 +81,20 @@ public class OrderDAO {
     public int userOrderCount(Map map) {
     	return omapper.userOrderCount(map);
     }
-    public int userOrderCancel(Map map) {
-    	return omapper.userOrderCancel(map);
+    
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public void userOrderCancel(Map map) {
+        
+        // 판매량 감소
+        List<Map<String,Object>> list = odmapper.getGidsFromOrder((String)map.get("oid"));
+        for(Map<String,Object> i : list) {
+            Map map2 = new HashMap();
+            map2.put("g_id", i.get("G_ID"));
+            map2.put("g_quantity", i.get("G_QUANTITY"));
+            gmapper.decreaseSold(map2);
+        }
+        // 주문 취소
+    	omapper.userOrderCancel(map);
     }
     
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
@@ -73,7 +113,11 @@ public class OrderDAO {
             odvo.setG_sale(list.getOrderDetailVOList().get(i).getG_sale());
             odvo.setG_quantity(list.getOrderDetailVOList().get(i).getG_quantity());
             odmapper.orderDetailInsert(odvo);
-            
+            // 판매량 증가
+            Map map2 = new HashMap();
+            map2.put("g_id", list.getOrderDetailVOList().get(i).getG_id());
+            map2.put("g_quantity", list.getOrderDetailVOList().get(i).getG_quantity());
+            gmapper.increaseSold(map2);
             
             map.put("gid", list.getOrderDetailVOList().get(i).getG_id());
             cmapper.cartDeleteByGidAndUid(map);

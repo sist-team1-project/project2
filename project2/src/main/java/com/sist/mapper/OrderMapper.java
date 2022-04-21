@@ -124,9 +124,13 @@ public interface OrderMapper {
 	 
 	/* 유저  - 주문상태 변경 */
 	@Update("UPDATE order_1 SET o_state=#{state} WHERE o_id=#{oid} AND u_id=#{uid}")
-	public int userOrderCancel(Map map);
+	public void userOrderCancel(Map map);
 	
 	/**************************** 주문 **************************/
+	/* 이전 주문 상태 가져오기 */
+	@Select("SELECT o_state FROM order_1 WHERE o_id=#{oid}")
+	public int getDBOrderState(String oid);
+	
 	@Insert("INSERT INTO order_1 VALUES (#{o_id},#{u_id},#{o_receiver},#{o_phone},#{o_post},#{o_address1},#{o_address2},#{o_request},SYSDATE,5000,0)")
 	@SelectKey(statement="SELECT CONCAT(TO_CHAR(SYSDATE,'YYMMDDHH24MI'),LPAD(order_id_seq_1.NEXTVAL,4,0)) AS o_id FROM DUAL", keyProperty="o_id", before=true, resultType=String.class)
 	public void orderInsert(OrderVO vo);

@@ -125,10 +125,7 @@ public class AdminRestController {
     @PostMapping(value = "order_state_update_ok.do", produces = "text/plain;charset=utf-8")
     public void order_state_update_ok(int state, String oid) {
         
-        Map map = new HashMap();
-        map.put("state",state);
-        map.put("oid",oid);
-        odao.stateupdate(map);
+        odao.stateupdate(state, oid);
     }
     
     /****************************** USER 관리 *****************************/

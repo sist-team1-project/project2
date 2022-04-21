@@ -21,7 +21,6 @@ public interface OrderDetailMapper {
     public List<OrderDetailVO> orderListDetail(); 
     
     /* 상품명 */
-    
     @Select("SELECT g_name "
     		+"FROM order_detail_1 "
     		+"WHERE o_id=#{oid}")    
@@ -35,4 +34,10 @@ public interface OrderDetailMapper {
     
     @Insert("INSERT INTO order_detail_1 VALUES(order_detail_id_seq_1.NEXTVAL,#{o_id},#{g_id},#{g_name},#{g_price},#{g_sale},#{g_quantity})")
     public void orderDetailInsert(OrderDetailVO vo);
+    
+    
+    /* 주문 취소 */
+    @Select("SELECT g_id,g_quantity FROM order_detail_1 WHERE o_id=#{o_id}")
+    public List<Map<String,Object>> getGidsFromOrder(String oid);
+    
 } 
