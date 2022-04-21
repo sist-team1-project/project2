@@ -13,10 +13,10 @@ public interface GoodsMapper {
     public String goodsMaxPrice(String cid);
     
     @Select("<script>"
-            + "SELECT NVL(l.l_id,0) AS l_id,g.g_id,g.g_name,g.g_price,g.g_image "
-            + "FROM (SELECT l_id,g_id FROM like_1 WHERE u_id=#{uid}) l, (SELECT g_id,g_name,g_price,g_image "
-            + "FROM (SELECT g_id,g_name,g_price,g_image,rownum as num "
-            + "FROM (SELECT g_id,g_name,g_price,g_image "
+            + "SELECT l_id,g_id,g_name,g_price,g_image "
+            + "FROM (SELECT l_id,g_id,g_name,g_price,g_image,rownum as num "
+            + "FROM (SELECT NVL(l.l_id,0) AS l_id,g.g_id,g.g_name,g.g_price,g.g_image "
+            + "FROM (SELECT l_id,g_id FROM like_1 WHERE u_id=#{uid}) l, (SELECT g_id,g_name,g_price,g_image,g_sold "
             + "FROM goods_1 "
             + "WHERE c_id LIKE #{cid}||'%' AND g_status=1 AND (g_price BETWEEN #{price1} AND #{price2}) AND (g_name LIKE '%'||#{keyword}||'%' OR g_brand LIKE '%'||#{keyword}||'%')"
             + "<if test=\"brands.size!=0\">"
@@ -25,6 +25,8 @@ public interface GoodsMapper {
             + "#{b}"
             + "</foreach>"
             + "</if>"
+            + ") g "
+            + "WHERE l.g_id(+)=g.g_id"
             + "<choose>"
             + "<when test=\"order=='A'.toString()\">"
             + "ORDER BY g_id DESC"
@@ -39,9 +41,8 @@ public interface GoodsMapper {
             + "ORDER BY g_price DESC"
             + "</when>"
             + "</choose>"
-            + ")) "
-            + "WHERE num BETWEEN #{start} AND #{end}) g "
-            + "WHERE l.g_id(+)=g.g_id"
+            + ")) WHERE num BETWEEN #{start} AND #{end}"
+            
             + "</script>")
     public List<Map<String,Object>> goodsList(Map map);
 	
@@ -186,5 +187,11 @@ public interface GoodsMapper {
             + "</if>"
             + "</script>")
     public List<Map<String,Object>> checkOutGoodsDetail(Map map);
+    
+    @Update("UPDATE goods_1 SET g_sold=g_sold+#{g_quantity} WHERE g_id=#{g_id}")
+    public void increaseSold(Map map);
+    
+    @Update("UPDATE goods_1 SET g_sold=g_sold-#{g_quantity} WHERE g_id=#{g_id}")
+    public void decreaseSold(Map map);
     /******************************************************************************/
 }

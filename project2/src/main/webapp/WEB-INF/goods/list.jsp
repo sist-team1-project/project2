@@ -189,6 +189,7 @@
             searchByOrder:function(event) {
                 this.curpage = 1; // 페이지 초기화
                 this.order = event.currentTarget.value; // 누른 버튼의 값(원하는 순서)을 가지고옴
+                console.log(this.order)
                 this.list();      // 목록 출력
             },
             /* 브랜드 전체 체크 버튼 */
