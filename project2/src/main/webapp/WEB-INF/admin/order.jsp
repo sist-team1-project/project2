@@ -140,7 +140,6 @@
                     this.startPage = res.data[0].startPage;
                     this.endPage = res.data[0].endPage;
                     this.count = res.data[0].count;
-                    console.log(this.count);
                     this.pages=[];
                     for(i = this.startPage; i <= this.endPage; i++) {
                         this.pages.push(i);
