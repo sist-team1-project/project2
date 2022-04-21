@@ -68,7 +68,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="(goods, index) in goodsList" class="table_row_admin fs-13 font-center p-t-20-admin-td p-b-20">
+							<tr v-for="(goods, index) in goodsList" class="table_row_admin fs-13 font-center p-t-20-admin-td p-b-20" v-if="empty==false">
 								<td class="column-1"><div><img :src="goods.g_image" onerror="this.src='../images/image_ready.jpg'" class="size-109"></div></td>
 								<td class="column-2">{{goods.g_id}}</td>
 								<td class="column-3">{{goods.c_title}}</td>
@@ -154,7 +154,8 @@
             fs: ["N", "S", "C", "D"],
             ss: '',
             order: 'A',
-            status: 1
+            status: 1,
+            empty: false
         },
         filters: {
             currency: function(value) {
@@ -182,6 +183,12 @@
                     this.startPage = res.data[0].startPage;
                     this.endPage = res.data[0].endPage;
                     this.count = res.data[0].count;
+                    
+                    if(res.data[0].g_name == null) {
+                        this.empty = true;
+                    } else {
+                        this.empty = false;
+                    }
                     
                     this.pages = [];
                     for (i = this.startPage; i <= this.endPage; i++) {
