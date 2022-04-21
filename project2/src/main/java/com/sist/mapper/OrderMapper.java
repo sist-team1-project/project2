@@ -11,7 +11,7 @@ public interface OrderMapper {
 	/* 페이징 사용 */
 	@Select("<script>"
 	        + "SELECT CEIL(COUNT(*) / 10.0) "
-	        + "FROM order_1 "
+	        + "FROM orders "
             + "<choose>"
             + "<when test=\"sort=='B'.toString()\">"
             + "WHERE o_state=-1"
@@ -35,7 +35,7 @@ public interface OrderMapper {
 	/* 페이징 사용 */
 	@Select("<script>"
 	        + "SELECT COUNT(*) "
-	        + "FROM order_1 "
+	        + "FROM orders "
             + "<choose>"
             + "<when test=\"sort=='B'.toString()\">"
             + "WHERE o_state=-1"
@@ -57,8 +57,8 @@ public interface OrderMapper {
     public int orderCount(Map map);
 
 	/* 주문상세에서 사용 */ 
-	@Select("SELECT /*+ INDEX_ASC(order_1 order_o_id_pk_1)*/* " 
-			+ "FROM order_1 "
+	@Select("SELECT /*+ INDEX_ASC(orders order_o_id_pk)*/* " 
+			+ "FROM orders "
 			+ "WHERE o_id=#{oid}")
 	public OrderVO order(String oid);
 	 
@@ -71,7 +71,7 @@ public interface OrderMapper {
 			+ "sum(g_price) as price, sum(g_quantity) as quantity "
 			+ "FROM (SELECT a.o_id, a.o_regdate, a.o_shipping, a.o_state, a.u_id, "
 			+ "first_value(b.g_name) over(PARTITION BY a.o_id order by a.o_id desc) as g_name, b.g_price, b.g_quantity "
-			+ "FROM order_1 a, order_detail_1 b "
+			+ "FROM orders a, order_detail b "
 			+ "WHERE a.o_id = b.o_id "
 			+ "<choose>"
 			+ "<when test=\"sort=='B'.toString()\">"
@@ -98,7 +98,7 @@ public interface OrderMapper {
 	public List<Map<String,Object>> orderFullList(Map map);
 	
 	/* 주문상태 변경 */
-	@Update("UPDATE order_1 SET o_state=#{state} WHERE o_id=#{oid}")
+	@Update("UPDATE orders SET o_state=#{state} WHERE o_id=#{oid}")
 	public int stateupdate(Map map);
 	 
 	/********************************************************************/
@@ -107,31 +107,31 @@ public interface OrderMapper {
 	@Select("SELECT o_id, u_id, o_regdate, o_state "
 			+"FROM (SELECT o_id, u_id, TO_CHAR(o_regdate,'YYYY-MM-DD HH24:MI:SS')as o_regdate, o_state, rownum as num "
 	 		+"FROM (SELECT o_id, u_id, o_regdate, o_state "
-			+"FROM order_1 ORDER BY o_regdate DESC)) "
+			+"FROM orders ORDER BY o_regdate DESC)) "
 			+"WHERE u_id=#{uid} AND num BETWEEN #{start} AND #{end}")
 	public List<OrderVO> orderInfoList(Map map);
 	
 	/* 유저  - 주문정보 페이징*/
 	@Select("SELECT CEIL(COUNT(*) / 10.0) "
-	        + "FROM order_1 "
+	        + "FROM orders "
 	        + "WHERE u_id=#{uid}")
 		public int userOrderTotalPage(Map map);
 	 
 	/* 유저  - 주문정보 갯수 */
-	@Select("SELECT COUNT(*) FROM order_1 "
+	@Select("SELECT COUNT(*) FROM orders "
 			+ "WHERE u_id=#{uid}")
 	    public int userOrderCount(Map map);
 	 
 	/* 유저  - 주문상태 변경 */
-	@Update("UPDATE order_1 SET o_state=#{state} WHERE o_id=#{oid} AND u_id=#{uid}")
+	@Update("UPDATE orders SET o_state=#{state} WHERE o_id=#{oid} AND u_id=#{uid}")
 	public void userOrderCancel(Map map);
 	
 	/**************************** 주문 **************************/
 	/* 이전 주문 상태 가져오기 */
-	@Select("SELECT o_state FROM order_1 WHERE o_id=#{oid}")
+	@Select("SELECT o_state FROM orders WHERE o_id=#{oid}")
 	public int getDBOrderState(String oid);
 	
-	@Insert("INSERT INTO order_1 VALUES (#{o_id},#{u_id},#{o_receiver},#{o_phone},#{o_post},#{o_address1},#{o_address2},#{o_request},SYSDATE,5000,0)")
-	@SelectKey(statement="SELECT CONCAT(TO_CHAR(SYSDATE,'YYMMDDHH24MI'),LPAD(order_id_seq_1.NEXTVAL,4,0)) AS o_id FROM DUAL", keyProperty="o_id", before=true, resultType=String.class)
+	@Insert("INSERT INTO orders VALUES (#{o_id},#{u_id},#{o_receiver},#{o_phone},#{o_post},#{o_address1},#{o_address2},#{o_request},SYSDATE,5000,0)")
+	@SelectKey(statement="SELECT CONCAT(TO_CHAR(SYSDATE,'YYMMDDHH24MI'),LPAD(orders_id_seq.NEXTVAL,4,0)) AS o_id FROM DUAL", keyProperty="o_id", before=true, resultType=String.class)
 	public void orderInsert(OrderVO vo);
 }

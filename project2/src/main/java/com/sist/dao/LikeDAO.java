@@ -13,7 +13,7 @@ import com.sist.mapper.*;
 public class LikeDAO {
 
 	@Autowired
-	private LikeMapper mapper;
+	private LikesMapper mapper;
     
 	public int likeInsert(LikeVO vo) {
 		return mapper.likeInsert(vo);

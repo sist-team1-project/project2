@@ -14,10 +14,6 @@ public class GoodsServiceImpl implements GoodsService{
 	@Autowired
 	private GoodsDAO gdao;
 	
-    @Autowired
-    private ReviewGoodsDAO rgdao;
-    
-    
     @Override
     public int goodsStatus(int gid) {
         return gdao.goodsStatus(gid);
@@ -27,14 +23,4 @@ public class GoodsServiceImpl implements GoodsService{
 	public Map<String,Object> goodsDetail(Map map) {
 		return gdao.goodsDetail(map);
 	}
-    
-    @Override
-    public List<ReviewGoodsVO> reviewList(Map map) {
-        return rgdao.reviewList(map);
-    }
-    
-    @Override
-    public int reviewListTotalpage(int gid) {
-        return rgdao.reviewListTotalpage(gid);
-    }
 }

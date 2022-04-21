@@ -86,7 +86,6 @@
             image:'',
             details:[],
             quantity:1,
-            reviews:[],
             curpage:1,
             start:1,
             end:1,
@@ -109,7 +108,6 @@
     	   		this.details=this.goods.detail.split(";");
     	   		this.image=this.images[0];
     	    })
-    	    //this.replyList();
         },
         methods: {
             showImg:function(link){
@@ -136,20 +134,6 @@
             	if(this.quantity>1){
             		this.quantity=this.quantity-1;
             	}
-            },
-            replyList:function(){
-                axios.get('http://localhost:8080/web/goods/review_vue.do',{
-                    params:{
-                        g_id:this.gid,
-                        page: this.curpage
-                    }
-                }).then(res=>{
-                    this.reviews = res.data;
-                    this.curpage = res.data[0].curpage;
-                    this.totalpage = res.data[0].totalpage;
-                    this.start = res.data[0].start;
-                    this.end = res.data[0].end;
-                })
             },
             like:function(gid) { // 좋아요
                 axios.post("http://localhost:8080/web/goods/like_insert_ok.do",null,{

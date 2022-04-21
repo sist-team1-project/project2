@@ -93,7 +93,7 @@ public class MypageRestController {
 		String result = "";
 		boolean bCheck = dao.userDelete(id, password);
 		if (bCheck == true) {
-			result = "<script>alert(\"계정이 사망하셨습니다.\"); location.href=\"../main/main.do\"</script>";
+			result = "<script>alert(\"탈퇴하셨습니다.\"); location.href=\"../main/main.do\"</script>";
 			session.invalidate();
 		} else {
 			result = "<script>alert(\"비밀번호가 일치하지 않습니다.\"); history.back();</script>";

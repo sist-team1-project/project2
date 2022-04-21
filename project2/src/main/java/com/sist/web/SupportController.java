@@ -22,9 +22,6 @@ public class SupportController {
 	@Autowired
 	private AskDAO adao;
 
-	@Autowired
-	private CommentDAO cdao;
-
 	/******************* 공지사항 *******************/
 	/* 공지사항 목록 */
 	@GetMapping("notice.do")

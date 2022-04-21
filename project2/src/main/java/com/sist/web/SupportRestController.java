@@ -21,10 +21,7 @@ public class SupportRestController {
 
 	@Autowired
 	private AskDAO adao;
-
-	@Autowired
-	private CommentDAO cdao;
-
+	
 	// 공지사항
 	@GetMapping(value = "notice_vue.do", produces = "text/plain;charset=utf-8")
 	public String notice_list_vue(int page, HttpSession session) {

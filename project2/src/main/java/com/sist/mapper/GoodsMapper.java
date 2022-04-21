@@ -9,15 +9,15 @@ import com.sist.vo.*;
 public interface GoodsMapper {
     
     /********************************* 리스트 ****************************************/
-    @Select("SELECT MAX(g_price) FROM goods_1 WHERE c_id LIKE #{cid}||'%'")
+    @Select("SELECT MAX(g_price) FROM goods WHERE c_id LIKE #{cid}||'%'")
     public String goodsMaxPrice(String cid);
     
     @Select("<script>"
             + "SELECT l_id,g_id,g_name,g_price,g_image "
             + "FROM (SELECT l_id,g_id,g_name,g_price,g_image,rownum as num "
             + "FROM (SELECT NVL(l.l_id,0) AS l_id,g.g_id,g.g_name,g.g_price,g.g_image "
-            + "FROM (SELECT l_id,g_id FROM like_1 WHERE u_id=#{uid}) l, (SELECT g_id,g_name,g_price,g_image,g_sold "
-            + "FROM goods_1 "
+            + "FROM (SELECT l_id,g_id FROM likes WHERE u_id=#{uid}) l, (SELECT g_id,g_name,g_price,g_image,g_sold "
+            + "FROM goods "
             + "WHERE c_id LIKE #{cid}||'%' AND g_status=1 AND (g_price BETWEEN #{price1} AND #{price2}) AND (g_name LIKE '%'||#{keyword}||'%' OR g_brand LIKE '%'||#{keyword}||'%')"
             + "<if test=\"brands.size!=0\">"
             + "AND g_brand IN "
@@ -48,7 +48,7 @@ public interface GoodsMapper {
 	
 	@Select("<script>"
 	        + "SELECT CEIL(COUNT(*)/20.0) "
-            + "FROM goods_1 "
+            + "FROM goods "
             + "WHERE c_id LIKE #{cid}||'%' AND (g_price BETWEEN #{price1} AND #{price2}) AND (g_name LIKE '%'||#{keyword}||'%' OR g_brand LIKE '%'||#{keyword}||'%')"
             + "<if test=\"brands.size!=0\">"
             + "AND g_brand IN "
@@ -59,17 +59,17 @@ public interface GoodsMapper {
             + "</script>")
     public int goodsListTotalpage(Map map);
 	
-	@Select("SELECT DISTINCT g_brand FROM goods_1 WHERE c_id LIKE #{cid}||'%' AND g_status=1")
+	@Select("SELECT DISTINCT g_brand FROM goods WHERE c_id LIKE #{cid}||'%' AND g_status=1")
 	public List<String> brandList(String cid);
 	/******************************************************************************/
 	
 	/********************************* 상품 상세 ****************************************/
-	@Select("SELECT g_status FROM goods_1 WHERE g_id=#{gid}")
+	@Select("SELECT g_status FROM goods WHERE g_id=#{gid}")
     public int goodsStatus(int gid);
 	
 	@Select("SELECT NVL(l.l_id,0) AS l_id,g.g_id,g.g_name,g.g_brand,g.g_sale,g.g_image,g.g_detail,g.g_sold,g.g_status,g.g_price "
-	        + "FROM (SELECT * FROM goods_1 WHERE g_id=#{gid}) g, "
-	        + "(SELECT l_id,g_id FROM like_1 WHERE u_id=#{uid}) l "
+	        + "FROM (SELECT * FROM goods WHERE g_id=#{gid}) g, "
+	        + "(SELECT l_id,g_id FROM likes WHERE u_id=#{uid}) l "
 	        + "WHERE g.g_id=l.g_id(+)")
     public Map<String,Object> goodsDetail(Map map);
 	/******************************************************************************/
@@ -81,7 +81,7 @@ public interface GoodsMapper {
             + "FROM (SELECT g_id, c_title, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_sold, g_status, g_regdate, rownum AS num "
             + "FROM (SELECT g_id, c_title, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_sold, g_status, g_regdate "
             + "FROM (SELECT g.g_id, c.c_title, g.g_name, g.g_brand, g.g_price, g.g_sale, g.g_image, g.g_detail, g.g_sold, g.g_status, g.g_regdate "
-            + "FROM (SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_sold, g_status, TO_CHAR(g_regdate,'YYYY-MM-DD HH24:MI:SS') AS g_regdate FROM goods_1) g, category_1 c "
+            + "FROM (SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_sold, g_status, TO_CHAR(g_regdate,'YYYY-MM-DD HH24:MI:SS') AS g_regdate FROM goods) g, category c "
             + "WHERE g.c_id=c.c_id) WHERE g_status=#{status} AND ("
             + "<trim prefixOverrides='OR'>"
             + "<foreach collection='fsArr' item='fd'>"
@@ -121,7 +121,7 @@ public interface GoodsMapper {
             + "SELECT CEIL(COUNT(*) / 10.0) "
             + "FROM (SELECT g_id, c_title, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_sold, g_status "
             + "FROM (SELECT g.g_id, c.c_title, g.g_name, g.g_brand, g.g_price, g.g_sale, g.g_image, g.g_detail, g.g_sold, g.g_status "
-            + "FROM (SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_sold, g_status FROM goods_1) g, category_1 c "
+            + "FROM (SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_sold, g_status FROM goods) g, category c "
             + "WHERE g.c_id=c.c_id) WHERE g_status=#{status} AND ("
             + "<trim prefixOverrides='OR'>"
             + "<foreach collection='fsArr' item='fd'>"
@@ -148,25 +148,25 @@ public interface GoodsMapper {
 	public int adminGoodsTotalPage(Map map);
 	
 	/* ---------------------- 관리자 상품 개수  ----------------------------  */
-	@Select("SELECT COUNT(*) FROM Goods_1")
+	@Select("SELECT COUNT(*) FROM goods")
 	public int adminGoodsCount();
 
 	/* ---------------------- 관리자 상세 정보 ----------------------------  */
-	@Select("SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_status FROM Goods_1 "
+	@Select("SELECT g_id, c_id, g_name, g_brand, g_price, g_sale, g_image, g_detail, g_status FROM goods "
 	         +"WHERE g_id=#{gid}")
 	public GoodsVO adminGoodsDetail(int gid);
 	
 	/*  --------------------- 상품 등록 페이지 -----------------------------  */
-	@Insert("INSERT INTO goods_1 VALUES(#{g_id}, #{c_id}, #{g_name}, #{g_brand}, #{g_price}, #{g_sale}, #{g_image}, #{g_detail}, 0, #{g_status}, SYSDATE)")
-    @SelectKey(statement="SELECT goods_id_seq_1.NEXTVAL FROM DUAL", keyProperty="g_id", before=true, resultType=int.class)
+	@Insert("INSERT INTO goods VALUES(#{g_id}, #{c_id}, #{g_name}, #{g_brand}, #{g_price}, #{g_sale}, #{g_image}, #{g_detail}, 0, #{g_status}, SYSDATE)")
+    @SelectKey(statement="SELECT goods_id_seq.NEXTVAL FROM DUAL", keyProperty="g_id", before=true, resultType=int.class)
 	public int goodsInsert(GoodsVO vo);
 	
 	/* ---------------------- 관리자  이벤트 정보 ----------------------------  */
-	@Select("SELECT eg_id, e_id FROM event_goods_1 WHERE g_id = #{g_id}")
+	@Select("SELECT eg_id, e_id FROM event_goods WHERE g_id = #{g_id}")
 	public EventGoodsVO eventGoodsData(String g_id);
 	   
 	/* ---------------------- 관리자 상품 수정  ----------------------------  */
-	@Update("UPDATE goods_1 SET "
+	@Update("UPDATE goods SET "
 			+ "c_id=#{c_id}, g_name=#{g_name}, g_brand = #{g_brand}, g_price = #{g_price}, g_sale = #{g_sale}, g_image = #{g_image}, g_detail = #{g_detail}, g_status = #{g_status} "
 			+ "WHERE g_id = #{g_id}")
 	public void goodsupdate(GoodsVO vo);
@@ -177,7 +177,7 @@ public interface GoodsMapper {
     @Select("<script>"
             + "SELECT g_id,g_name,g_brand,g_price,g_sale,g_image,g_sold,g_quantity "
             + "FROM (SELECT g.g_id,g.g_name,g.g_brand,g.g_price,g.g_sale,g.g_image,g.g_sold,c.g_quantity "
-            + "FROM (SELECT g_id,g_name,g_brand,g_price,g_sale,g_image,g_sold FROM goods_1 WHERE g_status=1) g, (SELECT g_id,g_quantity FROM cart_1 WHERE u_id=#{uid}) c "
+            + "FROM (SELECT g_id,g_name,g_brand,g_price,g_sale,g_image,g_sold FROM goods WHERE g_status=1) g, (SELECT g_id,g_quantity FROM cart WHERE u_id=#{uid}) c "
             + "WHERE g.g_id=c.g_id) "
             + "<if test=\"gids.size!=0\">"
             + "WHERE g_id IN "
@@ -188,10 +188,10 @@ public interface GoodsMapper {
             + "</script>")
     public List<Map<String,Object>> checkOutGoodsDetail(Map map);
     
-    @Update("UPDATE goods_1 SET g_sold=g_sold+#{g_quantity} WHERE g_id=#{g_id}")
+    @Update("UPDATE goods SET g_sold=g_sold+#{g_quantity} WHERE g_id=#{g_id}")
     public void increaseSold(Map map);
     
-    @Update("UPDATE goods_1 SET g_sold=g_sold-#{g_quantity} WHERE g_id=#{g_id}")
+    @Update("UPDATE goods SET g_sold=g_sold-#{g_quantity} WHERE g_id=#{g_id}")
     public void decreaseSold(Map map);
     /******************************************************************************/
 }
