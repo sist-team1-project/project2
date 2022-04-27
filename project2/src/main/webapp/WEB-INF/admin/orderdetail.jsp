@@ -123,7 +123,7 @@
         },
         methods:{
             odList:function(){
-                axios.get("http://localhost:8080/web/admin/orderdetail_vue.do",{
+                axios.get("http://13.125.104.199/project2/admin/orderdetail_vue.do",{
                     params:{
                         oid: this.oid
                     }
@@ -133,7 +133,7 @@
                 })
             },
             orList:function(){
-                axios.get("http://localhost:8080/web/admin/order.do",{
+                axios.get("http://13.125.104.199/project2/admin/order.do",{
                     params:{
                         oid: this.oid
                     }

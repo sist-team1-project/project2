@@ -126,7 +126,7 @@
         },
         mounted:function(){
             // 유저 정보
-            axios.get("http://localhost:8080/web/checkout/checkout_user_vue.do",{
+            axios.get("http://13.125.104.199/project2/checkout/checkout_user_vue.do",{
             }).then(result=>{
                 this.receiver = result.data.name;
                 this.phone = result.data.phone;
@@ -139,7 +139,7 @@
         },
         methods:{
             gList:function(){
-                axios.get("http://localhost:8080/web/checkout/checkout_list_vue.do",{
+                axios.get("http://13.125.104.199/project2/checkout/checkout_list_vue.do",{
                     params:{
                         gid: this.gidList.join(",")
                     }

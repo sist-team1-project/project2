@@ -53,7 +53,7 @@
      		    	this.$refs.email.focus();
      				return;
      			} // 서버실행 전 확인
-     			axios.get("http://localhost:8080/web/user/idfind_ok.do",{
+     			axios.get("http://13.125.104.199/project2/user/idfind_ok.do",{
      	            params:{
      	            	name: this.name,
      	                email: this.email

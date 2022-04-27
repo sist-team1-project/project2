@@ -62,7 +62,7 @@
 	 		info:{}
 	 	},
 	 	mounted:function(){
-	 		axios.get("http://localhost:8080/web/mypage/info_vue.do",{
+	 		axios.get("http://13.125.104.199/project2/mypage/info_vue.do",{
                 params:{    
                 }
             }).then(res=>{

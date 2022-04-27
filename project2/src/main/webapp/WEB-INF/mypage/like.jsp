@@ -48,7 +48,7 @@
         },
         methods:{
             list:function(){
-                axios.get("http://localhost:8080/web/mypage/likeList_vue.do",{
+                axios.get("http://13.125.104.199/project2/mypage/likeList_vue.do",{
                     params: {
                         page: this.curpage
                     }
@@ -70,7 +70,7 @@
                 this.list();
             },
             unlike:function(lid) { // 싫어요
-                axios.post("http://localhost:8080/web/goods/like_delete_ok.do",null,{
+                axios.post("http://13.125.104.199/project2/goods/like_delete_ok.do",null,{
                     params:{lid: lid}
                 })
                 this.list();

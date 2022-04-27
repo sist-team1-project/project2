@@ -194,7 +194,7 @@
             }
         },
         mounted:function(){ // 이벤트 상품 정보를 가져옴
-            axios.get("http://localhost:8080/web/main/event_list.do",{
+            axios.get("http://13.125.104.199/project2/main/event_list.do",{
                 
             }).then(result=>{
                 this.events=result.data[0];
@@ -204,17 +204,17 @@
         },
         methods:{
             like:function(gid, index) { // 좋아요
-                axios.post("http://localhost:8080/web/goods/like_insert_ok.do",null,{
+                axios.post("http://13.125.104.199/project2/goods/like_insert_ok.do",null,{
                     params:{gid: gid}
                 }).then(result=>{
                     this.event_goods[index].lid = result.data.lid;
                 })
             },
             unlike:function(lid) { // 싫어요
-                axios.post("http://localhost:8080/web/goods/like_delete_ok.do",null,{params:{lid: lid}})
+                axios.post("http://13.125.104.199/project2/goods/like_delete_ok.do",null,{params:{lid: lid}})
             }, 
             getCampingList:function() {
-                axios.get("http://localhost:8080/web/main/camping_list.do",{}).then(result=>{
+                axios.get("http://13.125.104.199/project2/main/camping_list.do",{}).then(result=>{
                     this.campingList = result.data
                 })
             },

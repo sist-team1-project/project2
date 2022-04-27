@@ -50,7 +50,7 @@
                     this.$refs.email.focus();
                     return;
                 }
-                axios.get("http://localhost:8080/web/user/pwdfind_ok.do",{
+                axios.get("http://13.125.104.199/project2/user/pwdfind_ok.do",{
                     params:{
                         id: this.id,
                         email: this.email

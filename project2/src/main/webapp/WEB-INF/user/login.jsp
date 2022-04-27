@@ -67,7 +67,7 @@
                     this.$refs.pwd.focus();
                     return;
                 } // 서버실행 전 확인
-                axios.post("http://localhost:8080/web/user/login_ok.do",this.form,{
+                axios.post("http://13.125.104.199/project2/user/login_ok.do",this.form,{
                 }).then(res=>{
                     console.log()
                     if(res.data == 'NOID') {

@@ -260,7 +260,7 @@
         },
         methods:{
             cate1:function(){
-                axios.get("http://localhost:8080/web/main/category_1_vue.do",{
+                axios.get("http://13.125.104.199/project2/main/category_1_vue.do",{
                     params:{
                     }
                 }).then(result=>{
@@ -268,7 +268,7 @@
                 })
             },
             cate2:function(){
-                axios.get("http://localhost:8080/web/main/category_2_vue.do",{
+                axios.get("http://13.125.104.199/project2/main/category_2_vue.do",{
                     params:{
                     }
                 }).then(result=>{
@@ -276,7 +276,7 @@
                 })
             },
             countCart:function(){
-                axios.get("http://localhost:8080/web/cart/count_cart_vue.do",{
+                axios.get("http://13.125.104.199/project2/cart/count_cart_vue.do",{
                     params:{
                     }
                 }).then(result=>{
@@ -284,7 +284,7 @@
                 })
             },
             cList:function(){
-                axios.get("http://localhost:8080/web/cart/cart_list_vue.do",{
+                axios.get("http://13.125.104.199/project2/cart/cart_list_vue.do",{
                     params:{
                     }
                 }).then(result=>{
@@ -299,7 +299,7 @@
                 return totalsum;
             },
             getNotice:function(){
-                axios.get("http://localhost:8080/web/main/header_notice.do",{
+                axios.get("http://13.125.104.199/project2/main/header_notice.do",{
                 }).then(result=>{
                     this.notice = result.data;
                 })
@@ -332,21 +332,21 @@
         var move = 0;
         function noticeRolling(){
             move += height;
-            $(".rolling").animate({"top":-move},2000,function(){
+            $(".rolling").animate({"top":-move},600,function(){
                 if( move >= max ){
                     $(this).css("top",0);
                     move = 0;
                 };
             });
         };
-        noticeRollingOff = setInterval(noticeRolling,2400);
+        noticeRollingOff = setInterval(noticeRolling,1000);
         $(".rolling").append($(".rolling li").first().clone());
     
         $(".rolling_stop").click(function(){
             clearInterval(noticeRollingOff);
         });
         $(".rolling_start").click(function(){
-            noticeRollingOff = setInterval(noticeRolling,2400);
+            noticeRollingOff = setInterval(noticeRolling,1000);
         });
     });
   </script>

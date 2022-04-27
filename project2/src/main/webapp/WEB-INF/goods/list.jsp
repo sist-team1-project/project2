@@ -134,7 +134,7 @@
             /* 상품 출력 */
             list:function(){
                 $("#items")[0].scrollIntoView();
-                axios.get("http://localhost:8080/web/goods/list_vue.do",{
+                axios.get("http://13.125.104.199/project2/goods/list_vue.do",{
                     params:{
                         cid: this.cid,
                         page: this.curpage,
@@ -165,7 +165,7 @@
             },
             /* 브랜드 목록 & 카테고리 이름 출력 (초기 1번만) */
             brandListAndCname:function(){
-                axios.get("http://localhost:8080/web/goods/brandlist_cname_vue.do",{
+                axios.get("http://13.125.104.199/project2/goods/brandlist_cname_vue.do",{
                     params:{
                         cid: this.cid
                     }
@@ -202,14 +202,14 @@
                 }
             },
             like:function(gid, index) { // 좋아요
-                axios.post("http://localhost:8080/web/goods/like_insert_ok.do",null,{
+                axios.post("http://13.125.104.199/project2/goods/like_insert_ok.do",null,{
                     params:{gid: gid}
                 }).then(result=>{
                     this.goods[index].lid = result.data.lid;
                 })
             },
             unlike:function(lid) { // 싫어요
-                axios.post("http://localhost:8080/web/goods/like_delete_ok.do",null,{params:{lid: lid}})
+                axios.post("http://13.125.104.199/project2/goods/like_delete_ok.do",null,{params:{lid: lid}})
             }
         }
     })

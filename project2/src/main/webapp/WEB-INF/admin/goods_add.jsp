@@ -152,19 +152,19 @@
         },
         methods: {
             cate1: function() {
-                axios.get("http://localhost:8080/web/main/category_1_vue.do", {}).then(result => {
+                axios.get("http://13.125.104.199/project2/main/category_1_vue.do", {}).then(result => {
                     this.categories1 = result.data;
                     this.cid1 = result.data[0].cid
                 })
             },
             cate2: function() {
-                axios.get("http://localhost:8080/web/main/category_2_vue.do", {}).then(result => {
+                axios.get("http://13.125.104.199/project2/main/category_2_vue.do", {}).then(result => {
                     this.categories2 = result.data;
                     this.cid2 = result.data[0][0].cid
                 })
             },
             eventList: function() {
-                axios.get("http://localhost:8080/web/admin/event_list.do", {}).then(result => {
+                axios.get("http://13.125.104.199/project2/admin/event_list.do", {}).then(result => {
                     this.events = result.data;
                 })
             },
@@ -211,7 +211,7 @@
                     form.append("g_details[" + i + "]", this.$refs.gdetails.files[i]);
                 }
                 
-                axios.post("http://localhost:8080/web/admin/goods_add_ok.do", form, {
+                axios.post("http://13.125.104.199/project2/admin/goods_add_ok.do", form, {
                     header: {
                         'Context-Type' : 'multipart/form-data'
                     }

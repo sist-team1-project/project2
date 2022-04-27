@@ -101,7 +101,7 @@
         },
         methods:{
             cList:function(){
-                axios.get("http://localhost:8080/web/cart/cart_list_vue.do",{
+                axios.get("http://13.125.104.199/project2/cart/cart_list_vue.do",{
                     params:{
                     }
                 }).then(result=>{
@@ -126,7 +126,7 @@
             	return totalsum;
             },
             cartDelete:function(event) {
-                axios.post("http://localhost:8080/web/cart/delete_ok.do",null,{
+                axios.post("http://13.125.104.199/project2/cart/delete_ok.do",null,{
                     params:{cid: event.currentTarget.value}
                 }).then(result=>{
                     this.cList();     
@@ -135,7 +135,7 @@
             numUp:function(index) {
                 this_ = this.cartList[index];
                 this_.gquantity = parseInt(this_.gquantity) + 1;
-                axios.post("http://localhost:8080/web/cart/cart_num_update.do",null,{
+                axios.post("http://13.125.104.199/project2/cart/cart_num_update.do",null,{
                     params:{num: 1, gid:this_.gid}
                 })
             },
@@ -143,7 +143,7 @@
                 this_ = this.cartList[index];
                 if(this_.gquantity > 1){
                     this_.gquantity = parseInt(this_.gquantity) - 1;
-                    axios.post("http://localhost:8080/web/cart/cart_num_update.do",null,{
+                    axios.post("http://13.125.104.199/project2/cart/cart_num_update.do",null,{
                         params:{num: -1, gid:this_.gid}
                     })
                 }

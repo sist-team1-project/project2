@@ -67,7 +67,7 @@
         methods:{
         	/*  공지사항 첫화면 출력  */
             dataSend:function(){
-              axios.get("http://localhost:8080/web/support/notice_vue.do",{
+              axios.get("http://13.125.104.199/project2/support/notice_vue.do",{
                   params:{
                     page:this.curpage
                   }

@@ -168,7 +168,7 @@
         },
         methods: {
             dataSend: function() {
-                axios.get("http://localhost:8080/web/admin/adlist_vue.do", {
+                axios.get("http://13.125.104.199/project2/admin/adlist_vue.do", {
                     params: {
                         page: this.curpage,
                         fs: this.fs.join(","),

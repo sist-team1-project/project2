@@ -84,7 +84,7 @@
         },
         methods:{
             uList:function(){
-                axios.get("http://localhost:8080/web/admin/userlist_vue.do",{
+                axios.get("http://13.125.104.199/project2/admin/userlist_vue.do",{
                     params:{
                         page: this.curpage
                     }
@@ -107,7 +107,7 @@
             },
             xclick:function(event, uid){
         	    let grade = event.currentTarget.value;
-        	    axios.post("http://localhost:8080/web/admin/user_grade_update_ok.do",null,{
+        	    axios.post("http://13.125.104.199/project2/admin/user_grade_update_ok.do",null,{
                     params:{
                         grade: grade,
                         uid: uid

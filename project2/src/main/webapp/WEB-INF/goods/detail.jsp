@@ -98,7 +98,7 @@
             }
         },
         mounted:function(){
-    	   	axios.get('http://localhost:8080/web/goods/detail_vue.do',{
+    	   	axios.get('http://13.125.104.199/project2/goods/detail_vue.do',{
     	  		params:{
     	   		    gid:this.gid
     	   		}
@@ -114,7 +114,7 @@
                 this.image=link;
             },
             insertCart:function(){
-            	axios.post('http://localhost:8080/web/cart/insert_ok.do',null,{
+            	axios.post('http://13.125.104.199/project2/cart/insert_ok.do',null,{
         	  		params:{
         	   		    g_id:this.gid,
         	   		    g_quantity:this.quantity
@@ -136,14 +136,14 @@
             	}
             },
             like:function(gid) { // 좋아요
-                axios.post("http://localhost:8080/web/goods/like_insert_ok.do",null,{
+                axios.post("http://13.125.104.199/project2/goods/like_insert_ok.do",null,{
                     params:{gid: gid}
                 }).then(result=>{
                     this.goods.lid = result.data.lid;
                 })
             },
             unlike:function(lid) { // 싫어요
-                axios.post("http://localhost:8080/web/goods/like_delete_ok.do",null,{params:{lid: lid}})
+                axios.post("http://13.125.104.199/project2/goods/like_delete_ok.do",null,{params:{lid: lid}})
             }
         }
     })

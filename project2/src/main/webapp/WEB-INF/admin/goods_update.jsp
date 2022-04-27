@@ -151,20 +151,20 @@
 	    },
 	    mounted: function() {
 	        // 카테고리 대분류
-	        axios.get("http://localhost:8080/web/main/category_1_vue.do", {}).then(result => {
+	        axios.get("http://13.125.104.199/project2/main/category_1_vue.do", {}).then(result => {
                 this.categories1 = result.data;
                 this.cid1 = result.data[0].cid;
             })
             // 카테고리 소분류
-	        axios.get("http://localhost:8080/web/main/category_2_vue.do", {}).then(result => {
+	        axios.get("http://13.125.104.199/project2/main/category_2_vue.do", {}).then(result => {
                 this.categories2 = result.data;
                 this.cid2 = result.data[0][0].cid;
             })
             // 이벤트 목록
-            axios.get("http://localhost:8080/web/admin/event_list.do", {}).then(result => {
+            axios.get("http://13.125.104.199/project2/admin/event_list.do", {}).then(result => {
                 this.events = result.data;
             })
-	        axios.get("http://localhost:8080/web/admin/goodsdetaildata.do", {
+	        axios.get("http://13.125.104.199/project2/admin/goodsdetaildata.do", {
                 params: {
                     g_id: this.gid
                 }

@@ -169,7 +169,7 @@
             },
             idCheck:function() {
                 if(this.id != ''){
-                    axios.get("http://localhost:8080/web/user/idcheck_ok.do",{
+                    axios.get("http://13.125.104.199/project2/user/idcheck_ok.do",{
                         params:{
                             id: this.id
                         }
@@ -187,7 +187,7 @@
             },
             emailCheck:function() {
                 if(this.email != ''){
-                    axios.get("http://localhost:8080/web/user/emailcheck_ok.do",{
+                    axios.get("http://13.125.104.199/project2/user/emailcheck_ok.do",{
                         params:{
                             email: this.email
                         }

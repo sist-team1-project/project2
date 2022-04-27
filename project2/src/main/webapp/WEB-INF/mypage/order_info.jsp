@@ -97,7 +97,7 @@
         },
         methods:{
             infoList:function(){
-                axios.get("http://localhost:8080/web/mypage/orderInfoList_vue.do",{
+                axios.get("http://13.125.104.199/project2/mypage/orderInfoList_vue.do",{
                     params:{
                     	page: this.curpage
                     }
@@ -130,7 +130,7 @@
             /* 주문취소 */
             cancel:function(event, oid) { 
         	    let state = event.currentTarget.value;
-                axios.post("http://localhost:8080/web/mypage/user_state_cancel_ok.do",null,{
+                axios.post("http://13.125.104.199/project2/mypage/user_state_cancel_ok.do",null,{
                     params:{
                     	state: state,
                     	oid : oid

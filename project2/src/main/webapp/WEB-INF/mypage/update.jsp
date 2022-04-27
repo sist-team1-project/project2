@@ -113,7 +113,7 @@
             emailOk:'',
         },
         mounted:function(){
-              axios.get("http://localhost:8080/web/mypage/info_vue.do",{
+              axios.get("http://13.125.104.199/project2/mypage/info_vue.do",{
               }).then(res=>{
             	  this.u_id=res.data.uid;
             	  this.u_name=res.data.name;
@@ -159,7 +159,7 @@
 	        },
             idCheck:function() {
                 if(this.u_id != ''){
-                    axios.get("http://localhost:8080/web/user/idcheck_ok.do",{
+                    axios.get("http://13.125.104.199/project2/user/idcheck_ok.do",{
                         params:{
                             id: this.u_id
                         }
@@ -177,7 +177,7 @@
             },
             emailCheck:function() {
                 if(this.u_email != ''){
-                    axios.get("http://localhost:8080/web/user/emailcheck_ok.do",{
+                    axios.get("http://13.125.104.199/project2/user/emailcheck_ok.do",{
                         params:{
                             email: this.u_email
                         }

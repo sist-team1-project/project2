@@ -128,7 +128,7 @@
         },
         methods:{
             oList:function(){
-                axios.get("http://localhost:8080/web/admin/orderlist_vue.do",{
+                axios.get("http://13.125.104.199/project2/admin/orderlist_vue.do",{
                     params:{
                         page: this.curpage,
                         sort: this.sort
@@ -152,7 +152,7 @@
             },
             selecteOrder:function(event, oid) {
                 let state = event.currentTarget.value;
-                axios.post("http://localhost:8080/web/admin/order_state_update_ok.do",null,{
+                axios.post("http://13.125.104.199/project2/admin/order_state_update_ok.do",null,{
                     params:{
                         state: state,
                         oid: oid
