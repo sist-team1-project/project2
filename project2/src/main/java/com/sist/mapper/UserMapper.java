@@ -71,8 +71,8 @@ public interface UserMapper {
 	/******************* User admin ********************************/
 	@Select("SELECT u_id, u_name, u_gender, u_email, u_phone, TO_CHAR(u_regdate,'YY-MM-DD')as u_regdate, u_grade, num "
 			+ "FROM (SELECT u_id, u_name, u_gender, u_email, u_phone, u_regdate, u_grade, rownum as num "
-			+ "FROM (SELECT u_id, u_name, u_gender, u_email, u_phone, u_regdate, u_grade from users) "
-			+ "ORDER BY u_regdate desc ) " + "WHERE num BETWEEN #{start} AND #{end}")
+			+ "FROM (SELECT u_id, u_name, u_gender, u_email, u_phone, u_regdate, u_grade from users ORDER BY u_regdate desc)) "
+			+ "WHERE num BETWEEN #{start} AND #{end}")
 	public List<UserVO> userList(Map map);
 
 	/* 페이징 사용 */
@@ -86,7 +86,6 @@ public interface UserMapper {
 	/* 유저등급 변경 */
 	@Update("UPDATE users SET u_grade=#{grade} WHERE u_id=#{uid}")
 	public int gradeupdate(Map map);
-	
 	
 	@Select("SELECT u_address1 FROM users WHERE u_id=#{u_id}")
 	public String getUserAddress(String u_id);
